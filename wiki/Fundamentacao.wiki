@@ -12,7 +12,7 @@ O Raciocínio Baseado em Casos - RBC, do Inglês Case Based Reasoning – CBR, �
 A técnica se espelha na forma que frequentemente os humanos agem para aprender novas tarefas, recorrendo a experiências anteriores para executar novos problemas ou ainda problemas comuns, mas sendo aplicados em contextos diferentes [TutorialJCOLIBRI [fonte]].
 A aplicação do RBC é baseada em um ciclo, conforme a seguinte figura:
 
-http://larbc.googlecode.com/files/DiagramaRBC.png
+http://larbc.googlecode.com/files/DiagramaRBC2.png
 
 Como pode ser visto na figura acima, a operação normal de um sistema que usa RBC prevê o aumento da base de conhecimento, ou seja, o aprendizado é tarefa natural do processo, aumentando, assim, a capacidade de adaptação do sistema a novas situações.
 
