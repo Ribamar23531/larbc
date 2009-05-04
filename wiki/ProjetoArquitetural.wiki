@@ -53,6 +53,6 @@ Utilizaremos o SGBD MySQL.
 ||Infruência ||Persistência de dados mais facilitada||
 
 ||Decisão 7 ||Uso do SGBD MySQL||
-||Prós ||É gratuito e fornece acesso (tanto leitura quanto escrita) de forma mais eficiente que outros SGBDs gratuitos [ComparativoBD fonte].||
+||Prós ||É gratuito e fornece acesso (tanto leitura quanto escrita) de forma mais eficiente que outros SGBDs gratuitos [http://code.google.com/p/larbc/downloads/detail?name=8330.pdf&can=2&q= [fonte]].||
 ||Contras ||Existem SGBDs que proveem mais segurança que o MySQL.||
 ||Infruência ||Forma de persistir os dados gerados/processados pela aplicação.||
