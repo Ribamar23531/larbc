@@ -1,0 +1,5 @@
+=Riscos=
+
+Até o presente momento foi identificado como risco a possibilidade de o cliente real ficar indisponível, tornando assim difícil ou impraticável a tomada de decisões importantes no projeto.
+
+Também é importante salientar que a falta de dados imobiliários reais é outro fator de risco ao nosso projeto, uma vez que a falta dos mesmos torna a aplicação não viável.
