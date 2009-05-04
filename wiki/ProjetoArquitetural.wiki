@@ -1,0 +1,21 @@
+=Projeto Arquitetural=
+
+O projeto arquitetural se dá basicamente conforme a fugura abaixo:
+
+http://larbc.googlecode.com/files/Arquitetura%28Vis%C3%A3o%20Geral%29.PNG
+
+==Interface com o usuário==
+
+Será implementada utilizando a tecnologia GWT.
+
+==WEB==
+
+A aplicação será WEB conforme especificado pelo cliente. [Requisitos]
+
+==Servidor WEB==
+
+Será usado o Tomcat.
+
+==Persistência==
+
+Utilizaremos o SGBD MySQL.
