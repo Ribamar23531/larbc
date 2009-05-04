@@ -33,4 +33,3 @@ O jCOLIBRI2, versão mais atualizada do framework para o desenvolvimento das apl
  *  Estruturas para a organização da base de dados do sistema;
  *  Formas de persistência dos dados;
  *  Combinações de tarefas e métodos RBC que podem ser selecionados a fim de personalizar as aplicações.
-
