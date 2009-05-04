@@ -6,10 +6,10 @@ Nesta seção, estão contemplados o referencial teórico dos conceitos, ferrame
 ==Raciocínio Baseado em Casos==
 
 
-O Raciocínio Baseado em Casos - RBC, do Inglês Case Based Reasoning – CBR, é uma técnica de Inteligência Artificial que se propõe a, baseado em soluções usadas anteriormente, resolver problemas similares [AvaliacaoImobiliariaUFCG [fonte]].
+O Raciocínio Baseado em Casos - RBC, do Inglês Case Based Reasoning – CBR, é uma técnica de Inteligência Artificial que se propõe a, baseado em soluções usadas anteriormente, resolver problemas similares [http://larbc.googlecode.com/files/Artigo_RBC.pdf [fonte]].
  
 
-A técnica se espelha na forma que frequentemente os humanos agem para aprender novas tarefas, recorrendo a experiências anteriores para executar novos problemas ou ainda problemas comuns, mas sendo aplicados em contextos diferentes [TutorialJCOLIBRI [fonte]].
+A técnica se espelha na forma que frequentemente os humanos agem para aprender novas tarefas, recorrendo a experiências anteriores para executar novos problemas ou ainda problemas comuns, mas sendo aplicados em contextos diferentes [http://larbc.googlecode.com/files/tutorialjcolibri2.pdf [fonte]].
 A aplicação do RBC é baseada em um ciclo, conforme a seguinte figura:
 
 http://larbc.googlecode.com/files/DiagramaRBC2.png
