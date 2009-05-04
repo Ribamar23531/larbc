@@ -4,14 +4,11 @@
     *  Diego: Hibernate
     *  João Felipe: jColibri
     *  Alcione: GWT
-
  #  Elaborar modelo de dados para persistência de dados
     *  Mapear entidades a serem persistidas para Hibernate
     *  Testas logins válidos e inválidos
-
  #  Implementar o ciclo do RBC
     *  Implementar as fases do RBC, já aplicando às consultas dos clientes
-
  #  Interface com o usuário
     *  Propor protótipo da interface com o usuário
     *  Implementar a interface escolhida
