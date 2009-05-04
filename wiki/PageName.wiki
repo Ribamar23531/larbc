@@ -1,6 +1,4 @@
 #labels requisitos,planejamento
-#Seção de definição de requisitos
-
 = Requisitos =
 
 Os stakeholders para esse sistema, identificaram os seguintes requisitos:
