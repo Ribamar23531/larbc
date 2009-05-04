@@ -1,3 +1,4 @@
+#labels requisitos,planejamento
 = Requisitos =
 
 Os stakeholders para esse sistema, identificaram os seguintes requisitos:
