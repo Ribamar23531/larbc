@@ -6,11 +6,9 @@ As releases que serão entregues ao cliente são de dois tipos:
 
 Tais documentos serão entregues a professora Joseana sob a forma de artigos técnicos, juntamente com uma apresentação (exclusive o modelo de dados utilizado do projeto).
 
- *  Relatório técnico sobre Raciocínio Baseado em Casos - RBC;  (13 de Maio de 2009)
-
- *  Relatório técnico contendo as análises das ferramentas/tecnologias a serem utilizadas no desenvolvimento do projeto; (20 de Maio de 2009)
-
- *  Modelo de dados. (03 de Junho de 2009)
+||Relatório técnico sobre Raciocínio Baseado em Casos - RBC ||13 de Maio de 2009||
+||Relatório técnico contendo as análises das ferramentas/tecnologias a serem utilizadas no desenvolvimento do projeto ||20 de Maio de 2009||
+||Modelo de dados ||03 de Junho de 2009.||
 
 
 ==Unidades Implementadas==
