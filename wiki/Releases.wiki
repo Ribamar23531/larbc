@@ -15,8 +15,6 @@ Tais documentos serão entregues a professora Joseana sob a forma de artigos té
 
 E as unidades implementadas são produtos de software que já contém algum processamento que produz resultado útil diretamente para o funcionamento do sistema.
 
- *  Implementação do ciclo do RBC usando o jCOLIBRI2; (01 de Julho de 2009)
-
- *  Protótipo da interface com o usuário; (08 de Julho de 2009)
-
- *  Sistema completo em funcionamento. (15 de julho de 2009)
+||Implementação do ciclo do RBC usando o jCOLIBRI2 ||01 de Julho de 2009||
+||Protótipo da interface com o usuário ||08 de Julho de 2009||
+||Sistema completo em funcionamento ||15 de julho de 2009||
