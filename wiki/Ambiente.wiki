@@ -4,9 +4,9 @@ A equipe de desenvolvedores terá a disposição uma máquina no LIA (Laboratór
 
 Além dessa disponibilidade, como ferramentas de desenvolvimento, a equipe contará com:
 
- *  O controle de versões SVN provido pelo google code
+ *  O controle de versões SVN provido pelo google code;
 
- *  IDE Eclipse com suporte ao desenvolvimento de aplicações web
+ *  IDE Eclipse com suporte ao desenvolvimento de aplicações web;
 
  *  O plug-in para elipse para desenvolvimento de aplicações GWT, distribuído pelo google.
 
