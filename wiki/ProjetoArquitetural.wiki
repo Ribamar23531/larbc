@@ -2,7 +2,7 @@
 
 O projeto arquitetural se dá basicamente conforme a fugura abaixo:
 
-http://larbc.googlecode.com/files/Arquitetura%28Vis%C3%A3o%20Geral%29.PNG
+http://larbc.googlecode.com/files/Arquitetura.PNG
 
 ==Interface com o usuário==
 
