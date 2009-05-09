@@ -4,21 +4,25 @@ O projeto arquitetural se dá basicamente conforme a fugura abaixo:
 
 http://larbc.googlecode.com/files/Arquitetura.PNG
 
-==Interface com o usuário==
+==Descrição==
 
-Será implementada utilizando a tecnologia GWT.
+O sistema será composto basicamente por dois módulos, um gerente e uma interface.
 
-==WEB==
+===Módulo RBC===
 
-A aplicação será WEB conforme especificado pelo cliente. [Requisitos]
+Será responsável por toda a representação, aprendizagem e inferência de conhecimento.
 
-==Servidor WEB==
+===Módulo de persistência===
 
-Será usado o Tomcat.
+Será responsável pelo armazenamento de dados como contas de administradores.
 
-==Persistência==
+===Gerente do Sistema===
 
-Utilizaremos o SGBD MySQL.
+Conhecerá os módulos do sistema e delegará atividades para os módulos responsáveis.
+
+===Interface GWT===
+
+A interface que será apresentada ao cliente via browser será feita utilizando o framework GWT.
 
 ==Decisões Arquiteturais==
 
