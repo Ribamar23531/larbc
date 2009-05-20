@@ -1,0 +1,5 @@
+= Resultados da Iteração 1 =
+
+Como resultados da primeira iteração, foram gerados documentos de síntese de uso das tecnologias que serão usadas. São eles:
+
+ *  [http://larbc.googlecode.com/files/jCOLIBRI2.doc Relatório sobre uso do jCOLIBRI2] redigido por João Felipe
