@@ -10,3 +10,5 @@ Todos os integrantes da equipe terão que estudar o Raciocínio Baseado em Casos
 ||    Diego   || Hibernate ||
 || João Felipe|| jCOLIBRI2 ||
 ||   Alcione  ||    GWT    || 
+
+Para ver os artefatos gerados nessa iteração, clique [ResultadosIteracao1 aqui]
