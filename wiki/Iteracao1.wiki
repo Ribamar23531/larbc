@@ -6,6 +6,11 @@ Como resultado dessa etapa, teremos relatórios para o cliente, juntamente com s
 
 Todos os integrantes da equipe terão que estudar o Raciocínio Baseado em Casos e cada integrante da equipe irá estudar especificamente:
 
+||*Integrante*||*Framework*||
+||    Diego   || Hibernate ||
+|| João Felipe|| jCOLIBRI2 ||
+||   Alcione  ||    GWT    || 
+
 *  Diego: Hibernate
 
 *  João Felipe: jColibri
