@@ -5,3 +5,5 @@ Como resultados da primeira iteração, foram gerados documentos de síntese de 
  *  [http://larbc.googlecode.com/files/jCOLIBRI2.doc Relatório sobre uso do jCOLIBRI2] redigido por João Felipe
 
  *  [http://larbc.googlecode.com/files/Relat%C3%B3rio%20Hibernate%202.doc Relatório sobre uso de Hibernate Annotations] redigido por Diego Rodrigues
+
+ *  [http://larbc.googlecode.com/files/Google Web Toolkit.doc Relatório sobre GWT] redigido por Alcione Pinheiro
