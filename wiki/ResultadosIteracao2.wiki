@@ -2,7 +2,7 @@
 
 A equipe propôs o seguinte modelo de dados para a aplicação:
 
-http://larbc.googlecode.com/files/DBModel.png
+http://larbc.googlecode.com/files/EntidadeRelacionamento.JPG
 
 Onde:
 
