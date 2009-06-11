@@ -1,7 +1,7 @@
-create database larbc;
-use larbc;
-drop table Immobile;
-create table Immobile(
+create database Larbc;
+use Larbc;
+drop table Imoveis;
+create table Imoveis(
 					idCasos int,
 					estado char(2),
 					cidade varchar(50),

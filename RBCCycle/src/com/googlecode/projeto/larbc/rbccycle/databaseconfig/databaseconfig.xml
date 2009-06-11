@@ -1,4 +1,4 @@
-<DataBaseConfiguration>
+	<DataBaseConfiguration>
 	<!-- The file that configures the hibernate framework -->
 	<HibernateConfigFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/Hibernate.cfg.xml</HibernateConfigFile>
 	<!-- Description of the description of the problem -->
