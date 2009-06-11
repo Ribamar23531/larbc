@@ -42,7 +42,7 @@ public class HSQLDBServer
         org.apache.commons.logging.LogFactory.getLog(HSQLDBServer.class).info("Creating data base ...");
 
         server = new Server();
-        server.setDatabaseName(0, "Residence");
+        server.setDatabaseName(0, "Larbc");
         server.setDatabasePath(0, "mem:Residence;sql.enforce_strict_size=true");
         
         server.setLogWriter(null);
@@ -56,7 +56,7 @@ public class HSQLDBServer
             Class.forName("org.hsqldb.jdbcDriver");
 
             PrintStream out = new PrintStream(new ByteArrayOutputStream());
-            Connection conn = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/larbc", "sa", "");
+            Connection conn = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/Larbc", "sa", "");
             SqlFile file = new SqlFile(new File(FileIO.findFile("com/googlecode/projeto/larbc/rbccycle/databaseconfig/Database.sql").getFile()),false,new HashMap());
             file.execute(conn,out,out, true);
             org.apache.commons.logging.LogFactory.getLog(HSQLDBServer.class).info("Data base generation finished");
