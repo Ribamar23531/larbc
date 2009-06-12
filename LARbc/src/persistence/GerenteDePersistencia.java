@@ -1,18 +1,25 @@
 package persistence;
 
-import beans.Administrador;
 import persistence.DAO.AdministradorDAO;
 import persistence.DAO.AdministradorHibernateDAO;
-import exceptions.AdministradorNaoEncontradoException;
-import exceptions.LoginJaRegistradoException;
+import persistence.DAO.FotoDAO;
+import persistence.DAO.FotoHibernateDAO;
+import beans.Administrador;
+import beans.Foto;
+import exceptions.AdministradorNotFoundException;
+import exceptions.FotoAlreadySavedException;
+import exceptions.FotoNotFoundException;
+import exceptions.LoginAlreadyRegisteredException;
 
 public class GerenteDePersistencia {	
 	
 	private AdministradorDAO administradorDAO;
+	private FotoDAO fotoDAO;
 	private static GerenteDePersistencia minhaInstancia = null;
 	
-	public GerenteDePersistencia(boolean testando){
-		this.administradorDAO = new AdministradorHibernateDAO(testando);	
+	public GerenteDePersistencia(boolean testing){
+		this.administradorDAO = new AdministradorHibernateDAO(testing);
+		this.fotoDAO = new FotoHibernateDAO(testing);
 	}
 	
 	public static GerenteDePersistencia getInstance(boolean testando){
@@ -22,24 +29,48 @@ public class GerenteDePersistencia {
 		return minhaInstancia;
 	}
 	
-	public void gravarAdministrador(Administrador admin) throws LoginJaRegistradoException{
-		administradorDAO.gravarAdministrador(admin);		
+	//=============================Operacoes sobre Administrador===============================\\
+	
+	public void saveAdministrador(Administrador admin) throws LoginAlreadyRegisteredException{
+		administradorDAO.saveAdministrador(admin);		
 	}
 	
-	public void removerAdministrador(Administrador admin) throws AdministradorNaoEncontradoException{
-		administradorDAO.removerAdministrador(admin);
+	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException{
+		administradorDAO.removeAdministrador(admin);
 	}
 	
-	public Administrador getAdministrador(String login) throws AdministradorNaoEncontradoException{
+	public Administrador getAdministrador(String login) throws AdministradorNotFoundException{
 		return administradorDAO.getAdministrador(login);
 	}
 	
-	public void atualizarAdministrador(Administrador admin) throws AdministradorNaoEncontradoException{
-		administradorDAO.atualizarAdministrador(admin);
+	public void updateAdministrador(Administrador admin) throws AdministradorNotFoundException{
+		administradorDAO.updateAdministrador(admin);
 	}
 	
-	public void apagarTodosAdministradores(){
-		administradorDAO.apagarTodosAdministradores();
+	public void removeAllAdministradores(){
+		administradorDAO.removeAllAdministradores();
+	}
+	
+	//===================================Operacoes sobre Fotos=====================================\\
+	
+	public void saveFoto(Foto foto) throws FotoAlreadySavedException{
+		fotoDAO.saveFoto(foto);
+	}
+	
+	public void removeFoto(Foto foto) throws FotoNotFoundException{
+		fotoDAO.removeFoto(foto);
+	}
+	
+	public Foto getFoto(long idCaso, String path) throws FotoNotFoundException{
+		return fotoDAO.getFoto(idCaso, path);
+	}
+	
+	public void updateFoto(Foto oldPicture, Foto newPicture) throws FotoNotFoundException, FotoAlreadySavedException{
+		fotoDAO.updateFoto(oldPicture, newPicture);
+	}
+	
+	public void removeAllFotos(){
+		fotoDAO.removeAllFotos();
 	}
 
 }

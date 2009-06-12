@@ -2,8 +2,6 @@ package beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,31 +9,36 @@ import javax.persistence.Table;
 @Table(name = "fotos")
 public class Foto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_foto", updatable = false, nullable = false)
-	private long idFoto;
+	@Id	
+	@Column(name = "id_caso", updatable = false, nullable = false)
+	private long idCaso;
+//	@Id
 	@Column(updatable = true, nullable = false)
 	private String path;
 	
 	//construtor vazio necessario pelo hibernate
 	public Foto(){}
 	
-	public Foto(String path){
+	public Foto(long idCaso, String path){
+		this.idCaso = idCaso;
 		this.path = path;
 	}
 	
-	public long getIdFoto() {
-		return idFoto;
+	public long getIdCaso() {
+		return idCaso;
 	}
-	public void setIdFoto(long idFoto) {
-		this.idFoto = idFoto;
+	public void setIdCaso(long idFoto) {
+		this.idCaso = idFoto;
 	}
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
+	}
+	
+	public String toString(){
+		return this.idCaso + ";" + this.path;
 	}
 
 }
