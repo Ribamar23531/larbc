@@ -1,8 +1,8 @@
-package persistencia;
+package persistence;
 
-import modelo.Administrador;
-import persistencia.DAO.AdministradorDAO;
-import persistencia.DAO.AdministradorHibernateDAO;
+import beans.Administrador;
+import persistence.DAO.AdministradorDAO;
+import persistence.DAO.AdministradorHibernateDAO;
 import exceptions.AdministradorNaoEncontradoException;
 import exceptions.LoginJaRegistradoException;
 
