@@ -1,13 +1,13 @@
 package exceptions;
 
-public class AdministradorNaoEncontradoException extends Exception{
+public class AdministradorNotFoundException extends Exception{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public AdministradorNaoEncontradoException(){
+	public AdministradorNotFoundException(){
 		super("Administrador Nao Encontrado");
 	}
 

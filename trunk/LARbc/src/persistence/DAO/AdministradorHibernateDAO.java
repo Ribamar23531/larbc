@@ -2,37 +2,25 @@ package persistence.DAO;
 
 import java.util.List;
 
-
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import beans.Administrador;
+import exceptions.AdministradorNotFoundException;
+import exceptions.LoginAlreadyRegisteredException;
 
-import persistence.hibernate.HibernateUtil;
-import exceptions.AdministradorNaoEncontradoException;
-import exceptions.LoginJaRegistradoException;
-
-public class AdministradorHibernateDAO implements AdministradorDAO{
+public class AdministradorHibernateDAO extends HibernateDAO implements AdministradorDAO{	
 	
-	private SessionFactory sf;
-	private String schema;
-	
-	public AdministradorHibernateDAO(boolean testando){
-		if(!testando){
-			this.schema = HibernateUtil.getSchema();			
-		}else{
-			this.schema = HibernateUtil.getTesteSchema();
-		}
-		this.sf = HibernateUtil.getSessionFactory(testando);
+	public AdministradorHibernateDAO(boolean testing){
+		super(testing);
 	}	
 	
 	@Override
-	public void gravarAdministrador(Administrador admin) throws LoginJaRegistradoException {
+	public void saveAdministrador(Administrador admin) throws LoginAlreadyRegisteredException {
 		try {
 			getAdministrador(admin.getLogin());
-			throw new LoginJaRegistradoException();
-		} catch (AdministradorNaoEncontradoException e) {}
+			throw new LoginAlreadyRegisteredException();
+		} catch (AdministradorNotFoundException e) {}
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();		
 		session.save(admin);
@@ -41,8 +29,7 @@ public class AdministradorHibernateDAO implements AdministradorDAO{
 	}
 	
 	@Override
-	public void removerAdministrador(Administrador admin)
-			throws AdministradorNaoEncontradoException {
+	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException {
 		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -54,7 +41,7 @@ public class AdministradorHibernateDAO implements AdministradorDAO{
 	
 	@Override
 	public Administrador getAdministrador(String login)
-			throws AdministradorNaoEncontradoException {
+			throws AdministradorNotFoundException {
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		String consulta = "SELECT * FROM " 
@@ -63,7 +50,7 @@ public class AdministradorHibernateDAO implements AdministradorDAO{
 		transaction.commit();
 		session.close();
 		if(admin.size() == 0){
-			throw new AdministradorNaoEncontradoException();
+			throw new AdministradorNotFoundException();
 		}
 		String log = (String) admin.get(0)[1];
 		String pas = (String) admin.get(0)[2];
@@ -72,8 +59,8 @@ public class AdministradorHibernateDAO implements AdministradorDAO{
 	}
 
 	@Override
-	public void atualizarAdministrador(Administrador admin)
-			throws AdministradorNaoEncontradoException {
+	public void updateAdministrador(Administrador admin)
+			throws AdministradorNotFoundException {
 		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -84,7 +71,7 @@ public class AdministradorHibernateDAO implements AdministradorDAO{
 	}
 
 	@Override
-	public void apagarTodosAdministradores() {
+	public void removeAllAdministradores() {
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();		
 		List<Administrador> admins = session.createQuery("from " + Administrador.class.getCanonicalName()).list();

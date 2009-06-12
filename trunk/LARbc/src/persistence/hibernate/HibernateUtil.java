@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import beans.Administrador;
+import beans.Foto;
 
 
 public class HibernateUtil {
@@ -35,6 +36,8 @@ public class HibernateUtil {
 
 			// Add your mapped classes here:
 			config.addAnnotatedClass(Administrador.class);
+			config.addAnnotatedClass(Foto.class);
+			
 			sessionFactory = config.buildSessionFactory();
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
@@ -42,12 +45,6 @@ public class HibernateUtil {
 		}
 	}
 	
-	
-
-//	static {
-//		
-//	}
-
 	public static SessionFactory getSessionFactory(boolean testando) {
 		if(sessionFactory == null){
 			testing = testando;

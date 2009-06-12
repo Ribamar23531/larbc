@@ -1,19 +1,19 @@
 package persistence.DAO;
 
 import beans.Administrador;
-import exceptions.AdministradorNaoEncontradoException;
-import exceptions.LoginJaRegistradoException;
+import exceptions.AdministradorNotFoundException;
+import exceptions.LoginAlreadyRegisteredException;
 
 public interface AdministradorDAO {
 	
-	public void gravarAdministrador(Administrador admin) throws LoginJaRegistradoException;
+	public void saveAdministrador(Administrador admin) throws LoginAlreadyRegisteredException;
 	
-	public void removerAdministrador(Administrador admin) throws AdministradorNaoEncontradoException;
+	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException;
 	
-	public Administrador getAdministrador(String login) throws AdministradorNaoEncontradoException;
+	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
 	
-	public void atualizarAdministrador(Administrador admin) throws AdministradorNaoEncontradoException;
+	public void updateAdministrador(Administrador admin) throws AdministradorNotFoundException;
 	
-	public void apagarTodosAdministradores();
+	public void removeAllAdministradores();
 
 }

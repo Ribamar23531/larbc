@@ -6,11 +6,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import beans.Administrador;
-
-import exceptions.AdministradorNaoEncontradoException;
-
 import persistence.GerenteDePersistencia;
+import beans.Administrador;
+import beans.Foto;
+import exceptions.AdministradorNotFoundException;
 
 public class PersistenciaTestes {
 	
@@ -19,19 +18,24 @@ public class PersistenciaTestes {
 	@BeforeClass
 	public static void configurarTudo(){
 		gerente = GerenteDePersistencia.getInstance(true);		
-		gerente.apagarTodosAdministradores();
+		removeEveryThing();
 	}
 	
 	@AfterClass
 	public static void zerarTudo(){
-		gerente.apagarTodosAdministradores();
+		removeEveryThing();
+	}
+	
+	private static void removeEveryThing(){
+		gerente.removeAllAdministradores();
+		gerente.removeAllFotos();
 	}
 	
 	@Test
-	public void testaGerenteDePersistencia(){
+	public void testOperationsUnderAdministrador(){
 		Administrador a = new Administrador("login1", "senha1", "nome1");
 		try {
-			gerente.gravarAdministrador(a);
+			gerente.saveAdministrador(a);
 			Administrador admin = gerente.getAdministrador(a.getLogin());
 			if(admin.getLogin().equals(a.getLogin()) && admin.getPassword().equals(a.getPassword()) && admin.getNome().equals(a.getNome())){
 				assertTrue(true);
@@ -43,20 +47,43 @@ public class PersistenciaTestes {
 		}
 		a.setNome("fulaninho");
 		try {
-			gerente.atualizarAdministrador(a);
+			gerente.updateAdministrador(a);
 			if(gerente.getAdministrador(a.getLogin()).equals("fulaninho")){
 				assertTrue(true);
 			}
-		} catch (AdministradorNaoEncontradoException e1) {
+		} catch (AdministradorNotFoundException e1) {
 			a.setNome("fulaninho");
 		}
 		try {
-			gerente.removerAdministrador(a);
+			gerente.removeAdministrador(a);
 			assertTrue(true);
-		} catch (AdministradorNaoEncontradoException e) {
+		} catch (AdministradorNotFoundException e) {
 			assertTrue(false);
 		}
 	}
 	
+	@Test
+	public void testOperationsUnderFotos(){
+		long idCaso = 1;
+		String path = "path";
+		Foto foto = new Foto(idCaso, path);
+		try {
+			gerente.saveFoto(foto);
+			Foto f = gerente.getFoto(idCaso, path);
+			if(f.getIdCaso() == idCaso && f.getPath().equals(path)){
+				assertTrue(true);
+			}else{
+				assertTrue(false);
+			}
+			Foto oldPicture = new Foto(f.getIdCaso(), f.getPath());
+			f.setPath("differentPath");
+			gerente.updateFoto(oldPicture, f);
+			assertTrue(true);
+			gerente.removeFoto(f);
+			assertTrue(true);
+		} catch (Exception e) {
+			assertTrue(false);
+		}		
+	}	
 	
 }
