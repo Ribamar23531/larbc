@@ -4,7 +4,7 @@ Abaixo estão as tarefas definidas e os status momentâneos de cada uma delas.
 
 || Tarefa || Membro Responsável || Status ||
 || Enriquecer o modelo de dados || Alcione, Diego, Felipe || Completo ||
-|| Criação dos elementos Hibernate || Diego || Por Fazer ||
+|| Criação dos elementos Hibernate || Diego || Em andamento ||
 || Implementação do ciclo de consultas RBC || Alcione, Felipe || Por Fazer ||
 || Criação de protótipo de interface || Alcione || Por Fazer ||
 
