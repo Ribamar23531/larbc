@@ -1,14 +1,15 @@
-package persistencia.DAO;
+package persistence.DAO;
 
 import java.util.List;
 
-import modelo.Administrador;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
-import persistencia.hibernate.HibernateUtil;
+import beans.Administrador;
+
+import persistence.hibernate.HibernateUtil;
 import exceptions.AdministradorNaoEncontradoException;
 import exceptions.LoginJaRegistradoException;
 

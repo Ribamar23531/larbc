@@ -1,8 +1,9 @@
-package persistencia.hibernate;
-import modelo.Administrador;
+package persistence.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+
+import beans.Administrador;
 
 
 public class HibernateUtil {

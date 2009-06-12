@@ -1,15 +1,16 @@
 package persistenciaTestes;
 
 import static org.junit.Assert.assertTrue;
-import modelo.Administrador;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import beans.Administrador;
+
 import exceptions.AdministradorNaoEncontradoException;
 
-import persistencia.GerenteDePersistencia;
+import persistence.GerenteDePersistencia;
 
 public class PersistenciaTestes {
 	

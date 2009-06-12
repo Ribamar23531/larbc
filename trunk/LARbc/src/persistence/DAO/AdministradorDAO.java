@@ -1,8 +1,8 @@
-package persistencia.DAO;
+package persistence.DAO;
 
+import beans.Administrador;
 import exceptions.AdministradorNaoEncontradoException;
 import exceptions.LoginJaRegistradoException;
-import modelo.Administrador;
 
 public interface AdministradorDAO {
 	

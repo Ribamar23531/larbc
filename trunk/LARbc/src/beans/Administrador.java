@@ -1,4 +1,4 @@
-package modelo;
+package beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ public class Administrador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_administrador", updatable = false, nullable = false)
-	private int idAdministrador;
+	private long idAdministrador;
 	@Column(updatable = true, nullable = false)
 	private String login;
 	@Column(name = "senha", updatable = true, nullable = false)
@@ -33,11 +33,11 @@ public class Administrador {
 		this.nome = nome;
 	}
 	
-	public int getIdAdministrador() {
+	public long getIdAdministrador() {
 		return idAdministrador;
 	}
 
-	public void setIdAdministrador(int idAdministrador) {
+	public void setIdAdministrador(long idAdministrador) {
 		this.idAdministrador = idAdministrador;
 	}
 
