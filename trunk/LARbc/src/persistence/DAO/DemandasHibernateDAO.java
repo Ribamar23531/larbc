@@ -18,7 +18,7 @@ public class DemandasHibernateDAO extends HibernateDAO implements DemandaDAO{
 	public Demanda getDemanda(long idDemanda) throws DemandaNotFoundException {
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
-		Demanda demanda = (Demanda) session.load(Demanda.class, new Long(idDemanda));
+		Demanda demanda = (Demanda) session.get(Demanda.class, new Long(idDemanda));
 		if(demanda == null){
 			throw new DemandaNotFoundException();
 		}

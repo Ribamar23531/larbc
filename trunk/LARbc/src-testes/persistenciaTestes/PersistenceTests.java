@@ -16,7 +16,7 @@ import beans.Foto;
 import exceptions.AdministradorNotFoundException;
 import exceptions.DemandaNotFoundException;
 
-public class PersistenciaTestes {
+public class PersistenceTests {
 	
 	private static GerenteDePersistencia gerente;
 
@@ -142,17 +142,19 @@ public class PersistenciaTestes {
 			assertTrue(false);
 		}else{
 			assertTrue(true);
-//			d.setCidade("differentCidade");
-//			try {
-//				gerente.updateDemanda(d);
-//				if(gerente.getDemanda(d.getIdDemanda()).getCidade().equals("differentCidade")){
-//					assertTrue(true);
-//				}else{
-//					assertTrue(false);
-//				}
-//			} catch (DemandaNotFoundException e) {
-//				assertTrue(false);
-//			}
+			d.setCidade("differentCidade");
+			try {
+				gerente.updateDemanda(d);
+				long id = d.getIdDemanda();
+				Demanda dAux = gerente.getDemanda(id);
+				if(dAux.getCidade().equals("differentCidade")){
+					assertTrue(true);
+				}else{
+					assertTrue(false);
+				}
+			} catch (DemandaNotFoundException e) {
+				assertTrue(false);
+			}
 			try {
 				gerente.removeDemanda(d);
 				if(gerente.getDemandas().size() == size - 1){
