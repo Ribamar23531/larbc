@@ -33,12 +33,13 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
-		session.delete(admin);		
+		session.delete(admin);
 		transaction.commit();
 		session.close();
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Administrador getAdministrador(String login)
 			throws AdministradorNotFoundException {
@@ -70,6 +71,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void removeAllAdministradores() {
 		Session session = sf.openSession();

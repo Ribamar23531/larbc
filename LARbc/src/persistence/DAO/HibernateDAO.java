@@ -2,7 +2,7 @@ package persistence.DAO;
 
 import org.hibernate.SessionFactory;
 
-import persistence.hibernate.HibernateUtil;
+import persistence.hibernate.HibernateConfig;
 
 public abstract class HibernateDAO {
 	
@@ -11,11 +11,11 @@ public abstract class HibernateDAO {
 	
 	public HibernateDAO(boolean testing){
 		if(!testing){
-			this.schema = HibernateUtil.getSchema();			
+			this.schema = HibernateConfig.getSchema();			
 		}else{
-			this.schema = HibernateUtil.getTesteSchema();
+			this.schema = HibernateConfig.getTesteSchema();
 		}
-		this.sf = HibernateUtil.getSessionFactory(testing);
+		this.sf = HibernateConfig.getSessionFactory(testing);
 	}
 
 }

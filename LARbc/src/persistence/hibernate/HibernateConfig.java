@@ -4,10 +4,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import beans.Administrador;
+import beans.Demanda;
 import beans.Foto;
 
 
-public class HibernateUtil {
+public class HibernateConfig {
 	
 	private static boolean testing = false;
 	private static SessionFactory sessionFactory = null;	
@@ -37,6 +38,7 @@ public class HibernateUtil {
 			// Add your mapped classes here:
 			config.addAnnotatedClass(Administrador.class);
 			config.addAnnotatedClass(Foto.class);
+			config.addAnnotatedClass(Demanda.class);
 			
 			sessionFactory = config.buildSessionFactory();
 		} catch (Throwable ex) {
