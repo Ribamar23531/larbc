@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false">
-	<class name="com.googlecode.projeto.larbc.rbccycle.caseelements.ImmobileSolution" table="Imoveis">
+	<class name="com.googlecode.projeto.larbc.rbccycle.caseelements.ImmobileSolution" table="Casos">
 		<id name="id" column="idCasos">
 			<generator class="native" />
 		</id>
@@ -11,8 +11,16 @@
 		<property name="city" column="cidade" />
 		<property name="neighborhood" column="bairro" />
 		<property name="street" column="rua" />
+		<property name="number" column="numero" />
 		<property name="name" column="nome" />
 		<property name="builtArea" column="areaConstruida" />
 		<property name="totalArea" column="areaTotal" />
+		<property name="garageSpace" column="vagasGaragem" />
+		<property name="bedroom" column="quartos" />
+		<property name="suite" column="suite" />
+		<property name="bathroom" column="banheiros" />
+		<property name="type" column="tipo" />
+		<property name="price" column="preco" />
+		<property name="businessType" column="tipoNegocio" />
 	</class>
 </hibernate-mapping>

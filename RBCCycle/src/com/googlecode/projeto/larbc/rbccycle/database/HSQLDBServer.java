@@ -57,7 +57,7 @@ public class HSQLDBServer
 
             PrintStream out = new PrintStream(new ByteArrayOutputStream());
             Connection conn = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/Larbc", "sa", "");
-            SqlFile file = new SqlFile(new File(FileIO.findFile("com/googlecode/projeto/larbc/rbccycle/databaseconfig/Database.sql").getFile()),false,new HashMap());
+            SqlFile file = new SqlFile(new File(FileIO.findFile("com/googlecode/projeto/larbc/rbccycle/databaseconfig/LaRBCDatabase.sql").getFile()),false,new HashMap());
             file.execute(conn,out,out, true);
             org.apache.commons.logging.LogFactory.getLog(HSQLDBServer.class).info("Data base generation finished");
             
