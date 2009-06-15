@@ -2,6 +2,7 @@ package persistence.DAO;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
@@ -43,20 +44,34 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 	@Override
 	public Administrador getAdministrador(String login)
 			throws AdministradorNotFoundException {
+		
 		Session session = sf.openSession();
-		Transaction transaction = session.beginTransaction();
-		String consulta = "SELECT * FROM " 
-			+ this.schema + ".administradores a WHERE a.login = '" + login + "';";
-		List<Object[]> admin = session.createSQLQuery(consulta).list();
-		transaction.commit();
-		session.close();
-		if(admin.size() == 0){
-			throw new AdministradorNotFoundException();
-		}
-		String log = (String) admin.get(0)[1];
-		String pas = (String) admin.get(0)[2];
-		String nome = (String) admin.get(0)[3];
-		return new Administrador(log, nome, pas);
+        Transaction transaction = session.beginTransaction();
+        Query query = session.getNamedQuery("administrador.login");
+        query.setString("login", login);
+        List<Administrador> administradores = query.list();
+        if(administradores.size() == 0){
+            throw new AdministradorNotFoundException();
+        }
+        transaction.commit();
+        session.close();
+       
+        //OBS: Note que o administrador retornado terá o atributo "idAdministrador" setado.
+        return administradores.get(0);
+//		Session session = sf.openSession();
+//		Transaction transaction = session.beginTransaction();
+//		String consulta = "SELECT * FROM " 
+//			+ this.schema + ".administradores a WHERE a.login = '" + login + "';";
+//		List<Object[]> admin = session.createSQLQuery(consulta).list();
+//		transaction.commit();
+//		session.close();
+//		if(admin.size() == 0){
+//			throw new AdministradorNotFoundException();
+//		}
+//		String log = (String) admin.get(0)[1];
+//		String pas = (String) admin.get(0)[2];
+//		String nome = (String) admin.get(0)[3];
+//		return new Administrador(log, nome, pas);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package persistence.DAO;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
@@ -16,23 +17,36 @@ public class FotoHibernateDAO extends HibernateDAO implements FotoDAO{
 		super(testing);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Foto getFoto(long idCaso, String path) throws FotoNotFoundException {
 		Session session = sf.openSession();
-		Transaction transaction = session.beginTransaction();
-		String consulta = "SELECT * FROM " 
-			+ this.schema + ".fotos f WHERE f.id_caso = '" + idCaso + "' AND f.path = '" + path + "';";
-		List<Object[]> foto = session.createSQLQuery(consulta).list();
-		transaction.commit();
-		session.close();
-//		Foto foto = (Foto) session.load(Foto.class, new Long(id));
-		if(foto.size() == 0){
-			throw new FotoNotFoundException();
-		}
-		String longSTR = foto.get(0)[0].toString();
-		long idFoto = Long.parseLong(longSTR);		
-		String pathFoto = (String) foto.get(0)[1];
-		return new Foto(idFoto, pathFoto);
+        Transaction transaction = session.beginTransaction();
+        Query query = session.getNamedQuery("foto.idcaso_e_path");
+        query.setLong("id_caso", idCaso);
+        query.setString("path", path);
+        List<Foto> fotos = query.list();
+        transaction.commit();
+        session.close();
+        if(fotos.size() == 0){
+            throw new FotoNotFoundException();
+        }
+        return fotos.get(0);
+//		Session session = sf.openSession();
+//		Transaction transaction = session.beginTransaction();
+//		String consulta = "SELECT * FROM " 
+//			+ this.schema + ".fotos f WHERE f.id_caso = '" + idCaso + "' AND f.path = '" + path + "';";
+//		List<Object[]> foto = session.createSQLQuery(consulta).list();
+//		transaction.commit();
+//		session.close();
+////		Foto foto = (Foto) session.load(Foto.class, new Long(id));
+//		if(foto.size() == 0){
+//			throw new FotoNotFoundException();
+//		}
+//		String longSTR = foto.get(0)[0].toString();
+//		long idFoto = Long.parseLong(longSTR);		
+//		String pathFoto = (String) foto.get(0)[1];
+//		return new Foto(idFoto, pathFoto);
 	}
 	
 	@Override
@@ -69,6 +83,7 @@ public class FotoHibernateDAO extends HibernateDAO implements FotoDAO{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void removeAllFotos() {
 		Session session = sf.openSession();

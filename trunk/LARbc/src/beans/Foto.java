@@ -8,8 +8,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
 @Table(name = "fotos")
+@NamedQueries( { @NamedQuery(name = "foto.idcaso_e_path", query = "select f from Foto f where f.myComposedKey.idCaso = :id_caso and f.myComposedKey.path = :path") })
 public class Foto {
 	
 	@EmbeddedId
@@ -47,19 +51,22 @@ public class Foto {
 		return this.getIdCaso() + ";" + this.getPath();
 	}
 	
-	@Embeddable
-	private class MyComposedKey implements Serializable{
+	@Embeddable	
+	public static class MyComposedKey implements Serializable{
 
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
 		
+		
 		@Column(name = "id_caso", updatable = true, nullable = false)
 		private long idCaso;
 
 		@Column(updatable = true, nullable = false)
 		private String path;
+		
+		public MyComposedKey(){}
 		
 		public MyComposedKey(long idCaso, String path){
 			this.idCaso = idCaso;
