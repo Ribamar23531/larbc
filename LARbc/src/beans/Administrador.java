@@ -7,8 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
 @Table(name = "administradores")
+@NamedQueries( { @NamedQuery(name = "administrador.login", query = "select a from Administrador a where a.login = :login") })
 public class Administrador {
 	
 	@Id
