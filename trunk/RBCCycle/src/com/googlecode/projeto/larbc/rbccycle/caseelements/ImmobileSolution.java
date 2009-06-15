@@ -26,6 +26,7 @@ public class ImmobileSolution implements CaseComponent {
 	private String type;
 	private float price;
 	private int businessType;
+	private int addedBy;
 	
 	public int getId() {
 		return id;
