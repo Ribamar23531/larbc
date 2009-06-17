@@ -11,6 +11,7 @@ import jcolibri.cbrcore.CaseComponent;
 public class ImmobileDescription implements CaseComponent {
 
 	private int idCase;
+	
 	private String state;
 	private String city;
 	private String neighborhood;
