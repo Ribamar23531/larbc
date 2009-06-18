@@ -18,7 +18,7 @@ public class HibernateConfig {
 	
 	private static void configure(){
 		try {
-			AnnotationConfiguration config = new AnnotationConfiguration();
+			AnnotationConfiguration config = new AnnotationConfiguration();			
 			config.setProperty("hibernate.dialect",	"org.hibernate.dialect.MySQLDialect");
 			config.setProperty("hibernate.connection.driver_class",	"com.mysql.jdbc.Driver");
 			if(!testing){
@@ -36,7 +36,7 @@ public class HibernateConfig {
 			config.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
 			config.setProperty("hibernate.current_session_context_class", "thread");
 
-			// Add your mapped classes here:
+			// Mapped classes
 			config.addAnnotatedClass(Administrador.class);
 			config.addAnnotatedClass(Foto.class);
 			config.addAnnotatedClass(Demanda.class);

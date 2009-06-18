@@ -65,7 +65,7 @@ public class CasoTests {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
-		caso.setInseridoPor(inseridoPor);
+//		caso.setInseridoPor(inseridoPor);
 		gerente.saveCaso(caso);		 
 		if(gerente.getCasos().size() == 1){
 			assertTrue(true);			
