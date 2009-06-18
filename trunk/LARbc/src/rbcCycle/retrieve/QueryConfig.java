@@ -31,12 +31,12 @@ public class QueryConfig {
 	 * @param builtArea The built area of the immobile. 
 	 * @param totalArea The total area of the immobile.
 	 * @param garageSpace How many garage spaces there is/are.
-	 * @param bedroom
-	 * @param suite
-	 * @param bathroom
-	 * @param type
-	 * @param price
-	 * @param businessType
+	 * @param bedroom How many rooms there is/are.
+	 * @param suite How many of these bedrooms have/has a bathroom.
+	 * @param bathroom How many social bathrooms there is/are. 
+	 * @param type The type of the immobile. 
+	 * @param price The price of this.
+	 * @param businessType The type of business.
 	 */
 	public void setQuery(String state, String city, String neighborhood, String street, String name,
 						 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
@@ -58,6 +58,10 @@ public class QueryConfig {
 		this.query.setDescription(this.problemDescription);
 	}
 	
+	/**
+	 * Get the query to retrieve the results based on it. 
+	 * @return The query.
+	 */
 	public CBRQuery getQuery(){
 		return this.query;
 	}
