@@ -1,12 +1,19 @@
 package beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -26,6 +33,10 @@ public class Administrador {
 	@Column(updatable = true, nullable = false)
 	private String nome;
 	
+	@OneToMany(mappedBy="inseridoPor", fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	private List<Caso> casos;
+	
 	//construtor vazio necessario pelo hibernate
 	public Administrador(){
 		
@@ -35,6 +46,7 @@ public class Administrador {
 		this.login = login;
 		this.password = password;
 		this.nome = nome;
+		this.casos = new ArrayList<Caso>();
 	}
 	
 	public long getIdAdministrador() {
@@ -69,5 +81,26 @@ public class Administrador {
 		this.nome = nome;
 	}
 
+	public void setCasos(List<Caso> casos) {
+		this.casos = casos;
+	}
+
+	public List<Caso> getCasos() {
+		return casos;
+	}
+	
+	public void addCaso(Caso caso){
+		this.casos.add(caso);
+	}
+	
+	public void removeCaso(Caso caso){
+		int i = 0;
+		for (Caso c : casos) {
+			if(c.getIdCaso() == caso.getIdCaso()){
+				this.casos.remove(i);
+			}
+			i++;
+		}
+	}
 
 }

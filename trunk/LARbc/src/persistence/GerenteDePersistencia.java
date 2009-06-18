@@ -4,14 +4,18 @@ import java.util.List;
 
 import persistence.DAO.AdministradorDAO;
 import persistence.DAO.AdministradorHibernateDAO;
+import persistence.DAO.CasoDAO;
+import persistence.DAO.CasosHibernateDAO;
 import persistence.DAO.DemandaDAO;
 import persistence.DAO.DemandasHibernateDAO;
 import persistence.DAO.FotoDAO;
 import persistence.DAO.FotoHibernateDAO;
 import beans.Administrador;
+import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
 import exceptions.AdministradorNotFoundException;
+import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
@@ -22,12 +26,14 @@ public class GerenteDePersistencia {
 	private AdministradorDAO administradorDAO;
 	private FotoDAO fotoDAO;
 	private DemandaDAO demandaDAO;
+	private CasoDAO casoDAO;
 	private static GerenteDePersistencia minhaInstancia = null;
 	
 	public GerenteDePersistencia(boolean testing){
 		this.administradorDAO = new AdministradorHibernateDAO(testing);
 		this.fotoDAO = new FotoHibernateDAO(testing);
 		this.demandaDAO = new DemandasHibernateDAO(testing);
+		this.casoDAO = new CasosHibernateDAO(testing);
 	}
 	
 	public static GerenteDePersistencia getInstance(boolean testando){
@@ -39,8 +45,17 @@ public class GerenteDePersistencia {
 	
 	//=============================Operacoes sobre Administrador===============================\\
 	
-	public void saveAdministrador(Administrador admin) throws LoginAlreadyRegisteredException{
-		administradorDAO.saveAdministrador(admin);		
+	public void saveAdministrador(Administrador admin) throws LoginAlreadyRegisteredException/*, RequiredArgumentException*/{
+//		if(admin.getLogin() == null || admin.getLogin().equals("")){
+//			throw new RequiredArgumentException("login");
+//		}
+//		if(admin.getPassword() == null || admin.getPassword().equals("")){
+//			throw new RequiredArgumentException("password");
+//		}
+//		if(admin.getNome() == null || admin.getNome().equals("")){
+//			throw new RequiredArgumentException("nome");
+//		}
+		administradorDAO.saveAdministrador(admin);
 	}
 	
 	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException{
@@ -58,6 +73,13 @@ public class GerenteDePersistencia {
 	public void removeAllAdministradores(){
 		administradorDAO.removeAllAdministradores();
 	}
+	
+	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{
+		admin.addCaso(caso);
+		caso.setInseridoPor(admin);
+		updateAdministrador(admin);
+		saveCaso(caso);
+	}	
 	
 	//===================================Operacoes sobre Fotos=====================================\\
 	
@@ -105,6 +127,32 @@ public class GerenteDePersistencia {
 	
 	public void removeAllDemandas(){
 		demandaDAO.removeAllDemandas();
+	}
+	
+	//===================================Operacoes sobre Casos=====================================\\
+	
+	public void saveCaso(Caso caso){
+		casoDAO.saveCaso(caso);
+	}
+	
+	public void removeCaso(Caso caso) throws CasoNotFoundException{
+		casoDAO.removeCaso(caso);
+	}
+	
+	public Caso getCaso(long idCaso) throws CasoNotFoundException{
+		return casoDAO.getCaso(idCaso);
+	}
+	
+	public List<Caso> getCasos(){
+		return casoDAO.getCasos();
+	}
+	
+	public void updateCaso(Caso caso) throws CasoNotFoundException{
+		casoDAO.updateCaso(caso);
+	}
+	
+	public void removeAllCasos(){
+		casoDAO.removeAllCasos();
 	}
 
 }

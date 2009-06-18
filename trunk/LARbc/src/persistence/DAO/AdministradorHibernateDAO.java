@@ -14,7 +14,11 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 	
 	public AdministradorHibernateDAO(boolean testing){
 		super(testing);
-	}	
+	}
+
+	public AdministradorHibernateDAO(){
+		super(false);
+	}
 	
 	@Override
 	public void saveAdministrador(Administrador admin) throws LoginAlreadyRegisteredException {
@@ -55,23 +59,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
         }
         transaction.commit();
         session.close();
-       
-        //OBS: Note que o administrador retornado terá o atributo "idAdministrador" setado.
         return administradores.get(0);
-//		Session session = sf.openSession();
-//		Transaction transaction = session.beginTransaction();
-//		String consulta = "SELECT * FROM " 
-//			+ this.schema + ".administradores a WHERE a.login = '" + login + "';";
-//		List<Object[]> admin = session.createSQLQuery(consulta).list();
-//		transaction.commit();
-//		session.close();
-//		if(admin.size() == 0){
-//			throw new AdministradorNotFoundException();
-//		}
-//		String log = (String) admin.get(0)[1];
-//		String pas = (String) admin.get(0)[2];
-//		String nome = (String) admin.get(0)[3];
-//		return new Administrador(log, nome, pas);
 	}
 
 	@Override

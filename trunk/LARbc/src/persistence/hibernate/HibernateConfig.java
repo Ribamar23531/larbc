@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import beans.Administrador;
+import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
 
@@ -39,6 +40,7 @@ public class HibernateConfig {
 			config.addAnnotatedClass(Administrador.class);
 			config.addAnnotatedClass(Foto.class);
 			config.addAnnotatedClass(Demanda.class);
+			config.addAnnotatedClass(Caso.class);
 			
 			sessionFactory = config.buildSessionFactory();
 		} catch (Throwable ex) {
