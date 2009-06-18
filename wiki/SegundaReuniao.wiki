@@ -8,6 +8,6 @@ Data: em aberto
 
  *  Existe alguma situação que a busca não deve retornar nenhum resultado?
 
- *  Pegar os dados para alimentar a base de dados.
+ *  Obter os dados para alimentar a base de dados.
 
  *  Validar a interface gráfica.
