@@ -2,23 +2,15 @@ package beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 
 @Entity
 @Table(name = "casos")
-public class Caso {
+public class Caso{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,12 +47,12 @@ public class Caso {
 	@Column(updatable = true, nullable = false)
 	private int tipoNegocio;	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="id_administrador",
-	insertable=true, updatable=true)
-	@Fetch(FetchMode.JOIN)
-	@Cascade(CascadeType.SAVE_UPDATE)
-	private Administrador inseridoPor;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name="id_administrador", insertable=false, updatable=false, nullable=false)
+//	@Cascade(CascadeType.PERSIST)
+//	private Administrador inseridoPor;
+	@Column(updatable = false, nullable = false)
+	private long idAdministradorResponsavel;
 	
 	
 	//construtor vazio necessario pelo hibernate
@@ -162,11 +154,19 @@ public class Caso {
 	public void setTipoNegocio(int tipoNegocio) {
 		this.tipoNegocio = tipoNegocio;
 	}
-	public void setInseridoPor(Administrador inseridoPor) {
-		this.inseridoPor = inseridoPor;
+//	public void setInseridoPor(Administrador inseridoPor) {
+//		this.inseridoPor = inseridoPor;
+//	}
+//	public Administrador getInseridoPor() {
+//		return inseridoPor;
+//	}
+
+	public void setIdAdministradorResponsavel(long idAdministradorResponsavel) {
+		this.idAdministradorResponsavel = idAdministradorResponsavel;
 	}
-	public Administrador getInseridoPor() {
-		return inseridoPor;
+
+	public long getIdAdministradorResponsavel() {
+		return idAdministradorResponsavel;
 	}	
 	
 }

@@ -36,6 +36,13 @@ public class GerenteDePersistencia {
 		this.casoDAO = new CasosHibernateDAO(testing);
 	}
 	
+	public GerenteDePersistencia(){
+		this.administradorDAO = new AdministradorHibernateDAO();
+		this.fotoDAO = new FotoHibernateDAO();
+		this.demandaDAO = new DemandasHibernateDAO();
+		this.casoDAO = new CasosHibernateDAO();
+	}
+	
 	public static GerenteDePersistencia getInstance(boolean testando){
 		if(minhaInstancia == null){			
 			minhaInstancia = new GerenteDePersistencia(testando);			
@@ -75,10 +82,11 @@ public class GerenteDePersistencia {
 	}
 	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{
-		admin.addCaso(caso);
-		caso.setInseridoPor(admin);
-		updateAdministrador(admin);
+//		caso.setInseridoPor(admin);
+		caso.setIdAdministradorResponsavel(admin.getIdAdministrador());
 		saveCaso(caso);
+//		admin.addCaso(caso);
+//		updateAdministrador(admin);
 	}	
 	
 	//===================================Operacoes sobre Fotos=====================================\\
