@@ -16,6 +16,10 @@ public class FotoHibernateDAO extends HibernateDAO implements FotoDAO{
 	public FotoHibernateDAO(boolean testing){
 		super(testing);
 	}
+	
+	public FotoHibernateDAO(){
+		super(false);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
