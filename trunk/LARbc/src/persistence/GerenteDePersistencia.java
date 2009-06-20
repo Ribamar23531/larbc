@@ -69,6 +69,10 @@ public class GerenteDePersistencia {
 		administradorDAO.removeAdministrador(admin);
 	}
 	
+	public Administrador getAdministrador(long idAdmin) throws AdministradorNotFoundException{
+		return administradorDAO.getAdministrador(idAdmin);
+	}
+	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException{
 		return administradorDAO.getAdministrador(login);
 	}
@@ -81,8 +85,13 @@ public class GerenteDePersistencia {
 		administradorDAO.removeAllAdministradores();
 	}
 	
+	public List<Caso> getCasos(long idAdministrador){
+		return casoDAO.getCasos(idAdministrador);
+	}
+	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{
 //		caso.setInseridoPor(admin);
+		getAdministrador(admin.getLogin());//testa se o administrador existe
 		caso.setIdAdministradorResponsavel(admin.getIdAdministrador());
 		saveCaso(caso);
 //		admin.addCaso(caso);
@@ -151,8 +160,8 @@ public class GerenteDePersistencia {
 		return casoDAO.getCaso(idCaso);
 	}
 	
-	public List<Caso> getCasos(){
-		return casoDAO.getCasos();
+	public List<Caso> getAllCasos(){
+		return casoDAO.getAllCasos();
 	}
 	
 	public void updateCaso(Caso caso) throws CasoNotFoundException{
@@ -161,6 +170,11 @@ public class GerenteDePersistencia {
 	
 	public void removeAllCasos(){
 		casoDAO.removeAllCasos();
+	}
+	
+	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException{
+		Administrador a = getAdministrador(caso.getIdAdministradorResponsavel());
+		return a;
 	}
 
 }

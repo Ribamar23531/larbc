@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
 import persistence.util.Estado;
-import beans.Administrador;
 import beans.Caso;
 import exceptions.CasoNotFoundException;
 
@@ -47,7 +46,7 @@ public class CasoTests {
 		String tipo = "tipo";
 		float preco = 5;
 		int tipoNegocio = 8;
-		Administrador inseridoPor = new Administrador("login", "password", "nome");		
+//		Administrador inseridoPor = new Administrador("login", "password", "nome");		
 		
 		
 		caso.setAreaConstruida(areaConst);
@@ -67,7 +66,7 @@ public class CasoTests {
 		caso.setVagasGaragem(vagasGaragem);
 //		caso.setInseridoPor(inseridoPor);
 		gerente.saveCaso(caso);		 
-		if(gerente.getCasos().size() == 1){
+		if(gerente.getAllCasos().size() == 1){
 			assertTrue(true);			
 		}else{
 			assertTrue(false);
@@ -92,10 +91,10 @@ public class CasoTests {
 	}
 	
 	@Test
-	public void TestRemove(){
+	public void testRemove(){
 		try {
 			gerente.removeCaso(caso);
-			if(gerente.getCasos().size() == 0){
+			if(gerente.getAllCasos().size() == 0){
 				assertTrue(true);
 			}else{
 				assertTrue(false);
@@ -103,6 +102,6 @@ public class CasoTests {
 		} catch (CasoNotFoundException e) {
 			assertTrue(false);
 		}
-	}
+	}	
 	
 }

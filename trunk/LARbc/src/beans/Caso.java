@@ -7,9 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 
 @Entity
 @Table(name = "casos")
+@NamedQueries( { @NamedQuery(name = "getCasosByAdmin", query = "select c from Caso c where c.idAdministradorResponsavel = :idAdministrador") })
 public class Caso{
 	
 	@Id
