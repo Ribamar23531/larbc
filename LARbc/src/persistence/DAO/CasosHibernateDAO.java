@@ -2,6 +2,7 @@ package persistence.DAO;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
@@ -55,7 +56,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Caso> getCasos(){
+	public List<Caso> getAllCasos(){
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		List<Caso> demandas = session.createQuery("from " + Caso.class.getCanonicalName()).list();
@@ -63,6 +64,19 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		session.close();		
 		return demandas;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Caso> getCasos(long adminId) {
+		Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.getNamedQuery("getCasosByAdmin");
+        query.setLong("idAdministrador", adminId);        
+        List<Caso> casos = query.list();
+        transaction.commit();
+        session.close();        
+        return casos;
+	}	
 	
 	@Override
 	public void updateCaso(Caso caso) throws CasoNotFoundException {
@@ -88,6 +102,6 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		}
 		session.close();
 		
-	}	
+	}
 
 }

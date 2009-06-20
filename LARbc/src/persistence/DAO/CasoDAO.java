@@ -13,7 +13,9 @@ public interface CasoDAO {
 	
 	public Caso getCaso(long idCaso) throws CasoNotFoundException;
 	
-	public List<Caso> getCasos();
+	public List<Caso> getAllCasos();
+	
+	public List<Caso> getCasos(long adminId);
 	
 	public void updateCaso(Caso caso) throws CasoNotFoundException;
 	

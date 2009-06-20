@@ -36,21 +36,6 @@ public class FotoHibernateDAO extends HibernateDAO implements FotoDAO{
             throw new FotoNotFoundException();
         }
         return fotos.get(0);
-//		Session session = sf.openSession();
-//		Transaction transaction = session.beginTransaction();
-//		String consulta = "SELECT * FROM " 
-//			+ this.schema + ".fotos f WHERE f.id_caso = '" + idCaso + "' AND f.path = '" + path + "';";
-//		List<Object[]> foto = session.createSQLQuery(consulta).list();
-//		transaction.commit();
-//		session.close();
-////		Foto foto = (Foto) session.load(Foto.class, new Long(id));
-//		if(foto.size() == 0){
-//			throw new FotoNotFoundException();
-//		}
-//		String longSTR = foto.get(0)[0].toString();
-//		long idFoto = Long.parseLong(longSTR);		
-//		String pathFoto = (String) foto.get(0)[1];
-//		return new Foto(idFoto, pathFoto);
 	}
 	
 	@Override

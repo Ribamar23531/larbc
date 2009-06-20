@@ -12,6 +12,8 @@ public interface AdministradorDAO {
 	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
 	
+	public Administrador getAdministrador(long idAdmin) throws AdministradorNotFoundException;
+	
 	public void updateAdministrador(Administrador admin) throws AdministradorNotFoundException;
 	
 	public void removeAllAdministradores();

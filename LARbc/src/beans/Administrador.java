@@ -31,9 +31,7 @@ public class Administrador {
 //	private List<Caso> casos;
 	
 	//construtor vazio necessario pelo hibernate
-	public Administrador(){
-		
-	}
+	public Administrador(){}
 	
 	public Administrador(String login, String password, String nome){
 		this.login = login;

@@ -62,11 +62,9 @@ public class AdministradorTests {
 		} catch (AdministradorNotFoundException e1) {
 			assertTrue(false);
 		}
-	}	
-	
-	@Test
-	public void testeCreateCaso(){
-		
+	}
+
+	private Caso getCaso(){
 		String estado = Estado.PE.toString();
 		String cidade = "cidade";
 		String bairro = "bairro";
@@ -81,7 +79,7 @@ public class AdministradorTests {
 		int baneiros = 3;
 		String tipo = "tipo";
 		float preco = 5;
-		int tipoNegocio = 8;			
+		int tipoNegocio = 8;
 		
 		Caso caso = new Caso();
 		caso.setAreaConstruida(areaConst);
@@ -99,16 +97,33 @@ public class AdministradorTests {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
-//		try {
-//			gerente.createCaso(a, caso);
-//			if(a.getCasos().size() == 0){
-//				assertTrue(false);
-//			}else{
-//				assertTrue(true);
-//			}
-//		} catch (AdministradorNotFoundException e) {
-//			assertTrue(false);
-//		} 
+		
+		return caso;
+	}
+	
+	@Test
+	public void testeCreateCaso(){		
+		
+//		caso.setInseridoPor(inseridoPor);
+		try {
+			gerente.createCaso(a, getCaso());
+			gerente.createCaso(a, getCaso());
+			gerente.createCaso(a, getCaso());
+			if(gerente.getAllCasos().size() == 3){
+				assertTrue(true);			
+			}else{
+				assertTrue(false);
+			}
+			a = gerente.getAdministrador(a.getLogin());
+			List<Caso> casos = gerente.getCasos(a.getIdAdministrador());
+			if(casos.size() == 3){
+				assertTrue(true);			
+			}else{
+				assertTrue(false);
+			}
+		} catch (AdministradorNotFoundException e) {
+			assertTrue(false);
+		}				 
 	}
 	
 	@Test

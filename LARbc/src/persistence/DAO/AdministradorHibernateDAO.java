@@ -61,6 +61,19 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
         session.close();
         return administradores.get(0);
 	}
+	
+	@Override
+	public Administrador getAdministrador(long idAdmin)	throws AdministradorNotFoundException {
+		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();
+		Administrador admin = (Administrador) session.get(Administrador.class, new Long(idAdmin));
+		if(admin == null){
+			throw new AdministradorNotFoundException();
+		}
+		transaction.commit();
+		session.close();
+		return admin;
+	}
 
 	@Override
 	public void updateAdministrador(Administrador admin)
