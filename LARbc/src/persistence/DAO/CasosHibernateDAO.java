@@ -8,6 +8,7 @@ import org.hibernate.classic.Session;
 
 import beans.Administrador;
 import beans.Caso;
+import beans.Foto;
 import exceptions.CasoNotFoundException;
 
 public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
@@ -73,6 +74,19 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
         Query query = session.getNamedQuery("getCasosByAdmin");
         query.setLong("idAdministrador", adminId);        
         List<Caso> casos = query.list();
+        transaction.commit();
+        session.close();        
+        return casos;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Foto> getFotos(Caso caso) {
+		Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.getNamedQuery("getFotos");
+        query.setLong("idCaso", caso.getIdCaso());
+        List<Foto> casos = query.list();
         transaction.commit();
         session.close();        
         return casos;

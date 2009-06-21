@@ -90,12 +90,9 @@ public class GerenteDePersistencia {
 	}
 	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{
-//		caso.setInseridoPor(admin);
 		getAdministrador(admin.getLogin());//testa se o administrador existe
 		caso.setIdAdministradorResponsavel(admin.getIdAdministrador());
 		saveCaso(caso);
-//		admin.addCaso(caso);
-//		updateAdministrador(admin);
 	}	
 	
 	//===================================Operacoes sobre Fotos=====================================\\
@@ -152,6 +149,10 @@ public class GerenteDePersistencia {
 		casoDAO.saveCaso(caso);
 	}
 	
+	public void saveFoto(Caso caso, String path) throws FotoAlreadySavedException{
+		saveFoto(new Foto(caso.getIdCaso(), path));
+	}
+	
 	public void removeCaso(Caso caso) throws CasoNotFoundException{
 		casoDAO.removeCaso(caso);
 	}
@@ -162,6 +163,10 @@ public class GerenteDePersistencia {
 	
 	public List<Caso> getAllCasos(){
 		return casoDAO.getAllCasos();
+	}
+	
+	public List<Foto> getFotos(Caso caso){
+		return casoDAO.getFotos(caso);
 	}
 	
 	public void updateCaso(Caso caso) throws CasoNotFoundException{

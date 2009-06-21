@@ -3,6 +3,7 @@ package persistence.DAO;
 import java.util.List;
 
 import beans.Caso;
+import beans.Foto;
 import exceptions.CasoNotFoundException;
 
 public interface CasoDAO {
@@ -16,6 +17,8 @@ public interface CasoDAO {
 	public List<Caso> getAllCasos();
 	
 	public List<Caso> getCasos(long adminId);
+	
+	public List<Foto> getFotos(Caso caso);
 	
 	public void updateCaso(Caso caso) throws CasoNotFoundException;
 	

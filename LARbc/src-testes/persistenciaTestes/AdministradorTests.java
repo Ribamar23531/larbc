@@ -103,8 +103,7 @@ public class AdministradorTests {
 	
 	@Test
 	public void testeCreateCaso(){		
-		
-//		caso.setInseridoPor(inseridoPor);
+
 		try {
 			gerente.createCaso(a, getCaso());
 			gerente.createCaso(a, getCaso());
@@ -124,23 +123,7 @@ public class AdministradorTests {
 		} catch (AdministradorNotFoundException e) {
 			assertTrue(false);
 		}				 
-	}
-	
-	@Test
-	public void testAssociation(){
-//		try {
-//			a = gerente.getAdministrador("login1");
-//			List<Caso> casos = a.getCasos();
-//			Caso c = casos.get(0);
-//			if(c.getInseridoPor() == a){
-//				assertTrue(true);
-//			}else{
-//				assertTrue(false);
-//			}
-//		} catch (AdministradorNotFoundException e) {
-//			assertTrue(false);
-//		}
-	}
+	}	
 	
 	@Test
 	public void testRemove(){
