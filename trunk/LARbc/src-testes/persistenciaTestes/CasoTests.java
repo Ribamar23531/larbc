@@ -2,6 +2,8 @@ package persistenciaTestes;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -9,7 +11,9 @@ import org.junit.Test;
 import persistence.GerenteDePersistencia;
 import persistence.util.Estado;
 import beans.Caso;
+import beans.Foto;
 import exceptions.CasoNotFoundException;
+import exceptions.FotoAlreadySavedException;
 
 public class CasoTests {
 	
@@ -21,11 +25,13 @@ public class CasoTests {
 		gerente = GerenteDePersistencia.getInstance(true);
 		caso = new Caso();
 		gerente.removeAllCasos();
+		gerente.removeAllFotos();
 	}
 	
 	@AfterClass
 	public static void zerarTudo(){
 		gerente.removeAllCasos();
+		gerente.removeAllFotos();
 	}	
 	
 	@Test
@@ -46,8 +52,6 @@ public class CasoTests {
 		String tipo = "tipo";
 		float preco = 5;
 		int tipoNegocio = 8;
-//		Administrador inseridoPor = new Administrador("login", "password", "nome");		
-		
 		
 		caso.setAreaConstruida(areaConst);
 		caso.setAreaTotal(areaTotal);
@@ -67,11 +71,40 @@ public class CasoTests {
 //		caso.setInseridoPor(inseridoPor);
 		gerente.saveCaso(caso);		 
 		if(gerente.getAllCasos().size() == 1){
-			assertTrue(true);			
+			assertTrue(true);
 		}else{
 			assertTrue(false);
 		}		
-		
+	}
+	
+	@Test
+	public void testGetFotos(){
+		try {
+			gerente.saveFoto(caso, "path1");
+		} catch (FotoAlreadySavedException e) {
+			assertTrue(false);
+		}
+		try {
+			gerente.saveFoto(caso, "path1");
+		} catch (FotoAlreadySavedException e) {
+			assertTrue(true);
+		}
+		try {
+			gerente.saveFoto(caso, "path2");
+		} catch (FotoAlreadySavedException e) {
+			assertTrue(false);
+		}
+		try {
+			gerente.saveFoto(caso, "path3");
+		} catch (FotoAlreadySavedException e) {
+			assertTrue(false);
+		}
+		List<Foto> fotos = gerente.getFotos(caso);
+		if(fotos.size() == 3){
+			assertTrue(true);
+		}else{
+			assertTrue(false);
+		}
 	}
 
 	@Test

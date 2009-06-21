@@ -13,7 +13,8 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "casos")
-@NamedQueries( { @NamedQuery(name = "getCasosByAdmin", query = "select c from Caso c where c.idAdministradorResponsavel = :idAdministrador") })
+@NamedQueries( {@NamedQuery(name = "getCasosByAdmin", query = "select c from Caso c where c.idAdministradorResponsavel = :idAdministrador"),
+				@NamedQuery(name = "getFotos", query = "select f from Foto f where f.myComposedKey.idCaso = :idCaso")})
 public class Caso{
 	
 	@Id
