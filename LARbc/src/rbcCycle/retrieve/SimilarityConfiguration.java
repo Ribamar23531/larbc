@@ -14,20 +14,35 @@ public class SimilarityConfiguration {
 	 * Default constructor. All the attributes have the same weight on the calculation of the similarity.
 	 */
 	public SimilarityConfiguration(){
-		this.defineAttributeConfigurationEqual("state", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("city", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("neighborhood", new Double("1")); //ver pesos
-		this.defineAttributeConfigurationEqual("street", new Double("0.6")); //ver pesos
-		this.defineAttributeConfigurationEqual("name", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("builtArea", new Double("0.8")); //ver pesos
-		this.defineAttributeConfigurationEqual("totalArea", new Double("0.3")); //ver pesos
-		this.defineAttributeConfigurationEqual("garageSpace", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("bedroom", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("suite", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("bathroom", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("type", new Double("0.1"));
-		this.defineAttributeConfigurationEqual("price", new Double("0.7")); //ver pesos
-		this.defineAttributeConfigurationEqual("businessType", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("state", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("city", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("neighborhood", new Double("1")); //ver pesos
+//		this.defineAttributeConfigurationEqual("street", new Double("0.6")); //ver pesos
+//		this.defineAttributeConfigurationEqual("name", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("builtArea", new Double("0.8")); //ver pesos
+//		this.defineAttributeConfigurationEqual("totalArea", new Double("0.3")); //ver pesos
+//		this.defineAttributeConfigurationEqual("garageSpace", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("bedroom", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("suite", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("bathroom", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("type", new Double("0.1"));
+//		this.defineAttributeConfigurationEqual("price", new Double("0.7")); //ver pesos
+//		this.defineAttributeConfigurationEqual("businessType", new Double("0.1"));
+
+		this.defineAttributeConfigurationEqual("state", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("city", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("neighborhood", new Double("1.0")); //ver pesos
+		this.defineAttributeConfigurationEqual("street", new Double("1.0")); //ver pesos
+		this.defineAttributeConfigurationEqual("name", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("builtArea", new Double("1.0")); //ver pesos
+		this.defineAttributeConfigurationEqual("totalArea", new Double("1.0")); //ver pesos
+		this.defineAttributeConfigurationEqual("garageSpace", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("bedroom", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("suite", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("bathroom", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("type", new Double("1.0"));
+		this.defineAttributeConfigurationEqual("price", new Double("1.0")); //ver pesos
+		this.defineAttributeConfigurationEqual("businessType", new Double("1.0"));
 	}
 	
 	
