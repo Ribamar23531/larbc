@@ -37,7 +37,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	public void configure() throws ExecutionException {
 		try{
 			this.connector = new DataBaseConnector();
-			String URLString = "com/googlecode/projeto/larbc/rbccycle/databaseconfig/";
+			String URLString = "rbcCycle/dataBaseConfig/";
 			URLString += (this.testing ? "testingdatabaseconfig.xml" : "databaseconfig.xml");
 			URL configFileURL = FileIO.findFile(URLString);
 			this.connector.initFromXMLfile(configFileURL);
@@ -56,7 +56,8 @@ public class CasesRetriever implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery queryToDo) throws ExecutionException {
-		NNConfig config = new NNConfig();
+		SimilarityConfiguration configuration = new SimilarityConfiguration();
+		NNConfig config = configuration.getConfiguration();
 		Collection<RetrievalResult> evaluation = NNScoringMethod.evaluateSimilarity(this.caseBase.getCases(), queryToDo, config);
 	}
 
