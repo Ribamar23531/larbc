@@ -1,0 +1,1 @@
+- Impedir a inserção do mesmo caso duas vezes, mesmo que por administradores diferentes
