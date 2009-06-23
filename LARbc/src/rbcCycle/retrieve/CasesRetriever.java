@@ -1,4 +1,4 @@
-package rbcCycle;
+package rbcCycle.retrieve;
 
 import java.net.URL;
 import java.util.Collection;
@@ -16,16 +16,30 @@ import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.util.FileIO;
 
-public class Application implements StandardCBRApplication {
+public class CasesRetriever implements StandardCBRApplication {
 
 	private Connector connector;
 	private CBRCaseBase caseBase;
+	
+	private boolean testing;
+	
+	public CasesRetriever(boolean testing){
+		try {
+			this.testing = testing;
+			this.configure();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	public void configure() throws ExecutionException {
 		try{
 			this.connector = new DataBaseConnector();
-//			HSQLDBServer.init();
-			URL configFileURL = FileIO.findFile("com/googlecode/projeto/larbc/rbccycle/databaseconfig/databaseconfig.xml");
+			String URLString = "com/googlecode/projeto/larbc/rbccycle/databaseconfig/";
+			URLString += (this.testing ? "testingdatabaseconfig.xml" : "databaseconfig.xml");
+			URL configFileURL = FileIO.findFile(URLString);
 			this.connector.initFromXMLfile(configFileURL);
 			this.caseBase = new LinealCaseBase();
 		}catch(Exception exc){
@@ -49,11 +63,10 @@ public class Application implements StandardCBRApplication {
 	@Override
 	public void postCycle() throws ExecutionException {
 		this.connector.close();
-//		HSQLDBServer.shutDown();
 	}
 	
 	public static void main(String[] args) {
-		Application app = new Application();
+		CasesRetriever app = new CasesRetriever(true);
 		try {
 			app.configure();
 			app.preCycle();

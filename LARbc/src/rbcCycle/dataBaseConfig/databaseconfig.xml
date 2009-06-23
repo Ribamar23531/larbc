@@ -1,6 +1,6 @@
 	<DataBaseConfiguration>
 	<!-- The file that configures the hibernate framework -->
-	<HibernateConfigFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/Hibernate.cfg.xml</HibernateConfigFile>
+	<HibernateConfigFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/hibernate.cfg.xml</HibernateConfigFile>
 	<!-- Description of the description of the problem -->
 	<DescriptionMappingFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/ImmobileDescription.hbm.xml</DescriptionMappingFile>
 	<DescriptionClassName>com.googlecode.projeto.larbc.rbccycle.caseelements.ImmobileDescription</DescriptionClassName>
