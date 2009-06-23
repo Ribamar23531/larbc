@@ -1,10 +1,10 @@
 	<DataBaseConfiguration>
 	<!-- The file that configures the hibernate framework -->
-	<HibernateConfigFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/testinghibernate.cfg.xml</HibernateConfigFile>
+	<HibernateConfigFile>rbcCycle/dataBaseConfig/testinghibernate.cfg.xml</HibernateConfigFile>
 	<!-- Description of the description of the problem -->
-	<DescriptionMappingFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/ImmobileDescription.hbm.xml</DescriptionMappingFile>
-	<DescriptionClassName>com.googlecode.projeto.larbc.rbccycle.caseelements.ImmobileDescription</DescriptionClassName>
+	<DescriptionMappingFile>rbcCycle/dataBaseConfig/ImmobileDescription.hbm.xml</DescriptionMappingFile>
+	<DescriptionClassName>rbcCycle.caseElement.ImmobileDescription</DescriptionClassName>
 	<!-- Description of the solution of the problem-->
-	<SolutionMappingFile>com/googlecode/projeto/larbc/rbccycle/databaseconfig/ImmobileSolution.hbm.xml</SolutionMappingFile>
-	<SolutionClassName>com.googlecode.projeto.larbc.rbccycle.caseelements.ImmobileSolution</SolutionClassName>
+	<SolutionMappingFile>rbcCycle/dataBaseConfig/ImmobileSolution.hbm.xml</SolutionMappingFile>
+	<SolutionClassName>rbcCycle.caseElement.ImmobileSolution</SolutionClassName>
 </DataBaseConfiguration>
