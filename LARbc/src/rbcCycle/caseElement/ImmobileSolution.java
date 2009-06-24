@@ -160,4 +160,24 @@ public class ImmobileSolution implements CaseComponent {
 	public Attribute getIdAttribute() {
 		return new Attribute("id", this.getClass());
 	}
+	
+	public String toString(){
+		String newLine = System.getProperty("line.separator");
+		String result = "Id: " + getId() + newLine +
+						"State: + " + getState() + newLine + 
+						"City: " + getCity() + newLine +
+						"Neighborhood: " + getNeighborhood() + newLine +
+						"Street: " + getStreet() + newLine +
+						"Number: " + getNumber() + newLine +
+						"Built area: " + getBuiltArea() + newLine +
+						"Total area: " + getTotalArea() + newLine +
+						"Garage: " + getGarageSpace() + newLine +
+						"Bedroom: " + getBedroom() + newLine +
+						"Suite: " + getSuite() + newLine +
+						"Bathroom: " + getBathroom() + newLine +
+						"Type: " + getType() + newLine +
+						"Price: " + getPrice() + newLine +
+						"Business type: " + getBusinessType() + newLine;
+		return result;
+	}
 }
