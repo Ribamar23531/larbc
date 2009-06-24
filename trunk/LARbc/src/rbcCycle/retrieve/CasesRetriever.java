@@ -21,18 +21,20 @@ public class CasesRetriever implements StandardCBRApplication {
 	private Connector connector;
 	private CBRCaseBase caseBase;
 	
+	private Collection<RetrievalResult> queryResult;
+	
 	private boolean testing;
 	
 	public CasesRetriever(boolean testing){
 		try {
 			this.testing = testing;
+			this.queryResult = null;
 			this.configure();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void configure() throws ExecutionException {
 		try{
@@ -58,28 +60,16 @@ public class CasesRetriever implements StandardCBRApplication {
 	public void cycle(CBRQuery queryToDo) throws ExecutionException {
 		SimilarityConfiguration configuration = new SimilarityConfiguration();
 		NNConfig config = configuration.getConfiguration();
-		Collection<RetrievalResult> evaluation = NNScoringMethod.evaluateSimilarity(this.caseBase.getCases(), queryToDo, config);
+		this.queryResult = NNScoringMethod.evaluateSimilarity(this.caseBase.getCases(), queryToDo, config);
 	}
 
 	@Override
 	public void postCycle() throws ExecutionException {
+		this.caseBase.close();
 		this.connector.close();
 	}
 	
-	public static void main(String[] args) {
-		CasesRetriever app = new CasesRetriever(true);
-		try {
-			app.configure();
-			app.preCycle();
-
-			CBRQuery query = new CBRQuery();
-			
-			app.cycle(query);
-			app.postCycle();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Collection<RetrievalResult> getResults(){
+		return this.queryResult;
 	}
 }

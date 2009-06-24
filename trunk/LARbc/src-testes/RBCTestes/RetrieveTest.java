@@ -1,5 +1,9 @@
 package RBCTestes;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,6 +16,7 @@ import beans.Caso;
 import persistence.GerenteDePersistencia;
 import persistence.util.Estado;
 import rbcCycle.GerenteDeRBC;
+import rbcCycle.caseElement.ImmobileSolution;
 
 public class RetrieveTest {
 	private static GerenteDePersistencia persistenceManager;
@@ -115,7 +120,14 @@ public class RetrieveTest {
 	
 	@Test
 	public void testRetrieve(){
-		CBRManager.doQuery("", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
+		List<ImmobileSolution> queryResult= CBRManager.doQuery("", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
+		assertTrue(queryResult.size() == 2);
+		for (ImmobileSolution immobileSolution : queryResult) {
+			System.out.println(immobileSolution.toString());
+			System.out.println();
+		}
+		persistenceManager.removeAllAdministradores();
+		persistenceManager.removeAllCasos();
 	}
 	
 	
