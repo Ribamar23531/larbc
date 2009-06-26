@@ -64,7 +64,7 @@ public class RetrieveTest {
 	private static Caso getCaso2() {
 		String estado = Estado.PE.toString();
 		String cidade = "cidade";
-		String bairro = "bairro";
+		String bairro = "bairro2";
 		String rua = "rua";
 		int numero = 4;
 		String nome = "nome";
@@ -120,8 +120,8 @@ public class RetrieveTest {
 	
 	@Test
 	public void testRetrieve(){
-		List<ImmobileSolution> queryResult= CBRManager.doQuery("", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
-		assertTrue(queryResult.size() == 2);
+		List<ImmobileSolution> queryResult= CBRManager.doQuery(1, "", "", "bairro2", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
+		assertTrue(queryResult.size() == 1);
 		for (ImmobileSolution immobileSolution : queryResult) {
 			System.out.println(immobileSolution.toString());
 			System.out.println();
