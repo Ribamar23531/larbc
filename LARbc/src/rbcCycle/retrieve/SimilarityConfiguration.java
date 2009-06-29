@@ -7,6 +7,7 @@ import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import rbcCycle.caseElement.ImmobileDescription;
+import rbcCycle.retrieve.localSimilarityFunctions.Like;
 
 public class SimilarityConfiguration {
 	
@@ -35,7 +36,7 @@ public class SimilarityConfiguration {
 
 		this.defineAttributeConfigurationEqual("state", new Double("1"));
 		this.defineAttributeConfigurationEqual("city", new Double("1"));
-		this.defineAttributeConfigurationEqual("neighborhood", new Double("1")); //ver pesos
+		this.defineAttributeConfigurationLike("neighborhood", new Double("1")); //ver pesos
 		this.defineAttributeConfigurationEqual("street", new Double("1")); //ver pesos
 		this.defineAttributeConfigurationEqual("name", new Double("1"));
 		this.defineAttributeConfigurationEqual("builtArea", new Double("1")); //ver pesos
@@ -61,6 +62,12 @@ public class SimilarityConfiguration {
 	private void defineAttributeConfigurationInterval(String attributeName, Double weight, Double interval){
 		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
 		this.configuration.addMapping(attribute, new Interval(interval));
+		this.configuration.setWeight(attribute, weight);
+	}
+	
+	private void defineAttributeConfigurationLike(String attributeName, Double weight){
+		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
+		this.configuration.addMapping(attribute, new Like());
 		this.configuration.setWeight(attribute, weight);
 	}
 	
