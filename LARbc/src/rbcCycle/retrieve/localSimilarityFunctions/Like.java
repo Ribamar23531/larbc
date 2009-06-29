@@ -18,10 +18,13 @@ public class Like implements LocalSimilarityFunction {
 	 */
 	public double compute(Object caseObject, Object queryObject)
 			throws NoApplicableSimilarityFunctionException {
-
-		
-		
-		return 0;
+		if(!(caseObject instanceof String)){
+			throw new NoApplicableSimilarityFunctionException(this.getClass(), caseObject.getClass());
+		}
+		if(!(queryObject instanceof String)){
+			throw new NoApplicableSimilarityFunctionException(this.getClass(), queryObject.getClass());
+		}
+		return (numberOfSimilarities((String)caseObject, (String)queryObject))/((String)caseObject).length(); 
 	}
 
 	/**
@@ -42,37 +45,51 @@ public class Like implements LocalSimilarityFunction {
 			return (caseObject instanceof String)&&(queryObject instanceof String);
 	}
 	
-//	"asj  aksj"
 	
-	private static String removeUnecessaryBlankSpaces(String toRemove){
+	/**
+	 * Removes the unnecessary blank spaces in the passed string.s 
+	 * @param toRemove The string to be processed.
+	 * @return A string without redundant blank spaces.
+	 */
+	private String removeUnnecessaryBlankSpaces(String toRemove){
 		String result = toRemove.trim();
 		boolean previousSpace = false;
-		int size = 0;
-		
-		for (int i = 0; i < result.length(); i++) {
-			String charInPositioni = ((Character)result.charAt(i)).toString();
+		int index = 0;
+		while(index < result.length()){
+			String charInPositioni = ((Character)result.charAt(index)).toString();
 			if(charInPositioni.equals(" ") && previousSpace == false){
 				previousSpace = true;
+				++ index;
 			}else if(charInPositioni.equals(" ") && previousSpace == true){
-				result = result.substring(0, i) + result.substring(i + 1, result.length());
+				result = result.substring(0, index) + result.substring(index + 1, result.length());
 			}else{
 				previousSpace = false;
+				++ index;
 			}
 		}
 		return result;
 	}
 	
-//	private int numberOfSimilarities(String first, String second){
-//		if(first.length() != second.length() || first.split(" ").length != second.split(" ").length){
-//			return 0;
-//		}
-//		int similarities = 0;
-//		for (int i = 0; i < first.length(); i++) {
-//			if( ((Character)first.charAt(i)).toString().equalsIgnoreCase(((Character)second.charAt(i)).toString()) ){
-//				++similarities;
-//			}
-//		}
-//	}
+	/**
+	 * Verifies all the string to calculate the number of similarities between the two strings passed.
+	 * @param first A string to compare.
+	 * @param second Another string to compare.
+	 * @return The number of equal characters from the strings. 
+	 */
+	private int numberOfSimilarities(String first, String second){
+		String firstOk = this.removeUnnecessaryBlankSpaces(first);
+		String secondOk = this.removeUnnecessaryBlankSpaces(second);
+		if(firstOk.length() != secondOk.length() || firstOk.split(" ").length != secondOk.split(" ").length){
+			return 0;
+		}
+		int similarities = 0;
+		for (int i = 0; i < firstOk.length(); i++) {
+			if( ((Character)firstOk.charAt(i)).toString().equalsIgnoreCase(((Character)secondOk.charAt(i)).toString()) ){
+				++similarities;
+			}
+		}
+		return similarities;
+	}
 	
 	public static void main(String[] args) {
 		String test1 = " aaa ";
@@ -81,13 +98,6 @@ public class Like implements LocalSimilarityFunction {
 		String test4 = " a  a  a ";
 		String test5 = " a                        aa ";
 		String test6 = "aa                       a";
-		
-		System.out.println("Original String: " + test1 + "  Converted one: " + removeUnecessaryBlankSpaces(test1));
-		System.out.println("Original String: " + test2 + "  Converted one: " + removeUnecessaryBlankSpaces(test2));
-		System.out.println("Original String: " + test3 + "  Converted one: " + removeUnecessaryBlankSpaces(test3));
-		System.out.println("Original String: " + test4 + "  Converted one: " + removeUnecessaryBlankSpaces(test4));
-		System.out.println("Original String: " + test5 + "  Converted one: " + removeUnecessaryBlankSpaces(test5));
-		System.out.println("Original String: " + test6 + "  Converted one: " + removeUnecessaryBlankSpaces(test6));
 	}
 
 }
