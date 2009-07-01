@@ -1,5 +1,11 @@
 =Riscos=
 
-Até o presente momento foi identificado como risco a possibilidade de o cliente real ficar indisponível, tornando assim difícil ou impraticável a tomada de decisões importantes no projeto.
+|| *Descrição* || *Iteração que foi percebido* || *Criticidade* || *Status* ||
+|| Indisponibilidade do cliente || 2ª Iteração || Alta || Esse risco ainda não se mostrou presente ||
+|| Falta de dados reais || 3ª Iteração || Alta || Risco presente no desenvolvimento ||
+|| Heterogeneidade dos bairros`*` || 3ª Iteração || Média || Próprio do domínio ||
+|| Descaracterização do caso se alterado`**` || 3ª Iteração || Média || Próprio do domínio ||
 
-Também é importante salientar que a falta de dados imobiliários reais é outro fator de risco ao nosso projeto, uma vez que a falta dos mesmos torna a aplicação não viável.
+`*` Não poder tratar um único bairro de forma homogênea, de modo que imóveis vizinhos, embora em um mesmo bairro, podem ter valores comerciais bem diferentes.
+
+`**` Uma das etapas do RBC é a alteração + aprendizado de casos modificados. Fica impossibilitada essa etapa pois qualquer modificação feita nos atributos de um caso, descaracterizam-no enquanto produto a venda.
