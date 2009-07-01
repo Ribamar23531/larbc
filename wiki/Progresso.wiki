@@ -1,0 +1,14 @@
+= Progresso do Projeto = 
+
+ *  Iteração 1
+   *  [Iteracao1 Plano]
+   *  [ResultadosIteracao1 Resultados]
+
+
+ *  Iteração 2
+   *  [Iteracao2 Plano]
+   *  [ResultadosIteracao2 Resultados]
+
+ *  Iteração 3
+   *  [Iteracao3 Plano]
+   *  [ResultadosIteracao3 Resultados]
