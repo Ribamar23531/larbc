@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ import persistence.util.Estado;
 import rbcCycle.GerenteDeRBC;
 import rbcCycle.caseElement.ImmobileSolution;
 
-public class RetrieveTest {
+public class OneFieldQueryTest {
 	private static GerenteDePersistencia persistenceManager;
 	private static GerenteDeRBC CBRManager;
 	private static Caso caso1;
@@ -75,7 +76,7 @@ public class RetrieveTest {
 		int suites = 7;
 		int baneiros = 3;
 		String tipo = "tipo";
-		float preco = 5;
+		float preco = 6;
 		int tipoNegocio = 8;
 
 		Caso caso = new Caso();
@@ -122,10 +123,25 @@ public class RetrieveTest {
 	public void testRetrieve(){
 		List<ImmobileSolution> queryResult= CBRManager.doQuery(1, "", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
 		assertTrue(queryResult.size() == 1);
+	}
+	
+	@Test
+	public void testRetrieve2(){
+		List<ImmobileSolution> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 2, 0, 0, 0, 0, 0, "", 0, 0);
+		assertTrue(queryResult.size() == 2);
+	}
+	
+	@Test
+	public void testRetrieve3(){
+		List<ImmobileSolution> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 0, 0, 0, 0, 0, 0, "", 1, 0);
+		assertTrue(queryResult.size() == 2);
 		for (ImmobileSolution immobileSolution : queryResult) {
-			System.out.println(immobileSolution.toString());
-			System.out.println();
+			System.out.println("Price: " + immobileSolution.getPrice());
 		}
+	}
+	
+	@AfterClass
+	public static void clean(){
 		persistenceManager.removeAllAdministradores();
 		persistenceManager.removeAllCasos();
 	}
