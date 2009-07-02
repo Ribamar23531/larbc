@@ -12,7 +12,6 @@ import jcolibri.method.retrieve.selection.SelectCases;
 import rbcCycle.caseElement.ImmobileSolution;
 import rbcCycle.retrieve.CasesRetriever;
 import rbcCycle.retrieve.QueryConfig;
-import beans.Caso;
 
 public class GerenteDeRBC {
 

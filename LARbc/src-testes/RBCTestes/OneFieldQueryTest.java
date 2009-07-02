@@ -149,6 +149,7 @@ public class OneFieldQueryTest {
 	public static void clean(){
 		persistenceManager.removeAllAdministradores();
 		persistenceManager.removeAllCasos();
+		persistenceManager.resetSystemPassword();
 	}
 	
 	
