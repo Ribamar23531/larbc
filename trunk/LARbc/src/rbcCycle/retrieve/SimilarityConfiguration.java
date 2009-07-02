@@ -46,7 +46,7 @@ public class SimilarityConfiguration {
 		this.defineAttributeConfigurationEqual("suite", new Double("1"));
 		this.defineAttributeConfigurationEqual("bathroom", new Double("1"));
 		this.defineAttributeConfigurationEqual("type", new Double("1"));
-		this.defineAttributeConfigurationEqual("price", new Double("1")); //ver pesos
+		this.defineAttributeConfigurationInterval("price", new Double("1"), new Double("5")); //ver pesos
 		this.defineAttributeConfigurationEqual("businessType", new Double("1"));
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
