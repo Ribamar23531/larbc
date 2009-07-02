@@ -7,6 +7,7 @@ import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
+import beans.SystemPassword;
 
 
 public class HibernateConfig {
@@ -41,6 +42,7 @@ public class HibernateConfig {
 			config.addAnnotatedClass(Foto.class);
 			config.addAnnotatedClass(Demanda.class);
 			config.addAnnotatedClass(Caso.class);
+			config.addAnnotatedClass(SystemPassword.class);
 			
 			sessionFactory = config.buildSessionFactory();
 		} catch (Throwable ex) {

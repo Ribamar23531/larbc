@@ -13,11 +13,13 @@ import persistence.util.Estado;
 import beans.Administrador;
 import beans.Caso;
 import exceptions.AdministradorNotFoundException;
+import exceptions.PermissionDaniedException;
 
 public class AdministradorTests {
 	
 	private static GerenteDePersistencia gerente;
 	private static Administrador a;
+	private static String systemPassword;
 
 	@BeforeClass
 	public static void configurarTudo(){
@@ -25,18 +27,26 @@ public class AdministradorTests {
 		a = new Administrador("login1", "senha1", "nome1");
 		gerente.removeAllAdministradores();
 		gerente.removeAllCasos();
+		gerente.resetSystemPassword();
+		systemPassword = "password";
+		try {
+			gerente.setPassword("admin", systemPassword);
+		} catch (PermissionDaniedException e) {
+			assertTrue(false);
+		}
 	}
 	
 	@AfterClass
 	public static void zerarTudo(){
 		gerente.removeAllAdministradores();
 		gerente.removeAllCasos();
+		gerente.resetSystemPassword();
 	}	
 	
 	@Test
 	public void testSave(){		
 		try {
-			gerente.saveAdministrador(a);
+			gerente.saveAdministrador(a, systemPassword);
 			Administrador admin = gerente.getAdministrador(a.getLogin());
 			if(admin.getLogin().equals(a.getLogin()) && admin.getPassword().equals(a.getPassword()) && admin.getNome().equals(a.getNome())){
 				assertTrue(true);
@@ -53,13 +63,15 @@ public class AdministradorTests {
 	public void testUpdate(){
 		a.setNome("fulaninho");
 		try {
-			gerente.updateAdministrador(a);
+			gerente.updateAdministrador(a, systemPassword);
 			Administrador admin = gerente.getAdministrador(a.getLogin());
 			String adminName = admin.getNome();
 			if(adminName.equals("fulaninho")){
 				assertTrue(true);				
 			}
 		} catch (AdministradorNotFoundException e1) {
+			assertTrue(false);
+		} catch (PermissionDaniedException e) {
 			assertTrue(false);
 		}
 	}
@@ -128,9 +140,11 @@ public class AdministradorTests {
 	@Test
 	public void testRemove(){
 		try {
-			gerente.removeAdministrador(a);
+			gerente.removeAdministrador(a, systemPassword);
 			assertTrue(true);
 		} catch (AdministradorNotFoundException e) {
+			assertTrue(false);
+		} catch (PermissionDaniedException e) {
 			assertTrue(false);
 		}
 	}
