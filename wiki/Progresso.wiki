@@ -2,6 +2,7 @@
 
 
  *  [Riscos Riscos]
+ *  [BigChart]
 
 == Acompanhamento das Iterações ==
 
