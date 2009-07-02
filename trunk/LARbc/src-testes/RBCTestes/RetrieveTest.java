@@ -4,23 +4,20 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import exceptions.AdministradorNotFoundException;
-import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
-
-import beans.Administrador;
-import beans.Caso;
 
 import persistence.GerenteDePersistencia;
 import persistence.util.Estado;
 import rbcCycle.GerenteDeRBC;
 import rbcCycle.caseElement.ImmobileSolution;
+import beans.Administrador;
+import beans.Caso;
+import exceptions.AdministradorNotFoundException;
+import exceptions.LoginAlreadyRegisteredException;
+import exceptions.PermissionDaniedException;
 
-public class OneFieldQueryTest {
+public class RetrieveTest {
 	private static GerenteDePersistencia persistenceManager;
 	private static GerenteDeRBC CBRManager;
 	private static Caso caso1;
@@ -77,7 +74,7 @@ public class OneFieldQueryTest {
 		int suites = 7;
 		int baneiros = 3;
 		String tipo = "tipo";
-		float preco = 6;
+		float preco = 5;
 		int tipoNegocio = 8;
 
 		Caso caso = new Caso();
@@ -121,32 +118,17 @@ public class OneFieldQueryTest {
 		} catch (PermissionDaniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	@Test
 	public void testRetrieve(){
 		List<ImmobileSolution> queryResult= CBRManager.doQuery(1, "", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
 		assertTrue(queryResult.size() == 1);
-	}
-	
-	@Test
-	public void testRetrieve2(){
-		List<ImmobileSolution> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 2, 0, 0, 0, 0, 0, "", 0, 0);
-		assertTrue(queryResult.size() == 2);
-	}
-	
-	@Test
-	public void testRetrieve3(){
-		List<ImmobileSolution> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 0, 0, 0, 0, 0, 0, "", 1, 0);
-		assertTrue(queryResult.size() == 2);
 		for (ImmobileSolution immobileSolution : queryResult) {
-			System.out.println("Price: " + immobileSolution.getPrice());
+			System.out.println(immobileSolution.toString());
+			System.out.println();
 		}
-	}
-	
-	@AfterClass
-	public static void clean(){
 		persistenceManager.removeAllAdministradores();
 		persistenceManager.removeAllCasos();
 	}
