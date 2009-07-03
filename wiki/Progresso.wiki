@@ -18,3 +18,6 @@
  *  Iteração 3
    *  [Iteracao3 Plano]
    *  [ResultadosIteracao3 Resultados]
+
+ *  Entrega de Release 1
+   *  [ResultadosRelease1 Resultados]
