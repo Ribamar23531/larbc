@@ -27,6 +27,4 @@ Todas as classes que serão persistidas no banco de dados quando as classes que 
 
 As etapas do ciclo de consultas RBC foram feitas, mas ainda faltando serem testadas, e integradas ao banco de dados "físico", pois ainda está acessando um banco de dados em memória.
 
-Como resumo dos resultados, abaixo temos um bigchart com os número de artefatos gerados.
-
-http://larbc.googlecode.com/files/BigChart3iteracao.JPG
+Como resumo dos resultados, temos um bigchart com os número de artefatos gerados que pode ser acessado [BigChart aqui].
