@@ -13,7 +13,7 @@ O cálculo do coeficiente de similaridade, além de fazer uso das funções de s
 
 ==Configuração das função de similaridade locais da aplicação==
 
-O jCOLIBRI2 fornece algumas funções de similaridade locais como _Treshold_, _Equal_, dentre outros comparadores simples. Todas as funções satisfazem um contrato, leia-se uma interface Java, _LocalSimilarityFunction_ que determina como uma função de similaridade deve se comportar.
+O jCOLIBRI2 fornece algumas funções de similaridade locais como _Treshold_, _Equal_, dentre outros comparadores simples. Todas as funções satisfazem um contrato, leia-se uma interface Java, _ LocalSimilarityFunction _ que determina como uma função de similaridade deve se comportar.
 
 Como alguns atributos (preço, localização, entre outros) não são comparados simplesmente, algumas funções de similaridade foram implementadas. Já que é deveras fácil inserir e/ou remover uma função de similaridade, o grupo decidiu que a configuração da função de similaridade também seja feita de forma incremental, mesmo que em paralelo com o desenvolvimento de outras atividades, e nesse documento poderemos acompanhar a mudança de funções de cada atributo.
 
