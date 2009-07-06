@@ -1,0 +1,21 @@
+<module>
+
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<!--<inherits name='com.google.gwt.user.User'/> -->
+	
+	<!-- Inherit the core GWT-EXT -->
+	<inherits name="com.gwtext.GwtExt"/>
+
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class='com.googlecode.projeto1.client.LARbc'/>
+  
+  	<stylesheet src="js/ext/resources/css/ext-all.css"/>
+	
+	<script src="js/ext/adapter/ext/ext-base.js"/>
+	<script src="js/ext/ext-all.js"/>
+	
+	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+  	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
+  	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/> -->
+  	
+</module>
