@@ -64,7 +64,18 @@ Abaixo temos quais funções são utilizadas para cada atributo. São elas:
 
  *  *Preço*
    *  Comparados segundo a igualdade numérica.
-   *  A função foi melhorada com uma comparação de acordo com um intervalo relativo à consulta do usuário. Ele fornece um intervalo que, o preço do caso estando no invervalo fornecido, similaridade = 1 - (|precoCaso - precoCons| / intervalo), caso contrário a similaridade é 0. Estamos estudando a possibilidade de usar essa função em mais atributos.
+   *  A função foi melhorada com uma comparação de acordo com um intervalo relativo à consulta do usuário. 
+     
+     *  http://larbc.googlecode.com/files/IntervaloRelativo.PNG , se o valor está no intervalo.
+
+     *  Caso contrário a similaridade é 0. 
+Estamos estudando a possibilidade de usar essa função em mais atributos.
 
  *  *Tipo de Negócio*
    *  Verificação de igualdade.
+
+==Configuração da função de similaridade global==
+
+O jCOLIBRI2 fornece uma função de similaridade global que é a _Average_, que calcula a média dos valores avaliados das funções de similaridade locais, ponderada pelos pesos configurados. Então o coeficiente de similaridade entre uma consulta e um caso é calculado da seguinte forma:
+
+http://larbc.googlecode.com/files/SimGlobal.PNG
