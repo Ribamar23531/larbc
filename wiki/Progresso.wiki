@@ -3,6 +3,7 @@
 
  *  [Riscos Riscos]
  *  [BigChart]
+ *  [SimFun Função de Similaridade]
 
 == Acompanhamento das Iterações ==
 
