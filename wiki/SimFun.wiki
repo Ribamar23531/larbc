@@ -1,0 +1,22 @@
+=Função de Similaridade=
+
+==Conceito==
+
+O raciocínio baseado em casos tem as suas consultas baseadas em comparações e cálculos de similaridade. Esse cálculo do coeficiente de similaridade é feito calculando um conjunto de funções de similaridade locais, uma para cada atributo envolvido, e calculando uma função de similaridade global, que sumariza todas as similaridades locais.
+
+Para cada atributo do caso é definida uma função de similaridade local, consideremos f, onde para um par de valores, tomemos, x e y, onde x é o valor do atributo no caso, e y é o valor do mesmo atributo na consulta, f(x,y) = z, com 0  ≤ z ≤ 1.
+Quando x e y são iguais, dependendo de seu tipo, a similaridade local é igual 1 e quando são totalmente contrários (segundo a semântica da função) a sua similaridade local é igual a 0.
+
+E para configurar a importância que deve ser dada a um determinado atributo no cálculo durante uma consulta, para cada um deles é atribuído um peso, de modo a priorizar um, ou um subconjunto de atributos.
+
+O cálculo do coeficiente de similaridade, além de fazer uso das funções de similaridade locais, particulares para cada tipo de atributo, usa uma função de similaridade global que recebe como entrada os valores das similaridades locais calculadas e os pesos dos atributos e fornece o coeficiente de similaridade entre um determinado caso da base e uma consulta realizada.
+
+==Configuração das função de similaridade locais da aplicação==
+
+O jCOLIBRI2 fornece algumas funções de similaridade locais como _Treshold_, _Equal_, dentre outros comparadores simples. Todas as funções satisfazem um contrato, leia-se uma interface Java, _LocalSimilarityFunction_ que determina como uma função de similaridade deve se comportar.
+
+Como alguns atributos (preço, localização, entre outros) não são comparados simplesmente, algumas funções de similaridade foram implementadas. Já que é deveras fácil inserir e/ou remover uma função de similaridade, o grupo decidiu que a configuração da função de similaridade também seja feita de forma incremental, mesmo que em paralelo com o desenvolvimento de outras atividades, e nesse documento poderemos acompanhar a mudança de funções de cada atributo.
+
+Abaixo temos quais funções são utilizadas para cada atributo. São elas:
+
+===Atributos===
