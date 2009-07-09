@@ -11,7 +11,7 @@ import com.gwtext.client.widgets.layout.BorderLayoutData;
 public class WelcomePanel extends Panel{
 	
 	private final String familyImagePath = "images/familia.png";
-	private final String image1Path = "images/imagem1.PNG";
+	private final String image1Path = "images/imagem1.png";
 	private Image familyImage;
 	private Image image1;
 	
