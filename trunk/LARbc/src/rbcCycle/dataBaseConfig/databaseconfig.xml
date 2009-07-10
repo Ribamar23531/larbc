@@ -1,4 +1,5 @@
-	<DataBaseConfiguration>
+
+<DataBaseConfiguration>
 	<!-- The file that configures the hibernate framework -->
 	<HibernateConfigFile>rbcCycle/dataBaseConfig/hibernate.cfg.xml</HibernateConfigFile>
 	<!-- Description of the description of the problem -->
