@@ -51,6 +51,26 @@ public class SimilarityConfiguration {
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
 	
+	public SimilarityConfiguration(Double stateWeight, Double cityWeight, Double neigborhoodWeight, Double streetWeight, Double nameWeight,
+								   Double builtAreaWeight, Double totalAreaWeight, Double garageSpaceWeight, Double bedroomWeight,
+								   Double suiteWeight, Double bathroomWeight, Double typeWeight, Double priceWeight, Double businessTypeWeight){
+		this.defineAttributeConfigurationEqual("state", stateWeight);
+		this.defineAttributeConfigurationEqual("city", cityWeight);
+		this.defineAttributeConfigurationLike("neighborhood", neigborhoodWeight); //ver pesos
+		this.defineAttributeConfigurationEqual("street", streetWeight); //ver pesos
+		this.defineAttributeConfigurationEqual("name", nameWeight);
+		this.defineAttributeConfigurationEqual("builtArea", builtAreaWeight); //ver pesos
+		this.defineAttributeConfigurationEqual("totalArea", totalAreaWeight); //ver pesos
+		this.defineAttributeConfigurationEqual("garageSpace", garageSpaceWeight);
+		this.defineAttributeConfigurationEqual("bedroom", bedroomWeight);
+		this.defineAttributeConfigurationEqual("suite", suiteWeight);
+		this.defineAttributeConfigurationEqual("bathroom", bathroomWeight);
+		this.defineAttributeConfigurationEqual("type", typeWeight);
+		this.defineAttributeConfigurationInterval("price", priceWeight, new Double("5")); //ver intervalos
+		this.defineAttributeConfigurationEqual("businessType", businessTypeWeight);
+		this.configuration.setDescriptionSimFunction(new Average());
+	}
+	
 	
 	private void defineAttributeConfigurationEqual(String attributeName, Double weight){
 		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
