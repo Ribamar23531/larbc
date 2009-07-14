@@ -12,6 +12,7 @@ public class ModalityPanel extends Panel {
 		  
 		this.setBorder(false);  
 		this.setPaddings(15);  
+		this.setFrame(true);
 //		this.setLayout(new FitLayout());  
 
 		//add wrapper panel just to dispaly the borders  
