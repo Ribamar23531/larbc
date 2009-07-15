@@ -10,5 +10,7 @@ public class LARbc implements EntryPoint {
 	public void onModuleLoad() {		
 		PanelSwitcher.switchPanel(new WelcomePanel());
 //		PanelSwitcher.switchPanel(new ModalityPanel());
+//		PanelSwitcher.switchPanel(new NorthModalityPanel());
+	
 	}
 }
