@@ -4,6 +4,7 @@
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/" source-path="/build/gwtOutput/com.googlecode.projeto1.LARbc"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/gwtOutput/com.googlecode.projeto1.LARbc"/>
         <property name="context-root" value="LARbcGUI"/>
         <property name="java-output-path"/>
     </wb-module>
