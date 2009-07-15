@@ -9,7 +9,14 @@ public class Util {
 	public final static String SOLTO_MAIOR_IMAGE_PATH = "images/soltoMaior.png";
 	public final static String PREENCHIMENTO_PATH = "images/preenchimento.png";
 	public final static String ADMINISTRAR_BUTTON_IMAGE = "images/botaoAdministrar.PNG";
-	public final static String ADMINISTRAR_BUTTON_IMAGE_SELECTED = "images/botaoAdministrarSelecionado.PNG";
+	public final static String SELECTED_ADMINISTRAR_BUTTON_IMAGE = "images/botaoAdministrarSelecionado.PNG";
+	public final static String QUESTION = "images/questao.PNG";
+	public final static String VENDER_BUTTON_IMAGE = "images/venderButton.PNG";
+	public final static String ALUGAR_BUTTON_IMAGE = "images/alugarButton.PNG";
+	public final static String COMPRAR_BUTTON_IMAGE = "images/comprarButton.PNG";
+	public final static String SELECTED_VENDER_BUTTON_IMAGE = "images/selectedVenderButton.PNG";
+	public final static String SELECTED_ALUGAR_BUTTON_IMAGE = "images/selectedAlugarButton.PNG";
+	public final static String SELECTED_COMPRAR_BUTTON_IMAGE = "images/selectedComprarButton.PNG";
 	
 	public static Image createImage(String path){
 		Image image = new Image(path);

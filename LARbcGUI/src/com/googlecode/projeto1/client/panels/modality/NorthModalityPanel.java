@@ -1,12 +1,9 @@
 package com.googlecode.projeto1.client.panels.modality;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.MouseOutEvent;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.MouseListenerAdapter;
+import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.panels.Util;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
@@ -53,36 +50,41 @@ public class NorthModalityPanel extends Panel{
 	}
 
 	private void createSelectedManagerButton() {
-		selectedManagerButtonImage = Util.createImage(Util.ADMINISTRAR_BUTTON_IMAGE_SELECTED);		
-		selectedManagerButtonImage.addMouseOutHandler(new MouseOutHandler(){
+		selectedManagerButtonImage = Util.createImage(Util.SELECTED_ADMINISTRAR_BUTTON_IMAGE);
+		selectedManagerButtonImage.addMouseListener(new MouseListenerAdapter(){
 
-			public void onMouseOut(MouseOutEvent event) {
+			
+
+			public void onMouseLeave(Widget arg0) {
 				rebuildNorthPanel(managerButtonImage);
 				
-			}
+			}			
+			
 			
 		});
 		
-		selectedManagerButtonImage.addClickHandler(new ClickHandler(){
+		selectedManagerButtonImage.addClickListener(new ClickListener(){
 
-			public void onClick(ClickEvent event) {
+			public void onClick(Widget arg0) {
 				PanelSwitcher.switchPanel(new ManagePanel());
 				
 			}
 			
-		});
+		});		
 		
 	}
 
 	private void createManagerButton() {
 		managerButtonImage = Util.createImage(Util.ADMINISTRAR_BUTTON_IMAGE);
-		managerButtonImage.addMouseOverHandler(new MouseOverHandler(){
-
-			public void onMouseOver(MouseOverEvent event) {
+		
+		managerButtonImage.addMouseListener(new MouseListenerAdapter(){
+			
+			public void onMouseEnter(Widget arg0) {
 				rebuildNorthPanel(selectedManagerButtonImage);
+				
 			}
 			
-		});	
+		});
 		  
 		
 	}

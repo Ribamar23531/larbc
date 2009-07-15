@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="E:/Eclipse/EclipseEE/plugins/com.google.gwt.eclipse.sdkbundle.win32_1.6.4.v200904062334/gwt-windows-1.6.4/gwt-user.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/E:/Eclipse/EclipseEE/plugins/com.google.gwt.eclipse.sdkbundle.win32_1.6.4.v200904062334/gwt-windows-1.6.4/doc/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="E:/Eclipse/EclipseEE/plugins/com.google.gwt.eclipse.sdkbundle.win32_1.6.4.v200904062334/gwt-windows-1.6.4/gwt-dev-windows.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/E:/Eclipse/EclipseEE/plugins/com.google.gwt.eclipse.sdkbundle.win32_1.6.4.v200904062334/gwt-windows-1.6.4/doc/javadoc/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="lib/gwtext.jar"/>
 	<classpathentry kind="lib" path="libgwt/gwt-dev-windows.jar"/>
 	<classpathentry kind="lib" path="libgwt/gwt-servlet.jar"/>
