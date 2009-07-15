@@ -3,6 +3,7 @@ package facade;
 import java.util.List;
 
 import exceptions.AdministradorNotFoundException;
+import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
@@ -29,14 +30,14 @@ public interface SystemFacade {
 	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException;
 	
-	public void removeCaso(Administrador admin, Caso caso);
+	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDaniedException, CasoNotFoundException;
 	
-	public void updateCaso(Administrador admin, Caso caso);
+	public void updateCaso(Administrador admin, Caso caso) throws PermissionDaniedException, AdministradorNotFoundException, CasoNotFoundException;
 	
-	public List<Caso> getCasos(String login);
+	public List<Caso> getCasos(String login) throws AdministradorNotFoundException;
 	
 //=== Photo operations ===
-	public void removeFoto(Caso caso, String path);
+	public void removeFoto(Caso caso, String path) throws FotoNotFoundException;
 	
 	public Foto getFoto(long idCaso, String path) throws FotoNotFoundException;
 	
@@ -54,7 +55,7 @@ public interface SystemFacade {
 	public void updateDemanda(Demanda demand) throws DemandaNotFoundException;
 	
 //=== Case operations ===
-	public void saveFoto(Caso caso, String path);
+	public void saveFoto(Caso caso, String path) throws FotoAlreadySavedException;
 	
 	public List<Caso> getAllCasos();
 	
@@ -62,8 +63,13 @@ public interface SystemFacade {
 	
 	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException;
 	
-//=== Query ===
+//=== Query operation ===
 	public List<ImmobileSolution> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType);
+
+//=== Password operation ===
+	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException;
+	
+	
 }

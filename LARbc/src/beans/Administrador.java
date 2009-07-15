@@ -71,6 +71,12 @@ public class Administrador {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public boolean equals(Object obj) {
+		Administrador anotherOne = (Administrador) obj;
+		return this.getIdAdministrador() == anotherOne.getIdAdministrador();
+//		return this.getLogin().equals(anotherOne.getLogin()) && this.getPassword().equals(anotherOne.getPassword()) && this.getNome().equals(anotherOne.getNome());
+	}
 
 //	public void setCasos(List<Caso> casos) {
 //		this.casos = casos;
