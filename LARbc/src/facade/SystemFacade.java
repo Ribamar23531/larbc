@@ -1,22 +1,69 @@
 package facade;
 
+import java.util.List;
+
+import exceptions.AdministradorNotFoundException;
+import exceptions.DemandaNotFoundException;
+import exceptions.FotoAlreadySavedException;
+import exceptions.FotoNotFoundException;
+import exceptions.LoginAlreadyRegisteredException;
+import exceptions.PermissionDaniedException;
+
+import rbcCycle.caseElement.ImmobileSolution;
+
+import beans.Administrador;
+import beans.Caso;
+import beans.Demanda;
+import beans.Foto;
+
 public interface SystemFacade {
 	
 //=== Administrator operations ===
-	public void saveAdministrador(String login, String password, String name, String adminPassword);
+	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDaniedException;
 	
-	public void removeAdministrador(String login, String adminPassword);
+	public void removeAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
 	
-	public void updateAdministrador(String login, String password, String name, String adminPassword);
+	public void updateAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
 	
-	public void createCaso(String loginAdministrador, String state, String city, String neighborhood, int number,  
-						   String street, String name, float builtArea, float totalArea, int garageSpace, 
-						   int bedroom, int suite, int bathroom, String type, float price, int businessType);
+	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
+	
+	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException;
+	
+	public void removeCaso(Administrador admin, Caso caso);
+	
+	public void updateCaso(Administrador admin, Caso caso);
+	
+	public List<Caso> getCasos(String login);
 	
 //=== Photo operations ===
-	public void saveFoto(long idCaso, String path);
+	public void removeFoto(Caso caso, String path);
 	
-	public void removeFoto(long idCaso, String path);
+	public Foto getFoto(long idCaso, String path) throws FotoNotFoundException;
 	
+	public void updateFoto(Foto oldPhoto, Foto newPhoto) throws FotoNotFoundException, FotoAlreadySavedException;
 	
+//=== Demand operations ===
+	public void saveDemanda(Demanda demand);
+	
+	public void removeDemanda(Demanda demand) throws DemandaNotFoundException;
+	
+	public Demanda getDemanda(long idDemand) throws DemandaNotFoundException;
+	
+	public List<Demanda> getDemandas();
+	
+	public void updateDemanda(Demanda demand) throws DemandaNotFoundException;
+	
+//=== Case operations ===
+	public void saveFoto(Caso caso, String path);
+	
+	public List<Caso> getAllCasos();
+	
+	public List<Foto> getFotos(Caso caso);
+	
+	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException;
+	
+//=== Query ===
+	public List<ImmobileSolution> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
+			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
+			 int bathroom, String type, float price, int businessType);
 }
