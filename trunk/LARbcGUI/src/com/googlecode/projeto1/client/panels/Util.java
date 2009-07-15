@@ -9,6 +9,7 @@ public class Util {
 	public final static String SOLTO_MAIOR_IMAGE_PATH = "images/soltoMaior.png";
 	public final static String PREENCHIMENTO_PATH = "images/preenchimento.png";
 	public final static String ADMINISTRAR_BUTTON_IMAGE = "images/botaoAdministrar.PNG";
+	public final static String ADMINISTRAR_BUTTON_IMAGE_SELECTED = "images/botaoAdministrarSelecionado.PNG";
 	
 	public static Image createImage(String path){
 		Image image = new Image(path);
