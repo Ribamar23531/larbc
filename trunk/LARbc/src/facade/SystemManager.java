@@ -3,6 +3,7 @@ package facade;
 import java.util.List;
 
 import exceptions.AdministradorNotFoundException;
+import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
@@ -59,9 +60,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Caso> getCasos(String login) {
-//		return this.persistenceManager.getCasos(login);
-		return null;
+	public List<Caso> getCasos(String login) throws AdministradorNotFoundException {
+		return this.persistenceManager.getCasos(login);
 	}
 
 	/**
@@ -102,8 +102,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeCaso(Administrador admin, Caso caso) {
-//		this.persistenceManager.removeCaso(admin, caso);
+	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDaniedException, CasoNotFoundException {
+		this.persistenceManager.removeCaso(admin, caso);
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeFoto(Caso caso, String path) {
-//		this.persistenceManager.removeFoto(caso, path);
+	public void removeFoto(Caso caso, String path) throws FotoNotFoundException {
+		this.persistenceManager.removeFoto(caso, path);
 	}
 
 	/**
@@ -134,9 +134,11 @@ public class SystemManager implements SystemFacade {
 		this.persistenceManager.saveDemanda(demand);
 	}
 
-	@Override
-	public void saveFoto(Caso caso, String path) {
-//		this.persistenceManager.saveFoto(caso, path);
+	/**
+	 * {@inheritDoc}
+	 */
+	public void saveFoto(Caso caso, String path) throws FotoAlreadySavedException {
+		this.persistenceManager.saveFoto(caso, path);
 	}
 
 	/**
@@ -149,8 +151,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateCaso(Administrador admin, Caso caso) {
-//		this.persistenceManager.updateCaso(admin, caso);
+	public void updateCaso(Administrador admin, Caso caso) throws PermissionDaniedException, AdministradorNotFoundException, CasoNotFoundException {
+		this.persistenceManager.updateCaso(admin, caso);
 	}
 
 	/**
@@ -176,4 +178,12 @@ public class SystemManager implements SystemFacade {
 			int suite, int bathroom, String type, float price, int businessType) {
 		return this.rbcManager.doQuery(resultNumber, state, city, neighborhood, street, name, builtArea, 
 									   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
-	}}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException {
+		this.persistenceManager.setPassword(oldPassword, newPassword);
+	}
+}
