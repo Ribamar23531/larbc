@@ -25,7 +25,7 @@ public class WelcomePanel extends Panel{
 		this.setTitle("Bem Vindo");
 		larbcImage = Util.createImage(Util.LARBC_IMAGE_PATH);
 		familiaImage = Util.createImage(Util.FAMILY_IMAGE_PATH);
-		image1 = Util.createImage(Util.SOLTO_MAIOR_IMAGE_PATH);		
+		image1 = Util.createImage(Util.SOUTO_MAIOR_IMAGE_PATH);		
 		VerticalPanel vp = new VerticalPanel();
 		vp.add(image1);
 		secundaryTable = createSecundaryTable();
