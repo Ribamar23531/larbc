@@ -1,7 +1,7 @@
 package com.googlecode.projeto1.client.panels.modality;
 
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.layout.VerticalLayout;
+import com.gwtext.client.widgets.layout.RowLayoutData;
 
 public class ModalityPanel extends Panel {
 	
@@ -11,11 +11,12 @@ public class ModalityPanel extends Panel {
 	public ModalityPanel(){
 		super(); 
 		this.setFrame(true);
-		this.setLayout(new VerticalLayout());
+//		this.setLayout(new FitLayout());
 		this.northPanel = new NorthModalityPanel();
 		this.centerPanel = new CenterModalityPanel();
-		this.add(northPanel);
-		this.add(centerPanel);
+		this.add(northPanel, new RowLayoutData("20%"));
+		this.setAutoScroll(true);
+		this.add(centerPanel, new RowLayoutData("50%"));
 		  
 		
 	}
