@@ -27,7 +27,6 @@ public class CenterModalityPanel extends Panel{
 		this.p2 = new Panel();
 		this.isSelectedVenderButton = false;
 		buttonsPanel = new Panel();
-		buttonsPanel.setLayout(new HorizontalLayout(10));
 		createVenderButton();
 		p1.setLayout(new ColumnLayout());
 		Panel panel1 = new Panel();		
