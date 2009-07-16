@@ -1,7 +1,7 @@
 package com.googlecode.projeto1.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.googlecode.projeto1.client.panels.modality.NorthModalityPanel;
+import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 
 public class LARbc implements EntryPoint {
 	
@@ -9,8 +9,8 @@ public class LARbc implements EntryPoint {
 
 	public void onModuleLoad() {		
 //		PanelSwitcher.switchPanel(new WelcomePanel());
-//		PanelSwitcher.switchPanel(new ModalityPanel());
-		PanelSwitcher.switchPanel(new NorthModalityPanel());
+		PanelSwitcher.switchPanel(new ModalityPanel());
+//		PanelSwitcher.switchPanel(new NorthModalityPanel());
 	
 	}
 }

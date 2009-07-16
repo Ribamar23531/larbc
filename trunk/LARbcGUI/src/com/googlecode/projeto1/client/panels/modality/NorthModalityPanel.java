@@ -34,8 +34,9 @@ public class NorthModalityPanel extends Panel{
 		rightPanel.add(managerButtonImage);
 		wrapperPanel.add(leftPanel, new ColumnLayoutData(.86));
 		wrapperPanel.add(rightPanel, new ColumnLayoutData(.14));  
-
-		this.add(wrapperPanel); 
+		this.add(wrapperPanel);
+		this.setAutoScroll(true);
+		
 	}
 	
 	private void rebuildNorthPanel(Image buttonImage){
