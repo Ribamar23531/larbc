@@ -80,6 +80,7 @@ public class CenterModalityPanel extends Panel{
 	}
 	
 	private void buildButtonsPanel() {
+		buttonsPanel.removeAll();
 		if(!isSelectedVenderButton){
 			buttonsPanel.add(venderButton);
 		}else{
