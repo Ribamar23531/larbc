@@ -1,4 +1,4 @@
-<module>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><module>
 
 	<!-- Inherit the core Web Toolkit stuff.                  -->
 	<!--<inherits name='com.google.gwt.user.User'/> -->
@@ -7,7 +7,7 @@
 	<inherits name="com.gwtext.GwtExt"/>
 
 	<!-- Specify the app entry point class.                   -->
-	<entry-point class='com.googlecode.projeto1.client.LARbc'/>
+	<entry-point class="com.googlecode.projeto1.client.LARbc"/>
   
   	<stylesheet src="js/ext/resources/css/ext-all.css"/>
 	
@@ -18,4 +18,4 @@
   	<!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
   	<!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/> -->
   	
-</module>
+<servlet class="com.googlecode.projeto1.server.PersistenceServiceImpl" path="/persistence"/></module>
