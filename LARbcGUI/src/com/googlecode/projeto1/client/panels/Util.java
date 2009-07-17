@@ -5,6 +5,8 @@ import com.google.gwt.user.client.ui.Image;
 public class Util {
 	
 	public final static String LARBC_IMAGE_PATH = "images/larbc.png";
+	public final static String ENTRAR_BUTTON_IMAGE = "images/ENTRAR.PNG";
+	public final static String ENTRAR_SELECTED_BUTTON_IMAGE = "images/entrarSelected.PNG";
 	public final static String FAMILY_IMAGE_PATH= "images/familia.png";
 	public final static String SOUTO_MAIOR_IMAGE_PATH = "images/soltoMaior.png";
 	public final static String PREENCHIMENTO_PATH = "images/preenchimento.png";
