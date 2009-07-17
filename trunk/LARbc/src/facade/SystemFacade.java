@@ -2,6 +2,8 @@ package facade;
 
 import java.util.List;
 
+import persistence.util.Estado;
+
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
@@ -20,6 +22,8 @@ import beans.Foto;
 public interface SystemFacade {
 	
 //=== Administrator operations ===
+	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException;
+	
 	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDaniedException;
 	
 	public void removeAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
@@ -70,6 +74,12 @@ public interface SystemFacade {
 
 //=== Password operation ===
 	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException;
+	
+//===Listing operation ===
+	public List<String> listBairros();
+	
+	public List<String> listEstados();
+	
 	
 	
 }

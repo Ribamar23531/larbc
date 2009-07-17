@@ -10,7 +10,9 @@ import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDaniedException;
 
+import persistence.GerenteDeListagens;
 import persistence.GerenteDePersistencia;
+import persistence.util.Estado;
 import rbcCycle.GerenteDeRBC;
 import rbcCycle.caseElement.ImmobileSolution;
 
@@ -23,10 +25,16 @@ public class SystemManager implements SystemFacade {
 
 	private GerenteDePersistencia persistenceManager;
 	private GerenteDeRBC rbcManager;
+	private GerenteDeListagens listingManager;
 	
 	public SystemManager(){
 		this.persistenceManager = new GerenteDePersistencia();
 		this.rbcManager = new GerenteDeRBC(false);
+		this.listingManager = new GerenteDeListagens();
+	}
+	@Override
+	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
+		this.persistenceManager.verifyAdministrador(login, password);
 	}
 	/**
 	 * {@inheritDoc}
@@ -185,5 +193,19 @@ public class SystemManager implements SystemFacade {
 	 */
 	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException {
 		this.persistenceManager.setPassword(oldPassword, newPassword);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<String> listBairros() {
+		return this.listingManager.getBairros();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<String> listEstados() {
+		return this.listingManager.getEstados();
 	}
 }
