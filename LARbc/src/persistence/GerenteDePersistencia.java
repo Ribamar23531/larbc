@@ -1,6 +1,9 @@
 package persistence;
 
+import java.io.File;
 import java.util.List;
+
+import com.sun.org.apache.xalan.internal.xsltc.trax.Util;
 
 import persistence.DAO.AdministradorDAO;
 import persistence.DAO.AdministradorHibernateDAO;
@@ -12,6 +15,7 @@ import persistence.DAO.FotoDAO;
 import persistence.DAO.FotoHibernateDAO;
 import persistence.DAO.SystemPasswordDAO;
 import persistence.DAO.SystemPasswordHibernateDAO;
+import persistence.util.Paths;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -180,7 +184,9 @@ public class GerenteDePersistencia {
 	}
 	
 	public void removeCaso(Caso caso) throws CasoNotFoundException{
+		long casoId = caso.getIdCaso();
 		casoDAO.removeCaso(caso);
+		this.eraseDirectory(Paths.FILES_PATH + Paths.PATH_SEPARATOR + casoId);
 	}
 	
 	public Caso getCaso(long idCaso) throws CasoNotFoundException{
@@ -212,7 +218,7 @@ public class GerenteDePersistencia {
 		if(!getCasoOwner(caso).equals(admin)){
 			throw new PermissionDaniedException();
 		}
-		this.casoDAO.removeCaso(caso);
+		this.removeCaso(caso);
 	}
 
 	public void removeFoto(Caso caso, String path) throws FotoNotFoundException {
@@ -232,6 +238,27 @@ public class GerenteDePersistencia {
 
 	public List<Caso> getCasos(String login) throws AdministradorNotFoundException {
 		return getCasos(getAdministrador(login).getIdAdministrador());
+	}
+
+	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
+		Administrador admin = this.getAdministrador(login);
+		if(!admin.getPassword().equals(password)){
+			throw new PermissionDaniedException();
+		}
+	}
+	
+	public void eraseDirectory(String path){
+		File directory = new File(path);
+		if(directory.exists() && directory.isDirectory()){
+			for (File subFile : directory.listFiles()) {
+				if(subFile.isFile()){
+					subFile.delete();
+				}else{
+					eraseDirectory(subFile.getPath());
+				}
+			}
+			directory.delete();
+		}
 	}
 
 }
