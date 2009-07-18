@@ -1,5 +1,6 @@
 package com.googlecode.projeto1.client.panels.modality;
 
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
