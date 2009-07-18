@@ -11,14 +11,11 @@ public class ModalityPanel extends Panel {
 	public ModalityPanel(){
 		super(); 
 		this.setFrame(true);
-//		this.setLayout(new FitLayout());
 		this.northPanel = new NorthModalityPanel();
 		this.centerPanel = new CenterModalityPanel();
 		this.add(northPanel, new RowLayoutData("20%"));
 		this.setAutoScroll(true);
-		this.add(centerPanel, new RowLayoutData("50%"));
-		  
-		
+		this.add(centerPanel, new RowLayoutData(300));		
 	}
 
 }
