@@ -1,28 +1,32 @@
 package com.googlecode.projeto1.client.panels.manage;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CaptionPanel;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.Label;
 
 public class ManagePanel extends Panel{
 	
-	private AbsolutePanel panel;
+	private AbsolutePanel rootPanel;
 	
 	public ManagePanel(){
 		super();
-		panel = new AbsolutePanel();		
+		rootPanel = new AbsolutePanel();		
 		{
 			TabPanel createTab = new TabPanel();
 			createTab.setAnimationEnabled(true);
-			panel.add(createTab, 5, 5);
-			createTab.setSize("442px", "273px");
+			rootPanel.add(createTab, 5, 5);
+			createTab.setSize("442px", "313px");
 			{
 				AbsolutePanel createPanel = new AbsolutePanel();
 				createTab.add(createPanel, "Criar", false);
-				createPanel.setSize("428px", "224px");
+				createPanel.setSize("428px", "257px");
 				{
 					Label stateLabel = new Label("Estado:");
 					createPanel.add(stateLabel, 308, 5);
@@ -149,9 +153,95 @@ public class ManagePanel extends Panel{
 					createPanel.add(priceTextBox, 338, 189);
 					priceTextBox.setSize("85px", "22px");
 				}
+				{
+					Button criarButton = new Button("Criar");
+					createPanel.add(criarButton, 361, 218);
+				}
+			}
+			{
+				ScrollPanel scrollPanel = new ScrollPanel();
+				createTab.add(scrollPanel, "Editar", false);
+				scrollPanel.setSize("433px", "260px");
+				{
+					VerticalPanel verticalPanel = new VerticalPanel();
+					scrollPanel.setWidget(verticalPanel);
+					verticalPanel.setSize("100%", "100%");
+					{
+						CaptionPanel cptnpnlCaso = new CaptionPanel("Caso 1");
+						cptnpnlCaso.setHeight("138px");
+						verticalPanel.add(cptnpnlCaso);
+						{
+							AbsolutePanel absolutePanel = new AbsolutePanel();
+							cptnpnlCaso.setContentWidget(absolutePanel);
+							absolutePanel.setSize("428px", "3cm");
+							{
+								Label enderecoLabel = new Label("Endere\u00E7o:");
+								absolutePanel.add(enderecoLabel, 5, 5);
+							}
+							{
+								Label nomeLabel = new Label("Nome:");
+								absolutePanel.add(nomeLabel, 5, 31);
+							}
+							{
+								Label precoLabel = new Label("Pre\u00E7o:");
+								absolutePanel.add(precoLabel, 5, 57);
+							}
+							{
+								Button editarButton = new Button("New button");
+								editarButton.setText("Editar");
+								absolutePanel.add(editarButton, 347, 74);
+							}
+						}
+					}
+				}
+			}
+			{
+				AbsolutePanel absolutePanel = new AbsolutePanel();
+				createTab.add(absolutePanel, "Moderar Demandas", false);
+				absolutePanel.setSize("430px", "263px");
+				{
+					ScrollPanel scrollPanel = new ScrollPanel();
+					absolutePanel.add(scrollPanel, 5, 5);
+					scrollPanel.setSize("420px", "253px");
+					{
+						VerticalPanel verticalPanel = new VerticalPanel();
+						scrollPanel.setWidget(verticalPanel);
+						verticalPanel.setSize("100%", "100%");
+						{
+							CaptionPanel cptnpnlDemanda = new CaptionPanel("Demanda 1");
+							cptnpnlDemanda.setHeight("109px");
+							verticalPanel.add(cptnpnlDemanda);
+							{
+								AbsolutePanel absolutePanel_1 = new AbsolutePanel();
+								cptnpnlDemanda.setContentWidget(absolutePanel_1);
+								absolutePanel_1.setSize("416px", "135px");
+								{
+									Label enderecoLabel = new Label("Endere\u00E7o:");
+									absolutePanel_1.add(enderecoLabel, 5, 5);
+								}
+								{
+									Label nomeLabel = new Label("Nome:");
+									absolutePanel_1.add(nomeLabel, 5, 31);
+								}
+								{
+									Label precoLabel = new Label("Pre\u00E7o:");
+									absolutePanel_1.add(precoLabel, 5, 57);
+								}
+								{
+									Label situacaoLabel = new Label("Situa\u00E7\u00E3o:");
+									absolutePanel_1.add(situacaoLabel, 5, 83);
+								}
+								{
+									Button editarButton = new Button("Editar");
+									absolutePanel_1.add(editarButton, 335, 96);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
-		this.add(panel);
+		this.add(rootPanel);
 		this.setFrame(true);
 	}
 
