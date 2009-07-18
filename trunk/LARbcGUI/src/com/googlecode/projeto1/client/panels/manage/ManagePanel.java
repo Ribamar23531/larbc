@@ -22,7 +22,7 @@ public class ManagePanel extends Panel{
 			TabPanel createTab = new TabPanel();
 			createTab.setAnimationEnabled(true);
 			rootPanel.add(createTab, 5, 5);
-			createTab.setSize("442px", "313px");
+			createTab.setSize("469px", "313px");
 			{
 				AbsolutePanel createPanel = new AbsolutePanel();
 				createTab.add(createPanel, "Criar", false);
@@ -198,7 +198,7 @@ public class ManagePanel extends Panel{
 			{
 				AbsolutePanel absolutePanel = new AbsolutePanel();
 				createTab.add(absolutePanel, "Moderar Demandas", false);
-				absolutePanel.setSize("430px", "263px");
+				absolutePanel.setSize("453px", "263px");
 				{
 					ScrollPanel scrollPanel = new ScrollPanel();
 					absolutePanel.add(scrollPanel, 5, 5);
@@ -206,7 +206,7 @@ public class ManagePanel extends Panel{
 					{
 						VerticalPanel verticalPanel = new VerticalPanel();
 						scrollPanel.setWidget(verticalPanel);
-						verticalPanel.setSize("100%", "100%");
+						verticalPanel.setSize("419px", "100%");
 						{
 							CaptionPanel cptnpnlDemanda = new CaptionPanel("Demanda 1");
 							cptnpnlDemanda.setHeight("109px");
@@ -234,6 +234,70 @@ public class ManagePanel extends Panel{
 								{
 									Button editarButton = new Button("Editar");
 									absolutePanel_1.add(editarButton, 335, 96);
+								}
+							}
+						}
+					}
+				}
+			}
+			{
+				AbsolutePanel adminsMainPanel = new AbsolutePanel();
+				createTab.add(adminsMainPanel, "Administradores", false);
+				adminsMainPanel.setSize("437px", "259px");
+				{
+					Button criarAdministradorButton = new Button("New button");
+					criarAdministradorButton.setText("Criar Novo");
+					adminsMainPanel.add(criarAdministradorButton, 310, 220);
+				}
+				{
+					ScrollPanel scrollPanel = new ScrollPanel();
+					adminsMainPanel.add(scrollPanel, 0, 0);
+					scrollPanel.setSize("432px", "215px");
+					{
+						VerticalPanel adminVerticalPanel = new VerticalPanel();
+						scrollPanel.setWidget(adminVerticalPanel);
+						adminVerticalPanel.setSize("100%", "100%");
+						{
+							CaptionPanel captionPanel = new CaptionPanel("Administrador 1");
+							captionPanel.setSize("427px", "116px");
+							adminVerticalPanel.add(captionPanel);
+							{
+								AbsolutePanel absolutePanel = new AbsolutePanel();
+								captionPanel.setContentWidget(absolutePanel);
+								absolutePanel.setSize("423px", "3cm");
+								{
+									Label nomeLabel = new Label("Nome:");
+									absolutePanel.add(nomeLabel, 5, 5);
+								}
+								{
+									TextBox nomeTextBox = new TextBox();
+									absolutePanel.add(nomeTextBox, 61, 5);
+									nomeTextBox.setSize("248px", "22px");
+								}
+								{
+									Label loginLabel = new Label("Login:");
+									absolutePanel.add(loginLabel, 5, 31);
+								}
+								{
+									TextBox loginTextBox = new TextBox();
+									absolutePanel.add(loginTextBox, 61, 31);
+								}
+								{
+									Label senhaLabel = new Label("Senha:");
+									absolutePanel.add(senhaLabel, 5, 57);
+								}
+								{
+									TextBox senhaTextBox = new TextBox();
+									absolutePanel.add(senhaTextBox, 61, 57);
+								}
+								{
+									Button alterarButton = new Button("New button");
+									alterarButton.setText("Alterar");
+									absolutePanel.add(alterarButton, 335, 5);
+								}
+								{
+									Button removerButton = new Button("Remover");
+									absolutePanel.add(removerButton, 309, 44);
 								}
 							}
 						}
