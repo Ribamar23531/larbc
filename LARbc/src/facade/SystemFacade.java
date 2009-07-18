@@ -68,7 +68,11 @@ public interface SystemFacade {
 	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException;
 	
 //=== Query operation ===
-	public List<ImmobileSolution> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
+	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
+			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
+			 int bathroom, String type, float price, int businessType);
+	
+	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType);
 

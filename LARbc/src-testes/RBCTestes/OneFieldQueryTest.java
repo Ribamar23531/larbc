@@ -126,22 +126,22 @@ public class OneFieldQueryTest {
 	
 	@Test
 	public void testRetrieve(){
-		List<ImmobileSolution> queryResult= CBRManager.doQuery(1, "", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
+		List<Caso> queryResult= CBRManager.doQuery(1, "", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
 		assertTrue(queryResult.size() == 1);
 	}
 	
 	@Test
 	public void testRetrieve2(){
-		List<ImmobileSolution> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 2, 0, 0, 0, 0, 0, "", 0, 0);
+		List<Caso> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 2, 0, 0, 0, 0, 0, "", 0, 0);
 		assertTrue(queryResult.size() == 2);
 	}
 	
 	@Test
 	public void testRetrieve3(){
-		List<ImmobileSolution> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 0, 0, 0, 0, 0, 0, "", 1, 0);
+		List<Caso> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 0, 0, 0, 0, 0, 0, "", 1, 0);
 		assertTrue(queryResult.size() == 2);
-		for (ImmobileSolution immobileSolution : queryResult) {
-			System.out.println("Price: " + immobileSolution.getPrice());
+		for (Caso caseReturned : queryResult) {
+			System.out.println("Price: " + caseReturned.getPreco());
 		}
 	}
 	

@@ -2,6 +2,13 @@ package facade;
 
 import java.util.List;
 
+import persistence.GerenteDeListagens;
+import persistence.GerenteDePersistencia;
+import rbcCycle.GerenteDeRBC;
+import beans.Administrador;
+import beans.Caso;
+import beans.Demanda;
+import beans.Foto;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
@@ -9,17 +16,6 @@ import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDaniedException;
-
-import persistence.GerenteDeListagens;
-import persistence.GerenteDePersistencia;
-import persistence.util.Estado;
-import rbcCycle.GerenteDeRBC;
-import rbcCycle.caseElement.ImmobileSolution;
-
-import beans.Administrador;
-import beans.Caso;
-import beans.Demanda;
-import beans.Foto;
 
 public class SystemManager implements SystemFacade {
 
@@ -59,7 +55,6 @@ public class SystemManager implements SystemFacade {
 
 	/**
 	 * {@inheritDoc}
-	 * @throws AdministradorNotFoundException 
 	 */
 	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException {
 		return this.persistenceManager.getCasoOwner(caso);
@@ -180,7 +175,7 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<ImmobileSolution> doQuery(int resultNumber, String state,
+	public List<Caso> doQuery(int resultNumber, String state,
 			String city, String neighborhood, String street, String name,
 			float builtArea, float totalArea, int garageSpace, int bedroom,
 			int suite, int bathroom, String type, float price, int businessType) {
@@ -188,6 +183,15 @@ public class SystemManager implements SystemFacade {
 									   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
 	}
 
+	@Override
+	public List<Caso> doQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, int businessType) {
+
+		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, 
+				   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
+	}
 	/**
 	 * {@inheritDoc}
 	 */
