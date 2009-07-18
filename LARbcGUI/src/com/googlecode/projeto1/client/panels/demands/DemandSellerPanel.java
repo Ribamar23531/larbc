@@ -172,7 +172,7 @@ public class DemandSellerPanel extends Panel{
 	}
 	
 	private void createEntrarButton() {
-		pesquisarButton = Util.createImage(Util.PESQUISAR_BUTTON_IMAGE);
+		pesquisarButton = Util.createImage(Util.CADASTRAR_BUTTON_IMAGE);
 		pesquisarButton.setSize("11%", "5%");
 		pesquisarButton.addMouseListener(new MouseListenerAdapter(){
 
@@ -185,7 +185,7 @@ public class DemandSellerPanel extends Panel{
 			}
 
 		});
-		selectedPesquisarButton = Util.createImage(Util.PESQUISAR_SELECTED_BUTTON_IMAGE);
+		selectedPesquisarButton = Util.createImage(Util.SELECTED_CADASTRAR_BUTTON_IMAGE);
 		selectedPesquisarButton.setSize("11%", "5%");
 		selectedPesquisarButton.addMouseListener(new MouseListenerAdapter(){			
 
