@@ -26,17 +26,17 @@ public class WelcomePanel extends Panel {
 		{
 			Image image = new Image("images/larbc.png");
 			rootPanel.add(image, 5, 5);
-			image.setSize("271px", "100px");
+			image.setSize("40%", "15%");
 		}
 		{
 			Image image = new Image("images/familia.png");
 			rootPanel.add(image, 38, 164);
-			image.setSize("238px", "325px");
+			image.setSize("24%", "60%");
 		}
 		{
 			Image image = new Image("images/soltoMaior.png");
-			rootPanel.add(image, 325, 155);
-			image.setSize("463px", "168px");
+			rootPanel.add(image, 360, 180);
+			image.setSize("52%", "25%");
 		}
 		createEntrarButton();
 		this.add(rootPanel);
@@ -46,7 +46,7 @@ public class WelcomePanel extends Panel {
 	
 	private void createEntrarButton() {
 		entrarButton = Util.createImage(Util.ENTRAR_BUTTON_IMAGE);
-		entrarButton.setSize("90px", "33px");
+		entrarButton.setSize("11%", "5%");
 		entrarButton.addMouseListener(new MouseListenerAdapter(){
 
 			
@@ -59,7 +59,7 @@ public class WelcomePanel extends Panel {
 
 		});
 		entrarSelectedButton = Util.createImage(Util.ENTRAR_SELECTED_BUTTON_IMAGE);
-		entrarSelectedButton.setSize("90px", "33px");
+		entrarSelectedButton.setSize("11%", "5%");
 		entrarSelectedButton.addMouseListener(new MouseListenerAdapter(){			
 
 			public void onMouseLeave(Widget arg0) {
@@ -80,9 +80,9 @@ public class WelcomePanel extends Panel {
 	
 	private void buildButtonsPanel() {
 		if(!isSelectedEntrarButton){
-			rootPanel.add(entrarButton, 526, 365);
+			rootPanel.add(entrarButton, 540, 365);
 		}else{
-			rootPanel.add(entrarSelectedButton, 526, 365);
+			rootPanel.add(entrarSelectedButton, 540, 365);
 		}
 	}
 
