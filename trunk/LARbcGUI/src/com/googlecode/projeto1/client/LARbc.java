@@ -1,7 +1,6 @@
 package com.googlecode.projeto1.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.googlecode.projeto1.client.panels.query.QuerySellerPanel;
 
 public class LARbc implements EntryPoint {
 	
@@ -15,6 +14,6 @@ public class LARbc implements EntryPoint {
 //		PanelSwitcher.switchPanel(new ResultsPanel());
 //		PanelSwitcher.switchPanel(new CasePanel());
 //		PanelSwitcher.switchPanel(new LoginWindowPanel());
-		PanelSwitcher.switchPanel(new QuerySellerPanel());
+//		PanelSwitcher.switchPanel(new QuerySellerPanel());
 	}
 }

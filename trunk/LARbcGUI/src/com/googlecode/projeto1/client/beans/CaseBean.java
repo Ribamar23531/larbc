@@ -1,7 +1,7 @@
 package com.googlecode.projeto1.client.beans;
 
 public class CaseBean {
-	private int id;
+	private long id;
 	private String state;
 	private String city;
 	private String neighborhood;
@@ -18,11 +18,11 @@ public class CaseBean {
 	private float price;
 	private int businessType;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
