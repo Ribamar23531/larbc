@@ -2,7 +2,9 @@ package com.googlecode.projeto1.client.panels.results;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.googlecode.projeto1.client.panels.Util;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
 
 public class ResultsPanel extends Panel{
 	
@@ -21,7 +23,9 @@ public class ResultsPanel extends Panel{
 		vp.add(new CasePanel());
 		vp.add(new CasePanel());
 		vp.add(new CasePanel());
-		this.add(vp);
+		Button button = new Button("Nao encontrou o que queria?");
+		vp.add(button);
+		button.setSize("117px", "21px");
 		this.setAutoScroll(true);
 		
 	}
