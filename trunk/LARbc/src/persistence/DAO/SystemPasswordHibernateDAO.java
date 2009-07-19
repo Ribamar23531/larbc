@@ -12,10 +12,16 @@ public class SystemPasswordHibernateDAO extends HibernateDAO implements SystemPa
 	
 	public SystemPasswordHibernateDAO(boolean testing) {
 		super(testing);
+		if(!alreadyThereIsPassword()){
+			setPassword("admin");
+		}
 	}
 	
 	public SystemPasswordHibernateDAO(){
 		super(false);
+		if(!alreadyThereIsPassword()){
+			setPassword("admin");
+		}
 	}
 
 	@Override
