@@ -2,14 +2,17 @@ package com.googlecode.projeto1.client.panels.manage;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.TabPanel;
+import com.googlecode.projeto1.client.beans.AdminBean;
 import com.gwtext.client.widgets.Panel;
 
 public class ManagePanel extends Panel{
 	
 	private AbsolutePanel managePanel;
+	private AdminBean administrator;
 	
-	public ManagePanel(){
+	public ManagePanel(AdminBean admin){
 		super();
+		this.administrator = admin;
 		managePanel = new AbsolutePanel();		
 		{
 			TabPanel tabPanel = new TabPanel();
@@ -17,7 +20,7 @@ public class ManagePanel extends Panel{
 			managePanel.add(tabPanel, 5, 5);
 			tabPanel.setSize("469px", "313px");
 			{
-				CreateTab createTab = new CreateTab();
+				CreateTab createTab = new CreateTab(administrator);
 				tabPanel.add(createTab, "Criar", false);
 				createTab.setSize("428px", "257px");
 				
@@ -33,7 +36,7 @@ public class ManagePanel extends Panel{
 				demandsTab.setSize("453px", "263px");
 			}
 			{
-				AdminTab adminsMainPanel = new AdminTab();
+				AdminTab adminsMainPanel = new AdminTab(administrator);
 				tabPanel.add(adminsMainPanel, "Administradores", false);
 				adminsMainPanel.setSize("437px", "259px");
 				

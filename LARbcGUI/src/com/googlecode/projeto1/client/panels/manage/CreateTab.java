@@ -1,21 +1,25 @@
 package com.googlecode.projeto1.client.panels.manage;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.form.Label;
 
 public class CreateTab extends AbsolutePanel{
 	
 	private static final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
+	private AdminBean admin;
 	private TextBox cityTextBox;
 	private TextBox neighborhoodTextBox;
 	private TextBox numberTextBox;
@@ -25,15 +29,16 @@ public class CreateTab extends AbsolutePanel{
 	private TextBox areaConstruidaTextBox;
 	private TextBox areaTotalTextBox;
 	private TextBox garageTextBox;
-	private TextBox qteRoomsTextBox;
+	private TextBox qteBedroomsTextBox;
 	private TextBox qteSuitesTextBox;
 	private TextBox qteBathroomsTextBox;
 	private ListBox typeComboBox;
 	private TextBox priceTextBox;
 	private Button criarButton;
 	
-	public CreateTab(){
+	public CreateTab(AdminBean admin){
 		super();
+		this.admin = admin;
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);
@@ -120,9 +125,9 @@ public class CreateTab extends AbsolutePanel{
 			this.add(roomsLabel, 235, 137);
 		}
 		{
-			qteRoomsTextBox = new TextBox();
-			this.add(qteRoomsTextBox, 369, 138);
-			qteRoomsTextBox.setSize("54px", "22px");
+			qteBedroomsTextBox = new TextBox();
+			this.add(qteBedroomsTextBox, 369, 138);
+			qteBedroomsTextBox.setSize("54px", "22px");
 		}
 		{
 			Label qteSuitesLabel = new Label("Qte de Su\u00EDtes:");
@@ -176,29 +181,44 @@ public class CreateTab extends AbsolutePanel{
 				caseBean.setCity(cityTextBox.getText());
 				caseBean.setNeighborhood(neighborhoodTextBox.getText());
 				caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
-				caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
-				
-				
-				//TODO CONTINUAR
-				
-				
-				
-//				PERSISTENCE_SERVICE
-//				private TextBox cityTextBox;
-//				private TextBox townTextBox;
-//				private TextBox numberTextBox;
-//				private ListBox stateListBox;
-//				private TextBox streetTextBox;
-//				private TextBox nameTextBox;
-//				private TextBox areaConstruidaTextBox;
-//				private TextBox areaTotalTextBox;
-//				private TextBox garageTextBox;
-//				private TextBox qteRoomsTextBox;
-//				private TextBox qteSuitesTextBox;
-//				private TextBox qteBathroomsTextBox;
-//				private ListBox typeComboBox;
-//				private TextBox priceTextBox;
-//				private Button criarButton;
+//				caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
+				caseBean.setState("state");
+				caseBean.setStreet(streetTextBox.getText());
+				caseBean.setName(nameTextBox.getText());
+				caseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
+				caseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
+				caseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
+				caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
+				caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
+				caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
+//				caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
+				caseBean.setType("type");
+				caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));				
+				PERSISTENCE_SERVICE.crateCaso(admin, caseBean, new AsyncCallback<String>() {
+
+					public void onFailure(Throwable arg0) {
+						MessageBox.alert("Houveram problemas durante o armazenamento desse caso.");
+						
+					}
+
+					public void onSuccess(String arg0) {
+						MessageBox.alert("Caso armazenado com sucesso");
+//						cityTextBox.setText("");
+//						neighborhoodTextBox.setText("");
+//						numberTextBox.setText("");
+//						stateListBox.setSelectedIndex(0);
+//						streetTextBox.setText("");
+//						nameTextBox.setText("");
+//						areaConstruidaTextBox.setText("");
+//						areaTotalTextBox.setText("");
+//						garageTextBox.setText("");
+//						qteBedroomsTextBox.setText("");
+//						qteSuitesTextBox.setText("");
+//						qteBathroomsTextBox.setText("");
+//						typeComboBox.setSelectedIndex(0);
+//						priceTextBox.setText("");				
+					}
+				});
 				
 			}
 		});

@@ -6,12 +6,16 @@ import com.google.gwt.user.client.ui.CaptionPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.googlecode.projeto1.client.beans.AdminBean;
 import com.gwtext.client.widgets.form.Label;
 
 public class AdminTab extends AbsolutePanel{
 	
-	public AdminTab(){
+	private AdminBean administrator;
+	
+	public AdminTab(AdminBean admin){
 		super();		
+		this.administrator = admin;
 		{
 			ScrollPanel scrollPanel = new ScrollPanel();
 			this.add(scrollPanel, 0, 0);
