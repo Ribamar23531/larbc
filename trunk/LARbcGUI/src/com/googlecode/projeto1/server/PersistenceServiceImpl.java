@@ -312,16 +312,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void verifyAdministrador(String login, String password) {
+	public String verifyAdministrador(String login, String password) {
 		try {
 			this.getSystemFacade().verifyAdministrador(login, password);
 		} catch (PermissionDaniedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "NOT OK";
 		} catch (AdministradorNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "NOT OK";
 		}
+		return "OK";
 	}
 
 //=== Conversors ===	

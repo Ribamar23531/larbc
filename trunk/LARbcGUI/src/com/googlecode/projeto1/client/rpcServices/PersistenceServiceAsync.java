@@ -6,6 +6,7 @@ import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface PersistenceServiceAsync {
@@ -18,7 +19,7 @@ public interface PersistenceServiceAsync {
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType, AsyncCallback<List<CaseBean>> callback);
 	
-	public void verifyAdministrador(String login, String password, AsyncCallback<?> callback);
+	public void verifyAdministrador(String login, String password, AsyncCallback<String> callback);
 	
 	public void crateCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback); 
 	

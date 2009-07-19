@@ -9,6 +9,9 @@ import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 
+import exceptions.AdministradorNotFoundException;
+import exceptions.PermissionDaniedException;
+
 @RemoteServiceRelativePath("persistence")
 public interface PersistenceService extends RemoteService {
 
@@ -20,7 +23,7 @@ public interface PersistenceService extends RemoteService {
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType);
 	
-	public void verifyAdministrador(String login, String password);
+	public String verifyAdministrador(String login, String password);
 	
 	public void crateCaso(AdminBean admin, CaseBean caso); 
 	
