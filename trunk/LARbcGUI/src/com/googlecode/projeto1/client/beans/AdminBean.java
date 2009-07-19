@@ -1,11 +1,19 @@
 package com.googlecode.projeto1.client.beans;
 
-public class AdminBean {
+import java.io.Serializable;
 
+public class AdminBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long idAdministrador;
 	private String login;
 	private String password;
 	private String nome;
+	
+	public AdminBean(){}
 	
 	public long getIdAdministrador() {
 		return idAdministrador;

@@ -1,9 +1,17 @@
 package com.googlecode.projeto1.client.beans;
 
-public class PhotoBean {
+import java.io.Serializable;
+
+public class PhotoBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long idCaso;
 	private String path;
+	
+	public PhotoBean(){}
 	
 	
 	public long getIdCaso() {

@@ -1,6 +1,12 @@
 package com.googlecode.projeto1.client.beans;
 
-public class DemandBean {
+import java.io.Serializable;
+
+public class DemandBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long idDemanda;
 	private String estado;
 	private String cidade;
@@ -21,6 +27,9 @@ public class DemandBean {
 	private String telefone;
 	private boolean jahModerado;
 	private int tipoNegocio;
+	
+	public DemandBean(){}
+	
 	public long getIdDemanda() {
 		return idDemanda;
 	}
