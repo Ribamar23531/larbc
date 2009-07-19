@@ -1,0 +1,69 @@
+package com.googlecode.projeto1.client.panels.modality;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.googlecode.projeto1.client.PanelSwitcher;
+import com.googlecode.projeto1.client.panels.manage.ManagePanel;
+import com.googlecode.projeto1.client.rpcServices.PersistenceService;
+import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+
+public class LoginWindow extends Window{
+	
+	private static final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
+//	private final ModelServicesAsync MODEL_SERVICES = (ModelServicesAsync) GWT.create(ModelServices.class);
+	private LoginWindowPanel loginWindowPanel;
+	
+	public LoginWindow(){
+		super();
+		this.loginWindowPanel = new LoginWindowPanel();
+		this.setTitle("Entre com o Login");		
+		this.setClosable(true);
+		this.setPlain(true);		
+		this.setPaddings(5);  
+		this.setButtonAlign(Position.CENTER);
+		this.addButton(getOkButton());		
+		this.setResizable(true);
+		this.setCloseAction(Window.HIDE);  
+		this.setPlain(true);
+		this.add(loginWindowPanel);
+		this.setSize("250px", "170px");
+		this.setResizable(false);
+	}
+	
+	private Button getOkButton() {
+		Button okButton = new Button("OK");
+		okButton.addListener(new ButtonListenerAdapter(){
+			public void onClick(Button button, EventObject e) {
+				String login = loginWindowPanel.getLogin();
+				String password = loginWindowPanel.getPassword();
+				if(login.equals("") || password.equals("")){
+				PERSISTENCE_SERVICE.verifyAdministrador(login, password, new AsyncCallback<String>() {
+
+					public void onFailure(Throwable arg0) {
+//						MessageBox.alert(arg0.)
+						
+					}
+
+					public void onSuccess(String arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+					MessageBox.alert("Favor preencher todos os campos.");
+				}else{
+					PanelSwitcher.switchPanel(new ManagePanel());
+					hide();					
+				}
+			}
+
+		});
+		return okButton;
+	}
+
+}

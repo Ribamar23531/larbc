@@ -4,15 +4,8 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.panels.Util;
-import com.googlecode.projeto1.client.panels.manage.ManagePanel;
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.core.Position;
-import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.Window;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.ColumnLayoutData;
 
@@ -21,7 +14,7 @@ public class NorthModalityPanel extends Panel{
 	private Image managerButtonImage;
 	private Image selectedManagerButtonImage;
 	private Panel wrapperPanel;
-	private Window loginWindow;
+	private LoginWindow loginWindow;
 	
 	public NorthModalityPanel(){
 		super();
@@ -41,33 +34,34 @@ public class NorthModalityPanel extends Panel{
 		wrapperPanel.add(leftPanel, new ColumnLayoutData(.86));
 		wrapperPanel.add(rightPanel, new ColumnLayoutData(.14));  
 		this.add(wrapperPanel);
-		this.setAutoScroll(true);		
-		loginWindow = new Window();  
-		loginWindow.setTitle("Entre com o Login");		
-		loginWindow.setClosable(true);
-		loginWindow.setPlain(true);		
-		loginWindow.setPaddings(5);  
-		loginWindow.setButtonAlign(Position.CENTER);
-		loginWindow.addButton(getOkButton());		
-		loginWindow.setResizable(true);
-		loginWindow.setCloseAction(Window.HIDE);  
-		loginWindow.setPlain(true);
-		loginWindow.add(new LoginWindowPanel());
-		loginWindow.setSize("250px", "170px");		
+		this.setAutoScroll(true);
+		this.loginWindow = new LoginWindow();
+//		loginWindow = new Window();  
+//		loginWindow.setTitle("Entre com o Login");		
+//		loginWindow.setClosable(true);
+//		loginWindow.setPlain(true);		
+//		loginWindow.setPaddings(5);  
+//		loginWindow.setButtonAlign(Position.CENTER);
+//		loginWindow.addButton(getOkButton());		
+//		loginWindow.setResizable(true);
+//		loginWindow.setCloseAction(Window.HIDE);  
+//		loginWindow.setPlain(true);
+//		loginWindow.add(new LoginWindowPanel());
+//		loginWindow.setSize("250px", "170px");		
 		
 	}
 	
-	private Button getOkButton() {
-		Button okButton = new Button("OK");
-		okButton.addListener(new ButtonListenerAdapter(){
-			public void onClick(Button button, EventObject e) {
-				PanelSwitcher.switchPanel(new ManagePanel());
-				loginWindow.hide();
-			}
-
-		});
-		return okButton;
-	}
+//	private Button getOkButton() {
+//		Button okButton = new Button("OK");
+//		okButton.addListener(new ButtonListenerAdapter(){
+//			public void onClick(Button button, EventObject e) {
+//				PanelSwitcher.switchPanel(new ManagePanel());
+//				loginWindow.hide();
+//			}
+//
+//		});
+//		return okButton;
+//	}
 
 	private void rebuildNorthPanel(Image buttonImage){
 		wrapperPanel.removeAll();
