@@ -36,32 +36,7 @@ public class NorthModalityPanel extends Panel{
 		this.add(wrapperPanel);
 		this.setAutoScroll(true);
 		this.loginWindow = new LoginWindow();
-//		loginWindow = new Window();  
-//		loginWindow.setTitle("Entre com o Login");		
-//		loginWindow.setClosable(true);
-//		loginWindow.setPlain(true);		
-//		loginWindow.setPaddings(5);  
-//		loginWindow.setButtonAlign(Position.CENTER);
-//		loginWindow.addButton(getOkButton());		
-//		loginWindow.setResizable(true);
-//		loginWindow.setCloseAction(Window.HIDE);  
-//		loginWindow.setPlain(true);
-//		loginWindow.add(new LoginWindowPanel());
-//		loginWindow.setSize("250px", "170px");		
-		
 	}
-	
-//	private Button getOkButton() {
-//		Button okButton = new Button("OK");
-//		okButton.addListener(new ButtonListenerAdapter(){
-//			public void onClick(Button button, EventObject e) {
-//				PanelSwitcher.switchPanel(new ManagePanel());
-//				loginWindow.hide();
-//			}
-//
-//		});
-//		return okButton;
-//	}
 
 	private void rebuildNorthPanel(Image buttonImage){
 		wrapperPanel.removeAll();
@@ -91,7 +66,6 @@ public class NorthModalityPanel extends Panel{
 		selectedManagerButtonImage.addClickListener(new ClickListener(){
 
 			public void onClick(Widget arg0) {
-//				PanelSwitcher.switchPanel(new ManagePanel());
 				loginWindow.show(selectedManagerButtonImage.getElement());
 				
 			}

@@ -16,7 +16,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 public class LoginWindow extends Window{
 	
 	private static final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
-//	private final ModelServicesAsync MODEL_SERVICES = (ModelServicesAsync) GWT.create(ModelServices.class);
+
 	private LoginWindowPanel loginWindowPanel;
 	
 	public LoginWindow(){
@@ -42,23 +42,26 @@ public class LoginWindow extends Window{
 			public void onClick(Button button, EventObject e) {
 				String login = loginWindowPanel.getLogin();
 				String password = loginWindowPanel.getPassword();
-				if(login.equals("") || password.equals("")){
-				PERSISTENCE_SERVICE.verifyAdministrador(login, password, new AsyncCallback<String>() {
-
-					public void onFailure(Throwable arg0) {
-//						MessageBox.alert(arg0.)
-						
-					}
-
-					public void onSuccess(String arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
+				if(login.equals("") || password.equals("")){				
 					MessageBox.alert("Favor preencher todos os campos.");
 				}else{
-					PanelSwitcher.switchPanel(new ManagePanel());
-					hide();					
+					PERSISTENCE_SERVICE.verifyAdministrador(login, password, new AsyncCallback<String>() {
+
+						public void onFailure(Throwable arg0) {
+							MessageBox.alert("Falha na tentativa de login.");
+							
+						}
+
+						public void onSuccess(String arg0) {
+							if(arg0.equals("OK")){
+								PanelSwitcher.switchPanel(new ManagePanel());
+								hide();								
+							}else{
+								MessageBox.alert("Login ou senha inválidos.");
+							}
+							
+						}
+					});
 				}
 			}
 
