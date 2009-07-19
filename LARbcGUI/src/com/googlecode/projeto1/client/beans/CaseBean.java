@@ -1,6 +1,12 @@
 package com.googlecode.projeto1.client.beans;
 
-public class CaseBean {
+import java.io.Serializable;
+
+public class CaseBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String state;
 	private String city;
@@ -17,6 +23,8 @@ public class CaseBean {
 	private String type;
 	private float price;
 	private int businessType;
+	
+	public CaseBean(){}
 	
 	public long getId() {
 		return id;
@@ -147,7 +155,8 @@ public class CaseBean {
 	}
 
 	public String toString(){
-		String newLine = System.getProperty("line.separator");
+//		String newLine = System.getProperty("line.separator");
+		String newLine = "\n";
 		String result = "Id: " + getId() + newLine +
 						"State: + " + getState() + newLine + 
 						"City: " + getCity() + newLine +
