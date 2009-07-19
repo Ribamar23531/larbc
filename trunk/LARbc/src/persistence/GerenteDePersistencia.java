@@ -11,8 +11,6 @@ import persistence.DAO.DemandaDAO;
 import persistence.DAO.DemandasHibernateDAO;
 import persistence.DAO.FotoDAO;
 import persistence.DAO.FotoHibernateDAO;
-import persistence.DAO.SystemPasswordDAO;
-import persistence.DAO.SystemPasswordHibernateDAO;
 import persistence.util.Paths;
 import beans.Administrador;
 import beans.Caso;
@@ -32,7 +30,7 @@ public class GerenteDePersistencia {
 	private FotoDAO fotoDAO;
 	private DemandaDAO demandaDAO;
 	private CasoDAO casoDAO;
-	private SystemPasswordDAO systemPasswordDAO;
+//	private SystemPasswordDAO systemPasswordDAO;
 	private static GerenteDePersistencia minhaInstancia = null;
 	
 	public GerenteDePersistencia(boolean testing){
@@ -40,7 +38,7 @@ public class GerenteDePersistencia {
 		this.fotoDAO = new FotoHibernateDAO(testing);
 		this.demandaDAO = new DemandasHibernateDAO(testing);
 		this.casoDAO = new CasosHibernateDAO(testing);
-		this.systemPasswordDAO = new SystemPasswordHibernateDAO(testing);
+//		this.systemPasswordDAO = new SystemPasswordHibernateDAO(testing);
 	}
 	
 	public GerenteDePersistencia(){
@@ -48,7 +46,7 @@ public class GerenteDePersistencia {
 		this.fotoDAO = new FotoHibernateDAO();
 		this.demandaDAO = new DemandasHibernateDAO();
 		this.casoDAO = new CasosHibernateDAO();
-		this.systemPasswordDAO = new SystemPasswordHibernateDAO();
+//		this.systemPasswordDAO = new SystemPasswordHibernateDAO();
 	}
 	
 	public static GerenteDePersistencia getInstance(boolean testando){
@@ -58,41 +56,50 @@ public class GerenteDePersistencia {
 		return minhaInstancia;
 	}
 	
-	//=============================Operacoes sobre senha======================================\\
+	//=============================Operacoes sobre sistema======================================\\
 	
-	public void resetSystemPassword(){
-		systemPasswordDAO.resetPassword();
+//	public void resetSystemPassword(){
+//		systemPasswordDAO.resetPassword();
+//	}
+//	
+	private void verifyPermission(Administrador admin) throws PermissionDaniedException{
+		Administrador a;
+		try {
+			a = getAdministrador(admin.getLogin());
+		} catch (AdministradorNotFoundException e) {
+			throw new PermissionDaniedException();//se nao encontrar administrador entao alguem tentou um login invalido
+		}
+		if(!a.getPassword().equals(admin.getPassword()) || !a.isRoot()){
+			throw new PermissionDaniedException();
+		}		
 	}
 	
-	private void verifyPermission(String password) throws PermissionDaniedException{
-		if(!password.equals(systemPasswordDAO.getPassword())){
+	public Administrador doLogin(String login, String password) throws PermissionDaniedException{
+		try {
+			Administrador admin = getAdministrador(login);
+			if(!admin.getPassword().equals(password)){
+				throw new PermissionDaniedException();
+			}
+			return admin;
+		} catch (AdministradorNotFoundException e) {
 			throw new PermissionDaniedException();
 		}
 	}
-	
-	public void setPassword(String oldPassword, String newPassword) throws PermissionDaniedException{
-		verifyPermission(oldPassword);
-		systemPasswordDAO.setPassword(newPassword);
-	}
+//	
+//	public void setPassword(String oldPassword, String newPassword) throws PermissionDaniedException{
+//		verifyPermission(oldPassword);
+//		systemPasswordDAO.setPassword(newPassword);
+//	}
 	
 	//=============================Operacoes sobre Administrador===============================\\	
 	
 	public void saveAdministrador(Administrador admin, String password) throws LoginAlreadyRegisteredException, PermissionDaniedException/*, RequiredArgumentException*/{
-//		if(admin.getLogin() == null || admin.getLogin().equals("")){
-//			throw new RequiredArgumentException("login");
-//		}
-//		if(admin.getPassword() == null || admin.getPassword().equals("")){
-//			throw new RequiredArgumentException("password");
-//		}
-//		if(admin.getNome() == null || admin.getNome().equals("")){
-//			throw new RequiredArgumentException("nome");
-//		}		
-		verifyPermission(password);
+		verifyPermission(admin);		
 		administradorDAO.saveAdministrador(admin);
 	}
 	
 	public void removeAdministrador(Administrador admin, String password) throws AdministradorNotFoundException, PermissionDaniedException{
-		verifyPermission(password);
+		verifyPermission(admin);		
 		administradorDAO.removeAdministrador(admin);
 	}
 	
@@ -105,7 +112,7 @@ public class GerenteDePersistencia {
 	}
 	
 	public void updateAdministrador(Administrador admin, String password) throws AdministradorNotFoundException, PermissionDaniedException{
-		verifyPermission(password);
+		verifyPermission(admin);
 		administradorDAO.updateAdministrador(admin);
 	}
 	
@@ -118,6 +125,9 @@ public class GerenteDePersistencia {
 	}
 	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{
+		if(admin.getLogin().equals("admin")){
+			
+		}
 		getAdministrador(admin.getLogin());//testa se o administrador existe
 		caso.setIdAdministradorResponsavel(admin.getIdAdministrador());
 		saveCaso(caso);
@@ -238,19 +248,19 @@ public class GerenteDePersistencia {
 		return getCasos(getAdministrador(login).getIdAdministrador());
 	}
 
-	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
-		if(login.equals("admin")){
-			if(systemPasswordDAO.getPassword().equals(password)){
-				return;
-			}else{
-				throw new PermissionDaniedException();				
-			}
-		}
-		Administrador admin = this.getAdministrador(login);
-		if(!admin.getPassword().equals(password)){
-			throw new PermissionDaniedException();
-		}
-	}
+//	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
+//		if(login.equals("admin")){
+//			if(systemPasswordDAO.getPassword().equals(password)){
+//				return;
+//			}else{
+//				throw new PermissionDaniedException();				
+//			}
+//		}
+//		Administrador admin = this.getAdministrador(login);
+//		if(!admin.getPassword().equals(password)){
+//			throw new PermissionDaniedException();
+//		}
+//	}
 	
 	public void eraseDirectory(String path){
 		File directory = new File(path);

@@ -104,7 +104,7 @@ public class OneFieldQueryTest {
 		persistenceManager = new GerenteDePersistencia(true);
 		persistenceManager.removeAllAdministradores();
 		persistenceManager.removeAllCasos();
-		persistenceManager.resetSystemPassword();
+//		persistenceManager.resetSystemPassword();
 		CBRManager = new GerenteDeRBC(true);
 		caso1 = getCaso1();
 		caso2 = getCaso2();
@@ -149,7 +149,7 @@ public class OneFieldQueryTest {
 	public static void clean(){
 		persistenceManager.removeAllAdministradores();
 		persistenceManager.removeAllCasos();
-		persistenceManager.resetSystemPassword();
+//		persistenceManager.resetSystemPassword();
 	}
 	
 	

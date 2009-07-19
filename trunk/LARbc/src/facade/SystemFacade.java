@@ -2,8 +2,10 @@ package facade;
 
 import java.util.List;
 
-import persistence.util.Estado;
-
+import beans.Administrador;
+import beans.Caso;
+import beans.Demanda;
+import beans.Foto;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
@@ -12,17 +14,12 @@ import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDaniedException;
 
-import rbcCycle.caseElement.ImmobileSolution;
-
-import beans.Administrador;
-import beans.Caso;
-import beans.Demanda;
-import beans.Foto;
-
 public interface SystemFacade {
 	
 //=== Administrator operations ===
-	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException;
+//	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException;
+	
+	public Administrador doLogin(String login, String password) throws PermissionDaniedException;
 	
 	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDaniedException;
 	
@@ -77,7 +74,7 @@ public interface SystemFacade {
 			 int bathroom, String type, float price, int businessType);
 
 //=== Password operation ===
-	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException;
+//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException;
 	
 //===Listing operation ===
 	public List<String> listBairros();
