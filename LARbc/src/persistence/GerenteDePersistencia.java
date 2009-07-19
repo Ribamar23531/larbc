@@ -3,8 +3,6 @@ package persistence;
 import java.io.File;
 import java.util.List;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.Util;
-
 import persistence.DAO.AdministradorDAO;
 import persistence.DAO.AdministradorHibernateDAO;
 import persistence.DAO.CasoDAO;
@@ -241,6 +239,13 @@ public class GerenteDePersistencia {
 	}
 
 	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
+		if(login.equals("admin")){
+			if(systemPasswordDAO.getPassword().equals(password)){
+				return;
+			}else{
+				throw new PermissionDaniedException();				
+			}
+		}
 		Administrador admin = this.getAdministrador(login);
 		if(!admin.getPassword().equals(password)){
 			throw new PermissionDaniedException();
