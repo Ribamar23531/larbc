@@ -27,20 +27,20 @@ public class AdministradorTests {
 		a = new Administrador("login1", "senha1", "nome1");
 		gerente.removeAllAdministradores();
 		gerente.removeAllCasos();
-		gerente.resetSystemPassword();
+//		gerente.resetSystemPassword();
 		systemPassword = "password";
-		try {
-			gerente.setPassword("admin", systemPassword);
-		} catch (PermissionDaniedException e) {
-			assertTrue(false);
-		}
+//		try {
+//			gerente.setPassword("admin", systemPassword);
+//		} catch (PermissionDaniedException e) {
+//			assertTrue(false);
+//		}
 	}
 	
 	@AfterClass
 	public static void zerarTudo(){
 		gerente.removeAllAdministradores();
 		gerente.removeAllCasos();
-		gerente.resetSystemPassword();
+//		gerente.resetSystemPassword();
 	}	
 	
 	@Test

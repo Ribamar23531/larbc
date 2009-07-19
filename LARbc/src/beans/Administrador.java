@@ -12,7 +12,8 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "administradores")
-@NamedQueries( { @NamedQuery(name = "administrador.login", query = "select a from Administrador a where a.login = :login") })
+@NamedQueries( {@NamedQuery(name = "administrador.login", query = "select a from Administrador a where a.login = :login"),
+				@NamedQuery(name = "getRoots", query = "select a from Administrador a where a.isRoot = :true")})
 public class Administrador {
 	
 	@Id
@@ -24,7 +25,9 @@ public class Administrador {
 	@Column(name = "senha", updatable = true, nullable = false)
 	private String password;
 	@Column(updatable = true, nullable = false)
-	private String nome;	
+	private String nome;
+	@Column(updatable = true, nullable = false)
+	private boolean isRoot;
   
 //	@OneToMany(mappedBy="inseridoPor", fetch = FetchType.EAGER)
 //	@Cascade(CascadeType.PERSIST)
@@ -76,6 +79,14 @@ public class Administrador {
 		Administrador anotherOne = (Administrador) obj;
 		return this.getIdAdministrador() == anotherOne.getIdAdministrador();
 //		return this.getLogin().equals(anotherOne.getLogin()) && this.getPassword().equals(anotherOne.getPassword()) && this.getNome().equals(anotherOne.getNome());
+	}
+
+	public void setRoot(boolean isRoot) {
+		this.isRoot = isRoot;
+	}
+
+	public boolean isRoot() {
+		return isRoot;
 	}
 
 //	public void setCasos(List<Caso> casos) {

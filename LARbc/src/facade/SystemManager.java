@@ -31,10 +31,10 @@ public class SystemManager implements SystemFacade {
 		this.listingManager = new GerenteDeListagens();
 		this.mailManager = new GerenteDeEMail();
 	}
-	@Override
-	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
-		this.persistenceManager.verifyAdministrador(login, password);
-	}
+//	@Override
+//	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {		
+//		this.persistenceManager.verifyAdministrador(login, password);
+//	}
 	/**
 	 * {@inheritDoc}
 	 */
@@ -196,12 +196,12 @@ public class SystemManager implements SystemFacade {
 		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, 
 				   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
 	}
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException {
-		this.persistenceManager.setPassword(oldPassword, newPassword);
-	}
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException {
+//		this.persistenceManager.setPassword(oldPassword, newPassword);
+//	}
 
 	/**
 	 * {@inheritDoc}
@@ -215,5 +215,9 @@ public class SystemManager implements SystemFacade {
 	 */
 	public List<String> listEstados() {
 		return this.listingManager.getEstados();
+	}
+	@Override
+	public Administrador doLogin(String login, String password) throws PermissionDaniedException {		
+		return this.persistenceManager.doLogin(login, password);
 	}
 }

@@ -9,15 +9,48 @@ import org.hibernate.classic.Session;
 import beans.Administrador;
 import exceptions.AdministradorNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
+import exceptions.PermissionDaniedException;
 
 public class AdministradorHibernateDAO extends HibernateDAO implements AdministradorDAO{	
 	
 	public AdministradorHibernateDAO(boolean testing){
 		super(testing);
-	}
+		createRootIfNeeded();
+	}	
 
 	public AdministradorHibernateDAO(){
 		super(false);
+		createRootIfNeeded();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Administrador> getRoots(){
+		Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.getNamedQuery("getRoots");
+        query.setBoolean("true", true);
+        List<Administrador> roots = query.list();
+        transaction.commit();
+        session.close();
+        return roots;
+	}	
+	
+	@Override
+	public void createRootIfNeeded() {		
+        List<Administrador> roots = getRoots();
+        if(roots.size() == 0){
+            try {
+				saveAdministrador(new Administrador("root", "root", "Root"));
+			} catch (LoginAlreadyRegisteredException e) {
+//				try {
+//					double randon= Math.random();
+//					saveAdministrador(new Administrador("root" + randon, "root", "Root"));
+//				} catch (LoginAlreadyRegisteredException e1) {
+//					createRootIfNeeded();
+//				}
+			}
+        }        
+		
 	}
 	
 	@Override
@@ -25,7 +58,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 		try {
 			getAdministrador(admin.getLogin());
 			throw new LoginAlreadyRegisteredException();
-		} catch (AdministradorNotFoundException e) {}
+		} catch (AdministradorNotFoundException e) {}		
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();		
 		session.save(admin);
@@ -34,8 +67,14 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 	}
 	
 	@Override
-	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException {
+	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException {
 		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
+		if(admin.isRoot()){
+			List<Administrador> roots = getRoots();
+			if(roots.size() == 1){
+				throw new PermissionDaniedException();
+			}
+		}
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.delete(admin);
