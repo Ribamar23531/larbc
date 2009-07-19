@@ -37,7 +37,7 @@ public class MailSender {
 		properties.put("mail.smtp.starttls.enable",true);   
 		properties.put("mail.smtp.host", "smtp.gmail.com");  
 		properties.put("mail.smtp.auth", true);  
-		properties.put("mail.smtp.user", "joaofso@gmail.com");  
+		properties.put("mail.smtp.user", "larbc.application@gmail.com");  
 		properties.put("mail.debug", true);  
 		properties.put("mail.smtp.port", 465);  
 		properties.put("mail.smtp.socketFactory.port", 465);  
@@ -47,7 +47,7 @@ public class MailSender {
 	}
 
 	public void sendMail(String to, String subject, String message){
-		Session session = Session.getDefaultInstance(this.mailProperties, new SimpleAuth("joaofso@gmail.com", "bowser"));
+		Session session = Session.getDefaultInstance(this.mailProperties, new SimpleAuth("larbc.application@gmail.com", "soutomaior"));
 		try {
 			MimeMessage mailMessage = new MimeMessage(session);
 			mailMessage.setRecipients(Message.RecipientType.TO, to);

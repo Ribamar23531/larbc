@@ -2,6 +2,7 @@ package facade;
 
 import java.util.List;
 
+import persistence.GerenteDeEMail;
 import persistence.GerenteDeListagens;
 import persistence.GerenteDePersistencia;
 import rbcCycle.GerenteDeRBC;
@@ -22,11 +23,13 @@ public class SystemManager implements SystemFacade {
 	private GerenteDePersistencia persistenceManager;
 	private GerenteDeRBC rbcManager;
 	private GerenteDeListagens listingManager;
+	private GerenteDeEMail mailManager;
 	
 	public SystemManager(){
 		this.persistenceManager = new GerenteDePersistencia();
 		this.rbcManager = new GerenteDeRBC(false);
 		this.listingManager = new GerenteDeListagens();
+		this.mailManager = new GerenteDeEMail();
 	}
 	@Override
 	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
@@ -135,6 +138,7 @@ public class SystemManager implements SystemFacade {
 	 */
 	public void saveDemanda(Demanda demand) {
 		this.persistenceManager.saveDemanda(demand);
+		this.mailManager.sendMail(demand);
 	}
 
 	/**
