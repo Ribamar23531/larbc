@@ -248,15 +248,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void setAdminPassword(String oldAdminPassword,
-			String newAdminPassword) {
-		try {
-			this.getSystemFacade().setAdministrationPassword(oldAdminPassword, newAdminPassword);
-		} catch (PermissionDaniedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void setAdminPassword(String oldAdminPassword,
+//			String newAdminPassword) {
+//		try {
+//			this.getSystemFacade().setAdministrationPassword(oldAdminPassword, newAdminPassword);
+//		} catch (PermissionDaniedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 
 	public void updateAdministrador(AdminBean adminToUpdate,
@@ -311,17 +311,27 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 	}
 
-
-	public String verifyAdministrador(String login, String password) {
+	public AdminBean doLogin(String login, String password) {
+		AdminBean adminBean = null;
 		try {
-			this.getSystemFacade().verifyAdministrador(login, password);
+			Administrador admin = this.getSystemFacade().doLogin(login, password);
+			adminBean = getAdminBean(admin);
 		} catch (PermissionDaniedException e) {
-			return "NOT OK";
-		} catch (AdministradorNotFoundException e) {
-			return "NOT OK";
+			return null;
 		}
-		return "OK";
+		return adminBean;
 	}
+
+//	public String verifyAdministrador(String login, String password) {
+//		try {
+//			this.getSystemFacade().verifyAdministrador(login, password);
+//		} catch (PermissionDaniedException e) {
+//			return "NOT OK";
+//		} catch (AdministradorNotFoundException e) {
+//			return "NOT OK";
+//		}
+//		return "OK";
+//	}
 
 //=== Conversors ===	
 	
@@ -445,17 +455,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		result.setIdCaso(foto.getIdCaso());
 		result.setPath(foto.getPath());
 		return result;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 }
