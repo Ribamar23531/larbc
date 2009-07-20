@@ -78,7 +78,7 @@ public class MailSender {
 
 
 	public static void main(String[] args) {
-		String to = "ourixilva@gmail.com";
+		String to = "joaofso@gmail.com";
 		String subject = "Testing";
 		String message = "Hello fuckin' World";
 		
