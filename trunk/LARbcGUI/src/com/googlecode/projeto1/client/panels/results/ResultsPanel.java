@@ -35,7 +35,10 @@ public class ResultsPanel extends Panel{
 			public void onClick(Button button, EventObject e) {  
 				MessageBox.confirm("Confirmacao", "Voce deseja enviar essas informacoes para o administrador?",  
 						new MessageBox.ConfirmCallback() {  
-					public void execute(String btnID) {  
+					public void execute(String btnID) {
+						if(btnID.equals("yes")){
+							new ContactWindow().show();
+						}
 						System.out.println("Button Click : " +  
 								Format.format("You clicked the {0} button", btnID));  
 					}  

@@ -1,10 +1,14 @@
 package com.googlecode.projeto1.client.panels.modality;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.panels.Util;
+import com.googlecode.projeto1.client.panels.demands.DemandSellerPanel;
+import com.googlecode.projeto1.client.panels.query.QueryPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.ColumnLayout;
 
@@ -29,7 +33,7 @@ public class CenterModalityPanel extends Panel{
 		this.p2 = new Panel();
 		this.isSelectedVenderButton = false;
 		this.isSelectedComprarButton = false;
-		buttonsPanel = new Panel();
+		buttonsPanel = new Panel();		
 		buttonsComprarPanel = new Panel();
 		createVenderButton();
 		createComprarButton();
@@ -67,6 +71,13 @@ public class CenterModalityPanel extends Panel{
 				isSelectedComprarButton = false;
 				rebuildComprarPanel();				
 			}			
+			
+		});
+		selectedComprarButton.addClickListener(new ClickListener(){
+
+			public void onClick(Widget arg0) {
+				PanelSwitcher.switchPanel(new QueryPanel());				
+			}
 			
 		});
 		
@@ -126,6 +137,15 @@ public class CenterModalityPanel extends Panel{
 				isSelectedVenderButton = false;
 				rebuildPanel();				
 			}			
+			
+			
+		});
+		
+		selectedVenderButton.addClickListener(new ClickListener(){
+
+			public void onClick(Widget arg0) {
+				PanelSwitcher.switchPanel(new DemandSellerPanel());				
+			}
 			
 		});
 		

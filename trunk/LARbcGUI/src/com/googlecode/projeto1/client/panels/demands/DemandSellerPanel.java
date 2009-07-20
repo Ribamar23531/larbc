@@ -99,7 +99,7 @@ public class DemandSellerPanel extends Panel{
 		rootPanel.add(lblCidade, 17, 166);
 		lblCidade.setSize("61px", "18px");
 		
-		//Nome do imovel
+		//Nome 
 		textNome = new TextBox();
 		rootPanel.add(textNome, 55, 194);
 		textNome.setSize("265px", "21px");
@@ -249,48 +249,44 @@ public class DemandSellerPanel extends Panel{
 		});
 		selectedCadastrarButton.addClickListener(new ClickListener(){
 			public void onClick(Widget arg0) {
-				selectedCadastrarButton.addClickListener(new ClickListener(){
-					public void onClick(Widget arg0) {
-						street = textRua.getText();
-						neighborhood = textBairro.getText();
-						city = textCidade.getText();
-						name = textNome.getText();
-						builtArea = Float.parseFloat(textAreaConstruida.getText());
-						garageSpace = Integer.parseInt(textGaragem.getText());
-						bathroom = Integer.parseInt(textBanheiros.getText());
-//						type;
-						price = Float.parseFloat(textPreco.getText());
-//						businessType;
-//						state;
-						totalArea = Float.parseFloat(textAreaTotal.getText());
-						suite = Integer.parseInt(textSuites.getText());
-						bedroom = Integer.parseInt(textQuartos.getText());
-						email = textEmail.getText();
-						telefone = textTelefone.getText();
-						DemandBean demanda = new DemandBean();
-						demanda.setAreaConstruida(builtArea);
-						demanda.setAreaTotal(totalArea);
-						demanda.setBairro(neighborhood);
-						demanda.setBanheiros(bathroom);
-						demanda.setCidade(city);
-						demanda.setEmailCliente(email);
-						demanda.setNome(name);
-						demanda.setTelefone(telefone);
-						demanda.setRua(street);
-						demanda.setSuites(suite);
-						demanda.setQuartos(bedroom);
-						demanda.setVagasGaragem(garageSpace);
-						demanda.setPreco(price);
-						PERSISTENCE_SERVICE.saveDemanda(demanda, new AsyncCallback<String>() {
+				street = textRua.getText();
+				neighborhood = textBairro.getText();
+				city = textCidade.getText();
+				name = textNome.getText();
+				builtArea = Float.parseFloat(textAreaConstruida.getText());
+				garageSpace = Integer.parseInt(textGaragem.getText());
+				bathroom = Integer.parseInt(textBanheiros.getText());
+				//						type;
+				price = Float.parseFloat(textPreco.getText());
+				//						businessType;
+				//						state;
+				totalArea = Float.parseFloat(textAreaTotal.getText());
+				suite = Integer.parseInt(textSuites.getText());
+				bedroom = Integer.parseInt(textQuartos.getText());
+				email = textEmail.getText();
+				telefone = textTelefone.getText();
+				DemandBean demanda = new DemandBean();
+				demanda.setAreaConstruida(builtArea);
+				demanda.setAreaTotal(totalArea);
+				demanda.setBairro(neighborhood);
+				demanda.setBanheiros(bathroom);
+				demanda.setCidade(city);
+				demanda.setEmailCliente(email);
+				demanda.setNomeCliente(name);
+				demanda.setTelefone(telefone);
+				demanda.setRua(street);
+				demanda.setSuites(suite);
+				demanda.setQuartos(bedroom);
+				demanda.setVagasGaragem(garageSpace);
+				demanda.setPreco(price);
+				PERSISTENCE_SERVICE.saveDemanda(demanda, new AsyncCallback<String>() {
 
-							public void onFailure(Throwable arg0) {
-								MessageBox.alert("O cadastro nao pode ser relizado.");								
-							}
+					public void onFailure(Throwable arg0) {
+						MessageBox.alert("O cadastro nao pode ser relizado.");								
+					}
 
-							public void onSuccess(String arg0) {
-								MessageBox.alert("Cadastro realizado com sucesso.");								
-							}
-						});
+					public void onSuccess(String arg0) {
+						MessageBox.alert("Cadastro realizado com sucesso.");								
 					}
 				});
 			}

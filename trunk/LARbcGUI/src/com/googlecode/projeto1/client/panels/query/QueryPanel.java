@@ -29,7 +29,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
  */
 public class QueryPanel extends Panel{
 	
-	private AbsolutePanel rootPanel;
+	private AbsolutePanel queryPanel;
 	private Image pesquisarButton;
 	private Image selectedPesquisarButton;
 	private boolean isSelectedPesquisarButton;
@@ -65,10 +65,10 @@ public class QueryPanel extends Panel{
 	private List<CaseBean> cases;
 	
 	public QueryPanel(){
-		rootPanel = new AbsolutePanel();
-		rootPanel.setSize("809px", "546px");
+		queryPanel = new AbsolutePanel();
+		queryPanel.setSize("809px", "546px");
 		VerticalPanel verticalPanel = new VerticalPanel();
-		rootPanel.add(verticalPanel, 0, 0);
+		queryPanel.add(verticalPanel, 0, 0);
 		verticalPanel.setSize("440px", "59px");
 		Image image = new Image("images/larbc.png");
 		verticalPanel.add(image);
@@ -76,89 +76,89 @@ public class QueryPanel extends Panel{
 		
 		//Nome da Rua
 		textRua = new TextBox();
-		rootPanel.add(textRua, 91, 111);
+		queryPanel.add(textRua, 91, 111);
 		textRua.setSize("278px", "21px");
 		Label rua = new Label("Nome da Rua:");
-		rootPanel.add(rua, 17, 114);
+		queryPanel.add(rua, 17, 114);
 		rua.setSize("127px", "18px");
 		
 		//Bairro
 		textBairro = new TextBox();
-		rootPanel.add(textBairro, 59, 137);
+		queryPanel.add(textBairro, 59, 137);
 		textBairro.setSize("265px", "21px");
 		Label lblBairro = new Label("Bairro:");
-		rootPanel.add(lblBairro, 17, 140);
+		queryPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("61px", "18px");
 		
 		//Cidade
 		textCidade = new TextBox();
-		rootPanel.add(textCidade, 60, 163);
+		queryPanel.add(textCidade, 60, 163);
 		textCidade.setSize("224px", "21px");
 		Label lblCidade = new Label("Cidade:");
-		rootPanel.add(lblCidade, 17, 166);
+		queryPanel.add(lblCidade, 17, 166);
 		lblCidade.setSize("61px", "18px");
 		
 		//Nome do imovel
 		textNome = new TextBox();
-		rootPanel.add(textNome, 55, 194);
+		queryPanel.add(textNome, 100, 194);
 		textNome.setSize("265px", "21px");
-		Label lblNome = new Label("Nome:");
-		rootPanel.add(lblNome, 17, 197);
-		lblNome.setSize("61px", "18px");
+		Label lblNome = new Label("Nome do imovel:");
+		queryPanel.add(lblNome, 17, 197);
+		lblNome.setSize("100px", "18px");
 		
 		//Area construida
 		textAreaConstruida = new TextBox();
-		rootPanel.add(textAreaConstruida, 108, 222);
+		queryPanel.add(textAreaConstruida, 108, 222);
 		textAreaConstruida.setSize("108px", "21px");
 		Label lblreaConstruda = new Label("Area Construida:");
-		rootPanel.add(lblreaConstruda, 17, 225);
+		queryPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("127px", "18px");
 		
 		//Vagas na garagem
 		textGaragem = new TextBox();
-		rootPanel.add(textGaragem, 121, 248);
+		queryPanel.add(textGaragem, 121, 248);
 		textGaragem.setSize("146px", "21px");
 		Label lblVagasNaGaragem = new Label("Vagas na Garagem:");
-		rootPanel.add(lblVagasNaGaragem, 17, 251);
+		queryPanel.add(lblVagasNaGaragem, 17, 251);
 		lblVagasNaGaragem.setSize("167px", "18px");
 		
 		//Quartos
 		textQuartos = new TextBox();
-		rootPanel.add(textQuartos, 63, 277);
+		queryPanel.add(textQuartos, 63, 277);
 		textQuartos.setSize("78px", "21px");
 		Label lblQuartos = new Label("Quartos:");
-		rootPanel.add(lblQuartos, 17, 280);
+		queryPanel.add(lblQuartos, 17, 280);
 		lblQuartos.setSize("75px", "18px");
 		
 		//Tipo de imovel
 		comboTipo = new ListBox();
-		rootPanel.add(comboTipo, 98, 329);
+		queryPanel.add(comboTipo, 98, 329);
 		comboTipo.setSize("205px", "21px");	
 		Label lblTipoDeImvel = new Label("Tipo de imovel:");
-		rootPanel.add(lblTipoDeImvel, 17, 334);
+		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
 		
 		//Preco do imovel
 		textPreco = new TextBox();
-		rootPanel.add(textPreco, 120, 361);
+		queryPanel.add(textPreco, 120, 361);
 		textPreco.setSize("146px", "21px");		
 		Label lblPreoEmTorno = new Label("Preco em torno de:");
-		rootPanel.add(lblPreoEmTorno, 17, 364);
+		queryPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("151px", "24px");
 		
 		//Tipo de negocio
 		listTipoNegocio = new ListBox();
-		rootPanel.add(listTipoNegocio, 108, 387);
+		queryPanel.add(listTipoNegocio, 108, 387);
 		listTipoNegocio.setSize("166px", "21px");
 		listTipoNegocio.addItem("Comprar");
 		listTipoNegocio.addItem("Alugar");
 		Label lblTipoDeNegcio = new Label("Tipo de negocio:");
-		rootPanel.add(lblTipoDeNegcio, 17, 392);
+		queryPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("151px", "24px");
 		
 		//Estado
 		listEstado = new ListBox();
-		rootPanel.add(listEstado, 312, 160);
+		queryPanel.add(listEstado, 312, 160);
 		listEstado.setSize("57px", "21px");
 		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
 			
@@ -174,44 +174,44 @@ public class QueryPanel extends Panel{
 			}
 		});
 		Label lblUf = new Label("UF:");
-		rootPanel.add(lblUf, 292, 165);
+		queryPanel.add(lblUf, 292, 165);
 		lblUf.setSize("34px", "18px");
 		
 		//Area total
 		textAreaTotal = new TextBox();
-		rootPanel.add(textAreaTotal, 290, 222);
+		queryPanel.add(textAreaTotal, 290, 222);
 		textAreaTotal.setSize("108px", "21px");
 		Label lblreaTotal = new Label("Area Total:");
-		rootPanel.add(lblreaTotal, 226, 225);
+		queryPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("91px", "18px");
 		
 		//Suites
 		textSuites = new TextBox();
-		rootPanel.add(textSuites, 197, 277);
+		queryPanel.add(textSuites, 197, 277);
 		textSuites.setSize("78px", "21px");
 		Label lblSutes = new Label("Suites:");
-		rootPanel.add(lblSutes, 156, 280);
+		queryPanel.add(lblSutes, 156, 280);
 		lblSutes.setSize("57px", "18px");
 
 		//Banheiros
 		textBanheiros = new TextBox();
-		rootPanel.add(textBanheiros, 113, 303);
+		queryPanel.add(textBanheiros, 113, 303);
 		textBanheiros.setSize("78px", "21px");
 		Label lblBanheirosSociais = new Label("Banheiros Sociais:");
-		rootPanel.add(lblBanheirosSociais, 17, 306);
+		queryPanel.add(lblBanheirosSociais, 17, 306);
 		lblBanheirosSociais.setSize("151px", "24px");
 		
 		Image image1 = new Image("images/familia.png");
-		rootPanel.add(image1, 463, 96);
+		queryPanel.add(image1, 463, 96);
 		image1.setSize("193px", "300px");
 		
 		createEntrarButton();
 
 		Label lblPesquisaDeImoveis = new Label("PESQUISA DE IMOVEIS");
-		rootPanel.add(lblPesquisaDeImoveis, 17, 76);
+		queryPanel.add(lblPesquisaDeImoveis, 17, 76);
 		lblPesquisaDeImoveis.setSize("151px", "13px");
 		
-		this.add(rootPanel);
+		this.add(queryPanel);
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
 	}
@@ -281,9 +281,9 @@ public class QueryPanel extends Panel{
 	
 	private void buildButtonsPanel() {
 		if(!isSelectedPesquisarButton){
-			rootPanel.add(pesquisarButton, 326, 423);
+			queryPanel.add(pesquisarButton, 326, 423);
 		}else{
-			rootPanel.add(selectedPesquisarButton, 326, 423);
+			queryPanel.add(selectedPesquisarButton, 326, 423);
 		}
 	}
 
