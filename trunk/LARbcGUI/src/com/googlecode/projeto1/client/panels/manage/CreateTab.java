@@ -1,5 +1,7 @@
 package com.googlecode.projeto1.client.panels.manage;
 
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -8,7 +10,8 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.projeto1.client.beans.AdminBean;
+import com.googlecode.projeto1.client.LoginManager;
+import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
@@ -17,9 +20,8 @@ import com.gwtext.client.widgets.form.Label;
 
 public class CreateTab extends AbsolutePanel{
 	
-	private static final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
-	
-	private AdminBean admin;
+	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
+		
 	private TextBox cityTextBox;
 	private TextBox neighborhoodTextBox;
 	private TextBox numberTextBox;
@@ -36,9 +38,8 @@ public class CreateTab extends AbsolutePanel{
 	private TextBox priceTextBox;
 	private Button criarButton;
 	
-	public CreateTab(AdminBean admin){
-		super();
-		this.admin = admin;
+	public CreateTab(){
+		super();		
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);
@@ -81,6 +82,19 @@ public class CreateTab extends AbsolutePanel{
 		}
 		{
 			stateListBox = new ListBox();
+			PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
+				
+				public void onSuccess(List<String> states) {
+					for (String state : states) {
+						stateListBox.addItem(state);
+					}
+				}
+				
+				public void onFailure(Throwable arg0) {
+					MessageBox.alert("Os estados n�o puderam ser carregados do disco");
+					
+				}
+			});
 			this.add(stateListBox, 374, 5);
 			stateListBox.setSize("49px", "27px");
 		}
@@ -194,7 +208,7 @@ public class CreateTab extends AbsolutePanel{
 //				caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
 				caseBean.setType("type");
 				caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));				
-				PERSISTENCE_SERVICE.crateCaso(admin, caseBean, new AsyncCallback<String>() {
+				PERSISTENCE_SERVICE.crateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
 
 					public void onFailure(Throwable arg0) {
 						MessageBox.alert("Houveram problemas durante o armazenamento desse caso.");
@@ -203,6 +217,7 @@ public class CreateTab extends AbsolutePanel{
 
 					public void onSuccess(String arg0) {
 						MessageBox.alert("Caso armazenado com sucesso");
+						PanelSwitcher.switchPanel(new ManagePanel());
 //						cityTextBox.setText("");
 //						neighborhoodTextBox.setText("");
 //						numberTextBox.setText("");
