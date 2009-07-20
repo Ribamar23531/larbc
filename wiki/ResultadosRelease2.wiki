@@ -13,3 +13,4 @@ As funcionalidades de nosso sistema que foram demonstradas para a professora Jos
        * O usuário pode cadastrar um imóvel para para vender através da imobiliária (esse cadastro será armazenado como demanda e um e-mail de alerta será enviado para o administrador)
 
 O Bigchart atual pode ser acessado [BigChart aqui].
+Um documento, que está disponível [http://larbc.googlecode.com/files/Caso%20de%20Uso%20da%20Ferramenta.doc aqui], descreve algumas funcionalidades do sistema através de capturas de tela.
