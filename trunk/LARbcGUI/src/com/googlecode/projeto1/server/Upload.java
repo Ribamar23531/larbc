@@ -13,6 +13,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import facade.SystemManager;
+
 /**
  * Servlet implementation class for Servlet: Upload
  *
@@ -21,6 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
    static final long serialVersionUID = 1L;
    private final String PATH_SEPARATOR = File.separator;
    private final String FILES_DIRECTORY = "filesUploaded";
+   private final SystemManager FACADE = new SystemManager(); 
    
     /* (non-Java-doc)
 	 * @see javax.servlet.http.HttpServlet#HttpServlet()
@@ -61,8 +64,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 			File directoryFile = new File(directory);
 			directoryFile.mkdirs();
 			String fileName = new Integer(numberOfFiles(directory)).toString() + "." + fileExtension;
-			File fileToSave = new File(directory + PATH_SEPARATOR + fileName);
+			String fotoCasoPath = directory + PATH_SEPARATOR + fileName;
+			File fileToSave = new File(fotoCasoPath);
 			fileToPersist.write(fileToSave);
+			FACADE.saveFoto(FACADE.getCaso(new Long(idCaso)), fotoCasoPath);
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
