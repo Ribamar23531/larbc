@@ -1,5 +1,9 @@
 package com.googlecode.projeto1.client.panels.query;
 
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
@@ -10,8 +14,12 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.PanelSwitcher;
+import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.Util;
-import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
+import com.googlecode.projeto1.client.panels.results.ResultsPanel;
+import com.googlecode.projeto1.client.rpcServices.PersistenceService;
+import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.FitLayout;
 
@@ -25,6 +33,36 @@ public class QueryPanel extends Panel{
 	private Image pesquisarButton;
 	private Image selectedPesquisarButton;
 	private boolean isSelectedPesquisarButton;
+	private String street;
+	private String neighborhood;
+	private String city;
+	private String name;
+	private float builtArea;
+	private int garageSpace;
+	private int bathroom;
+	private String type;
+	private float price;
+	private int businessType;
+	private String state;
+	private float totalArea;
+	private int suite;
+	private int bedroom;
+	private TextBox textRua;
+	private TextBox textBairro;
+	private TextBox textCidade;
+	private TextBox textNome;
+	private TextBox textAreaConstruida;
+	private TextBox textGaragem;
+	private TextBox textQuartos;
+	private ListBox comboTipo;
+	private TextBox textPreco;
+	private ListBox listTipoNegocio;
+	private ListBox listEstado;
+	private TextBox textAreaTotal;
+	private TextBox textSuites;
+	private TextBox textBanheiros;
+	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
+	private List<CaseBean> cases;
 	
 	public QueryPanel(){
 		rootPanel = new AbsolutePanel();
@@ -37,113 +75,128 @@ public class QueryPanel extends Panel{
 		image.setSize("70%", "100%");
 		
 		//Nome da Rua
-		TextBox textBox = new TextBox();
-		rootPanel.add(textBox, 91, 111);
-		textBox.setSize("278px", "21px");
+		textRua = new TextBox();
+		rootPanel.add(textRua, 91, 111);
+		textRua.setSize("278px", "21px");
 		Label rua = new Label("Nome da Rua:");
 		rootPanel.add(rua, 17, 114);
 		rua.setSize("127px", "18px");
 		
 		//Bairro
-		TextBox textBox1 = new TextBox();
-		rootPanel.add(textBox1, 59, 137);
-		textBox1.setSize("265px", "21px");
+		textBairro = new TextBox();
+		rootPanel.add(textBairro, 59, 137);
+		textBairro.setSize("265px", "21px");
 		Label lblBairro = new Label("Bairro:");
 		rootPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("61px", "18px");
 		
 		//Cidade
-		TextBox textBox2 = new TextBox();
-		rootPanel.add(textBox2, 60, 163);
-		textBox2.setSize("224px", "21px");
+		textCidade = new TextBox();
+		rootPanel.add(textCidade, 60, 163);
+		textCidade.setSize("224px", "21px");
 		Label lblCidade = new Label("Cidade:");
 		rootPanel.add(lblCidade, 17, 166);
 		lblCidade.setSize("61px", "18px");
 		
 		//Nome do imovel
-		TextBox textBox3 = new TextBox();
-		rootPanel.add(textBox3, 55, 194);
-		textBox3.setSize("265px", "21px");
+		textNome = new TextBox();
+		rootPanel.add(textNome, 55, 194);
+		textNome.setSize("265px", "21px");
 		Label lblNome = new Label("Nome:");
 		rootPanel.add(lblNome, 17, 197);
 		lblNome.setSize("61px", "18px");
 		
 		//Area construida
-		TextBox textBox4 = new TextBox();
-		rootPanel.add(textBox4, 108, 222);
-		textBox4.setSize("108px", "21px");
+		textAreaConstruida = new TextBox();
+		rootPanel.add(textAreaConstruida, 108, 222);
+		textAreaConstruida.setSize("108px", "21px");
 		Label lblreaConstruda = new Label("Area Construida:");
 		rootPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("127px", "18px");
 		
 		//Vagas na garagem
-		TextBox textBox5 = new TextBox();
-		rootPanel.add(textBox5, 121, 248);
-		textBox5.setSize("146px", "21px");
+		textGaragem = new TextBox();
+		rootPanel.add(textGaragem, 121, 248);
+		textGaragem.setSize("146px", "21px");
 		Label lblVagasNaGaragem = new Label("Vagas na Garagem:");
 		rootPanel.add(lblVagasNaGaragem, 17, 251);
 		lblVagasNaGaragem.setSize("167px", "18px");
 		
 		//Quartos
-		TextBox textBox6 = new TextBox();
-		rootPanel.add(textBox6, 63, 277);
-		textBox6.setSize("78px", "21px");
+		textQuartos = new TextBox();
+		rootPanel.add(textQuartos, 63, 277);
+		textQuartos.setSize("78px", "21px");
 		Label lblQuartos = new Label("Quartos:");
 		rootPanel.add(lblQuartos, 17, 280);
 		lblQuartos.setSize("75px", "18px");
 		
 		//Tipo de imovel
-		ListBox comboBox = new ListBox();
-		rootPanel.add(comboBox, 98, 329);
-		comboBox.setSize("205px", "21px");		
+		comboTipo = new ListBox();
+		rootPanel.add(comboTipo, 98, 329);
+		comboTipo.setSize("205px", "21px");	
 		Label lblTipoDeImvel = new Label("Tipo de imovel:");
 		rootPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
 		
 		//Preco do imovel
-		TextBox textBox7 = new TextBox();
-		rootPanel.add(textBox7, 120, 361);
-		textBox7.setSize("146px", "21px");		
+		textPreco = new TextBox();
+		rootPanel.add(textPreco, 120, 361);
+		textPreco.setSize("146px", "21px");		
 		Label lblPreoEmTorno = new Label("Preco em torno de:");
 		rootPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("151px", "24px");
 		
 		//Tipo de negocio
-		ListBox listBox = new ListBox();
-		rootPanel.add(listBox, 108, 387);
-		listBox.setSize("166px", "21px");		
+		listTipoNegocio = new ListBox();
+		rootPanel.add(listTipoNegocio, 108, 387);
+		listTipoNegocio.setSize("166px", "21px");
+		listTipoNegocio.addItem("Comprar");
+		listTipoNegocio.addItem("Alugar");
 		Label lblTipoDeNegcio = new Label("Tipo de negocio:");
 		rootPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("151px", "24px");
 		
 		//Estado
-		ListBox listBox1 = new ListBox();
-		rootPanel.add(listBox1, 312, 160);
-		listBox1.setSize("57px", "21px");
+		listEstado = new ListBox();
+		rootPanel.add(listEstado, 312, 160);
+		listEstado.setSize("57px", "21px");
+		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
+			
+			public void onSuccess(List<String> states) {
+				for (String state : states) {
+					listEstado.addItem(state);
+				}
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Os estados não puderam ser carregados do disco");
+				
+			}
+		});
 		Label lblUf = new Label("UF:");
 		rootPanel.add(lblUf, 292, 165);
 		lblUf.setSize("34px", "18px");
 		
 		//Area total
-		TextBox textBox8 = new TextBox();
-		rootPanel.add(textBox8, 290, 222);
-		textBox8.setSize("108px", "21px");
+		textAreaTotal = new TextBox();
+		rootPanel.add(textAreaTotal, 290, 222);
+		textAreaTotal.setSize("108px", "21px");
 		Label lblreaTotal = new Label("Area Total:");
 		rootPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("91px", "18px");
 		
 		//Suites
-		TextBox textBox9 = new TextBox();
-		rootPanel.add(textBox9, 197, 277);
-		textBox9.setSize("78px", "21px");
+		textSuites = new TextBox();
+		rootPanel.add(textSuites, 197, 277);
+		textSuites.setSize("78px", "21px");
 		Label lblSutes = new Label("Suites:");
 		rootPanel.add(lblSutes, 156, 280);
 		lblSutes.setSize("57px", "18px");
 
 		//Banheiros
-		TextBox textBox10 = new TextBox();
-		rootPanel.add(textBox10, 113, 303);
-		textBox10.setSize("78px", "21px");
+		textBanheiros = new TextBox();
+		rootPanel.add(textBanheiros, 113, 303);
+		textBanheiros.setSize("78px", "21px");
 		Label lblBanheirosSociais = new Label("Banheiros Sociais:");
 		rootPanel.add(lblBanheirosSociais, 17, 306);
 		lblBanheirosSociais.setSize("151px", "24px");
@@ -189,12 +242,41 @@ public class QueryPanel extends Panel{
 		});
 		selectedPesquisarButton.addClickListener(new ClickListener(){
 			public void onClick(Widget arg0) {
-				PanelSwitcher.switchPanel(new ModalityPanel());
+				street = textRua.getText();
+				neighborhood = textBairro.getText();
+				city = textCidade.getText();
+				name = textNome.getText();
+				builtArea = Float.parseFloat(textAreaConstruida.getText());
+				garageSpace = Integer.parseInt(textGaragem.getText());
+				bathroom = Integer.parseInt(textBanheiros.getText());
+//				type;
+				price = Float.parseFloat(textPreco.getText());
+//				businessType;
+//				state;
+				totalArea = Float.parseFloat(textAreaTotal.getText());
+				suite = Integer.parseInt(textSuites.getText());
+				bedroom = Integer.parseInt(textQuartos.getText());
+				PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType, new AsyncCallback<List<CaseBean>>() {
+					
+					public void onSuccess(List<CaseBean> arg0) {
+						PanelSwitcher.switchPanel(new ResultsPanel(arg0));
+						
+					}
+					
+					public void onFailure(Throwable arg0) {
+						MessageBox.alert("A consulta não pode ser realizada.");
+						
+					}
+				});
 			}
 		});
 		
 		buildButtonsPanel();
 		
+	}
+	
+	public List<CaseBean> getCases(){
+		return cases;
 	}
 	
 	private void buildButtonsPanel() {

@@ -1,32 +1,33 @@
 package com.googlecode.projeto1.client.panels.results;
 
+import java.util.List;
+
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.Util;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.util.Format;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.layout.ColumnLayoutData;
-import com.gwtext.client.core.EventObject;  
 
 public class ResultsPanel extends Panel{
 	
-	private VerticalPanel vp;
+	private VerticalPanel vp;	
 	
-	public ResultsPanel(){
-		super();
+	public ResultsPanel(List<CaseBean> cases){
+		super();		
 		vp = new VerticalPanel();
 		this.setFrame(true);
 		vp.add(Util.createImage(Util.LARBC_IMAGE_PATH));
 		vp.add(Util.createImage(Util.IMMOBILE_IMAGE_PATH));
-		vp.add(new CasePanel());
-		vp.add(new CasePanel());
-		vp.add(new CasePanel());
-		vp.add(new CasePanel());
-		vp.add(new CasePanel());
-		vp.add(new CasePanel());
-		vp.add(new CasePanel());
+		int index = 1;
+		for (CaseBean caseBean : cases) {
+			vp.add(new CasePanel(caseBean, index));
+			index++;
+		}				
 //		Button button = new ButtonListenerAdapter();
 
 		this.add(vp, new ColumnLayoutData(50));
