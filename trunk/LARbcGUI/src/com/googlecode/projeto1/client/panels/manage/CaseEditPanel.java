@@ -40,8 +40,14 @@ public class CaseEditPanel extends CaptionPanel{
 		Label precoLabel = new Label("Preço: " + myCaseBean.getPrice());
 		absolutePanel.add(precoLabel, 5, 57);
 
-		Button editarButton = new Button("New button");
-		editarButton.setText("Editar");
+		Button editarButton = new Button("Editar");
+		editarButton.addClickListener(new ClickListener() {
+			
+			public void onClick(Widget arg0) {
+				new EditWindow(myCaseBean).show();
+				
+			}
+		});		
 		absolutePanel.add(editarButton, 338, 74);
 		
 		Button removeButton = new Button("Remover");
