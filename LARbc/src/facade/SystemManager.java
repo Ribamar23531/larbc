@@ -216,6 +216,10 @@ public class SystemManager implements SystemFacade {
 	public List<String> listEstados() {
 		return this.listingManager.getEstados();
 	}
+
+	public Caso getCaso(long idCaso) throws CasoNotFoundException {
+		return this.persistenceManager.getCaso(idCaso);
+	}
 	@Override
 	public Administrador doLogin(String login, String password) throws PermissionDaniedException {		
 		return this.persistenceManager.doLogin(login, password);
