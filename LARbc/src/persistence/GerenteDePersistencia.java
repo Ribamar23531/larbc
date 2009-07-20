@@ -124,10 +124,7 @@ public class GerenteDePersistencia {
 		return casoDAO.getCasos(idAdministrador);
 	}
 	
-	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{
-		if(admin.getLogin().equals("admin")){
-			
-		}
+	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException{		
 		getAdministrador(admin.getLogin());//testa se o administrador existe
 		caso.setIdAdministradorResponsavel(admin.getIdAdministrador());
 		saveCaso(caso);
