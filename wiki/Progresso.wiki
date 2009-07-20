@@ -24,5 +24,4 @@
    *  [ResultadosRelease1 Resultados]
 
  *  Entrega de Release 2
-   *  [Release2 Plano]
    *  [ResultadosRelease2 Resultados]
