@@ -13,8 +13,10 @@ import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.panels.Util;
+import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
@@ -111,7 +113,7 @@ public class DemandSellerPanel extends Panel{
 		textAreaConstruida = new TextBox();
 		rootPanel.add(textAreaConstruida, 108, 222);
 		textAreaConstruida.setSize("108px", "21px");
-		Label lblreaConstruda = new Label("Area Construida:");
+		Label lblreaConstruda = new Label("Área Construída:");
 		rootPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("127px", "18px");
 		
@@ -135,7 +137,7 @@ public class DemandSellerPanel extends Panel{
 		comboTipo = new ListBox();
 		rootPanel.add(comboTipo, 98, 329);
 		comboTipo.setSize("205px", "21px");		
-		Label lblTipoDeImvel = new Label("Tipo de imovel:");
+		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		rootPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
 		
@@ -143,7 +145,7 @@ public class DemandSellerPanel extends Panel{
 		textPreco = new TextBox();
 		rootPanel.add(textPreco, 120, 361);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("Preco em torno de:");
+		Label lblPreoEmTorno = new Label("Preço em torno de:");
 		rootPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("151px", "24px");
 		
@@ -188,7 +190,7 @@ public class DemandSellerPanel extends Panel{
 		textAreaTotal = new TextBox();
 		rootPanel.add(textAreaTotal, 290, 222);
 		textAreaTotal.setSize("108px", "21px");
-		Label lblreaTotal = new Label("Area Total:");
+		Label lblreaTotal = new Label("Área Total:");
 		rootPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("91px", "18px");
 		
@@ -196,7 +198,7 @@ public class DemandSellerPanel extends Panel{
 		textSuites = new TextBox();
 		rootPanel.add(textSuites, 197, 277);
 		textSuites.setSize("78px", "21px");
-		Label lblSutes = new Label("Suites:");
+		Label lblSutes = new Label("Suítes:");
 		rootPanel.add(lblSutes, 156, 280);
 		lblSutes.setSize("57px", "18px");
 
@@ -214,7 +216,7 @@ public class DemandSellerPanel extends Panel{
 		
 		createEntrarButton();
 
-		Label lblPesquisaDeImoveis = new Label("CADASTRO DE IMOVEIS PARA VENDA");
+		Label lblPesquisaDeImoveis = new Label("CADASTRO DE IMÓVEIS PARA VENDA");
 		rootPanel.add(lblPesquisaDeImoveis, 17, 76);
 		lblPesquisaDeImoveis.setSize("200px", "13px");
 		
@@ -253,18 +255,69 @@ public class DemandSellerPanel extends Panel{
 				neighborhood = textBairro.getText();
 				city = textCidade.getText();
 				name = textNome.getText();
-				builtArea = Float.parseFloat(textAreaConstruida.getText());
-				garageSpace = Integer.parseInt(textGaragem.getText());
-				bathroom = Integer.parseInt(textBanheiros.getText());
-				//						type;
-				price = Float.parseFloat(textPreco.getText());
-				//						businessType;
-				//						state;
-				totalArea = Float.parseFloat(textAreaTotal.getText());
-				suite = Integer.parseInt(textSuites.getText());
-				bedroom = Integer.parseInt(textQuartos.getText());
+				String message = "Digite um valor numérico válido para: ";
+				try{
+					builtArea = Float.parseFloat(textAreaConstruida.getText());					
+				}catch(Exception e){
+					if(!textAreaConstruida.getText().equals("")){
+						MessageBox.alert(message + "Área Construída");
+						return;
+					}
+				}
+				try{
+					garageSpace = Integer.parseInt(textGaragem.getText());					
+				}catch(Exception e){
+					if(!textGaragem.getText().equals("")){
+						MessageBox.alert(message + "Vagas na garagem");
+						return;
+					}
+				}
+				try{
+					bathroom = Integer.parseInt(textBanheiros.getText());					
+				}catch(Exception e){
+					if(!textBanheiros.getText().equals("")){
+						MessageBox.alert(message + "Banheiros Sociais");
+						return;
+					}
+				}				
+				//				type;
+				try{
+					price = Float.parseFloat(textPreco.getText());
+				}catch(Exception e){
+					if(!textPreco.getText().equals("")){
+						MessageBox.alert(message + "Preço");
+						return;
+					}
+				}				
+				//				businessType;
+				//				state;
+				try{
+					totalArea = Float.parseFloat(textAreaTotal.getText());
+				}catch(Exception e){
+					if(!textAreaTotal.getText().equals("")){
+						MessageBox.alert(message + "Área Total");
+						return;
+					}
+				}
+				try{
+					suite = Integer.parseInt(textSuites.getText());
+				}catch(Exception e){
+					if(!textSuites.getText().equals("")){
+						MessageBox.alert(message + "Suítes");
+						return;
+					}
+				}	
+				try{
+					bedroom = Integer.parseInt(textQuartos.getText());
+				}catch(Exception e){
+					if(!textQuartos.getText().equals("")){
+						MessageBox.alert(message + "Quartos");
+						return;
+					}
+				}
 				email = textEmail.getText();
 				telefone = textTelefone.getText();
+//				if()
 				DemandBean demanda = new DemandBean();
 				demanda.setAreaConstruida(builtArea);
 				demanda.setAreaTotal(totalArea);
@@ -282,11 +335,12 @@ public class DemandSellerPanel extends Panel{
 				PERSISTENCE_SERVICE.saveDemanda(demanda, new AsyncCallback<String>() {
 
 					public void onFailure(Throwable arg0) {
-						MessageBox.alert("O cadastro nao pode ser relizado.");								
+						MessageBox.alert("O cadastro não pode ser relizado.");						
 					}
 
 					public void onSuccess(String arg0) {
-						MessageBox.alert("Cadastro realizado com sucesso.");								
+						MessageBox.alert("Cadastro realizado com sucesso.");
+						PanelSwitcher.switchPanel(new ModalityPanel());
 					}
 				});
 			}

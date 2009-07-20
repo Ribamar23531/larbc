@@ -102,7 +102,7 @@ public class QueryPanel extends Panel{
 		textNome = new TextBox();
 		queryPanel.add(textNome, 100, 194);
 		textNome.setSize("265px", "21px");
-		Label lblNome = new Label("Nome do imovel:");
+		Label lblNome = new Label("Nome do imóvel:");
 		queryPanel.add(lblNome, 17, 197);
 		lblNome.setSize("100px", "18px");
 		
@@ -110,7 +110,7 @@ public class QueryPanel extends Panel{
 		textAreaConstruida = new TextBox();
 		queryPanel.add(textAreaConstruida, 108, 222);
 		textAreaConstruida.setSize("108px", "21px");
-		Label lblreaConstruda = new Label("Area Construida:");
+		Label lblreaConstruda = new Label("Área Construída:");
 		queryPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("127px", "18px");
 		
@@ -134,7 +134,7 @@ public class QueryPanel extends Panel{
 		comboTipo = new ListBox();
 		queryPanel.add(comboTipo, 98, 329);
 		comboTipo.setSize("205px", "21px");	
-		Label lblTipoDeImvel = new Label("Tipo de imovel:");
+		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
 		
@@ -142,7 +142,7 @@ public class QueryPanel extends Panel{
 		textPreco = new TextBox();
 		queryPanel.add(textPreco, 120, 361);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("Preco em torno de:");
+		Label lblPreoEmTorno = new Label("Preço em torno de:");
 		queryPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("151px", "24px");
 		
@@ -152,7 +152,7 @@ public class QueryPanel extends Panel{
 		listTipoNegocio.setSize("166px", "21px");
 		listTipoNegocio.addItem("Comprar");
 		listTipoNegocio.addItem("Alugar");
-		Label lblTipoDeNegcio = new Label("Tipo de negocio:");
+		Label lblTipoDeNegcio = new Label("Tipo de negócio:");
 		queryPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("151px", "24px");
 		
@@ -181,7 +181,7 @@ public class QueryPanel extends Panel{
 		textAreaTotal = new TextBox();
 		queryPanel.add(textAreaTotal, 290, 222);
 		textAreaTotal.setSize("108px", "21px");
-		Label lblreaTotal = new Label("Area Total:");
+		Label lblreaTotal = new Label("Área Total:");
 		queryPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("91px", "18px");
 		
@@ -189,7 +189,7 @@ public class QueryPanel extends Panel{
 		textSuites = new TextBox();
 		queryPanel.add(textSuites, 197, 277);
 		textSuites.setSize("78px", "21px");
-		Label lblSutes = new Label("Suites:");
+		Label lblSutes = new Label("Suítes:");
 		queryPanel.add(lblSutes, 156, 280);
 		lblSutes.setSize("57px", "18px");
 
@@ -207,7 +207,7 @@ public class QueryPanel extends Panel{
 		
 		createEntrarButton();
 
-		Label lblPesquisaDeImoveis = new Label("PESQUISA DE IMOVEIS");
+		Label lblPesquisaDeImoveis = new Label("PESQUISA DE IMÓVEIS");
 		queryPanel.add(lblPesquisaDeImoveis, 17, 76);
 		lblPesquisaDeImoveis.setSize("151px", "13px");
 		
@@ -241,21 +241,71 @@ public class QueryPanel extends Panel{
 			
 		});
 		selectedPesquisarButton.addClickListener(new ClickListener(){
-			public void onClick(Widget arg0) {
+			public void onClick(Widget arg0) {			
 				street = textRua.getText();
 				neighborhood = textBairro.getText();
 				city = textCidade.getText();
 				name = textNome.getText();
-				builtArea = Float.parseFloat(textAreaConstruida.getText());
-				garageSpace = Integer.parseInt(textGaragem.getText());
-				bathroom = Integer.parseInt(textBanheiros.getText());
-//				type;
-				price = Float.parseFloat(textPreco.getText());
-//				businessType;
-//				state;
-				totalArea = Float.parseFloat(textAreaTotal.getText());
-				suite = Integer.parseInt(textSuites.getText());
-				bedroom = Integer.parseInt(textQuartos.getText());
+				String message = "Digite um valor numérico válido para: ";
+				try{
+					builtArea = Float.parseFloat(textAreaConstruida.getText());					
+				}catch(Exception e){
+					if(!textAreaConstruida.getText().equals("")){
+						MessageBox.alert(message + "Área Construída");
+						return;
+					}
+				}
+				try{
+					garageSpace = Integer.parseInt(textGaragem.getText());					
+				}catch(Exception e){
+					if(!textGaragem.getText().equals("")){
+						MessageBox.alert(message + "Vagas na garagem");
+						return;
+					}
+				}
+				try{
+					bathroom = Integer.parseInt(textBanheiros.getText());					
+				}catch(Exception e){
+					if(!textBanheiros.getText().equals("")){
+						MessageBox.alert(message + "Banheiros Sociais");
+						return;
+					}
+				}				
+				//				type;
+				try{
+					price = Float.parseFloat(textPreco.getText());
+				}catch(Exception e){
+					if(!textPreco.getText().equals("")){
+						MessageBox.alert(message + "Preço");
+						return;
+					}
+				}				
+				//				businessType;
+				//				state;
+				try{
+					totalArea = Float.parseFloat(textAreaTotal.getText());
+				}catch(Exception e){
+					if(!textAreaTotal.getText().equals("")){
+						MessageBox.alert(message + "Área Total");
+						return;
+					}
+				}
+				try{
+					suite = Integer.parseInt(textSuites.getText());
+				}catch(Exception e){
+					if(!textSuites.getText().equals("")){
+						MessageBox.alert(message + "Suítes");
+						return;
+					}
+				}	
+				try{
+					bedroom = Integer.parseInt(textQuartos.getText());
+				}catch(Exception e){
+					if(!textQuartos.getText().equals("")){
+						MessageBox.alert(message + "Quartos");
+						return;
+					}
+				}
 				PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType, new AsyncCallback<List<CaseBean>>() {
 					
 					public void onSuccess(List<CaseBean> arg0) {
