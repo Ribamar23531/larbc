@@ -2,6 +2,7 @@ package com.googlecode.projeto1.client.panels.modality;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
@@ -44,7 +45,7 @@ public class LoginWindow extends Window{
 				String login = loginWindowPanel.getLogin();
 				String password = loginWindowPanel.getPassword();
 				if(login.equals("") || password.equals("")){				
-					MessageBox.alert("Favor preencher todos os campos.");
+					MessageBox.alert("Favor preencher todos os campos.");					
 				}else{
 					PERSISTENCE_SERVICE.doLogin(login, password, new AsyncCallback<AdminBean>() {
 
@@ -55,10 +56,11 @@ public class LoginWindow extends Window{
 
 						public void onSuccess(AdminBean admin) {							
 							if(admin != null){
-								PanelSwitcher.switchPanel(new ManagePanel(admin));
+								LoginManager.setLogged(admin);
+								PanelSwitcher.switchPanel(new ManagePanel());
 								hide();								
 							}else{
-								MessageBox.alert("Login ou senha inválidos.");
+								MessageBox.alert("Login ou senha invï¿½lidos.");
 							}
 							
 						}

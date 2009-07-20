@@ -9,13 +9,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.gwtext.client.widgets.form.Label;
 
-public class AdminTab extends AbsolutePanel{
+public class AdminTab extends AbsolutePanel{	
 	
-	private AdminBean administrator;
-	
-	public AdminTab(AdminBean admin){
-		super();		
-		this.administrator = admin;
+	public AdminTab(){
+		super();	
 		{
 			ScrollPanel scrollPanel = new ScrollPanel();
 			this.add(scrollPanel, 0, 0);
