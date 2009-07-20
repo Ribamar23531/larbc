@@ -14,7 +14,16 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name = "casos")
 @NamedQueries( {@NamedQuery(name = "getCasosByAdmin", query = "select c from Caso c where c.idAdministradorResponsavel = :idAdministrador"),
-				@NamedQuery(name = "getFotos", query = "select f from Foto f where f.myComposedKey.idCaso = :idCaso")})
+				@NamedQuery(name = "getFotos", query = "select f from Foto f where f.myComposedKey.idCaso = :idCaso"),
+				@NamedQuery(name = "getId", query = "select f from Caso f where f.estado = :estado AND f.cidade = :cidade AND " +
+																						"f.bairro = :bairro AND f.rua = :rua AND " +
+																						"f.numero = :numero AND f.nome = :nome AND " +
+																						"f.areaConstruida = :areaConstruida AND " +
+																						"f.areaTotal = :areaTotal AND " +
+																						"f.vagasGaragem = :vagasGaragem AND " +
+																						"f.quartos = :quartos AND f.suites = :suites AND " +
+																						"f.banheiros = :banheiros AND f.tipo = :tipo AND " +
+																						"f.preco = :preco AND f.tipoNegocio = :tipoNegocio")})
 public class Caso{
 	
 	@Id
