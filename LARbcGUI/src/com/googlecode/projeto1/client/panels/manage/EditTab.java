@@ -37,35 +37,8 @@ public class EditTab extends ScrollPanel{
 				MessageBox.alert("Não foi possível carregar os casos");
 				
 			}
-		});
-		
-//		{
-//			CaptionPanel captionPanel = new CaptionPanel("Caso 1");
-//			captionPanel.setHeight("138px");
-//			verticalPanel.add(captionPanel);
-//			{
-//				AbsolutePanel absolutePanel = new AbsolutePanel();
-//				captionPanel.setContentWidget(absolutePanel);
-//				absolutePanel.setSize("428px", "3cm");
-//				{
-//					Label enderecoLabel = new Label("Endere\u00E7o:");
-//					absolutePanel.add(enderecoLabel, 5, 5);
-//				}
-//				{
-//					Label nomeLabel = new Label("Nome:");
-//					absolutePanel.add(nomeLabel, 5, 31);
-//				}
-//				{
-//					Label precoLabel = new Label("Pre\u00E7o:");
-//					absolutePanel.add(precoLabel, 5, 57);
-//				}
-//				{
-//					Button editarButton = new Button("New button");
-//					editarButton.setText("Editar");
-//					absolutePanel.add(editarButton, 347, 74);
-//				}
-//			}
-//		}
+		});		
+
 	}
 
 }
