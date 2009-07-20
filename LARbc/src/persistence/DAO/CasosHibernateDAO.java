@@ -94,6 +94,9 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	
 	@Override
 	public void updateCaso(Caso caso) throws CasoNotFoundException {
+		if(caso.getIdCaso() == 0){
+			caso.setIdCaso(getId(caso));
+		}
 		getCaso(caso.getIdCaso());//verifica se existe o caso a ser removida
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -101,6 +104,34 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		transaction.commit();
 		session.close();		
 		
+	}
+
+	private long getId(Caso caso) {
+		Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.getNamedQuery("getId");
+        query.setString("estado", caso.getEstado());
+        query.setString("cidade", caso.getCidade());
+        query.setString("bairro", caso.getBairro());
+        query.setString("rua", caso.getRua());
+        query.setInteger("numero", caso.getNumero());
+        query.setString("nome", caso.getNome());
+        query.setFloat("areaConstruida", caso.getAreaConstruida());
+        query.setFloat("areaTotal", caso.getAreaTotal());
+        query.setInteger("vagasGaragem", caso.getVagasGaragem());
+        query.setInteger("quartos", caso.getQuartos());
+        query.setInteger("suites", caso.getSuites());
+        query.setInteger("banheiros", caso.getBanheiros());
+        query.setString("tipo", caso.getTipo());
+        query.setFloat("preco", caso.getPreco());
+        query.setInteger("tipoNegocio", caso.getTipoNegocio());
+        List<Caso> casos = query.list();
+        transaction.commit();
+        session.close();
+        if(casos.size() > 0){
+        	return casos.get(0).getIdCaso();
+        }
+		return 0;
 	}
 
 	@SuppressWarnings("unchecked")

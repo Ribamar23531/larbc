@@ -220,9 +220,9 @@ public class GerenteDePersistencia {
 	}
 
 	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDaniedException, CasoNotFoundException {
-		if(!getCasoOwner(caso).equals(admin)){
-			throw new PermissionDaniedException();
-		}
+//		if(!getCasoOwner(caso).equals(admin)){
+//			throw new PermissionDaniedException();
+//		}
 		this.removeCaso(caso);
 	}
 
@@ -235,9 +235,9 @@ public class GerenteDePersistencia {
 	}
 
 	public void updateCaso(Administrador admin, Caso caso) throws PermissionDaniedException, AdministradorNotFoundException, CasoNotFoundException {
-		if(!getCasoOwner(caso).equals(admin)){
-			throw new PermissionDaniedException();
-		}
+//		if(!getCasoOwner(caso).equals(admin)){
+//			throw new PermissionDaniedException();
+//		}
 		this.casoDAO.updateCaso(caso);
 	}
 
