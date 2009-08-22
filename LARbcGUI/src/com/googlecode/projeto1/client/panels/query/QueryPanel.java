@@ -72,7 +72,7 @@ public class QueryPanel extends Panel{
 		verticalPanel.setSize("440px", "59px");
 		Image image = new Image("images/larbc.png");
 		verticalPanel.add(image);
-		image.setSize("70%", "100%");
+		image.setSize("60%", "100%");
 		
 		//Nome da Rua
 		textRua = new TextBox();
