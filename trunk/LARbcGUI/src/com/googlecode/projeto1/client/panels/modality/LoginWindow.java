@@ -60,7 +60,7 @@ public class LoginWindow extends Window{
 								PanelSwitcher.switchPanel(new ManagePanel());
 								hide();								
 							}else{
-								MessageBox.alert("Login ou senha inv�lidos.");
+								MessageBox.alert("Login ou senha inválidos.");
 							}
 							
 						}
