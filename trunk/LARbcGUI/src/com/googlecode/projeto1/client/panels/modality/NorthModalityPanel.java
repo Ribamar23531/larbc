@@ -51,6 +51,7 @@ public class NorthModalityPanel extends Panel{
 
 	private void createSelectedManagerButton() {
 		selectedManagerButtonImage = Util.createImage(Util.SELECTED_ADMINISTRAR_BUTTON_IMAGE);
+		selectedManagerButtonImage.setPixelSize(160, 40);
 		selectedManagerButtonImage.addMouseListener(new MouseListenerAdapter(){
 
 			
@@ -76,7 +77,7 @@ public class NorthModalityPanel extends Panel{
 
 	private void createManagerButton() {
 		managerButtonImage = Util.createImage(Util.ADMINISTRAR_BUTTON_IMAGE);
-		
+		managerButtonImage.setPixelSize(160, 40);
 		managerButtonImage.addMouseListener(new MouseListenerAdapter(){
 			
 			public void onMouseEnter(Widget arg0) {

@@ -38,8 +38,10 @@ public class CenterModalityPanel extends Panel{
 		createVenderButton();
 		createComprarButton();
 		Panel panel1 = new Panel();
-		panel1.add(Util.createImage(Util.QUESTION));
-		p1.add(panel1, 350, 135);
+		Image image = Util.createImage(Util.QUESTION);
+		image.setPixelSize(400, 86);
+		panel1.add(image);
+		p1.add(panel1, 255, 100);
 		vp.add(p1);
 		p2.setLayout(new ColumnLayout());
 		vp.add(buttonsPanel, 600, 240);
@@ -51,6 +53,7 @@ public class CenterModalityPanel extends Panel{
 	//BOTAO COMPRAR
 	private void createComprarButton() {
 		comprarButton = Util.createImage(Util.COMPRAR_BUTTON_IMAGE);
+		comprarButton.setPixelSize(160, 40);
 		comprarButton.addMouseListener(new MouseListenerAdapter(){
 
 			
@@ -65,6 +68,7 @@ public class CenterModalityPanel extends Panel{
 			
 		});
 		selectedComprarButton = Util.createImage(Util.SELECTED_COMPRAR_BUTTON_IMAGE);
+		selectedComprarButton.setPixelSize(160, 40);
 		selectedComprarButton.addMouseListener(new MouseListenerAdapter(){			
 
 			public void onMouseLeave(Widget arg0) {
@@ -117,6 +121,7 @@ public class CenterModalityPanel extends Panel{
 	
 	private void createVenderButton() {
 		venderButton = Util.createImage(Util.VENDER_BUTTON_IMAGE);
+		venderButton.setPixelSize(160, 40);
 		venderButton.addMouseListener(new MouseListenerAdapter(){
 
 			
@@ -131,6 +136,7 @@ public class CenterModalityPanel extends Panel{
 			
 		});
 		selectedVenderButton = Util.createImage(Util.SELECTED_VENDER_BUTTON_IMAGE);
+		selectedVenderButton.setPixelSize(160, 40);
 		selectedVenderButton.addMouseListener(new MouseListenerAdapter(){			
 
 			public void onMouseLeave(Widget arg0) {
