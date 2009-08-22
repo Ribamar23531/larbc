@@ -31,9 +31,9 @@ public class ResultsPanel extends Panel{
 //		Button button = new ButtonListenerAdapter();
 
 		this.add(vp, new ColumnLayoutData(50));
-		Button button = new Button("Nao encontrou o que queria?", new ButtonListenerAdapter() {  
+		Button button = new Button("Não encontrou o que queria?", new ButtonListenerAdapter() {  
 			public void onClick(Button button, EventObject e) {  
-				MessageBox.confirm("Confirmacao", "Voce deseja enviar essas informacoes para o administrador?",  
+				MessageBox.confirm("Confirmação", "Você deseja enviar essas informações para o administrador?",  
 						new MessageBox.ConfirmCallback() {  
 					public void execute(String btnID) {
 						if(btnID.equals("yes")){
