@@ -8,17 +8,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import exceptions.AdministradorNotFoundException;
-import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
-
-import beans.Administrador;
-import beans.Caso;
-
 import persistence.GerenteDePersistencia;
 import persistence.util.Estado;
 import rbcCycle.GerenteDeRBC;
-import rbcCycle.caseElement.ImmobileSolution;
+import beans.Administrador;
+import beans.Caso;
+import exceptions.AdministradorNotFoundException;
+import exceptions.LoginAlreadyRegisteredException;
+import exceptions.PermissionDaniedException;
 
 public class OneFieldQueryTest {
 	private static GerenteDePersistencia persistenceManager;
@@ -30,7 +27,7 @@ public class OneFieldQueryTest {
 	private static Caso getCaso1() {
 		String estado = Estado.PE.toString();
 		String cidade = "cidade";
-		String bairro = "baírro";
+		String bairro = "baï¿½rro";
 		String rua = "rua";
 		int numero = 4;
 		String nome = "nome";
@@ -102,7 +99,7 @@ public class OneFieldQueryTest {
 	@BeforeClass
 	public static void configure(){
 		persistenceManager = new GerenteDePersistencia(true);
-		persistenceManager.removeAllAdministradores();
+		persistenceManager.removeNotRoots();
 		persistenceManager.removeAllCasos();
 //		persistenceManager.resetSystemPassword();
 		CBRManager = new GerenteDeRBC(true);
@@ -110,7 +107,7 @@ public class OneFieldQueryTest {
 		caso2 = getCaso2();
 		administrador = new Administrador("login1", "senha1", "nome1");
 		try {
-			persistenceManager.saveAdministrador(administrador, "admin");
+			persistenceManager.saveAdministrador(new Administrador("root", "root", "Root", "true"), administrador);
 			persistenceManager.createCaso(administrador, caso1);
 			persistenceManager.createCaso(administrador, caso2);
 		} catch (AdministradorNotFoundException e) {

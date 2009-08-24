@@ -19,34 +19,27 @@ public class AdministradorTests {
 	
 	private static GerenteDePersistencia gerente;
 	private static Administrador a;
-	private static String systemPassword;
+	private static Administrador root;	
 
 	@BeforeClass
 	public static void configurarTudo(){
-		gerente = GerenteDePersistencia.getInstance(true);		
+		gerente = GerenteDePersistencia.getInstance(true);
 		a = new Administrador("login1", "senha1", "nome1");
-		gerente.removeAllAdministradores();
-		gerente.removeAllCasos();
-//		gerente.resetSystemPassword();
-		systemPassword = "password";
-//		try {
-//			gerente.setPassword("admin", systemPassword);
-//		} catch (PermissionDaniedException e) {
-//			assertTrue(false);
-//		}
+		root = new Administrador("root", "root", "Root", "true");
+		gerente.removeNotRoots();
+		gerente.removeAllCasos();		
 	}
 	
 	@AfterClass
 	public static void zerarTudo(){
 		gerente.removeAllAdministradores();
 		gerente.removeAllCasos();
-//		gerente.resetSystemPassword();
 	}	
 	
 	@Test
 	public void testSave(){		
 		try {
-			gerente.saveAdministrador(a, systemPassword);
+			gerente.saveAdministrador(root, a);
 			Administrador admin = gerente.getAdministrador(a.getLogin());
 			if(admin.getLogin().equals(a.getLogin()) && admin.getPassword().equals(a.getPassword()) && admin.getNome().equals(a.getNome())){
 				assertTrue(true);
@@ -63,7 +56,7 @@ public class AdministradorTests {
 	public void testUpdate(){
 		a.setNome("fulaninho");
 		try {
-			gerente.updateAdministrador(a, systemPassword);
+			gerente.updateAdministrador(root, a);
 			Administrador admin = gerente.getAdministrador(a.getLogin());
 			String adminName = admin.getNome();
 			if(adminName.equals("fulaninho")){
@@ -140,7 +133,7 @@ public class AdministradorTests {
 	@Test
 	public void testRemove(){
 		try {
-			gerente.removeAdministrador(a, systemPassword);
+			gerente.removeAdministrador(root, a);
 			assertTrue(true);
 		} catch (AdministradorNotFoundException e) {
 			assertTrue(false);

@@ -21,11 +21,11 @@ public interface SystemFacade {
 	
 	public Administrador doLogin(String login, String password) throws PermissionDaniedException;
 	
-	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDaniedException;
+	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDaniedException;
 	
-	public void removeAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
+	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException;
 	
-	public void updateAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
+	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException;
 	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
 	

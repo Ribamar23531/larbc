@@ -28,7 +28,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 		Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.getNamedQuery("getRoots");
-        query.setBoolean("true", true);
+        query.setString("true", "true");
         List<Administrador> roots = query.list();
         transaction.commit();
         session.close();
@@ -40,15 +40,8 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
         List<Administrador> roots = getRoots();
         if(roots.size() == 0){
             try {
-				saveAdministrador(new Administrador("root", "root", "Root"));
-			} catch (LoginAlreadyRegisteredException e) {
-//				try {
-//					double randon= Math.random();
-//					saveAdministrador(new Administrador("root" + randon, "root", "Root"));
-//				} catch (LoginAlreadyRegisteredException e1) {
-//					createRootIfNeeded();
-//				}
-			}
+				saveAdministrador(new Administrador("root", "root", "Root", "true"));
+			} catch (LoginAlreadyRegisteredException e) {}
         }        
 		
 	}
@@ -138,6 +131,24 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 			transaction = session.beginTransaction();
 		}
 		session.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void removeNotRoots() {
+		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();		
+		List<Administrador> admins = session.createQuery("from " + Administrador.class.getCanonicalName()).list();
+		for (int i = 0; i < admins.size(); i++) {	
+			Administrador admin = admins.get(i);
+			if(!admin.isRoot()){
+				session.delete(admin);
+				transaction.commit();
+				transaction = session.beginTransaction();				
+			}
+		}
+		session.close();
+		
 	}	
 
 }

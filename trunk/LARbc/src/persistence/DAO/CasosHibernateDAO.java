@@ -106,6 +106,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	private long getId(Caso caso) {
 		Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();

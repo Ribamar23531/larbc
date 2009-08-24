@@ -101,8 +101,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException {
-		this.persistenceManager.removeAdministrador(admin, adminPassword);
+	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException {
+		this.persistenceManager.removeAdministrador(root, admin);
 	}
 	
 	/**
@@ -129,8 +129,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDaniedException {
-		this.persistenceManager.saveAdministrador(admin, adminPassword);
+	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDaniedException {
+		this.persistenceManager.saveAdministrador(root, admin);
 	}
 
 	/**
@@ -151,8 +151,8 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException {
-		this.persistenceManager.updateAdministrador(admin, adminPassword);
+	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException {
+		this.persistenceManager.updateAdministrador(root, admin);
 	}
 
 	/**
