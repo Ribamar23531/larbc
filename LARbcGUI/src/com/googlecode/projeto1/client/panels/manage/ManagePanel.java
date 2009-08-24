@@ -15,7 +15,7 @@ public class ManagePanel extends Panel{
 			TabPanel tabPanel = new TabPanel();
 			tabPanel.setAnimationEnabled(true);
 			managePanel.add(tabPanel, 5, 5);
-			tabPanel.setSize("469px", "313px");
+			tabPanel.setSize("600px", "400px");
 			{
 				CreateTab createTab = new CreateTab();
 				tabPanel.add(createTab, "Criar", false);
@@ -25,12 +25,12 @@ public class ManagePanel extends Panel{
 			{
 				EditTab editTab = new EditTab();
 				tabPanel.add(editTab, "Editar", false);
-				editTab.setSize("433px", "260px");				
+				editTab.setSize("620px", "260px");				
 			}
 			{
 				DemandsTab demandsTab = new DemandsTab();
 				tabPanel.add(demandsTab, "Moderar Demandas", false);
-				demandsTab.setSize("453px", "263px");
+				demandsTab.setSize("600px", "263px");
 			}
 			{
 				AdminTab adminsMainPanel = new AdminTab();

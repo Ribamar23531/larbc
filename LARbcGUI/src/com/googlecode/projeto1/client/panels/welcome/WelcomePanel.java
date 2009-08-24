@@ -26,7 +26,7 @@ public class WelcomePanel extends Panel {
 		{
 			Image image = new Image("images/larbc.png");
 			rootPanel.add(image, 5, 5);
-			image.setSize("35%", "19%");
+			image.setPixelSize(300, 114);
 		}
 		{
 			Image image = new Image("images/familia.png");

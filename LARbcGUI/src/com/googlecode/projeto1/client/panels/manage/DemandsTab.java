@@ -24,7 +24,7 @@ public class DemandsTab extends AbsolutePanel{
 		super();
 		ScrollPanel scrollPanel = new ScrollPanel();
 		this.add(scrollPanel, 5, 5);
-		scrollPanel.setSize("420px", "253px");
+		scrollPanel.setSize("500px", "253px");
 		{
 			verticalPanel = new VerticalPanel();
 			scrollPanel.setWidget(verticalPanel);
@@ -35,12 +35,12 @@ public class DemandsTab extends AbsolutePanel{
 					int index = 1;
 					for (DemandBean demandBean : demands) {
 						CaptionPanel cptnpnlDemanda = new CaptionPanel("Demanda " + index);
-						cptnpnlDemanda.setHeight("109px");
+						cptnpnlDemanda.setSize("300px", "109px");
 						verticalPanel.add(cptnpnlDemanda);
 						{
 							AbsolutePanel absolutePanel_1 = new AbsolutePanel();
 							cptnpnlDemanda.setContentWidget(absolutePanel_1);
-							absolutePanel_1.setSize("416px", "135px");
+							absolutePanel_1.setSize("600px", "135px");
 							{
 								Label enderecoLabel = new Label("Endereço: " + demandBean.getRua() + ", " + demandBean.getBairro() + ", " + demandBean.getCidade());
 								absolutePanel_1.add(enderecoLabel, 5, 5);

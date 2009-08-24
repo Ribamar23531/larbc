@@ -24,10 +24,10 @@ public class CaseEditPanel extends CaptionPanel{
 	public CaseEditPanel(CaseBean caseBean, int index){
 		super("Caso " + index);
 		this.myCaseBean = caseBean;
-		this.setHeight("138px");
+		this.setHeight("200px");
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		this.setContentWidget(absolutePanel);
-		absolutePanel.setSize("428px", "3cm");
+		absolutePanel.setSize("600px", "3cm");
 		String address = myCaseBean.getStreet() + ", Nº " + myCaseBean.getNumber() + ". " +
 							myCaseBean.getCity() + ", " + myCaseBean.getNeighborhood();
 		

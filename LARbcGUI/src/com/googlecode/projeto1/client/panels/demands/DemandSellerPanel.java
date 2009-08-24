@@ -289,8 +289,10 @@ public class DemandSellerPanel extends Panel{
 						return;
 					}
 				}				
-				//				businessType;
-				//				state;
+
+				int index = listEstado.getSelectedIndex();
+				state  = listEstado.getItemText(index);
+				
 				try{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
 				}catch(Exception e){
