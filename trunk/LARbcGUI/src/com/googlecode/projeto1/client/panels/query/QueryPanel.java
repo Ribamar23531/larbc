@@ -70,7 +70,7 @@ public class QueryPanel extends Panel{
 		VerticalPanel verticalPanel = new VerticalPanel();
 		queryPanel.add(verticalPanel, 0, 0);
 		verticalPanel.setSize("440px", "59px");
-		Image image = new Image("images/larbc.png");
+		Image image = new Image("images/pesquisaDeImoveis.PNG");
 		verticalPanel.add(image);
 		image.setSize("60%", "100%");
 		
@@ -207,10 +207,6 @@ public class QueryPanel extends Panel{
 		
 		createEntrarButton();
 
-		Label lblPesquisaDeImoveis = new Label("PESQUISA DE IMÓVEIS");
-		queryPanel.add(lblPesquisaDeImoveis, 17, 76);
-		lblPesquisaDeImoveis.setSize("151px", "13px");
-		
 		this.add(queryPanel);
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
@@ -271,7 +267,8 @@ public class QueryPanel extends Panel{
 						return;
 					}
 				}				
-				//				type;
+				
+				//type = ;
 				try{
 					price = Float.parseFloat(textPreco.getText());
 				}catch(Exception e){
@@ -280,8 +277,12 @@ public class QueryPanel extends Panel{
 						return;
 					}
 				}				
-				//				businessType;
-				//				state;
+				
+				businessType = listTipoNegocio.getSelectedIndex();
+				
+				int indexState = listEstado.getSelectedIndex();
+				state = listEstado.getItemText(indexState);
+				
 				try{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
 				}catch(Exception e){

@@ -29,10 +29,12 @@ public class NorthModalityPanel extends Panel{
 		wrapperPanel.setLayout(new ColumnLayout());
 		Panel leftPanel = new Panel();
 		Panel rightPanel = new Panel();
-		leftPanel.add(Util.createImage(Util.LARBC_IMAGE_PATH));
+		Image larbc = Util.createImage(Util.LARBC_IMAGE_PATH); 
+		larbc.setPixelSize(300, 114);
+		leftPanel.add(larbc);
 		rightPanel.add(managerButtonImage);
 		wrapperPanel.add(leftPanel, new ColumnLayoutData(.86));
-		wrapperPanel.add(rightPanel, new ColumnLayoutData(.14));  
+		wrapperPanel.add(rightPanel, new ColumnLayoutData(.10));  
 		this.add(wrapperPanel);
 		this.setAutoScroll(true);
 		this.loginWindow = new LoginWindow();
@@ -42,7 +44,9 @@ public class NorthModalityPanel extends Panel{
 		wrapperPanel.removeAll();
 		Panel leftPanel = new Panel();
 		Panel rightPanel = new Panel();
-		leftPanel.add(Util.createImage(Util.LARBC_IMAGE_PATH));
+		Image larbc = Util.createImage(Util.LARBC_IMAGE_PATH);
+		larbc.setPixelSize(300, 114);
+		leftPanel.add(larbc);
 		rightPanel.add(buttonImage);
 		wrapperPanel.add(leftPanel, new ColumnLayoutData(.86));
 		wrapperPanel.add(rightPanel, new ColumnLayoutData(.14));
