@@ -3,6 +3,8 @@ package com.googlecode.projeto1.server;
 import java.util.ArrayList;
 import java.util.List;
 
+import rbcCycle.caseElement.ImmobileSolution;
+
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -21,7 +23,7 @@ import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
 import facade.SystemFacade;
 import facade.SystemManager;
 
@@ -48,11 +50,11 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			float totalArea, int garageSpace, int bedroom, int suite,
 			int bathroom, String type, float price, int businessType) {
 		
-		List<Caso> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
+		List<ImmobileSolution> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
 										 neighborhood, street, name, builtArea, totalArea, 
 										 garageSpace, bedroom, suite, bathroom, type, price, businessType);
 		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
-		for (Caso caso : results) {
+		for (ImmobileSolution caso : results) {
 			returnedCases.add(this.getCaseBean(caso));
 		}
 		return returnedCases;
@@ -63,12 +65,12 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			float totalArea, int garageSpace, int bedroom, int suite,
 			int bathroom, String type, float price, int businessType) {
 
-		List<Caso> results = this.getSystemFacade().doQuery(state, city, 
+		List<ImmobileSolution> results = this.getSystemFacade().doQuery(state, city, 
 				 neighborhood, street, name, builtArea, totalArea, 
 				 garageSpace, bedroom, suite, bathroom, type, price, businessType);
 		
 		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
-		for (Caso caso : results) {
+		for (ImmobileSolution caso : results) {
 			returnedCases.add(this.getCaseBean(caso));
 		}
 		return returnedCases;
@@ -187,7 +189,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -200,7 +202,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CasoNotFoundException e) {
@@ -236,7 +238,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (LoginAlreadyRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -252,7 +254,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 //			String newAdminPassword) {
 //		try {
 //			this.getSystemFacade().setAdministrationPassword(oldAdminPassword, newAdminPassword);
-//		} catch (PermissionDaniedException e) {
+//		} catch (PermissionDeniedException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
@@ -266,7 +268,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -276,7 +278,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public void updateCaso(AdminBean admin, CaseBean caso) {
 		try {
 			this.getSystemFacade().updateCaso(this.getAdmin(admin), this.getCaso(caso));
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AdministradorNotFoundException e) {
@@ -314,9 +316,9 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public AdminBean doLogin(String login, String password) {
 		AdminBean adminBean = null;
 		try {
-			Administrador admin = this.getSystemFacade().doLogin(login, password);
-			adminBean = getAdminBean(admin);
-		} catch (PermissionDaniedException e) {
+			this.getSystemFacade().verifyLogin(login, password);
+			AdminBean admin = getAdministrador(login);
+		} catch (PermissionDeniedException e) {
 			return null;
 		}
 		return adminBean;
@@ -325,7 +327,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 //	public String verifyAdministrador(String login, String password) {
 //		try {
 //			this.getSystemFacade().verifyAdministrador(login, password);
-//		} catch (PermissionDaniedException e) {
+//		} catch (PermissionDeniedException e) {
 //			return "NOT OK";
 //		} catch (AdministradorNotFoundException e) {
 //			return "NOT OK";
@@ -334,6 +336,27 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 //	}
 
 //=== Conversors ===	
+	
+	private CaseBean getCaseBean(ImmobileSolution result){
+		CaseBean caseResult = new CaseBean();
+		caseResult.setBathroom(result.getBathroom());
+		caseResult.setBedroom(result.getBedroom());
+		caseResult.setBuiltArea(result.getBuiltArea());
+		caseResult.setBusinessType(result.getBusinessType());
+		caseResult.setCity(result.getCity());
+		caseResult.setGarageSpace(result.getGarageSpace());
+		caseResult.setId(result.getId());
+		caseResult.setName(result.getName());
+		caseResult.setNeighborhood(result.getNeighborhood());
+		caseResult.setNumber(result.getNumber());
+		caseResult.setPrice(result.getPrice());
+		caseResult.setState(result.getState());
+		caseResult.setStreet(result.getStreet());
+		caseResult.setSuite(result.getSuite());
+		caseResult.setTotalArea(result.getTotalArea());
+		caseResult.setType(result.getType());
+		return caseResult;
+	}
 	
 	private CaseBean getCaseBean(Caso result){
 		CaseBean caseResult = new CaseBean();
