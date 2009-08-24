@@ -10,11 +10,7 @@ public abstract class HibernateDAO {
 	protected String schema;
 	
 	public HibernateDAO(boolean testing){
-		if(!testing){
-			this.schema = HibernateConfig.getSchema();			
-		}else{
-			this.schema = HibernateConfig.getTesteSchema();
-		}
+		this.schema = HibernateConfig.getCurrentSchema();		
 		this.sf = HibernateConfig.getSessionFactory(testing);
 	}
 

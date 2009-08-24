@@ -7,25 +7,26 @@ import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
-import beans.SystemPassword;
 
 
 public class HibernateConfig {
 	
 	private static boolean testing = false;
 	private static SessionFactory sessionFactory = null;	
-	private static final String SCHEMA = "larbcschema";
-	private static final String TESTE_SCHEMA = "larbctesteschema";
+	private static String currentSchema;	
 	
 	private static void configure(){
 		try {
 			AnnotationConfiguration config = new AnnotationConfiguration();			
-			config.setProperty("hibernate.dialect",	"org.hibernate.dialect.MySQLDialect");
-			config.setProperty("hibernate.connection.driver_class",	"com.mysql.jdbc.Driver");
+			config.setProperty("hibernate.dialect",	"org.hibernate.dialect.PostgreSQLDialect");
+			config.setProperty("hibernate.connection.driver_class",	"org.postgresql.Driver");
+			config.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/larbc_db");
 			if(!testing){
-				config.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/LARbcSchema");				
-			}else{
-				config.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/larbctesteschema");
+				currentSchema = "larbcschema";
+				config.setProperty("hibernate.default_schema", currentSchema);				
+			}else{				
+				currentSchema = "larbctestschema";
+				config.setProperty("hibernate.default_schema", currentSchema);
 			}
 			config.setProperty("hibernate.connection.username", "larbc");
 			config.setProperty("hibernate.connection.password", "123456");
@@ -38,17 +39,24 @@ public class HibernateConfig {
 			config.setProperty("hibernate.current_session_context_class", "thread");
 
 			// Mapped classes
+			
 			config.addAnnotatedClass(Administrador.class);
 			config.addAnnotatedClass(Foto.class);
 			config.addAnnotatedClass(Demanda.class);
-			config.addAnnotatedClass(Caso.class);
-			config.addAnnotatedClass(SystemPassword.class);
-			
+			config.addAnnotatedClass(Caso.class);			
 			sessionFactory = config.buildSessionFactory();
+			createGeometryColumn(currentSchema, sessionFactory);
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
+	}
+	
+	private static void createGeometryColumn(String currentSchema, SessionFactory sf){
+		String sqlQuery = "SELECT AddGeometryColumn('" + currentSchema + "','casos','location',-1,'POINT',2);";
+		try{
+			sf.openSession().createSQLQuery(sqlQuery).list();			
+		}catch(Exception e){}
 	}
 	
 	public static SessionFactory getSessionFactory(boolean testando) {
@@ -59,11 +67,8 @@ public class HibernateConfig {
 		return sessionFactory;
 	}	
 
-	public static String getSchema(){
-		return SCHEMA;
+	public static String getCurrentSchema(){
+		return currentSchema;
 	}
 	
-	public static String getTesteSchema(){
-		return TESTE_SCHEMA;
-	}
 }

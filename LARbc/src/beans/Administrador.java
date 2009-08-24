@@ -27,20 +27,23 @@ public class Administrador {
 	@Column(updatable = true, nullable = false)
 	private String nome;
 	@Column(updatable = true, nullable = false)
-	private boolean isRoot;
-  
-//	@OneToMany(mappedBy="inseridoPor", fetch = FetchType.EAGER)
-//	@Cascade(CascadeType.PERSIST)
-//	private List<Caso> casos;
+	private String isRoot;
 	
 	//construtor vazio necessario pelo hibernate
 	public Administrador(){}
 	
 	public Administrador(String login, String password, String nome){
 		this.login = login;
-		this.password = password;
+		this.password = password;		
 		this.nome = nome;
-//		this.casos = new ArrayList<Caso>();
+		this.isRoot = "false";
+	}
+	
+	public Administrador(String login, String password, String nome, String rootValue){
+		this.login = login;
+		this.password = password;		
+		this.nome = nome;
+		this.isRoot = rootValue;
 	}
 	
 	public long getIdAdministrador() {
@@ -81,34 +84,16 @@ public class Administrador {
 //		return this.getLogin().equals(anotherOne.getLogin()) && this.getPassword().equals(anotherOne.getPassword()) && this.getNome().equals(anotherOne.getNome());
 	}
 
-	public void setRoot(boolean isRoot) {
+	public void setIsRoot(String isRoot) {
 		this.isRoot = isRoot;
 	}
 
-	public boolean isRoot() {
+	public String getIsRoot() {
 		return isRoot;
 	}
-
-//	public void setCasos(List<Caso> casos) {
-//		this.casos = casos;
-//	}
-//
-//	public List<Caso> getCasos() {
-//		return casos;
-//	}
-//	
-//	public void addCaso(Caso caso){
-//		this.casos.add(caso);
-//	}
-//	
-//	public void removeCaso(Caso caso){
-//		int i = 0;
-//		for (Caso c : casos) {
-//			if(c.getIdCaso() == caso.getIdCaso()){
-//				this.casos.remove(i);
-//			}
-//			i++;
-//		}
-//	}
+	
+	public boolean isRoot(){
+		return isRoot.equals("true");
+	}	
 
 }

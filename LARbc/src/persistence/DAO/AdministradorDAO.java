@@ -20,5 +20,7 @@ public interface AdministradorDAO {
 	public void updateAdministrador(Administrador admin) throws AdministradorNotFoundException;
 	
 	public void removeAllAdministradores();
+	
+	public void removeNotRoots();
 
 }
