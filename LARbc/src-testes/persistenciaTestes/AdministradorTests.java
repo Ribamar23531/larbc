@@ -13,7 +13,7 @@ import persistence.util.Estado;
 import beans.Administrador;
 import beans.Caso;
 import exceptions.AdministradorNotFoundException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
 
 public class AdministradorTests {
 	
@@ -27,7 +27,7 @@ public class AdministradorTests {
 		a = new Administrador("login1", "senha1", "nome1");
 		root = new Administrador("root", "root", "Root", "true");
 		gerente.removeNotRoots();
-		gerente.removeAllCasos();		
+		gerente.removeAllCasos();
 	}
 	
 	@AfterClass
@@ -64,7 +64,7 @@ public class AdministradorTests {
 			}
 		} catch (AdministradorNotFoundException e1) {
 			assertTrue(false);
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			assertTrue(false);
 		}
 	}
@@ -137,7 +137,7 @@ public class AdministradorTests {
 			assertTrue(true);
 		} catch (AdministradorNotFoundException e) {
 			assertTrue(false);
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			assertTrue(false);
 		}
 	}

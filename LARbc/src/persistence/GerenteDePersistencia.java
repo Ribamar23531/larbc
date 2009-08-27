@@ -22,7 +22,7 @@ import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
 
 public class GerenteDePersistencia {	
 	
@@ -55,39 +55,47 @@ public class GerenteDePersistencia {
 	
 	//=============================Operacoes sobre sistema======================================\\
 		
-	private void verifyPermission(Administrador admin) throws PermissionDaniedException{
+	private void verifyPermission(Administrador admin) throws PermissionDeniedException{
 		Administrador a;
 		try {
 			a = getAdministrador(admin.getLogin());
 		} catch (AdministradorNotFoundException e) {
-			throw new PermissionDaniedException();//se nao encontrar administrador entao alguem tentou um login invalido
+			throw new PermissionDeniedException();//se nao encontrar administrador entao alguem tentou um login invalido
 		}
 		if(!a.getPassword().equals(admin.getPassword()) || !a.isRoot()){
-			throw new PermissionDaniedException();
+			throw new PermissionDeniedException();
 		}		
 	}
 	
-	public Administrador doLogin(String login, String password) throws PermissionDaniedException{
+	public Administrador doLogin(String login, String password) throws PermissionDeniedException{
 		try {
 			Administrador admin = getAdministrador(login);
 			if(!admin.getPassword().equals(password)){
-				throw new PermissionDaniedException();
+				throw new PermissionDeniedException();
 			}
 			return admin;
 		} catch (AdministradorNotFoundException e) {
-			throw new PermissionDaniedException();
+			throw new PermissionDeniedException();
 		}
 	}
 	
+//<<<<<<< .mine
+//	public void setPassword(String oldPassword, String newPassword) throws PermissionDeniedException{
+//		verifyPermission(oldPassword);
+//		systemPasswordDAO.setPassword(newPassword);
+//	}
+//	
+//=======
+//>>>>>>> .r246
 	//=============================Operacoes sobre Administrador===============================\\	
 	
-	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDaniedException/*, RequiredArgumentException*/{
+	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDeniedException/*, RequiredArgumentException*/{
 		verifyPermission(root);
 		administradorDAO.saveAdministrador(admin);
 	}
 	
-	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException{
-		verifyPermission(root);		
+	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException{
+		verifyPermission(root);
 		administradorDAO.removeAdministrador(admin);
 	}
 	
@@ -99,7 +107,7 @@ public class GerenteDePersistencia {
 		return administradorDAO.getAdministrador(login);
 	}
 	
-	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException{
+	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException{
 		verifyPermission(root);
 		administradorDAO.updateAdministrador(admin);
 	}
@@ -211,7 +219,7 @@ public class GerenteDePersistencia {
 		return a;
 	}
 
-	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDaniedException, CasoNotFoundException {
+	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException {
 //		if(!getCasoOwner(caso).equals(admin)){
 //			throw new PermissionDaniedException();
 //		}
@@ -226,7 +234,7 @@ public class GerenteDePersistencia {
 		}
 	}
 
-	public void updateCaso(Administrador admin, Caso caso) throws PermissionDaniedException, AdministradorNotFoundException, CasoNotFoundException {
+	public void updateCaso(Administrador admin, Caso caso) throws PermissionDeniedException, AdministradorNotFoundException, CasoNotFoundException {
 //		if(!getCasoOwner(caso).equals(admin)){
 //			throw new PermissionDaniedException();
 //		}
@@ -235,6 +243,17 @@ public class GerenteDePersistencia {
 
 	public List<Caso> getCasos(String login) throws AdministradorNotFoundException {
 		return getCasos(getAdministrador(login).getIdAdministrador());
+	}
+
+	public void verifyLogin(String login, String password) throws PermissionDeniedException {
+		try {
+			Administrador admin = this.getAdministrador(login);
+			if(!admin.getPassword().equals(password)){
+				throw new PermissionDeniedException();
+			}
+		} catch (AdministradorNotFoundException e) {
+			throw new PermissionDeniedException();
+		}
 	}
 
 //	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
