@@ -1,13 +1,13 @@
 package exceptions;
 
-public class PermissionDaniedException extends Exception{
+public class PermissionDeniedException extends Exception{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public PermissionDaniedException(){
+	public PermissionDeniedException(){
 		super("Permissao negada");
 	}
 
