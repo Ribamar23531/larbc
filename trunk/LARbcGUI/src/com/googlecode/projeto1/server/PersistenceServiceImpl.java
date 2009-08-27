@@ -22,7 +22,7 @@ import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
 import facade.SystemFacade;
 import facade.SystemManager;
 
@@ -49,14 +49,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			float totalArea, int garageSpace, int bedroom, int suite,
 			int bathroom, String type, float price, int businessType) {
 		
-		List<ImmobileSolution> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
-										 neighborhood, street, name, builtArea, totalArea, 
-										 garageSpace, bedroom, suite, bathroom, type, price, businessType);
+//		List<ImmobileSolution> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
+//										 neighborhood, street, name, builtArea, totalArea, 
+//										 garageSpace, bedroom, suite, bathroom, type, price, businessType);
 		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
-		for (ImmobileSolution caso : results) {
-			returnedCases.add(this.getCaseBean(caso));
-		}
-		return returnedCases;
+//		for (ImmobileSolution caso : results) {
+//			returnedCases.add(this.getCaseBean(caso));
+//		}
+//		return returnedCases;
+		return null;
 	}
 
 	public List<CaseBean> doQuery(String state, String city,
@@ -64,15 +65,16 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			float totalArea, int garageSpace, int bedroom, int suite,
 			int bathroom, String type, float price, int businessType) {
 
-		List<ImmobileSolution> results = this.getSystemFacade().doQuery(state, city, 
-				 neighborhood, street, name, builtArea, totalArea, 
-				 garageSpace, bedroom, suite, bathroom, type, price, businessType);
-		
-		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
-		for (ImmobileSolution caso : results) {
-			returnedCases.add(this.getCaseBean(caso));
-		}
-		return returnedCases;
+//		List<ImmobileSolution> results = this.getSystemFacade().doQuery(state, city, 
+//				 neighborhood, street, name, builtArea, totalArea, 
+//				 garageSpace, bedroom, suite, bathroom, type, price, businessType);
+//		
+//		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
+//		for (ImmobileSolution caso : results) {
+//			returnedCases.add(this.getCaseBean(caso));
+//		}
+//		return returnedCases;
+		return null;
 	}
 
 	public void crateCaso(AdminBean admin, CaseBean caso) {
@@ -188,7 +190,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -201,7 +203,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CasoNotFoundException e) {
@@ -237,7 +239,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (LoginAlreadyRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -267,7 +269,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -277,7 +279,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public void updateCaso(AdminBean admin, CaseBean caso) {
 		try {
 			this.getSystemFacade().updateCaso(this.getAdmin(admin), this.getCaso(caso));
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AdministradorNotFoundException e) {
@@ -317,7 +319,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		try {
 			this.getSystemFacade().doLogin(login, password);
 			adminBean = getAdministrador(login);
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			return null;
 		}
 		return adminBean;
