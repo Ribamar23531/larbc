@@ -47,6 +47,40 @@ public class GerenteDeRBC {
 		}
 		return null;
 	}
+//<<<<<<< .mine
+
+//	public List<ImmobileSolution> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
+//			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
+//			 int bathroom, String type, float price, int businessType){
+//		try {
+//			this.casesRetriever.configure();
+//			QueryConfig queryConfigurer = new QueryConfig();
+//			queryConfigurer.setQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, 
+//					bedroom, suite, bathroom, type, price, businessType);
+//			CBRQuery query = queryConfigurer.getQuery(); 
+//			this.casesRetriever.preCycle();
+//			this.casesRetriever.cycle(query);
+//			Collection<RetrievalResult> results = this.casesRetriever.getResults();
+//			Collection<CBRCase> selectedcases = SelectCases.selectTopK(results, resultNumber);
+//			List<ImmobileSolution> result = new ArrayList<ImmobileSolution>();
+//			for (CBRCase case1 : selectedcases) {
+//				result.add((ImmobileSolution) case1.getSolution());
+//			}
+//			return result;
+//		} catch (ExecutionException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		return null;
+//	}
+
+//	public List<ImmobileSolution> doQuery(String state, String city,
+//			String neighborhood, String street, String name, float builtArea,
+//			float totalArea, int garageSpace, int bedroom, int suite,
+//			int bathroom, String type, float price, int businessType) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
@@ -70,6 +104,31 @@ public class GerenteDeRBC {
 		}
 		return null;
 	}
+	
+//=======
+	
+//	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
+//			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
+//			 int bathroom, String type, float price, int businessType){
+//		try {
+//			this.casesRetriever.configure();
+//			QueryConfig queryConfigurer = new QueryConfig();
+//			queryConfigurer.setQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, 
+//					bedroom, suite, bathroom, type, price, businessType);
+//			CBRQuery query = queryConfigurer.getQuery(); 
+//			this.casesRetriever.preCycle();
+//			this.casesRetriever.cycle(query);
+//			Collection<RetrievalResult> results = this.casesRetriever.getResults();
+//			List<Caso> result = new ArrayList<Caso>();
+//			for (RetrievalResult case1 : results) {
+//				result.add(this.getCaso((ImmobileSolution)case1.get_case().getSolution()));
+//			}
+//			return result;
+//		} catch (ExecutionException e1) {
+//			e1.printStackTrace();
+//		}
+//		return null;
+//	}
 	
 	
 	

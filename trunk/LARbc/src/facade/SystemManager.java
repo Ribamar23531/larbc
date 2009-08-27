@@ -6,6 +6,7 @@ import persistence.GerenteDeEMail;
 import persistence.GerenteDeListagens;
 import persistence.GerenteDePersistencia;
 import rbcCycle.GerenteDeRBC;
+import rbcCycle.caseElement.ImmobileSolution;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -16,7 +17,8 @@ import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
+
 
 public class SystemManager implements SystemFacade {
 
@@ -31,10 +33,12 @@ public class SystemManager implements SystemFacade {
 		this.listingManager = new GerenteDeListagens();
 		this.mailManager = new GerenteDeEMail();
 	}
+
 //	@Override
 //	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {		
 //		this.persistenceManager.verifyAdministrador(login, password);
 //	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -56,12 +60,18 @@ public class SystemManager implements SystemFacade {
 		return this.persistenceManager.getAllCasos();
 	}
 
+	@Override
+	public Caso getCaso(long idCaso) throws CasoNotFoundException {
+		return this.persistenceManager.getCaso(idCaso);
+	}
 	/**
 	 * {@inheritDoc}
 	 */
 	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException {
 		return this.persistenceManager.getCasoOwner(caso);
 	}
+	
+//	public List<Caso> getCasos(String login) throws AdministradorNotFoundException;
 
 	/**
 	 * {@inheritDoc}
@@ -101,14 +111,14 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException {
+	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException {
 		this.persistenceManager.removeAdministrador(root, admin);
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
-	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDaniedException, CasoNotFoundException {
+	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException {
 		this.persistenceManager.removeCaso(admin, caso);
 	}
 
@@ -129,7 +139,7 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDaniedException {
+	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDeniedException {
 		this.persistenceManager.saveAdministrador(root, admin);
 	}
 
@@ -151,14 +161,14 @@ public class SystemManager implements SystemFacade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException {
+	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException {
 		this.persistenceManager.updateAdministrador(root, admin);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void updateCaso(Administrador admin, Caso caso) throws PermissionDaniedException, AdministradorNotFoundException, CasoNotFoundException {
+	public void updateCaso(Administrador admin, Caso caso) throws PermissionDeniedException, AdministradorNotFoundException, CasoNotFoundException {
 		this.persistenceManager.updateCaso(admin, caso);
 	}
 
@@ -176,6 +186,28 @@ public class SystemManager implements SystemFacade {
 		this.persistenceManager.updateFoto(oldPhoto, newPhoto);
 	}
 
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	public List<ImmobileSolution> doQuery(int resultNumber, String state,
+//			String city, String neighborhood, String street, String name,
+//			float builtArea, float totalArea, int garageSpace, int bedroom,
+//			int suite, int bathroom, String type, float price, int businessType) {
+//		return this.rbcManager.doQuery(resultNumber, state, city, neighborhood, street, name, builtArea, 
+//									   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
+//	}
+//
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	public List<ImmobileSolution> doQuery(String state, String city,
+//			String neighborhood, String street, String name, float builtArea,
+//			float totalArea, int garageSpace, int bedroom, int suite,
+//			int bathroom, String type, float price, int businessType) {
+//		// TODO Auto-generated method stub
+//		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
+//	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -196,19 +228,39 @@ public class SystemManager implements SystemFacade {
 		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, 
 				   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
 	}
+	
+	
 //	/**
 //	 * {@inheritDoc}
 //	 */
-//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException {
+//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDeniedException {
 //		this.persistenceManager.setPassword(oldPassword, newPassword);
 //	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	
+
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDeniedException {
+//		this.persistenceManager.setPassword(oldPassword, newPassword);
+
 	public List<String> listBairros() {
 		return this.listingManager.getBairros();
+
 	}
+//<<<<<<< .mine
+//	@Override
+//	public List<String> listBairros() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	@Override
+//	public List<String> listEstados() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//=======
 	
 	/**
 	 * {@inheritDoc}
@@ -217,11 +269,8 @@ public class SystemManager implements SystemFacade {
 		return this.listingManager.getEstados();
 	}
 
-	public Caso getCaso(long idCaso) throws CasoNotFoundException {
-		return this.persistenceManager.getCaso(idCaso);
-	}
 	@Override
-	public Administrador doLogin(String login, String password) throws PermissionDaniedException {		
+	public Administrador doLogin(String login, String password) throws PermissionDeniedException {		
 		return this.persistenceManager.doLogin(login, password);
 	}
 }

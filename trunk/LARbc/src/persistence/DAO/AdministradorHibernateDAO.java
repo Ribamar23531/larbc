@@ -9,7 +9,7 @@ import org.hibernate.classic.Session;
 import beans.Administrador;
 import exceptions.AdministradorNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
 
 public class AdministradorHibernateDAO extends HibernateDAO implements AdministradorDAO{	
 	
@@ -60,12 +60,12 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 	}
 	
 	@Override
-	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException, PermissionDaniedException {
+	public void removeAdministrador(Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException {
 		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
 		if(admin.isRoot()){
 			List<Administrador> roots = getRoots();
 			if(roots.size() == 1){
-				throw new PermissionDaniedException();
+				throw new PermissionDeniedException();
 			}
 		}
 		Session session = sf.openSession();
