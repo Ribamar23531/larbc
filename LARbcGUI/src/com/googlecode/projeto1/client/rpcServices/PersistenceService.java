@@ -42,7 +42,7 @@ public interface PersistenceService extends RemoteService {
 	
 	public List<PhotoBean> getFotos(CaseBean caso);
 	
-	public void removeAdministrador(AdminBean adminToRemove, String adminPassword);
+	public void removeAdministrador(AdminBean root, AdminBean adminToRemove);
 	
 	public void removeCaso(AdminBean admin, CaseBean caso);
 	
@@ -50,11 +50,11 @@ public interface PersistenceService extends RemoteService {
 	
 	public void removeFoto(CaseBean caso, String path);
 	
-	public void saveAdministrador(AdminBean adminToInsert, String adminPassword);
+	public void saveAdministrador(AdminBean root, AdminBean adminToInsert);
 	
 	public void saveDemanda(DemandBean demanda);
 	
-	public void updateAdministrador(AdminBean adminToUpdate, String adminPassword);
+	public void updateAdministrador(AdminBean root, AdminBean adminToUpdate);
 	
 	public void updateCaso(AdminBean admin, CaseBean caso);
 	

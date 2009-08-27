@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rbcCycle.caseElement.ImmobileSolution;
-
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -23,7 +22,7 @@ import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDeniedException;
+import exceptions.PermissionDaniedException;
 import facade.SystemFacade;
 import facade.SystemManager;
 
@@ -183,13 +182,13 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void removeAdministrador(AdminBean adminToRemove, String adminPassword) {
+	public void removeAdministrador(AdminBean root, AdminBean adminToRemove) {
 		try {
-			this.getSystemFacade().removeAdministrador(this.getAdmin(adminToRemove), adminPassword);
+			this.getSystemFacade().removeAdministrador(this.getAdmin(root), this.getAdmin(adminToRemove));
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDeniedException e) {
+		} catch (PermissionDaniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -202,7 +201,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDeniedException e) {
+		} catch (PermissionDaniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CasoNotFoundException e) {
@@ -232,13 +231,13 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void saveAdministrador(AdminBean adminToInsert, String adminPassword) {
+	public void saveAdministrador(AdminBean root, AdminBean adminToInsert) {
 		try {
-			this.getSystemFacade().saveAdministrador(this.getAdmin(adminToInsert), adminPassword);
+			this.getSystemFacade().saveAdministrador(this.getAdmin(root), this.getAdmin(adminToInsert));
 		} catch (LoginAlreadyRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDeniedException e) {
+		} catch (PermissionDaniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -261,14 +260,14 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 //	}
 
 
-	public void updateAdministrador(AdminBean adminToUpdate,
-			String adminPassword) {
+	public void updateAdministrador(AdminBean root,
+									AdminBean adminToUpdate) {
 		try {
-			this.getSystemFacade().updateAdministrador(this.getAdmin(adminToUpdate), adminPassword);
+			this.getSystemFacade().updateAdministrador(this.getAdmin(root), this.getAdmin(adminToUpdate));
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDeniedException e) {
+		} catch (PermissionDaniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -278,7 +277,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public void updateCaso(AdminBean admin, CaseBean caso) {
 		try {
 			this.getSystemFacade().updateCaso(this.getAdmin(admin), this.getCaso(caso));
-		} catch (PermissionDeniedException e) {
+		} catch (PermissionDaniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AdministradorNotFoundException e) {
@@ -316,9 +315,9 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public AdminBean doLogin(String login, String password) {
 		AdminBean adminBean = null;
 		try {
-			this.getSystemFacade().verifyLogin(login, password);
-			AdminBean admin = getAdministrador(login);
-		} catch (PermissionDeniedException e) {
+			this.getSystemFacade().doLogin(login, password);
+			adminBean = getAdministrador(login);
+		} catch (PermissionDaniedException e) {
 			return null;
 		}
 		return adminBean;
