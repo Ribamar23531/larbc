@@ -15,7 +15,7 @@ import beans.Administrador;
 import beans.Caso;
 import exceptions.AdministradorNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
-import exceptions.PermissionDaniedException;
+import exceptions.PermissionDeniedException;
 
 public class OneFieldQueryTest {
 	private static GerenteDePersistencia persistenceManager;
@@ -115,7 +115,7 @@ public class OneFieldQueryTest {
 		} catch (LoginAlreadyRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (PermissionDaniedException e) {
+		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
