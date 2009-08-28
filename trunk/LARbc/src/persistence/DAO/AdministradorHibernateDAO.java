@@ -86,11 +86,11 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
         Query query = session.getNamedQuery("administrador.login");
         query.setString("login", login);
         List<Administrador> administradores = query.list();
+        transaction.commit();
+        session.close();
         if(administradores.size() == 0){
             throw new AdministradorNotFoundException();
         }
-        transaction.commit();
-        session.close();
         return administradores.get(0);
 	}
 	
