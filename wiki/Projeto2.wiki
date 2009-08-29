@@ -2,10 +2,10 @@
 
   *  A interface será melhor organizada. (Na fase de planejamento, o tempo de desenvolvimento da interface gráfica foi mal dimensionado)
 
-  *  A função de similaridade para a avaliar a localização será melhor trabalhada. (possibilidade de uso de geo-referenciamento para avaliar a localização considerando elementos próximos)
+  *  A função de similaridade para a avaliar a localização será melhor trabalhada. (uso de geo-referenciamento para avaliar a localização considerando elementos próximos)
 
   *  Refatoramento do código
 
-  *  Possível utilização de redes neurais (Analisar viabilidade)
-
   *  Refinamento do cálculo do grau de similaridade
+
+O arquivo contendo o planejamento completo do nosso projeto pode ser visto [http://larbc.googlecode.com/files/Planejamento%20-%20projeto%202.pdf [aqui]].
