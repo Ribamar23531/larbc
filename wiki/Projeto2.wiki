@@ -8,4 +8,4 @@
 
   *  Refinamento do cálculo do grau de similaridade
 
-O arquivo contendo o planejamento completo do nosso projeto pode ser visto [http://larbc.googlecode.com/files/Planejamento%20-%20projeto%202.pdf [aqui]].
+*O arquivo contendo o planejamento completo do nosso projeto pode ser visto [http://larbc.googlecode.com/files/Planejamento%20-%20projeto%202.pdf [aqui]].*
