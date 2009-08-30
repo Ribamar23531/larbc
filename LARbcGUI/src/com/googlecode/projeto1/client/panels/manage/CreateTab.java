@@ -36,10 +36,12 @@ public class CreateTab extends AbsolutePanel{
 	private TextBox qteBathroomsTextBox;
 	private ListBox typeComboBox;
 	private TextBox priceTextBox;
+	private MappingWindow mappingWindow;
 	private Button criarButton;
 	
 	public CreateTab(){
-		super();		
+		super();
+		mappingWindow = new MappingWindow();
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);
@@ -183,8 +185,29 @@ public class CreateTab extends AbsolutePanel{
 			criarButton = getCreateButton();
 			this.add(criarButton, 361, 218);
 		}
+		{
+			Button mapButton = getMapButton();
+			this.add(mapButton, 157, 218);
+			mapButton.setSize("189px", "34px");
+		}
 		
 	}
+
+	
+
+	private Button getMapButton() {
+		Button button = new Button("Ajustar Coordenadas");
+		button.addClickListener(new ClickListener() {
+
+			public void onClick(Widget arg0) {
+				mappingWindow.show();				
+			}
+			
+		});
+		return button;
+	}
+
+
 
 	private Button getCreateButton() {
 		Button button = new Button("Criar");
@@ -217,21 +240,7 @@ public class CreateTab extends AbsolutePanel{
 
 					public void onSuccess(String arg0) {
 						MessageBox.alert("Caso armazenado com sucesso");
-						PanelSwitcher.switchPanel(new ManagePanel());
-//						cityTextBox.setText("");
-//						neighborhoodTextBox.setText("");
-//						numberTextBox.setText("");
-//						stateListBox.setSelectedIndex(0);
-//						streetTextBox.setText("");
-//						nameTextBox.setText("");
-//						areaConstruidaTextBox.setText("");
-//						areaTotalTextBox.setText("");
-//						garageTextBox.setText("");
-//						qteBedroomsTextBox.setText("");
-//						qteSuitesTextBox.setText("");
-//						qteBathroomsTextBox.setText("");
-//						typeComboBox.setSelectedIndex(0);
-//						priceTextBox.setText("");				
+						PanelSwitcher.switchPanel(new ManagePanel());	
 					}
 				});
 				
