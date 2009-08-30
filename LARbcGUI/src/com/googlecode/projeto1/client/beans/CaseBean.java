@@ -23,6 +23,7 @@ public class CaseBean implements Serializable{
 	private String type;
 	private float price;
 	private int businessType;
+	private String coordinates;
 	
 	public CaseBean(){}
 	
@@ -153,6 +154,14 @@ public class CaseBean implements Serializable{
 	public void setBusinessType(int businessType) {
 		this.businessType = businessType;
 	}
+	
+	public void setCoordinates(String coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public String getCoordinates() {
+		return coordinates;
+	}
 
 	public String toString(){
 //		String newLine = System.getProperty("line.separator");
@@ -174,4 +183,5 @@ public class CaseBean implements Serializable{
 						"Business type: " + getBusinessType() + newLine;
 		return result;
 	}
+	
 }

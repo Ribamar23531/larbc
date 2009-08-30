@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
+import com.googlecode.projeto1.client.panels.modality.SelectedLocation;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
@@ -35,13 +36,15 @@ public class CreateTab extends AbsolutePanel{
 	private TextBox qteSuitesTextBox;
 	private TextBox qteBathroomsTextBox;
 	private ListBox typeComboBox;
-	private TextBox priceTextBox;
+	private TextBox priceTextBox;	
 	private MappingWindow mappingWindow;
 	private Button criarButton;
+	private Button mapButton;
 	
 	public CreateTab(){
-		super();
+		super();		
 		mappingWindow = new MappingWindow();
+		mappingWindow.setClosable(false);
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);
@@ -60,6 +63,8 @@ public class CreateTab extends AbsolutePanel{
 		}
 		{
 			cityTextBox = new TextBox();
+			cityTextBox.setText("Campina Grande");
+			cityTextBox.setEnabled(false);
 			this.add(cityTextBox, 65, 5);
 			cityTextBox.setSize("238px", "22px");
 		}
@@ -87,9 +92,12 @@ public class CreateTab extends AbsolutePanel{
 			PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
 				
 				public void onSuccess(List<String> states) {
+					states.add(0, "UF");
 					for (String state : states) {
 						stateListBox.addItem(state);
 					}
+					stateListBox.setSelectedIndex(15);
+					stateListBox.setEnabled(false);
 				}
 				
 				public void onFailure(Throwable arg0) {
@@ -186,7 +194,7 @@ public class CreateTab extends AbsolutePanel{
 			this.add(criarButton, 361, 218);
 		}
 		{
-			Button mapButton = getMapButton();
+			mapButton = getMapButton();
 			this.add(mapButton, 157, 218);
 			mapButton.setSize("189px", "34px");
 		}
@@ -199,7 +207,7 @@ public class CreateTab extends AbsolutePanel{
 		Button button = new Button("Ajustar Coordenadas");
 		button.addClickListener(new ClickListener() {
 
-			public void onClick(Widget arg0) {
+			public void onClick(Widget arg0) {				
 				mappingWindow.show();				
 			}
 			
@@ -214,39 +222,135 @@ public class CreateTab extends AbsolutePanel{
 		button.addClickListener(new ClickListener() {
 			
 			public void onClick(Widget arg0) {
-				CaseBean caseBean = new CaseBean();
-				caseBean.setCity(cityTextBox.getText());
-				caseBean.setNeighborhood(neighborhoodTextBox.getText());
-				caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
-//				caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
-				caseBean.setState("state");
-				caseBean.setStreet(streetTextBox.getText());
-				caseBean.setName(nameTextBox.getText());
-				caseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
-				caseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
-				caseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
-				caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
-				caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
-				caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
-//				caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
-				caseBean.setType("type");
-				caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));				
-				PERSISTENCE_SERVICE.crateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
+				if(allFilled()){
+					CaseBean caseBean = new CaseBean();
+					caseBean.setCity(cityTextBox.getText());
+					caseBean.setNeighborhood(neighborhoodTextBox.getText());
+					caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
+//					caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
+					caseBean.setState("state");
+					caseBean.setStreet(streetTextBox.getText());
+					caseBean.setName(nameTextBox.getText());
+					caseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
+					caseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
+					caseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
+					caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
+					caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
+					caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
+//					caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
+					caseBean.setType("type");
+					caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));				
+					PERSISTENCE_SERVICE.crateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
 
-					public void onFailure(Throwable arg0) {
-						MessageBox.alert("Houve problemas durante o armazenamento desse caso.");
-						
-					}
+						public void onFailure(Throwable arg0) {
+							MessageBox.alert("Houve problemas durante o armazenamento desse caso.");
+							
+						}
 
-					public void onSuccess(String arg0) {
-						MessageBox.alert("Caso armazenado com sucesso");
-						PanelSwitcher.switchPanel(new ManagePanel());	
-					}
-				});
+						public void onSuccess(String arg0) {
+							MessageBox.alert("Caso armazenado com sucesso");
+							PanelSwitcher.switchPanel(new ManagePanel());	
+						}
+					});
+				}				
 				
 			}
+			
 		});
 		return button;
+	}
+	
+	private boolean allFilled() {
+		String message = "Favor digitar ";		
+		if(isEmpty(cityTextBox)){
+			MessageBox.alert(message + "a cidade.");
+//			fields.add("Cidade");
+			return false;
+		}
+		if(isEmpty(neighborhoodTextBox)){
+			MessageBox.alert(message + "o bairro.");
+//			fields.add("Bairro");
+			return false;
+		}
+		if(isEmpty(numberTextBox)){
+			MessageBox.alert(message + "o número.");
+//			fields.add("Número");
+			return false;
+		}
+		if(stateListBox.getSelectedIndex() == 0){
+			MessageBox.alert(message + "o estado.");
+//			fields.add("Estado");
+			return false;
+		}
+		if(isEmpty(streetTextBox)){
+			MessageBox.alert(message + "a rua.");
+			return false;
+		}
+		if(!isFloatFormat(areaConstruidaTextBox)){
+			MessageBox.alert(message + "a área construída.");
+			return false;
+		}
+		if(!isFloatFormat(areaTotalTextBox)){
+			MessageBox.alert(message + "a área total.");
+			return false;
+		}
+		if(!isIntFormat(garageTextBox)){
+			MessageBox.alert(message + "a quantidade de garagens.");
+			return false;
+		}
+		if(!isIntFormat(qteBedroomsTextBox)){
+			MessageBox.alert(message + "a quantidade de quartos.");
+			return false;
+		}
+		if(!isIntFormat(qteSuitesTextBox)){
+			MessageBox.alert(message + "a quantidade de suítes.");
+			return false;
+		}
+		if(!isIntFormat(qteBathroomsTextBox)){
+			MessageBox.alert(message + "a quantidade de banheiros.");
+			return false;
+		}
+//		if(typeComboBox.getSelectedIndex() == 0){
+//			fields.add(message + "Tipo de Negócio");
+//			result = false;
+//		}
+		if(!isFloatFormat(priceTextBox)){
+			MessageBox.alert(message + "o preço.");
+			return false;
+		}
+		if(SelectedLocation.getLocation().equals("")){
+			MessageBox.alert("Favor ajustar coordenadas.");
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isIntFormat(TextBox textBox) {
+		if(isEmpty(textBox)){
+			return false;
+		}
+		try{
+			Integer.parseInt(textBox.getText());					
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isFloatFormat(TextBox textBox) {
+		if(isEmpty(textBox)){
+			return false;
+		}
+		try{
+			Float.parseFloat(textBox.getText());					
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isEmpty(TextBox textBox) {
+		return textBox.getText().equals("");		
 	}
 
 }
