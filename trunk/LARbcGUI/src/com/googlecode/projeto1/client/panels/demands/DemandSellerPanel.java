@@ -81,7 +81,7 @@ public class DemandSellerPanel extends Panel{
 		textRua = new TextBox();
 		rootPanel.add(textRua, 91, 111);
 		textRua.setSize("278px", "21px");
-		Label rua = new Label("Nome da Rua:");
+		Label rua = new Label("Nome da rua:");
 		rootPanel.add(rua, 17, 114);
 		rua.setSize("127px", "18px");
 		
@@ -113,7 +113,7 @@ public class DemandSellerPanel extends Panel{
 		textAreaConstruida = new TextBox();
 		rootPanel.add(textAreaConstruida, 108, 222);
 		textAreaConstruida.setSize("108px", "21px");
-		Label lblreaConstruda = new Label("Área Construída:");
+		Label lblreaConstruda = new Label("Área construída:");
 		rootPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("127px", "18px");
 		
@@ -121,7 +121,7 @@ public class DemandSellerPanel extends Panel{
 		textGaragem = new TextBox();
 		rootPanel.add(textGaragem, 121, 248);
 		textGaragem.setSize("146px", "21px");
-		Label lblVagasNaGaragem = new Label("Vagas na Garagem:");
+		Label lblVagasNaGaragem = new Label("Vagas na garagem:");
 		rootPanel.add(lblVagasNaGaragem, 17, 251);
 		lblVagasNaGaragem.setSize("167px", "18px");
 		
@@ -190,7 +190,7 @@ public class DemandSellerPanel extends Panel{
 		textAreaTotal = new TextBox();
 		rootPanel.add(textAreaTotal, 290, 222);
 		textAreaTotal.setSize("108px", "21px");
-		Label lblreaTotal = new Label("Área Total:");
+		Label lblreaTotal = new Label("Área total:");
 		rootPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("91px", "18px");
 		
@@ -206,7 +206,7 @@ public class DemandSellerPanel extends Panel{
 		textBanheiros = new TextBox();
 		rootPanel.add(textBanheiros, 113, 303);
 		textBanheiros.setSize("78px", "21px");
-		Label lblBanheirosSociais = new Label("Banheiros Sociais:");
+		Label lblBanheirosSociais = new Label("Banheiros sociais:");
 		rootPanel.add(lblBanheirosSociais, 17, 306);
 		lblBanheirosSociais.setSize("151px", "24px");
 		
@@ -260,7 +260,7 @@ public class DemandSellerPanel extends Panel{
 					builtArea = Float.parseFloat(textAreaConstruida.getText());					
 				}catch(Exception e){
 					if(!textAreaConstruida.getText().equals("")){
-						MessageBox.alert(message + "Área Construída");
+						MessageBox.alert(message + "Área construída");
 						return;
 					}
 				}
@@ -276,7 +276,7 @@ public class DemandSellerPanel extends Panel{
 					bathroom = Integer.parseInt(textBanheiros.getText());					
 				}catch(Exception e){
 					if(!textBanheiros.getText().equals("")){
-						MessageBox.alert(message + "Banheiros Sociais");
+						MessageBox.alert(message + "Banheiros sociais");
 						return;
 					}
 				}				
@@ -297,7 +297,7 @@ public class DemandSellerPanel extends Panel{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
 				}catch(Exception e){
 					if(!textAreaTotal.getText().equals("")){
-						MessageBox.alert(message + "Área Total");
+						MessageBox.alert(message + "Área total");
 						return;
 					}
 				}
