@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
-import com.googlecode.projeto1.client.panels.modality.SelectedLocation;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
@@ -43,8 +42,7 @@ public class CreateTab extends AbsolutePanel{
 	
 	public CreateTab(){
 		super();		
-		mappingWindow = new MappingWindow();
-		mappingWindow.setClosable(false);
+		mappingWindow = new MappingWindow();		
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);

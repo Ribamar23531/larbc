@@ -1,4 +1,4 @@
-package com.googlecode.projeto1.client.panels.modality;
+package com.googlecode.projeto1.client.panels.manage;
 
 public class SelectedLocation {
 	
