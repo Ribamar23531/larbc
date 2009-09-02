@@ -28,7 +28,7 @@ public class Like implements LocalSimilarityFunction {
 	}
 
 	/**
-	 * Verify if the given arguments are compatibles for this funcion.
+	 * Verify if the given arguments are compatibles for this function.
 	 * @param caseObject The object from the case to be verified.
 	 * @param queryObject The object from the query to be verified.
 	 * @return A boolean value indicating if the two objects are compatibles for this similarity 
@@ -90,14 +90,4 @@ public class Like implements LocalSimilarityFunction {
 		}
 		return similarities;
 	}
-	
-	public static void main(String[] args) {
-		String test1 = " aaa ";
-		String test2 = "aaa ";
-		String test3 = " aaa";
-		String test4 = " a  a  a ";
-		String test5 = " a                        aa ";
-		String test6 = "aa                       a";
-	}
-
 }
