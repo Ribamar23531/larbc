@@ -24,7 +24,7 @@ public class NorthModalityPanel extends Panel{
 		createManagerButton();
 		createSelectedManagerButton();
 
-		//add wrapper panel just to dispaly the borders  
+		//add wrapper panel just to display the borders  
 		wrapperPanel = new Panel();
 		wrapperPanel.setLayout(new ColumnLayout());
 		Panel leftPanel = new Panel();
@@ -34,7 +34,7 @@ public class NorthModalityPanel extends Panel{
 		leftPanel.add(larbc);
 		rightPanel.add(managerButtonImage);
 		wrapperPanel.add(leftPanel, new ColumnLayoutData(.86));
-		wrapperPanel.add(rightPanel, new ColumnLayoutData(.10));  
+		wrapperPanel.add(rightPanel, new ColumnLayoutData(.14));  
 		this.add(wrapperPanel);
 		this.setAutoScroll(true);
 		this.loginWindow = new LoginWindow();
