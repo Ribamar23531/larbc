@@ -1,15 +1,15 @@
 package com.googlecode.projeto1.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.googlecode.projeto1.client.panels.welcome.WelcomePanel;
+import com.googlecode.projeto1.client.panels.manage.ManagePanel;
 
 public class LARbc implements EntryPoint {
 	
 	
 
 	public void onModuleLoad() {
-//		PanelSwitcher.switchPanel(new ManagePanel());
-		PanelSwitcher.switchPanel(new WelcomePanel());
+		PanelSwitcher.switchPanel(new ManagePanel());
+//		PanelSwitcher.switchPanel(new WelcomePanel());
 //		PanelSwitcher.switchPanel(new ModalityPanel());
 //		PanelSwitcher.switchPanel(new LoginWindowPanel());
 //		PanelSwitcher.switchPanel(new NorthModalityPanel());

@@ -1,11 +1,57 @@
 package com.googlecode.projeto1.client.panels;
 
+import java.util.List;
+
+import com.googlecode.projeto1.client.panels.exceptions.FieldsNotFilledExeption;
+
 public class FieldsChecker {
 	
 	//TODO CLASSE AINDA EM CONSTRUÇÃO
 	
-	public void checkFields(){
+	public void checkFields(List<String[]> fields) throws FieldsNotFilledExeption{
+		String message = "Os seguintes campos não foram preenchidos adequadamente:";
+		boolean mustThrowException = false;
+		for (String[] tuple : fields) {
+			String type = tuple[0];
+			String value = tuple[1];
+			String field = tuple[2];
+			if(type.equals("String") && value.isEmpty()){
+				message += "\n " + field;
+				mustThrowException = true;
+			}
+		}
+		if(mustThrowException){
+			throw new FieldsNotFilledExeption(message);
+		}		
 		
+	}
+	
+//	private boolean isIntFormat(TextBox textBox) {
+//		if(isEmpty(textBox)){
+//			return false;
+//		}
+//		try{
+//			Integer.parseInt(textBox.getText());					
+//		}catch(Exception e){
+//			return false;
+//		}
+//		return true;
+//	}
+//
+//	private boolean isFloatFormat(TextBox textBox) {
+//		if(isEmpty(textBox)){
+//			return false;
+//		}
+//		try{
+//			Float.parseFloat(textBox.getText());					
+//		}catch(Exception e){
+//			return false;
+//		}
+//		return true;
+//	}
+
+	private boolean isEmpty(String value) {
+		return value.equals("");		
 	}
 	
 //	String message = "Favor digitar ";		
