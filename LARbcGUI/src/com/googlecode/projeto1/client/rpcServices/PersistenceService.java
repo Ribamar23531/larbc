@@ -20,8 +20,6 @@ public interface PersistenceService extends RemoteService {
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType);
 	
-//	public String verifyAdministrador(String login, String password);
-	
 	public AdminBean doLogin(String login, String password);
 	
 	public void createCaso(AdminBean admin, CaseBean caso); 
