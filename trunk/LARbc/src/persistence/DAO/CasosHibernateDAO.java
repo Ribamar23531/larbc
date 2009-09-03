@@ -21,29 +21,23 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	
 	public CasosHibernateDAO(){
 		super(false);
-	}
-	
-//	INSERT INTO wikicrimes.wikicrimestable (tipocrime, tipolocal, data, horario, descricao, armautilizada, qtevitimas, qteassaltantes, localizacao)
-//	VALUES('Assalto a pessoa','avenida','2009-06-14','15:30','assalto da porra!!!','canhao',20,1, GeometryFromText('POINT(10.0 10.0)',-1));
+	}	
 	
 	@Override
-	public void saveCaso(Caso caso) {		
+	public void saveCaso(Caso caso) {
+		//creates the case
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();		
 		session.save(caso);		
 		transaction.commit();
 		session.close();
 		
+		//places the geometry column in the case witch has just been saved
 		session = sf.openSession();		
-//		String sqlQuery = 	"INSERT INTO larbc_db." + HibernateConfig.getCurrentSchema() + ".casos (location) " +
-//							"VALUES (GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1))" +
-//							"WHERE  ;";
-//		UPDATE films SET kind = 'Dramatic' WHERE kind = 'Drama';
-
 		String sqlQuery = 	"UPDATE larbc_db." + HibernateConfig.getCurrentSchema() + ".casos " +
-							"SET location = 'GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1)' " +
-							"WHERE id_caso = '" + caso.getIdCaso() + "';";
-		session.createSQLQuery(sqlQuery).list();		
+							"SET location = GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1) " +
+							"WHERE id_caso = " + caso.getIdCaso() + ";";
+		session.createSQLQuery(sqlQuery).executeUpdate();	
 		session.close();
 	}
 	
