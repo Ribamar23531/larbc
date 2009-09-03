@@ -2,7 +2,6 @@ package facade;
 
 import java.util.List;
 
-import rbcCycle.caseElement.ImmobileSolution;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -18,33 +17,21 @@ import exceptions.PermissionDeniedException;
 public interface SystemFacade {
 	
 //=== Administrator operations ===
-//<<<<<<< .mine
-//	public void verifyLogin(String login, String password) throws PermissionDeniedException;
-//=======
-//	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException;
+	public Administrador doLogin(String login, String password) throws PermissionDaniedException;
 	
-//<<<<<<< .mine
-//	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDeniedException;
-//=======
-	public Administrador doLogin(String login, String password) throws PermissionDeniedException;
-//>>>>>>> .r246
-//	
-//<<<<<<< .mine
-//	public void removeAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDeniedException;
-//=======
-	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDeniedException;
-
-	public void removeAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException;
+	public void saveAdministrador(Administrador admin, String adminPassword) throws LoginAlreadyRegisteredException, PermissionDaniedException;
 	
-	public void updateAdministrador(Administrador root, Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException;
+	public void removeAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
+	
+	public void updateAdministrador(Administrador admin, String adminPassword) throws AdministradorNotFoundException, PermissionDaniedException;
 	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
 	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException;
 	
-	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException;
+	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDaniedException, CasoNotFoundException;
 	
-	public void updateCaso(Administrador admin, Caso caso) throws PermissionDeniedException, AdministradorNotFoundException, CasoNotFoundException;
+	public void updateCaso(Administrador admin, Caso caso) throws PermissionDaniedException, AdministradorNotFoundException, CasoNotFoundException;
 	
 	public List<Caso> getCasos(String login) throws AdministradorNotFoundException;
 	
@@ -77,40 +64,23 @@ public interface SystemFacade {
 	
 	public Caso getCaso(long idCaso) throws CasoNotFoundException;
 	
-
 //=== Query operation ===
 	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType);
-//<<<<<<< .mine
-//	
-//	public List<ImmobileSolution> doQuery(String state, String city, String neighborhood, String street, String name,
-//			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-//			 int bathroom, String type, float price, int businessType);
-//=======
 	
 	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, int businessType);
-//	public List<ImmobileSolution> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
-//			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-//			 int bathroom, String type, float price, int businessType);
-	
-//	public List<ImmobileSolution> doQuery(String state, String city, String neighborhood, String street, String name,
-//			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-//			 int bathroom, String type, float price, int businessType);
-
 
 //=== Password operation ===
-//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDeniedException;
-
-
-
+//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDaniedException;
 	
 //===Listing operation ===
-	public List<String> listBairros();	
-
+	public List<String> listBairros();
+	
 	public List<String> listEstados();
+	
 	
 	
 }
