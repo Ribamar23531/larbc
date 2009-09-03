@@ -48,7 +48,7 @@ public class CreateTab extends AbsolutePanel{
 	
 	public CreateTab(){
 		super();		
-		mappingWindow = new MappingWindow();		
+		mappingWindow = new MappingWindow(true);		
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);

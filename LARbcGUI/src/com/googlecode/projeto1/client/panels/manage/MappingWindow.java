@@ -18,10 +18,16 @@ public class MappingWindow extends Window{
 	
 	private MapWidget myMap;
 	private int qteMarkers;	
+	private boolean editable;
 	
-	public MappingWindow(){
-		super();		
-		this.setTitle("Selecione o local do imóvel");		
+	public MappingWindow(boolean editable){
+		super();
+		this.editable = editable;
+		if(editable){
+			this.setTitle("Selecione o local do imóvel");			
+		}else{
+			this.setTitle("Mapa");
+		}
 		this.setClosable(true);
 		this.setPlain(true);		
 		this.setPaddings(5);  
@@ -45,39 +51,41 @@ public class MappingWindow extends Window{
 		map.setUIToDefault();
 		map.setContinuousZoom(true);
 		map.setScrollWheelZoomEnabled(true);
-		map.addMapClickHandler(new MapClickHandler() {
-			public void onClick(final MapClickEvent clickEvent) {
-				if(qteMarkers == 0){
-					qteMarkers++;
-					Marker marker = new Marker(clickEvent.getLatLng(), getMarkerOptions());
-					marker.addMarkerDragEndHandler(getDragEndHandler(marker));
-					map.addOverlay(marker);
-					getLocation(marker);
-				}
-			}
-
-			private MarkerDragEndHandler getDragEndHandler(final Marker marker) {				
-				return new MarkerDragEndHandler(){
-
-					public void onDragEnd(MarkerDragEndEvent event) {
+		if(editable){
+			map.addMapClickHandler(new MapClickHandler() {
+				public void onClick(final MapClickEvent clickEvent) {
+					if(qteMarkers == 0){
+						qteMarkers++;
+						Marker marker = new Marker(clickEvent.getLatLng(), getMarkerOptions());
+						marker.addMarkerDragEndHandler(getDragEndHandler(marker));
+						map.addOverlay(marker);
 						getLocation(marker);
 					}
-					
-				};
-			}
-			
-			private void getLocation(Marker marker){
-				String location = marker.getLatLng().toString();
-				SelectedLocation.setLocation(location.substring(1, location.length() - 1));
-			}
-
-			private MarkerOptions getMarkerOptions() {
-				MarkerOptions options = MarkerOptions.newInstance();
-				options.setDraggable(true);
-				return options;
-			}
-			
-		});
+				}
+				
+				private MarkerDragEndHandler getDragEndHandler(final Marker marker) {				
+					return new MarkerDragEndHandler(){
+						
+						public void onDragEnd(MarkerDragEndEvent event) {
+							getLocation(marker);
+						}
+						
+					};
+				}
+				
+				private void getLocation(Marker marker){
+					String location = marker.getLatLng().toString();
+					SelectedLocation.setLocation(location.substring(1, location.length() - 1));
+				}
+				
+				private MarkerOptions getMarkerOptions() {
+					MarkerOptions options = MarkerOptions.newInstance();
+					options.setDraggable(true);
+					return options;
+				}
+				
+			});			
+		}
 		return map;
 	}
 
@@ -85,7 +93,7 @@ public class MappingWindow extends Window{
 		Button okButton = new Button("Ok");
 		okButton.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
-				if(SelectedLocation.getLocation().equals("")){
+				if(SelectedLocation.getLocation().equals("") && editable){
 					MessageBox.alert("Favor ajustar coordenadas.");
 				}else{
 					hide();					
