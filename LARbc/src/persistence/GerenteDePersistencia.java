@@ -78,15 +78,6 @@ public class GerenteDePersistencia {
 			throw new PermissionDeniedException();
 		}
 	}
-	
-//<<<<<<< .mine
-//	public void setPassword(String oldPassword, String newPassword) throws PermissionDeniedException{
-//		verifyPermission(oldPassword);
-//		systemPasswordDAO.setPassword(newPassword);
-//	}
-//	
-//=======
-//>>>>>>> .r246
 	//=============================Operacoes sobre Administrador===============================\\	
 	
 	public void saveAdministrador(Administrador root, Administrador admin) throws LoginAlreadyRegisteredException, PermissionDeniedException/*, RequiredArgumentException*/{
@@ -220,9 +211,9 @@ public class GerenteDePersistencia {
 	}
 
 	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException {
-//		if(!getCasoOwner(caso).equals(admin)){
-//			throw new PermissionDaniedException();
-//		}
+		if(!getCasoOwner(caso).equals(admin)){
+			throw new PermissionDeniedException();
+		}
 		this.removeCaso(caso);
 	}
 
@@ -235,9 +226,9 @@ public class GerenteDePersistencia {
 	}
 
 	public void updateCaso(Administrador admin, Caso caso) throws PermissionDeniedException, AdministradorNotFoundException, CasoNotFoundException {
-//		if(!getCasoOwner(caso).equals(admin)){
-//			throw new PermissionDaniedException();
-//		}
+		if(!getCasoOwner(caso).equals(admin)){
+			throw new PermissionDeniedException();
+		}
 		this.casoDAO.updateCaso(caso);
 	}
 
@@ -256,19 +247,6 @@ public class GerenteDePersistencia {
 		}
 	}
 
-//	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {
-//		if(login.equals("admin")){
-//			if(systemPasswordDAO.getPassword().equals(password)){
-//				return;
-//			}else{
-//				throw new PermissionDaniedException();				
-//			}
-//		}
-//		Administrador admin = this.getAdministrador(login);
-//		if(!admin.getPassword().equals(password)){
-//			throw new PermissionDaniedException();
-//		}
-//	}
 	
 	public void eraseDirectory(String path){
 		File directory = new File(path);
