@@ -1,5 +1,6 @@
 package com.googlecode.projeto1.client.panels.manage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -13,9 +14,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
+import com.googlecode.projeto1.client.panels.FieldsChecker;
+import com.googlecode.projeto1.client.panels.WindowFieldsAlert;
+import com.googlecode.projeto1.client.panels.exceptions.FieldsNotFilledExeption;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.form.Label;
 
 public class CreateTab extends AbsolutePanel{
@@ -220,10 +226,25 @@ public class CreateTab extends AbsolutePanel{
 		button.addClickListener(new ClickListener() {
 			
 			public void onClick(Widget arg0) {
-				if(allFilled()){
+//				if(allFilled()){
+				List<String[]> fields = new ArrayList<String[]>();				
+				fields.add(getStrArray("String", cityTextBox, "Cidade"));					
+				fields.add(getStrArray("String", neighborhoodTextBox, "Bairro"));
+				fields.add(getStrArray("String", numberTextBox, "Número"));
+				fields.add(getStrArray("String", streetTextBox, "Rua"));
+				fields.add(getStrArray("float", areaConstruidaTextBox, "Area Construída"));
+				fields.add(getStrArray("float", areaTotalTextBox, "Area Total"));
+				fields.add(getStrArray("int", garageTextBox, "Vagas na Garagem"));
+				fields.add(getStrArray("int", qteBedroomsTextBox, "Qte de Quartos"));
+				fields.add(getStrArray("int", qteSuitesTextBox, "Qte de Suítes"));
+				fields.add(getStrArray("int", qteBathroomsTextBox, "Qte de Banheiros"));
+				fields.add(getStrArray("float", priceTextBox, "Preço"));
+				fields.add(getStrArray("String", SelectedLocation.getLocation(), "Coordenadas"));
+				try {
+					FieldsChecker.checkFields(fields);
 					CaseBean caseBean = new CaseBean();
-					caseBean.setCity(cityTextBox.getText());
-					caseBean.setNeighborhood(neighborhoodTextBox.getText());
+					caseBean.setCity(cityTextBox.getText());					 
+					caseBean.setNeighborhood(neighborhoodTextBox.getText());//					
 					caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
 //					caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
 					caseBean.setState("state");
@@ -237,8 +258,9 @@ public class CreateTab extends AbsolutePanel{
 					caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
 //					caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
 					caseBean.setType("type");
-					caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));				
-					PERSISTENCE_SERVICE.crateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
+					caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
+					
+					PERSISTENCE_SERVICE.createCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
 
 						public void onFailure(Throwable arg0) {
 							MessageBox.alert("Houve problemas durante o armazenamento desse caso.");
@@ -250,12 +272,28 @@ public class CreateTab extends AbsolutePanel{
 							PanelSwitcher.switchPanel(new ManagePanel());	
 						}
 					});
-				}				
+				} catch (FieldsNotFilledExeption e) {
+					new WindowFieldsAlert().show(e.getMessage());					
+//					e.printStackTrace();
+				}
+					
+//				}
+				
 				
 			}
 			
 		});
 		return button;
+	}
+	
+	private String[] getStrArray(String type, TextBox value, String field){
+		String[] result = {type, value.getText(), field};
+		return result;
+	}
+	
+	private String[] getStrArray(String type, String value, String field){
+		String[] result = {type, value, field};
+		return result;
 	}
 	
 	private boolean allFilled() {

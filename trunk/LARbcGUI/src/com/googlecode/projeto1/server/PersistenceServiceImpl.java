@@ -77,7 +77,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		return null;
 	}
 
-	public void crateCaso(AdminBean admin, CaseBean caso) {
+	public void createCaso(AdminBean admin, CaseBean caso) {
 		try {
 			this.getSystemFacade().createCaso(this.getAdmin(admin), this.getCaso(caso));
 		} catch (AdministradorNotFoundException e) {
