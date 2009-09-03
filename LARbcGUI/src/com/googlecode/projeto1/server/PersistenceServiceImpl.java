@@ -398,6 +398,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caso.setSuites(caseBean.getSuite());
 		caso.setAreaTotal(caseBean.getTotalArea());
 		caso.setTipo(caseBean.getType());
+		caso.setLocation(caseBean.getLocation());
 		return caso;
 	}
 	

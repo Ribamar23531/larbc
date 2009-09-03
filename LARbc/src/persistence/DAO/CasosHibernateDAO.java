@@ -6,6 +6,8 @@ import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
+import persistence.hibernate.HibernateConfig;
+
 import beans.Administrador;
 import beans.Caso;
 import beans.Foto;
@@ -21,14 +23,28 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		super(false);
 	}
 	
+//	INSERT INTO wikicrimes.wikicrimestable (tipocrime, tipolocal, data, horario, descricao, armautilizada, qtevitimas, qteassaltantes, localizacao)
+//	VALUES('Assalto a pessoa','avenida','2009-06-14','15:30','assalto da porra!!!','canhao',20,1, GeometryFromText('POINT(10.0 10.0)',-1));
+	
 	@Override
 	public void saveCaso(Caso caso) {		
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();		
-		session.save(caso);
+		session.save(caso);		
 		transaction.commit();
 		session.close();
 		
+		session = sf.openSession();		
+//		String sqlQuery = 	"INSERT INTO larbc_db." + HibernateConfig.getCurrentSchema() + ".casos (location) " +
+//							"VALUES (GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1))" +
+//							"WHERE  ;";
+//		UPDATE films SET kind = 'Dramatic' WHERE kind = 'Drama';
+
+		String sqlQuery = 	"UPDATE larbc_db." + HibernateConfig.getCurrentSchema() + ".casos " +
+							"SET location = 'GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1)' " +
+							"WHERE id_caso = '" + caso.getIdCaso() + "';";
+		session.createSQLQuery(sqlQuery).list();		
+		session.close();
 	}
 	
 	@Override

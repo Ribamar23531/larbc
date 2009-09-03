@@ -20,8 +20,6 @@ import com.googlecode.projeto1.client.panels.exceptions.FieldsNotFilledExeption;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
-import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.form.Label;
 
 public class CreateTab extends AbsolutePanel{
@@ -230,7 +228,7 @@ public class CreateTab extends AbsolutePanel{
 				List<String[]> fields = new ArrayList<String[]>();				
 				fields.add(getStrArray("String", cityTextBox, "Cidade"));					
 				fields.add(getStrArray("String", neighborhoodTextBox, "Bairro"));
-				fields.add(getStrArray("String", numberTextBox, "Número"));
+				fields.add(getStrArray("int", numberTextBox, "Número"));
 				fields.add(getStrArray("String", streetTextBox, "Rua"));
 				fields.add(getStrArray("float", areaConstruidaTextBox, "Area Construída"));
 				fields.add(getStrArray("float", areaTotalTextBox, "Area Total"));
@@ -259,6 +257,7 @@ public class CreateTab extends AbsolutePanel{
 //					caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
 					caseBean.setType("type");
 					caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
+					caseBean.setLocation(SelectedLocation.getLocation());
 					
 					PERSISTENCE_SERVICE.createCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
 
@@ -273,8 +272,7 @@ public class CreateTab extends AbsolutePanel{
 						}
 					});
 				} catch (FieldsNotFilledExeption e) {
-					new WindowFieldsAlert().show(e.getMessage());					
-//					e.printStackTrace();
+					new WindowFieldsAlert().show(e.getMessage());
 				}
 					
 //				}
@@ -294,99 +292,7 @@ public class CreateTab extends AbsolutePanel{
 	private String[] getStrArray(String type, String value, String field){
 		String[] result = {type, value, field};
 		return result;
-	}
+	}	
 	
-	private boolean allFilled() {
-		String message = "Favor digitar ";		
-		if(isEmpty(cityTextBox)){
-			MessageBox.alert(message + "a cidade.");
-//			fields.add("Cidade");
-			return false;
-		}
-		if(isEmpty(neighborhoodTextBox)){
-			MessageBox.alert(message + "o bairro.");
-//			fields.add("Bairro");
-			return false;
-		}
-		if(isEmpty(numberTextBox)){
-			MessageBox.alert(message + "o número.");
-//			fields.add("Número");
-			return false;
-		}
-		if(stateListBox.getSelectedIndex() == 0){
-			MessageBox.alert(message + "o estado.");
-//			fields.add("Estado");
-			return false;
-		}
-		if(isEmpty(streetTextBox)){
-			MessageBox.alert(message + "a rua.");
-			return false;
-		}
-		if(!isFloatFormat(areaConstruidaTextBox)){
-			MessageBox.alert(message + "a área construída.");
-			return false;
-		}
-		if(!isFloatFormat(areaTotalTextBox)){
-			MessageBox.alert(message + "a área total.");
-			return false;
-		}
-		if(!isIntFormat(garageTextBox)){
-			MessageBox.alert(message + "a quantidade de garagens.");
-			return false;
-		}
-		if(!isIntFormat(qteBedroomsTextBox)){
-			MessageBox.alert(message + "a quantidade de quartos.");
-			return false;
-		}
-		if(!isIntFormat(qteSuitesTextBox)){
-			MessageBox.alert(message + "a quantidade de suítes.");
-			return false;
-		}
-		if(!isIntFormat(qteBathroomsTextBox)){
-			MessageBox.alert(message + "a quantidade de banheiros.");
-			return false;
-		}
-//		if(typeComboBox.getSelectedIndex() == 0){
-//			fields.add(message + "Tipo de Negócio");
-//			result = false;
-//		}
-		if(!isFloatFormat(priceTextBox)){
-			MessageBox.alert(message + "o preço.");
-			return false;
-		}
-		if(SelectedLocation.getLocation().equals("")){
-			MessageBox.alert("Favor ajustar coordenadas.");
-			return false;
-		}
-		return true;
-	}
-
-	private boolean isIntFormat(TextBox textBox) {
-		if(isEmpty(textBox)){
-			return false;
-		}
-		try{
-			Integer.parseInt(textBox.getText());					
-		}catch(Exception e){
-			return false;
-		}
-		return true;
-	}
-
-	private boolean isFloatFormat(TextBox textBox) {
-		if(isEmpty(textBox)){
-			return false;
-		}
-		try{
-			Float.parseFloat(textBox.getText());					
-		}catch(Exception e){
-			return false;
-		}
-		return true;
-	}
-
-	private boolean isEmpty(TextBox textBox) {
-		return textBox.getText().equals("");		
-	}
 
 }
