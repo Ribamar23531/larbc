@@ -24,7 +24,7 @@ public interface PersistenceService extends RemoteService {
 	
 	public AdminBean doLogin(String login, String password);
 	
-	public void crateCaso(AdminBean admin, CaseBean caso); 
+	public void createCaso(AdminBean admin, CaseBean caso); 
 	
 	public AdminBean getAdministrador(String login);
 	

@@ -8,7 +8,7 @@ public class FieldsChecker {
 	
 	//TODO CLASSE AINDA EM CONSTRUÇÃO
 	
-	public void checkFields(List<String[]> fields) throws FieldsNotFilledExeption{
+	public static void checkFields(List<String[]> fields) throws FieldsNotFilledExeption{
 		String message = "Os seguintes campos não foram preenchidos adequadamente:";
 		boolean mustThrowException = false;
 		for (String[] tuple : fields) {
@@ -16,7 +16,13 @@ public class FieldsChecker {
 			String value = tuple[1];
 			String field = tuple[2];
 			if(type.equals("String") && value.isEmpty()){
-				message += "\n " + field;
+				message += "<br> *" + field;
+				mustThrowException = true;
+			}else if(type.equals("float") && !isFloatFormat(value)){
+				message += "<br> *" + field + " (valor numérico com ponto)";
+				mustThrowException = true;
+			}else if(type.equals("int") && !isIntFormat(value)){
+				message += "<br> *" + field + " (valor numérico)";
 				mustThrowException = true;
 			}
 		}
@@ -26,31 +32,31 @@ public class FieldsChecker {
 		
 	}
 	
-//	private boolean isIntFormat(TextBox textBox) {
-//		if(isEmpty(textBox)){
-//			return false;
-//		}
-//		try{
-//			Integer.parseInt(textBox.getText());					
-//		}catch(Exception e){
-//			return false;
-//		}
-//		return true;
-//	}
-//
-//	private boolean isFloatFormat(TextBox textBox) {
-//		if(isEmpty(textBox)){
-//			return false;
-//		}
-//		try{
-//			Float.parseFloat(textBox.getText());					
-//		}catch(Exception e){
-//			return false;
-//		}
-//		return true;
-//	}
+	private static boolean isIntFormat(String value) {
+		if(isEmpty(value)){
+			return false;
+		}
+		try{
+			Integer.parseInt(value);					
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
 
-	private boolean isEmpty(String value) {
+	private static boolean isFloatFormat(String value) {
+		if(isEmpty(value)){
+			return false;
+		}
+		try{
+			Float.parseFloat(value);					
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+
+	private static boolean isEmpty(String value) {
 		return value.equals("");		
 	}
 	

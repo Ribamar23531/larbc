@@ -22,7 +22,7 @@ public interface PersistenceServiceAsync {
 	
 	public void doLogin(String login, String password, AsyncCallback<AdminBean> callback);
 	
-	public void crateCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback); 
+	public void createCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback); 
 	
 	public void getAdministrador(String login, AsyncCallback<AdminBean> callback);
 	
