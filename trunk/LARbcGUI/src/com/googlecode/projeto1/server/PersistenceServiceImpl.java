@@ -250,18 +250,6 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		this.getSystemFacade().saveDemanda(this.getDemanda(demanda));
 	}
 
-
-//	public void setAdminPassword(String oldAdminPassword,
-//			String newAdminPassword) {
-//		try {
-//			this.getSystemFacade().setAdministrationPassword(oldAdminPassword, newAdminPassword);
-//		} catch (PermissionDeniedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
-
 	public void updateAdministrador(AdminBean root,
 									AdminBean adminToUpdate) {
 		try {
@@ -324,17 +312,6 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return adminBean;
 	}
-
-//	public String verifyAdministrador(String login, String password) {
-//		try {
-//			this.getSystemFacade().verifyAdministrador(login, password);
-//		} catch (PermissionDeniedException e) {
-//			return "NOT OK";
-//		} catch (AdministradorNotFoundException e) {
-//			return "NOT OK";
-//		}
-//		return "OK";
-//	}
 
 //=== Conversors ===	
 	
