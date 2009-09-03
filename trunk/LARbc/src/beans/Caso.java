@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -59,7 +60,10 @@ public class Caso{
 	@Column(updatable = true, nullable = false)
 	private float preco;	
 	@Column(updatable = true, nullable = false)
-	private int tipoNegocio;	
+	private int tipoNegocio;
+	@Transient
+	private String location;
+	
 	
 //	@ManyToOne(fetch = FetchType.EAGER)
 //	@JoinColumn(name="id_administrador", insertable=false, updatable=false, nullable=false)
@@ -181,6 +185,14 @@ public class Caso{
 
 	public long getIdAdministradorResponsavel() {
 		return idAdministradorResponsavel;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getLocation() {
+		return location;
 	}	
 	
 }
