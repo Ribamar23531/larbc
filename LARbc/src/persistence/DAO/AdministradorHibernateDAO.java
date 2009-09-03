@@ -40,7 +40,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
         List<Administrador> roots = getRoots();
         if(roots.size() == 0){
             try {
-				saveAdministrador(new Administrador("root", "root", "Root", "true"));
+				saveAdministrador(new Administrador("root", "root", "Root"));
 			} catch (LoginAlreadyRegisteredException e) {}
         }        
 		
