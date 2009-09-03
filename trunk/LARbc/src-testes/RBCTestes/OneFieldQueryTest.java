@@ -27,7 +27,7 @@ public class OneFieldQueryTest {
 	private static Caso getCaso1() {
 		String estado = Estado.PE.toString();
 		String cidade = "cidade";
-		String bairro = "ba�rro";
+		String bairro = "bairro";
 		String rua = "rua";
 		int numero = 4;
 		String nome = "nome";
@@ -146,7 +146,6 @@ public class OneFieldQueryTest {
 	public static void clean(){
 		persistenceManager.removeAllAdministradores();
 		persistenceManager.removeAllCasos();
-//		persistenceManager.resetSystemPassword();
 	}
 	
 	
