@@ -19,9 +19,11 @@ public class MappingWindow extends Window{
 	private MapWidget myMap;
 	private int qteMarkers;	
 	private boolean editable;
+	private Marker marker;
 	
 	public MappingWindow(boolean editable){
 		super();
+		SelectedLocation.setLocation("");
 		this.editable = editable;
 		if(editable){
 			this.setTitle("Selecione o local do imóvel");			
@@ -56,7 +58,7 @@ public class MappingWindow extends Window{
 				public void onClick(final MapClickEvent clickEvent) {
 					if(qteMarkers == 0){
 						qteMarkers++;
-						Marker marker = new Marker(clickEvent.getLatLng(), getMarkerOptions());
+						marker = new Marker(clickEvent.getLatLng(), getMarkerOptions());
 						marker.addMarkerDragEndHandler(getDragEndHandler(marker));
 						map.addOverlay(marker);
 						getLocation(marker);
@@ -102,6 +104,12 @@ public class MappingWindow extends Window{
 
 		});
 		return okButton;
-	}	
+	}
+	
+	public void clearMap(){
+		SelectedLocation.setLocation("");
+		qteMarkers = 0;
+		this.myMap.removeOverlay(marker);
+	}
 
 }

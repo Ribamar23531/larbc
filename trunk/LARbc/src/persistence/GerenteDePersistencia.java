@@ -211,9 +211,9 @@ public class GerenteDePersistencia {
 	}
 
 	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException {
-		if(!getCasoOwner(caso).equals(admin)){
-			throw new PermissionDeniedException();
-		}
+//		if(!getCasoOwner(caso).equals(admin)){
+//			throw new PermissionDeniedException();
+//		}
 		this.removeCaso(caso);
 	}
 
