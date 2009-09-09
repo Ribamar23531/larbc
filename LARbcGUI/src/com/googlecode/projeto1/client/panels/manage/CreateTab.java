@@ -268,7 +268,9 @@ public class CreateTab extends AbsolutePanel{
 
 						public void onSuccess(String arg0) {
 							MessageBox.alert("Caso armazenado com sucesso");
-							PanelSwitcher.switchPanel(new ManagePanel());	
+							PanelSwitcher.switchPanel(new ManagePanel());
+//							mappingWindow.clearMap();
+							mappingWindow = new MappingWindow(true);
 						}
 					});
 				} catch (FieldsNotFilledExeption e) {
