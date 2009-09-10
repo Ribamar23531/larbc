@@ -46,7 +46,7 @@ public class CreateTab extends AbsolutePanel{
 	
 	public CreateTab(){
 		super();		
-		mappingWindow = new MappingWindow(true);		
+		mappingWindow = MappingWindow.getInstance(true);
 		{
 			Label stateLabel = new Label("Estado:");
 			this.add(stateLabel, 308, 5);
@@ -269,8 +269,8 @@ public class CreateTab extends AbsolutePanel{
 						public void onSuccess(String arg0) {
 							MessageBox.alert("Caso armazenado com sucesso");
 							PanelSwitcher.switchPanel(new ManagePanel());
-//							mappingWindow.clearMap();
-							mappingWindow = new MappingWindow(true);
+							mappingWindow.clearMap();
+//							mappingWindow = new MappingWindow(true);
 						}
 					});
 				} catch (FieldsNotFilledExeption e) {
