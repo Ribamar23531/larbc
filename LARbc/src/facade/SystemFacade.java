@@ -1,5 +1,6 @@
 package facade;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import beans.Administrador;
@@ -77,6 +78,8 @@ public interface SystemFacade {
 	public List<String> listBairros();
 	
 	public List<String> listEstados();
+	
+	public String getCasoLocation(long id) throws SQLException;
 	
 	
 	

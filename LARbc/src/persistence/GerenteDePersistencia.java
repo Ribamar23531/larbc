@@ -1,6 +1,7 @@
 package persistence;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.List;
 
 import persistence.DAO.AdministradorDAO;
@@ -260,6 +261,10 @@ public class GerenteDePersistencia {
 			}
 			directory.delete();
 		}
+	}
+
+	public String getCasoLocation(long id) throws SQLException {
+		return this.casoDAO.getCasoLocation(id);
 	}
 
 }

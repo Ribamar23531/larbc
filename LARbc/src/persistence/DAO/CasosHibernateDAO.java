@@ -1,13 +1,15 @@
 package persistence.DAO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+import org.postgis.PGgeometry;
+import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
-
 import beans.Administrador;
 import beans.Caso;
 import beans.Foto;
@@ -144,6 +146,37 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
         }
 		return 0;
 	}
+	
+	private Point getPointByPGgeometry(PGgeometry pg) throws SQLException{		
+    	String aux[] = pg.toString().split(" ");
+    	String coordinates = aux[0].substring(6) + " " + aux[1].substring(0, aux[1].length() - 1);
+    	//creates a point with the string:
+    	//
+    	Point p = new Point(coordinates); 
+    	return p;
+	}
+
+	
+	@Override
+	public String getCasoLocation(long id) throws SQLException {
+		Session session = sf.openSession();	
+		
+		//places the geometry column in the case witch has just been saved
+		session = sf.openSession();		
+		String sqlQuery = 	"SELECT c.location " +
+							"FROM larbc_db." + HibernateConfig.getCurrentSchema() + ".casos c " +							
+							"WHERE c.id_caso = " + id + ";";
+		
+//		String pgGeometrySTR = session.createSQLQuery(sqlQuery).getQueryString();
+		
+		PGgeometry pg = (PGgeometry)(session.createSQLQuery(sqlQuery).uniqueResult());
+    	Point p = getPointByPGgeometry(pg);
+		
+		session.close();
+    	
+		return p.toString();		
+
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -158,6 +191,6 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		}
 		session.close();
 		
-	}
+	}	
 
 }

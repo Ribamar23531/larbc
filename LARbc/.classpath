@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mail.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-8.4-701.jdbc3.jar"/>
+	<classpathentry kind="lib" path="lib/postgis.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
