@@ -1,12 +1,12 @@
 package facade;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import persistence.GerenteDeEMail;
 import persistence.GerenteDeListagens;
 import persistence.GerenteDePersistencia;
 import rbcCycle.GerenteDeRBC;
-import rbcCycle.caseElement.ImmobileSolution;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -272,5 +272,10 @@ public class SystemManager implements SystemFacade {
 	@Override
 	public Administrador doLogin(String login, String password) throws PermissionDeniedException {		
 		return this.persistenceManager.doLogin(login, password);
+	}
+
+	@Override
+	public String getCasoLocation(long id) throws SQLException {
+		return this.persistenceManager.getCasoLocation(id);
 	}
 }

@@ -1,5 +1,6 @@
 package persistence.DAO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import beans.Caso;
@@ -23,5 +24,7 @@ public interface CasoDAO {
 	public void updateCaso(Caso caso) throws CasoNotFoundException;
 	
 	public void removeAllCasos();
+
+	public String getCasoLocation(long id) throws SQLException;
 
 }
