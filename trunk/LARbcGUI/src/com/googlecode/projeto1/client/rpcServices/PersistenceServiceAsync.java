@@ -58,6 +58,8 @@ public interface PersistenceServiceAsync {
 	
 	public void updateFoto(PhotoBean oldPhoto, PhotoBean newPhoto, AsyncCallback<?> callback);
 	
+//	public void setAdminPassword(String oldAdminPassword, String newAdminPassword);
+	
 	public void listEstados(AsyncCallback<List<String>> callback);
 	
 	public void listBairros(AsyncCallback<List<String>> callback);
