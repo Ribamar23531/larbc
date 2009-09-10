@@ -20,8 +20,9 @@ public class MappingWindow extends Window{
 	private int qteMarkers;	
 	private boolean editable;
 	private Marker marker;
+	private static MappingWindow me =  null;	
 	
-	public MappingWindow(boolean editable){
+	protected MappingWindow(boolean editable){
 		super();
 		SelectedLocation.setLocation("");
 		this.editable = editable;
@@ -44,7 +45,14 @@ public class MappingWindow extends Window{
 		this.add(mapPanel);		
 		this.setSize("650px", "500px");
 		this.setResizable(false);
-	}	
+	}
+	
+	public static MappingWindow getInstance(boolean editable){
+		if(me == null){
+			me = new MappingWindow(editable);
+		}
+		return me;
+	}
 
 	private MapWidget getMap() {
 		qteMarkers = 0;		
@@ -109,7 +117,8 @@ public class MappingWindow extends Window{
 	public void clearMap(){
 		SelectedLocation.setLocation("");
 		qteMarkers = 0;
-		this.myMap.removeOverlay(marker);
+//		this.myMap.removeOverlay(marker);
+		this.myMap.clearOverlays();
 	}
 
 }
