@@ -1,5 +1,6 @@
 package com.googlecode.projeto1.client.panels.manage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -10,6 +11,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.beans.CaseBean;
+import com.googlecode.projeto1.client.panels.FieldsChecker;
+import com.googlecode.projeto1.client.panels.WindowFieldsAlert;
+import com.googlecode.projeto1.client.panels.exceptions.FieldsNotFilledExeption;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
@@ -56,6 +60,7 @@ public class EditWindowPanel extends AbsolutePanel{
 		{
 			cityTextBox = new TextBox();
 			cityTextBox.setText(myCaseBean.getCity());
+			cityTextBox.setEnabled(false);
 			this.add(cityTextBox, 65, 5);
 			cityTextBox.setSize("238px", "22px");
 		}
@@ -88,6 +93,7 @@ public class EditWindowPanel extends AbsolutePanel{
 				public void onSuccess(List<String> states) {
 					for (String state : states) {
 						stateListBox.addItem(state);
+						stateListBox.setSelectedIndex(14);
 					}
 				}
 				
@@ -98,6 +104,7 @@ public class EditWindowPanel extends AbsolutePanel{
 			});
 			this.add(stateListBox, 374, 5);
 			stateListBox.setSize("49px", "27px");
+			stateListBox.setEnabled(false);
 		}
 		{
 			Label nameLabel = new Label("Nome:");
@@ -192,37 +199,113 @@ public class EditWindowPanel extends AbsolutePanel{
 	}
 	
 	public void updateCase(){
-		CaseBean caseBean = new CaseBean();
-		caseBean.setCity(cityTextBox.getText());
-		caseBean.setNeighborhood(neighborhoodTextBox.getText());
-		caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
-//		caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
-		caseBean.setState("state");
-		caseBean.setStreet(streetTextBox.getText());
-		caseBean.setName(nameTextBox.getText());
-		caseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
-		caseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
-		caseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
-		caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
-		caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
-		caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
-//		caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
-		caseBean.setType("type");
-		caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
-		PERSISTENCE_SERVICE.updateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
+		if(changed()){
+			List<String[]> fields = new ArrayList<String[]>();				
+			fields.add(getStrArray("String", cityTextBox, "Cidade"));					
+			fields.add(getStrArray("String", neighborhoodTextBox, "Bairro"));
+			fields.add(getStrArray("int", numberTextBox, "Número"));
+			fields.add(getStrArray("String", streetTextBox, "Rua"));
+			fields.add(getStrArray("float", areaConstruidaTextBox, "Area Construída"));
+			fields.add(getStrArray("float", areaTotalTextBox, "Area Total"));
+			fields.add(getStrArray("int", garageTextBox, "Vagas na Garagem"));
+			fields.add(getStrArray("int", qteBedroomsTextBox, "Qte de Quartos"));
+			fields.add(getStrArray("int", qteSuitesTextBox, "Qte de Suítes"));
+			fields.add(getStrArray("int", qteBathroomsTextBox, "Qte de Banheiros"));
+			fields.add(getStrArray("float", priceTextBox, "Preço"));
+//			fields.add(getStrArray("String", SelectedLocation.getLocation(), "Coordenadas"));
+			try {
+				FieldsChecker.checkFields(fields);
+				CaseBean caseBean = new CaseBean();
+				caseBean.setCity(cityTextBox.getText());
+				caseBean.setNeighborhood(neighborhoodTextBox.getText());
+				caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
+//				caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
+				caseBean.setState("state");
+				caseBean.setStreet(streetTextBox.getText());
+				caseBean.setName(nameTextBox.getText());
+				caseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
+				caseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
+				caseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
+				caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
+				caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
+				caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
+//				caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
+				caseBean.setType("type");
+				caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
+				PERSISTENCE_SERVICE.updateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
 
-			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Não foi possível atualizar o caso.");
-				
-			}
+					public void onFailure(Throwable arg0) {
+						MessageBox.alert("Não foi possível atualizar o caso.");
+						
+					}
 
-			public void onSuccess(String arg0) {
-				MessageBox.alert("Caso atualizado com sucesso.");				
-				
+					public void onSuccess(String arg0) {
+						MessageBox.alert("Caso atualizado com sucesso.");				
+						
+					}
+				});
+			} catch (FieldsNotFilledExeption e) {
+				new WindowFieldsAlert().show(e.getMessage());
 			}
-		});
+			
+		}		
+	}
+	
+	private boolean changed() {
+		if(!cityTextBox.getText().equals(myCaseBean.getCity())){
+			return true;
+		}
+		if(!neighborhoodTextBox.getText().equals(myCaseBean.getNeighborhood())){
+			return true;
+		}
+		if(Integer.parseInt(numberTextBox.getText()) != myCaseBean.getNumber()){
+			return true;
+		}
+//		if(!stateListBox.getItemText(stateListBox.getSelectedIndex()).equals(myCaseBean.getState())){
+//			return true;
+//		}
+		if(!streetTextBox.getText().equals(myCaseBean.getStreet())){
+			return true;
+		}
+		if(!nameTextBox.getText().equals(myCaseBean.getName())){
+			return true;
+		}
+		if(Float.parseFloat(areaConstruidaTextBox.getText()) != myCaseBean.getBuiltArea()){
+			return true;
+		}
+		if(Float.parseFloat(areaTotalTextBox.getText()) != myCaseBean.getTotalArea()){
+			return true;
+		}
+		if(Integer.parseInt(garageTextBox.getText()) != myCaseBean.getGarageSpace()){
+			return true;
+		}
+		if(Integer.parseInt(qteBedroomsTextBox.getText()) != myCaseBean.getBedroom()){
+			return true;
+		}
+		if(Integer.parseInt(qteSuitesTextBox.getText()) != myCaseBean.getSuite()){
+			return true;
+		}
+		if(Integer.parseInt(qteBathroomsTextBox.getText()) != myCaseBean.getBathroom()){
+			return true;
+		}
+//		if(!typeComboBox.getItemText(typeComboBox.getSelectedIndex()).equals(myCaseBean.getType())){
+//			return true;
+//		}
+		if(Float.parseFloat(priceTextBox.getText()) != myCaseBean.getPrice()){
+			return true;
+		}
+		return false;
 	}
 
+	private String[] getStrArray(String type, TextBox value, String field){
+		String[] result = {type, value.getText(), field};
+		return result;
+	}
+	
+	private String[] getStrArray(String type, String value, String field){
+		String[] result = {type, value, field};
+		return result;
+	}	
 	
 
 }

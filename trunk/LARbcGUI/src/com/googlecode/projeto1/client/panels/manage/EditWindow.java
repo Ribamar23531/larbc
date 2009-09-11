@@ -34,7 +34,7 @@ public class EditWindow extends Window{
 		button.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
 				windowPanel.updateCase();
-				PanelSwitcher.switchPanel(new ManagePanel());
+//				PanelSwitcher.switchPanel(new ManagePanel());
 				hide();
 			}
 
