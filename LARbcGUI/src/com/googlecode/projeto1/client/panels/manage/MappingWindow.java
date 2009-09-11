@@ -51,6 +51,7 @@ public class MappingWindow extends Window{
 		if(me == null){
 			me = new MappingWindow(editable);
 		}
+		me.clearMap();
 		return me;
 	}
 
@@ -117,7 +118,6 @@ public class MappingWindow extends Window{
 	public void clearMap(){
 		SelectedLocation.setLocation("");
 		qteMarkers = 0;
-//		this.myMap.removeOverlay(marker);
 		this.myMap.clearOverlays();
 	}
 

@@ -206,11 +206,11 @@ public class CreateTab extends AbsolutePanel{
 	
 
 	private Button getMapButton() {
-		Button button = new Button("Ajustar Coordenadas");
+		final Button button = new Button("Ajustar Coordenadas");
 		button.addClickListener(new ClickListener() {
 
 			public void onClick(Widget arg0) {				
-				mappingWindow.show();				
+				mappingWindow.show(button.getElement());
 			}
 			
 		});
@@ -224,7 +224,6 @@ public class CreateTab extends AbsolutePanel{
 		button.addClickListener(new ClickListener() {
 			
 			public void onClick(Widget arg0) {
-//				if(allFilled()){
 				List<String[]> fields = new ArrayList<String[]>();				
 				fields.add(getStrArray("String", cityTextBox, "Cidade"));					
 				fields.add(getStrArray("String", neighborhoodTextBox, "Bairro"));
@@ -268,17 +267,12 @@ public class CreateTab extends AbsolutePanel{
 
 						public void onSuccess(String arg0) {
 							MessageBox.alert("Caso armazenado com sucesso");
-							PanelSwitcher.switchPanel(new ManagePanel());
-							mappingWindow.clearMap();
-//							mappingWindow = new MappingWindow(true);
+							PanelSwitcher.switchPanel(new ManagePanel());							
 						}
 					});
 				} catch (FieldsNotFilledExeption e) {
 					new WindowFieldsAlert().show(e.getMessage());
-				}
-					
-//				}
-				
+				}			
 				
 			}
 			
