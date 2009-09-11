@@ -34,11 +34,6 @@ public class SystemManager implements SystemFacade {
 		this.mailManager = new GerenteDeEMail();
 	}
 
-//	@Override
-//	public void verifyAdministrador(String login, String password) throws PermissionDaniedException, AdministradorNotFoundException {		
-//		this.persistenceManager.verifyAdministrador(login, password);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -70,8 +65,6 @@ public class SystemManager implements SystemFacade {
 	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException {
 		return this.persistenceManager.getCasoOwner(caso);
 	}
-	
-//	public List<Caso> getCasos(String login) throws AdministradorNotFoundException;
 
 	/**
 	 * {@inheritDoc}
@@ -186,28 +179,6 @@ public class SystemManager implements SystemFacade {
 		this.persistenceManager.updateFoto(oldPhoto, newPhoto);
 	}
 
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	public List<ImmobileSolution> doQuery(int resultNumber, String state,
-//			String city, String neighborhood, String street, String name,
-//			float builtArea, float totalArea, int garageSpace, int bedroom,
-//			int suite, int bathroom, String type, float price, int businessType) {
-//		return this.rbcManager.doQuery(resultNumber, state, city, neighborhood, street, name, builtArea, 
-//									   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
-//	}
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	public List<ImmobileSolution> doQuery(String state, String city,
-//			String neighborhood, String street, String name, float builtArea,
-//			float totalArea, int garageSpace, int bedroom, int suite,
-//			int bathroom, String type, float price, int businessType) {
-//		// TODO Auto-generated method stub
-//		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
-//	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -228,39 +199,11 @@ public class SystemManager implements SystemFacade {
 		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, 
 				   totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType);
 	}
-	
-	
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDeniedException {
-//		this.persistenceManager.setPassword(oldPassword, newPassword);
-//	}
-
-	
-
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	public void setAdministrationPassword(String oldPassword, String newPassword) throws PermissionDeniedException {
-//		this.persistenceManager.setPassword(oldPassword, newPassword);
 
 	public List<String> listBairros() {
 		return this.listingManager.getBairros();
 
 	}
-//<<<<<<< .mine
-//	@Override
-//	public List<String> listBairros() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//	@Override
-//	public List<String> listEstados() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//=======
 	
 	/**
 	 * {@inheritDoc}
