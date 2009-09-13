@@ -39,9 +39,9 @@ public class CenterModalityPanel extends Panel{
 		createComprarButton();
 		Panel panel1 = new Panel();
 		Image image = Util.createImage(Util.QUESTION);
-		image.setPixelSize(400, 86);
+		image.setPixelSize(280, 70);
 		panel1.add(image);
-		p1.add(panel1, 255, 100);
+		p1.add(panel1, 325, 110);
 		vp.add(p1);
 		p2.setLayout(new ColumnLayout());
 		vp.add(buttonsPanel, 600, 240);

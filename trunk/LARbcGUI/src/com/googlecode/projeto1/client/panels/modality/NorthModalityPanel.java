@@ -30,7 +30,7 @@ public class NorthModalityPanel extends Panel{
 		Panel leftPanel = new Panel();
 		Panel rightPanel = new Panel();
 		Image larbc = Util.createImage(Util.LARBC_IMAGE_PATH); 
-		larbc.setPixelSize(300, 114);
+		larbc.setPixelSize(280, 100);
 		leftPanel.add(larbc);
 		rightPanel.add(managerButtonImage);
 		wrapperPanel.add(leftPanel, new ColumnLayoutData(.86));
