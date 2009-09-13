@@ -2,12 +2,11 @@ package persistence.DAO;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
-import org.postgis.PGgeometry;
-import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
 import persistence.jdbc.PointRecover;
@@ -24,7 +23,17 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	
 	public CasosHibernateDAO(){
 		super(false);
-	}	
+	}
+	
+	private void setLocation(Caso caso){
+		//places the geometry column in the case witch has just been saved
+		Session session = sf.openSession();
+		String sqlQuery = 	"UPDATE larbc_db." + HibernateConfig.getCurrentSchema() + ".casos " +
+							"SET location = GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1) " +
+							"WHERE id_caso = " + caso.getIdCaso() + ";";
+		session.createSQLQuery(sqlQuery).executeUpdate();	
+		session.close();
+	}
 	
 	@Override
 	public void saveCaso(Caso caso) {
@@ -35,13 +44,8 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		transaction.commit();
 		session.close();
 		
-		//places the geometry column in the case witch has just been saved
-		session = sf.openSession();		
-		String sqlQuery = 	"UPDATE larbc_db." + HibernateConfig.getCurrentSchema() + ".casos " +
-							"SET location = GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1) " +
-							"WHERE id_caso = " + caso.getIdCaso() + ";";
-		session.createSQLQuery(sqlQuery).executeUpdate();	
-		session.close();
+		setLocation(caso);
+		
 	}
 	
 	@Override
@@ -73,10 +77,19 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	public List<Caso> getAllCasos(){
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
-		List<Caso> demandas = session.createQuery("from " + Caso.class.getCanonicalName()).list();
+		List<Caso> casos = session.createQuery("from " + Caso.class.getCanonicalName()).list();
 		transaction.commit();
-		session.close();		
-		return demandas;
+		session.close();
+		PointRecover pr = new PointRecover();
+		try {
+			Map<Long, String> locations = pr.getLocations();
+			for (Caso caso : casos) {
+				caso.setLocation(locations.get(caso.getIdCaso()));
+			}
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return casos;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -115,7 +128,9 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		Transaction transaction = session.beginTransaction();
 		session.update(caso);		
 		transaction.commit();
-		session.close();		
+		session.close();
+		
+		setLocation(caso);
 		
 	}
 

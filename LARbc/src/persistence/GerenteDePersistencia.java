@@ -227,9 +227,9 @@ public class GerenteDePersistencia {
 	}
 
 	public void updateCaso(Administrador admin, Caso caso) throws PermissionDeniedException, AdministradorNotFoundException, CasoNotFoundException {
-		if(!getCasoOwner(caso).equals(admin)){
-			throw new PermissionDeniedException();
-		}
+//		if(!getCasoOwner(caso).equals(admin)){
+//			throw new PermissionDeniedException();
+//		}
 		this.casoDAO.updateCaso(caso);
 	}
 
