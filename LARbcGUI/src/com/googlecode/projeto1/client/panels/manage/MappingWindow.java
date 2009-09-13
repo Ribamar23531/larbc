@@ -39,7 +39,7 @@ public class MappingWindow extends Window{
 		this.setResizable(true);
 		this.setCloseAction(Window.HIDE);  
 		this.setPlain(true);
-		myMap = getMap();		
+		myMap = getMap();
 		RootPanel mapPanel = RootPanel.get("map_div");
 		mapPanel.add(myMap);
 		this.add(mapPanel);		
@@ -67,37 +67,44 @@ public class MappingWindow extends Window{
 				public void onClick(final MapClickEvent clickEvent) {
 					if(qteMarkers == 0){
 						qteMarkers++;
-						marker = new Marker(clickEvent.getLatLng(), getMarkerOptions());
-						marker.addMarkerDragEndHandler(getDragEndHandler(marker));
+						marker = getMarker(clickEvent.getLatLng());						
 						map.addOverlay(marker);
-						getLocation(marker);
+						setLocation(marker);
 					}
-				}
+				}					
 				
-				private MarkerDragEndHandler getDragEndHandler(final Marker marker) {				
-					return new MarkerDragEndHandler(){
-						
-						public void onDragEnd(MarkerDragEndEvent event) {
-							getLocation(marker);
-						}
-						
-					};
-				}
 				
-				private void getLocation(Marker marker){
-					String location = marker.getLatLng().toString();
-					SelectedLocation.setLocation(location.substring(1, location.length() - 1));
-				}
-				
-				private MarkerOptions getMarkerOptions() {
-					MarkerOptions options = MarkerOptions.newInstance();
-					options.setDraggable(true);
-					return options;
-				}
 				
 			});			
 		}
 		return map;
+	}
+	
+	private void setLocation(Marker marker){
+		String location = marker.getLatLng().toString();
+		SelectedLocation.setLocation(location.substring(1, location.length() - 1));
+	}
+	
+	private MarkerDragEndHandler getDragEndHandler(final Marker marker) {				
+		return new MarkerDragEndHandler(){
+			
+			public void onDragEnd(MarkerDragEndEvent event) {
+				setLocation(marker);
+			}
+			
+		};
+	}
+	
+	private MarkerOptions getMarkerOptions() {
+		MarkerOptions options = MarkerOptions.newInstance();
+		options.setDraggable(true);
+		return options;
+	}
+	
+	private Marker getMarker(LatLng point){
+		Marker marker = new Marker(point, getMarkerOptions());
+		marker.addMarkerDragEndHandler(getDragEndHandler(marker));			
+		return marker;
 	}
 
 	private Button getOkButton() {
@@ -119,6 +126,20 @@ public class MappingWindow extends Window{
 		SelectedLocation.setLocation("");
 		qteMarkers = 0;
 		this.myMap.clearOverlays();
+	}
+	
+	public void setLocation(String location){
+		try{
+			double lat = Double.parseDouble(location.split(" ")[0]);
+			double lng = Double.parseDouble(location.split(" ")[1]);			
+			LatLng pointLocation = LatLng.newInstance(lat, lng);
+			Marker m = getMarker(pointLocation);
+			this.myMap.addOverlay(m);
+			qteMarkers++;
+			SelectedLocation.setLocation(location);
+		}catch (Exception e) {
+			MessageBox.alert("Não foi possível adicionar um ponto na localização " + location);
+		}
 	}
 
 }

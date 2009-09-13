@@ -63,4 +63,6 @@ public interface PersistenceServiceAsync {
 	public void listEstados(AsyncCallback<List<String>> callback);
 	
 	public void listBairros(AsyncCallback<List<String>> callback);
+	
+	public void getCaseLocation(CaseBean caseBean, AsyncCallback<String> callback) ;
 }
