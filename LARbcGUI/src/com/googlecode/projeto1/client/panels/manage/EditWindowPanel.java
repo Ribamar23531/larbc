@@ -198,8 +198,8 @@ public class EditWindowPanel extends AbsolutePanel{
 		
 	}
 	
-	public void updateCase(){
-		if(changed()){
+	public void updateCase(boolean mapOpend){
+		if(changed(mapOpend)){
 			List<String[]> fields = new ArrayList<String[]>();				
 			fields.add(getStrArray("String", cityTextBox, "Cidade"));					
 			fields.add(getStrArray("String", neighborhoodTextBox, "Bairro"));
@@ -215,7 +215,7 @@ public class EditWindowPanel extends AbsolutePanel{
 			fields.add(getStrArray("String", SelectedLocation.getLocation(), "Coordenadas"));
 			try {
 				FieldsChecker.checkFields(fields);
-				myCaseBean = new CaseBean();
+//				myCaseBean = new CaseBean();
 				myCaseBean.setCity(cityTextBox.getText());
 				myCaseBean.setNeighborhood(neighborhoodTextBox.getText());
 				myCaseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
@@ -252,7 +252,7 @@ public class EditWindowPanel extends AbsolutePanel{
 		}		
 	}
 	
-	private boolean changed() {
+	private boolean changed(boolean mapOpend) {
 		if(!cityTextBox.getText().equals(myCaseBean.getCity())){
 			return true;
 		}
@@ -294,8 +294,8 @@ public class EditWindowPanel extends AbsolutePanel{
 //		}
 		if(Float.parseFloat(priceTextBox.getText()) != myCaseBean.getPrice()){
 			return true;
-		}
-		if(!myCaseBean.getLocation().equals(SelectedLocation.getLocation())){
+		}		
+		if(mapOpend && !myCaseBean.getLocation().equals(SelectedLocation.getLocation())){
 			return true;
 		}
 		return false;

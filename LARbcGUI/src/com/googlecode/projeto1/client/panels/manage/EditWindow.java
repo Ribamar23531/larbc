@@ -1,10 +1,6 @@
 package com.googlecode.projeto1.client.panels.manage;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.googlecode.projeto1.client.beans.CaseBean;
-import com.googlecode.projeto1.client.rpcServices.PersistenceService;
-import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
@@ -17,16 +13,19 @@ public class EditWindow extends Window{
 	private EditWindowPanel windowPanel;
 	private MappingWindow mappingWindow;
 	private CaseBean myCaseBean;
+	private boolean mapOpened;
 	
-	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
+	
+//	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
 	public EditWindow(CaseBean caseBean){
 		super();
 		this.myCaseBean = caseBean;
+		this.mapOpened = false;
 		this.mappingWindow = MappingWindow.getInstance(true);
 		this.windowPanel = new EditWindowPanel(myCaseBean);
 		this.setTitle("Editar");
-		this.setClosable(true);
+		this.setClosable(false);
 		this.setPlain(true);		
 		this.setPaddings(5);  
 		this.setButtonAlign(Position.CENTER);
@@ -44,7 +43,8 @@ public class EditWindow extends Window{
 		Button button = new Button("OK");
 		button.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
-				windowPanel.updateCase();
+				windowPanel.updateCase(mapOpened);
+				mappingWindow.clearMap();
 //				PanelSwitcher.switchPanel(new ManagePanel());				
 				hide();
 			}
@@ -55,21 +55,18 @@ public class EditWindow extends Window{
 	
 	private Button getMapButton() {
 		Button button = new Button("Visualizar Mapa");
-		button.addListener(new ButtonListenerAdapter(){
+		button.addListener(new ButtonListenerAdapter(){			
 			public void onClick(final Button button, EventObject e) {
-				PERSISTENCE_SERVICE.getCaseLocation(myCaseBean, new AsyncCallback<String>() {
-					
-					public void onSuccess(String location) {
-						mappingWindow.setLocation(location);
-						myCaseBean.setLocation(location);
-						mappingWindow.show(button.getElement());
-						
+				if(myCaseBean.getLocation() == null){
+					MessageBox.alert("Não foi possível localizar a posição geográfica desse caso");
+				}else{
+					if(SelectedLocation.getLocation() == null || SelectedLocation.getLocation().equals("")){
+						mappingWindow.setLocation(myCaseBean.getLocation());						
 					}
-					
-					public void onFailure(Throwable arg0) {
-						MessageBox.alert("Não foi possível localizar a posição geográfica desse caso");						
-					}
-				});
+					mappingWindow.show(button.getElement());
+					mapOpened = true;
+				}
+
 			}
 
 		});
