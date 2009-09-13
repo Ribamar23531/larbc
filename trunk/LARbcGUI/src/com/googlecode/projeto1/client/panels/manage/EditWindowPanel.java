@@ -36,7 +36,7 @@ public class EditWindowPanel extends AbsolutePanel{
 	private TextBox qteBathroomsTextBox;
 	private ListBox typeComboBox;
 	private TextBox priceTextBox;
-	private CaseBean myCaseBean;
+	private CaseBean myCaseBean;	
 	
 	public EditWindowPanel(CaseBean caseBean){
 		super();
@@ -212,27 +212,28 @@ public class EditWindowPanel extends AbsolutePanel{
 			fields.add(getStrArray("int", qteSuitesTextBox, "Qte de Suítes"));
 			fields.add(getStrArray("int", qteBathroomsTextBox, "Qte de Banheiros"));
 			fields.add(getStrArray("float", priceTextBox, "Preço"));
-//			fields.add(getStrArray("String", SelectedLocation.getLocation(), "Coordenadas"));
+			fields.add(getStrArray("String", SelectedLocation.getLocation(), "Coordenadas"));
 			try {
 				FieldsChecker.checkFields(fields);
-				CaseBean caseBean = new CaseBean();
-				caseBean.setCity(cityTextBox.getText());
-				caseBean.setNeighborhood(neighborhoodTextBox.getText());
-				caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
-//				caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
-				caseBean.setState("state");
-				caseBean.setStreet(streetTextBox.getText());
-				caseBean.setName(nameTextBox.getText());
-				caseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
-				caseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
-				caseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
-				caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
-				caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
-				caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
-//				caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
-				caseBean.setType("type");
-				caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
-				PERSISTENCE_SERVICE.updateCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
+				myCaseBean = new CaseBean();
+				myCaseBean.setCity(cityTextBox.getText());
+				myCaseBean.setNeighborhood(neighborhoodTextBox.getText());
+				myCaseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
+//				myCaseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
+				myCaseBean.setState("state");
+				myCaseBean.setStreet(streetTextBox.getText());
+				myCaseBean.setName(nameTextBox.getText());
+				myCaseBean.setBuiltArea(Float.parseFloat(areaConstruidaTextBox.getText()));
+				myCaseBean.setTotalArea(Float.parseFloat(areaTotalTextBox.getText()));
+				myCaseBean.setGarageSpace(Integer.parseInt(garageTextBox.getText()));
+				myCaseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
+				myCaseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
+				myCaseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
+//				myCaseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
+				myCaseBean.setType("type");
+				myCaseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
+				myCaseBean.setLocation(SelectedLocation.getLocation());
+				PERSISTENCE_SERVICE.updateCaso(LoginManager.getLogedAdministrator(), myCaseBean, new AsyncCallback<String>() {
 
 					public void onFailure(Throwable arg0) {
 						MessageBox.alert("Não foi possível atualizar o caso.");
@@ -292,6 +293,9 @@ public class EditWindowPanel extends AbsolutePanel{
 //			return true;
 //		}
 		if(Float.parseFloat(priceTextBox.getText()) != myCaseBean.getPrice()){
+			return true;
+		}
+		if(!myCaseBean.getLocation().equals(SelectedLocation.getLocation())){
 			return true;
 		}
 		return false;

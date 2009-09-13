@@ -65,4 +65,6 @@ public interface PersistenceService extends RemoteService {
 	public List<String> listEstados();
 	
 	public List<String> listBairros();
+	
+	public String getCaseLocation(CaseBean caseBean) ;
 }

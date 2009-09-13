@@ -1,5 +1,6 @@
 package com.googlecode.projeto1.server;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -278,7 +279,17 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			e.printStackTrace();
 		}
 	}
-
+	
+	public String getCaseLocation(CaseBean caseBean)  {
+		String location = null;
+		try {
+			location = this.getSystemFacade().getCasoLocation(caseBean.getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return location;
+	}
 
 	public void updateDemanda(DemandBean demanda) {
 		try {
