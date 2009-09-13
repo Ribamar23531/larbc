@@ -13,14 +13,18 @@ public class HibernateConfig {
 	
 	private static boolean testing = false;
 	private static SessionFactory sessionFactory = null;	
-	private static String currentSchema;	
+	private static String currentSchema;
+	private static final String USER_NAME = "larbc";
+	private static final String PASSWORD = "123456";
+	private static final String URL_DRIVER = "org.postgresql.Driver";
+	private static final String URL_DB = "jdbc:postgresql://localhost:5432/larbc_db";
 	
 	private static void configure(){
 		try {
 			AnnotationConfiguration config = new AnnotationConfiguration();			
 			config.setProperty("hibernate.dialect",	"org.hibernate.dialect.PostgreSQLDialect");
-			config.setProperty("hibernate.connection.driver_class",	"org.postgresql.Driver");
-			config.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/larbc_db");
+			config.setProperty("hibernate.connection.driver_class",	URL_DRIVER);
+			config.setProperty("hibernate.connection.url", URL_DB);
 			if(!testing){
 				currentSchema = "larbcschema";
 				config.setProperty("hibernate.default_schema", currentSchema);				
@@ -28,8 +32,8 @@ public class HibernateConfig {
 				currentSchema = "larbctestschema";
 				config.setProperty("hibernate.default_schema", currentSchema);
 			}
-			config.setProperty("hibernate.connection.username", "larbc");
-			config.setProperty("hibernate.connection.password", "123456");
+			config.setProperty("hibernate.connection.username", USER_NAME);
+			config.setProperty("hibernate.connection.password", PASSWORD);
 			config.setProperty("hibernate.connection.pool_size", "1");
 			config.setProperty("hibernate.connection.autocommit", "true");
 			config.setProperty("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
@@ -65,10 +69,26 @@ public class HibernateConfig {
 			configure();
 		}
 		return sessionFactory;
-	}	
-
+	}
+	
+	public static String getUserName(){
+		return USER_NAME;
+	}
+	
+	public static String getPassword(){
+		return PASSWORD;
+	}
+	
 	public static String getCurrentSchema(){
 		return currentSchema;
+	}
+	
+	public static String getUrlDriver(){
+		return URL_DRIVER;
+	}
+
+	public static String getUrlDb(){
+		return URL_DB;
 	}
 	
 }
