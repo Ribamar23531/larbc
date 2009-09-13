@@ -25,8 +25,8 @@ public class WelcomePanel extends Panel {
 		rootPanel = new AbsolutePanel();
 		{
 			Image image = new Image("images/larbc.png");
-			rootPanel.add(image, 5, 5);
-			image.setPixelSize(300, 114);
+			rootPanel.add(image, 35, 25);
+			image.setPixelSize(280, 100);
 		}
 		{
 			Image image = new Image("images/familia.png");
@@ -35,8 +35,8 @@ public class WelcomePanel extends Panel {
 		}
 		{
 			Image image = new Image("images/soutoMaior.png");
-			rootPanel.add(image, 360, 180);
-			image.setSize("40%", "18%");
+			rootPanel.add(image, 350, 220);
+			image.setSize("40%", "20%");
 		}
 		createEntrarButton();
 		this.add(rootPanel);
