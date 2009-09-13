@@ -365,6 +365,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caseResult.setSuite(result.getSuites());
 		caseResult.setTotalArea(result.getAreaTotal());
 		caseResult.setType(result.getTipo());
+		caseResult.setLocation(result.getLocation());
 		return caseResult;
 	}
 	

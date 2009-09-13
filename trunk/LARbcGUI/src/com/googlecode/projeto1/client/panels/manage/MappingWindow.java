@@ -20,7 +20,9 @@ public class MappingWindow extends Window{
 	private int qteMarkers;	
 	private boolean editable;
 	private Marker marker;
-	private static MappingWindow me =  null;	
+	private static MappingWindow me =  null;
+	private final LatLng CAMPINA_GRANDE_POINT = LatLng.newInstance(-7.22, -35.88);
+	private final int ZOOM = 13;
 	
 	protected MappingWindow(boolean editable){
 		super();
@@ -57,7 +59,7 @@ public class MappingWindow extends Window{
 
 	private MapWidget getMap() {
 		qteMarkers = 0;		
-		final MapWidget map = new MapWidget(LatLng.newInstance(-7.22, -35.88), 13);		
+		final MapWidget map = new MapWidget(CAMPINA_GRANDE_POINT, ZOOM);		
 		map.setSize("630px", "500px");
 		map.setUIToDefault();
 		map.setContinuousZoom(true);
@@ -81,8 +83,9 @@ public class MappingWindow extends Window{
 	}
 	
 	private void setLocation(Marker marker){
-		String location = marker.getLatLng().toString();
-		SelectedLocation.setLocation(location.substring(1, location.length() - 1));
+		String location = 	marker.getLatLng().getLatitude() + 
+							" " + marker.getLatLng().getLongitude();		
+		SelectedLocation.setLocation(location);
 	}
 	
 	private MarkerDragEndHandler getDragEndHandler(final Marker marker) {				
@@ -95,16 +98,18 @@ public class MappingWindow extends Window{
 		};
 	}
 	
-	private MarkerOptions getMarkerOptions() {
+	private MarkerOptions getMarkerOptions(boolean draggeble) {
 		MarkerOptions options = MarkerOptions.newInstance();
-		options.setDraggable(true);
+		options.setDraggable(draggeble);
 		return options;
 	}
 	
 	private Marker getMarker(LatLng point){
-		Marker marker = new Marker(point, getMarkerOptions());
-		marker.addMarkerDragEndHandler(getDragEndHandler(marker));			
-		return marker;
+		Marker marker = new Marker(point, getMarkerOptions(editable));
+		if(editable){
+			marker.addMarkerDragEndHandler(getDragEndHandler(marker));			
+		}
+		return marker;			
 	}
 
 	private Button getOkButton() {
@@ -126,6 +131,8 @@ public class MappingWindow extends Window{
 		SelectedLocation.setLocation("");
 		qteMarkers = 0;
 		this.myMap.clearOverlays();
+		this.myMap.setCenter(CAMPINA_GRANDE_POINT);
+		this.myMap.setZoomLevel(ZOOM);
 	}
 	
 	public void setLocation(String location){
