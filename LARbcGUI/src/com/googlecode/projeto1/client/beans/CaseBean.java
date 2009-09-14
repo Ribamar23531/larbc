@@ -184,6 +184,4 @@ public class CaseBean implements Serializable{
 						"Location: " + getLocation() + newLine;
 		return result;
 	}
-	
-	
 }
