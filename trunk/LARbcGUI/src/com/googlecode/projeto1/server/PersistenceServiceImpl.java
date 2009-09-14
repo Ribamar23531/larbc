@@ -50,15 +50,14 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			float totalArea, int garageSpace, int bedroom, int suite,
 			int bathroom, String type, float price, int businessType) {
 		
-//		List<ImmobileSolution> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
-//										 neighborhood, street, name, builtArea, totalArea, 
-//										 garageSpace, bedroom, suite, bathroom, type, price, businessType);
+		List<Caso> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
+										 neighborhood, street, name, builtArea, totalArea, 
+										 garageSpace, bedroom, suite, bathroom, type, price, businessType);
 		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
-//		for (ImmobileSolution caso : results) {
-//			returnedCases.add(this.getCaseBean(caso));
-//		}
-//		return returnedCases;
-		return null;
+		for (Caso caso : results) {
+			returnedCases.add(this.getCaseBean(caso));
+		}
+		return returnedCases;
 	}
 
 	public List<CaseBean> doQuery(String state, String city,
@@ -66,16 +65,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			float totalArea, int garageSpace, int bedroom, int suite,
 			int bathroom, String type, float price, int businessType) {
 
-//		List<ImmobileSolution> results = this.getSystemFacade().doQuery(state, city, 
-//				 neighborhood, street, name, builtArea, totalArea, 
-//				 garageSpace, bedroom, suite, bathroom, type, price, businessType);
-//		
-//		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
-//		for (ImmobileSolution caso : results) {
-//			returnedCases.add(this.getCaseBean(caso));
-//		}
-//		return returnedCases;
-		return null;
+		List<Caso> results = this.getSystemFacade().doQuery(state, city, 
+				 neighborhood, street, name, builtArea, totalArea, 
+				 garageSpace, bedroom, suite, bathroom, type, price, businessType);
+		
+		List<CaseBean> returnedCases = new ArrayList<CaseBean>();
+		for (Caso caso : results) {
+			returnedCases.add(this.getCaseBean(caso));
+		}
+		return returnedCases;
 	}
 
 	public void createCaso(AdminBean admin, CaseBean caso) {
