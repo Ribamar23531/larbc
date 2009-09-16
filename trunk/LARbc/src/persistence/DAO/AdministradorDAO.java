@@ -1,5 +1,7 @@
 package persistence.DAO;
 
+import java.util.List;
+
 import beans.Administrador;
 import exceptions.AdministradorNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
@@ -13,6 +15,8 @@ public interface AdministradorDAO {
 	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
 	
+	public List<Administrador> getAdministradores();
+	
 	public Administrador getAdministrador(long idAdmin) throws AdministradorNotFoundException;
 	
 	public void createRootIfNeeded();
@@ -22,5 +26,6 @@ public interface AdministradorDAO {
 	public void removeAllAdministradores();
 	
 	public void removeNotRoots();
+
 
 }

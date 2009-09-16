@@ -28,6 +28,8 @@ public interface SystemFacade {
 	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException;
 	
+	public List<Administrador> getAdministradores();
+	
 	public void createCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException;
 	
 	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException;

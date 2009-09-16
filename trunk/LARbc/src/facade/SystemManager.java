@@ -48,6 +48,11 @@ public class SystemManager implements SystemFacade {
 		return this.persistenceManager.getAdministrador(login);
 	}
 
+	@Override
+	public List<Administrador> getAdministradores() {		
+		return this.persistenceManager.getAdministradores();
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -221,4 +226,5 @@ public class SystemManager implements SystemFacade {
 	public String getCasoLocation(long id) throws SQLException {
 		return this.persistenceManager.getCasoLocation(id);
 	}
+	
 }

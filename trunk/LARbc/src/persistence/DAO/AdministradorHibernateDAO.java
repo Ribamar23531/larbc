@@ -106,6 +106,17 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 		session.close();
 		return admin;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Administrador> getAdministradores() {
+		Session session = sf.openSession();
+		Transaction transaction = session.beginTransaction();
+		List<Administrador> administradores = session.createQuery("from " + Administrador.class.getCanonicalName()).list();
+		transaction.commit();
+		session.close();		
+		return administradores;
+	}	
 
 	@Override
 	public void updateAdministrador(Administrador admin)
@@ -149,6 +160,6 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 		}
 		session.close();
 		
-	}	
+	}
 
 }
