@@ -1,6 +1,8 @@
-package com.googlecode.projeto1.client.panels.manage;
+package com.googlecode.projeto1.client.panels.manage.editTab;
 
 import com.googlecode.projeto1.client.beans.CaseBean;
+import com.googlecode.projeto1.client.panels.manage.MappingWindow;
+import com.googlecode.projeto1.client.panels.manage.SelectedLocation;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
@@ -44,8 +46,7 @@ public class EditWindow extends Window{
 		button.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
 				windowPanel.updateCase(mapOpened);
-				mappingWindow.clearMap();
-//				PanelSwitcher.switchPanel(new ManagePanel());				
+				mappingWindow.clearMap();				
 				hide();
 			}
 

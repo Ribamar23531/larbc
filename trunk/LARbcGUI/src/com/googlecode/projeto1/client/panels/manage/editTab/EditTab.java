@@ -1,4 +1,4 @@
-package com.googlecode.projeto1.client.panels.manage;
+package com.googlecode.projeto1.client.panels.manage.editTab;
 
 import java.util.List;
 

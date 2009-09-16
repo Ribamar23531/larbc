@@ -1,4 +1,4 @@
-package com.googlecode.projeto1.client.panels.manage;
+package com.googlecode.projeto1.client.panels.manage.editTab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.FieldsChecker;
 import com.googlecode.projeto1.client.panels.WindowFieldsAlert;
 import com.googlecode.projeto1.client.panels.exceptions.FieldsNotFilledExeption;
+import com.googlecode.projeto1.client.panels.manage.SelectedLocation;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;

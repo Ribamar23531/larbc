@@ -24,6 +24,8 @@ public interface PersistenceServiceAsync {
 	
 	public void getAdministrador(String login, AsyncCallback<AdminBean> callback);
 	
+	public void getAdministradores(AsyncCallback<List<AdminBean>> callback);
+	
 	public void getAllCasos(AsyncCallback<List<CaseBean>> callback);
 	
 	public void getCasoOwner(CaseBean caso, AsyncCallback<AdminBean> callback);
@@ -58,10 +60,11 @@ public interface PersistenceServiceAsync {
 	
 	public void updateFoto(PhotoBean oldPhoto, PhotoBean newPhoto, AsyncCallback<?> callback);
 	
+//	public void setAdminPassword(String oldAdminPassword, String newAdminPassword);
+	
 	public void listEstados(AsyncCallback<List<String>> callback);
 	
 	public void listBairros(AsyncCallback<List<String>> callback);
 	
 	public void getCaseLocation(CaseBean caseBean, AsyncCallback<String> callback) ;
 }
-	

@@ -12,6 +12,7 @@ public class AdminBean implements Serializable{
 	private String login;
 	private String password;
 	private String nome;
+	private boolean isRoot;
 	
 	public AdminBean(){}
 	
@@ -39,5 +40,13 @@ public class AdminBean implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public void setIsRoot(boolean isRoot) {
+		this.isRoot = isRoot;
+	}
+
+	public boolean getIsRoot() {
+		return isRoot;
+	}	
 	
 }
