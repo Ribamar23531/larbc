@@ -95,6 +95,10 @@ public class GerenteDePersistencia {
 		return administradorDAO.getAdministrador(idAdmin);
 	}
 	
+	public List<Administrador> getAdministradores() {
+		return administradorDAO.getAdministradores();
+	}
+	
 	public Administrador getAdministrador(String login) throws AdministradorNotFoundException{
 		return administradorDAO.getAdministrador(login);
 	}
