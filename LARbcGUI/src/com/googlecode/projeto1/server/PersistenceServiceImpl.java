@@ -94,7 +94,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return null;
 	}
-
+	
+	public List<AdminBean> getAdministradores() {
+		List<Administrador> admins = this.getSystemFacade().getAdministradores();
+		List<AdminBean> adminBeans = new ArrayList<AdminBean>();
+		for (Administrador admin : admins) {
+			adminBeans.add(getAdminBean(admin));
+		}
+		return adminBeans;
+	}	
 
 	public List<CaseBean> getAllCasos() {
 		List<Caso> casos = this.getSystemFacade().getAllCasos();
@@ -396,6 +404,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		adminBean.setLogin(admin.getLogin());
 		adminBean.setNome(admin.getNome());
 		adminBean.setPassword(admin.getPassword());
+		adminBean.setIsRoot(admin.isRoot());
 		return adminBean;
 	}
 	
@@ -468,6 +477,5 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		result.setPath(foto.getPath());
 		return result;
 	}	
-	
 	
 }

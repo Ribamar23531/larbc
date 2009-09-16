@@ -1,4 +1,4 @@
-package com.googlecode.projeto1.client.panels.manage;
+package com.googlecode.projeto1.client.panels.manage.demandTab;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.CaptionPanel;

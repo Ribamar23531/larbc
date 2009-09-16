@@ -26,6 +26,8 @@ public interface PersistenceService extends RemoteService {
 	
 	public AdminBean getAdministrador(String login);
 	
+	public List<AdminBean> getAdministradores();
+	
 	public List<CaseBean> getAllCasos();
 	
 	public AdminBean getCasoOwner(CaseBean caso);

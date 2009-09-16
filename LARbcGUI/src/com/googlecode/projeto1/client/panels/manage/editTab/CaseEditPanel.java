@@ -1,4 +1,4 @@
-package com.googlecode.projeto1.client.panels.manage;
+package com.googlecode.projeto1.client.panels.manage.editTab;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
+import com.googlecode.projeto1.client.panels.manage.ManagePanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.NameValuePair;

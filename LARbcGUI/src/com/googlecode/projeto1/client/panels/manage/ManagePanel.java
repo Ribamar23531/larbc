@@ -2,6 +2,10 @@ package com.googlecode.projeto1.client.panels.manage;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.TabPanel;
+import com.googlecode.projeto1.client.panels.manage.adminTab.AdminTab;
+import com.googlecode.projeto1.client.panels.manage.createTab.CreateTab;
+import com.googlecode.projeto1.client.panels.manage.demandTab.DemandsTab;
+import com.googlecode.projeto1.client.panels.manage.editTab.EditTab;
 import com.gwtext.client.widgets.Panel;
 
 public class ManagePanel extends Panel{
