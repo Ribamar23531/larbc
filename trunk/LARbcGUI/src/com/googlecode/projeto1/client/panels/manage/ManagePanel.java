@@ -19,23 +19,23 @@ public class ManagePanel extends Panel{
 			{
 				CreateTab createTab = new CreateTab();
 				tabPanel.add(createTab, "Criar", false);
-				createTab.setSize("428px", "257px");
+				createTab.setSize("620px", "260px");
 				
 			}
 			{
 				EditTab editTab = new EditTab();
 				tabPanel.add(editTab, "Editar", false);
-				editTab.setSize("620px", "260px");				
+				editTab.setSize("620px", "500px");				
 			}
 			{
 				DemandsTab demandsTab = new DemandsTab();
 				tabPanel.add(demandsTab, "Moderar Demandas", false);
-				demandsTab.setSize("600px", "263px");
+				demandsTab.setSize("620px", "500px");
 			}
 			{
 				AdminTab adminsMainPanel = new AdminTab();
 				tabPanel.add(adminsMainPanel, "Administradores", false);
-				adminsMainPanel.setSize("437px", "259px");
+				adminsMainPanel.setSize("620px", "400px");
 				
 			}
 		}
