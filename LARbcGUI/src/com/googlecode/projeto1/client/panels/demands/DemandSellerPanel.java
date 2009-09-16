@@ -97,6 +97,8 @@ public class DemandSellerPanel extends Panel{
 		textCidade = new TextBox();
 		rootPanel.add(textCidade, 60, 163);
 		textCidade.setSize("224px", "21px");
+		textCidade.setText("Campina Grande");
+		textCidade.setEnabled(false);
 		Label lblCidade = new Label("Cidade:");
 		rootPanel.add(lblCidade, 17, 166);
 		lblCidade.setSize("61px", "18px");
@@ -174,6 +176,8 @@ public class DemandSellerPanel extends Panel{
 			public void onSuccess(List<String> states) {
 				for (String state : states) {
 					listEstado.addItem(state);
+					listEstado.setSelectedIndex(14);
+					listEstado.setEnabled(false);
 				}
 			}
 			
@@ -332,6 +336,7 @@ public class DemandSellerPanel extends Panel{
 				demanda.setRua(street);
 				demanda.setSuites(suite);
 				demanda.setQuartos(bedroom);
+				demanda.setEstado(state);
 				demanda.setVagasGaragem(garageSpace);
 				demanda.setPreco(price);
 				PERSISTENCE_SERVICE.saveDemanda(demanda, new AsyncCallback<String>() {

@@ -13,7 +13,9 @@ import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.MessageBoxConfig;
 
 public class CaseEditPanel extends CaptionPanel{
 	
@@ -24,10 +26,11 @@ public class CaseEditPanel extends CaptionPanel{
 	public CaseEditPanel(CaseBean caseBean, int index){
 		super("Caso " + index);
 		this.myCaseBean = caseBean;
-		this.setHeight("200px");
+		this.setHeight("150px");
+		this.setWidth("150px");
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		this.setContentWidget(absolutePanel);
-		absolutePanel.setSize("600px", "3cm");
+		absolutePanel.setSize("450px", "3cm");
 		String address = myCaseBean.getStreet() + ", Nº " + myCaseBean.getNumber() + ". " +
 							myCaseBean.getCity() + ", " + myCaseBean.getNeighborhood();
 		
@@ -53,27 +56,47 @@ public class CaseEditPanel extends CaptionPanel{
 		Button removeButton = new Button("Remover");
 		removeButton.addClickListener(new ClickListener() {
 			
+			
 			public void onClick(Widget arg0) {
-				PERSISTENCE_SERVICE.removeCaso(LoginManager.getLogedAdministrator(), myCaseBean, new AsyncCallback<String>() {
+				MessageBox.show(new MessageBoxConfig() {
 
-					public void onFailure(Throwable arg0) {
-						MessageBox.alert("Não foi possível remover o caso");
-						
-					}
+					{
+						setTitle("Remover Caso");
+						setMsg("Você deseja realmente remover esse caso?");
+						setIconCls(MessageBox.QUESTION);
+						setButtons(MessageBox.YESNO);
+						setButtons(new NameValuePair[] {
+								new NameValuePair("yes", "Sim"),
+								new NameValuePair("no", "Não") });
+						setCallback(new MessageBox.PromptCallback() {
+							public void execute(String btnID, String text) {
+								if (btnID.equals("yes")) {
+									removeCaso();
+								}
 
-					public void onSuccess(String arg0) {
-						PanelSwitcher.switchPanel(new ManagePanel());
-						MessageBox.alert("Caso removido com sucesso");
-						
+							}
+						});
 					}
 				});
-				
 			}
 		});
 		absolutePanel.add(removeButton, 224, 74);
-		
+	}
+	
+	private void removeCaso(){
+		PERSISTENCE_SERVICE.removeCaso(LoginManager.getLogedAdministrator(), myCaseBean, new AsyncCallback<String>() {
 
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Não foi possível remover o caso");
+				
+			}
 
+			public void onSuccess(String arg0) {
+				PanelSwitcher.switchPanel(new ManagePanel());
+				MessageBox.alert("Caso removido com sucesso");
+				
+			}
+		});
 	}
 
 }

@@ -94,6 +94,8 @@ public class QueryPanel extends Panel{
 		textCidade = new TextBox();
 		queryPanel.add(textCidade, 60, 163);
 		textCidade.setSize("224px", "21px");
+		textCidade.setText("Campina Grande");
+		textCidade.setEnabled(false);		
 		Label lblCidade = new Label("Cidade:");
 		queryPanel.add(lblCidade, 17, 166);
 		lblCidade.setSize("61px", "18px");
@@ -165,6 +167,8 @@ public class QueryPanel extends Panel{
 			public void onSuccess(List<String> states) {
 				for (String state : states) {
 					listEstado.addItem(state);
+					listEstado.setSelectedIndex(14);
+					listEstado.setEnabled(false);
 				}
 			}
 			
