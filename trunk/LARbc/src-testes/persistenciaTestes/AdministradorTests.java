@@ -102,6 +102,7 @@ public class AdministradorTests {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
+		caso.setLocation("0 0");
 		
 		return caso;
 	}
