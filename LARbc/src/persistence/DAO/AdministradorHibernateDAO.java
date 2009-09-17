@@ -40,7 +40,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
         List<Administrador> roots = getRoots();
         if(roots.size() == 0){
             try {
-				saveAdministrador(new Administrador("root", "root", "Root"));
+				saveAdministrador(new Administrador("root", "root", "Root", "true"));
 			} catch (LoginAlreadyRegisteredException e) {}
         }        
 		
@@ -121,7 +121,7 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 	@Override
 	public void updateAdministrador(Administrador admin)
 			throws AdministradorNotFoundException {
-		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
+//		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(admin);
