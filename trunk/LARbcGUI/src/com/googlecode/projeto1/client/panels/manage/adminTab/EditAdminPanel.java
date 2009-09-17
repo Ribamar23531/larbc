@@ -89,7 +89,26 @@ public class EditAdminPanel extends CaptionPanel{
 		button.addClickListener(new ClickListener() {
 			
 			public void onClick(Widget arg0) {
-				removeAdmin();
+				MessageBox.show(new MessageBoxConfig() {
+
+					{
+						setTitle("Remover Administrador");
+						setMsg("Você deseja realmente remover esse administrador?");
+						setIconCls(MessageBox.QUESTION);
+						setButtons(MessageBox.YESNO);
+						setButtons(new NameValuePair[] {
+								new NameValuePair("yes", "Sim"),
+								new NameValuePair("no", "Não") });
+						setCallback(new MessageBox.PromptCallback() {
+							public void execute(String btnID, String text) {
+								if (btnID.equals("yes")) {
+									removeAdmin();
+								}
+
+							}							
+						});
+					}
+				});				
 			}			
 		});
 		button.setSize("109px", "34px");
