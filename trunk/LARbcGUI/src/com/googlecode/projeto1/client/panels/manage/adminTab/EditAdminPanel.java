@@ -14,6 +14,7 @@ import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
+import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.NameValuePair;
@@ -38,7 +39,12 @@ public class EditAdminPanel extends CaptionPanel{
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 
 	public EditAdminPanel(AdminBean admin, int index) {
-		super("Administrador " + index);
+		super();
+		if(admin.getIdAdministrador() == LoginManager.getLogedAdministrator().getIdAdministrador()){
+			this.setCaptionText("Administrador " + index + " (você)");
+		}else{
+			this.setCaptionText("Administrador " + index);			
+		}
 		this.myAdmin = admin;
 		this.defaultName = myAdmin.getNome();
 		this.defaultLogin = myAdmin.getLogin();
@@ -153,8 +159,13 @@ public class EditAdminPanel extends CaptionPanel{
 			
 			public void onSuccess(String arg0) {
 				if(arg0.equals("")){
-					PanelSwitcher.switchPanel(new ManagePanel());
-					MessageBox.alert("Administrador removido com sucesso");
+					if(myAdmin.getIdAdministrador() == LoginManager.getLogedAdministrator().getIdAdministrador()){
+						PanelSwitcher.switchPanel(new ModalityPanel());
+						MessageBox.alert("Você se removeu com sucesso");
+					}else{
+						PanelSwitcher.switchPanel(new ManagePanel());
+						MessageBox.alert("Administrador removido com sucesso");						
+					}
 				}else{
 					MessageBox.alert("Erro: " + arg0);
 				}
