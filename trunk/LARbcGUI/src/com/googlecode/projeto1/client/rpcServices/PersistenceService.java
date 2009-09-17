@@ -54,7 +54,7 @@ public interface PersistenceService extends RemoteService {
 	
 	public void saveDemanda(DemandBean demanda);
 	
-	public void updateAdministrador(AdminBean root, AdminBean adminToUpdate);
+	public String updateAdministrador(AdminBean root, AdminBean adminToUpdate);
 	
 	public void updateCaso(AdminBean admin, CaseBean caso);
 	

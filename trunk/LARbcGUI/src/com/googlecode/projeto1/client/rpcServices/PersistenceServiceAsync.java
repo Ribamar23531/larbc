@@ -52,7 +52,7 @@ public interface PersistenceServiceAsync {
 	
 	public void saveDemanda(DemandBean demanda, AsyncCallback<?> callback);
 	
-	public void updateAdministrador(AdminBean root, AdminBean adminToUpdate, AsyncCallback<?> callback);
+	public void updateAdministrador(AdminBean root, AdminBean adminToUpdate, AsyncCallback<String> callback);
 	
 	public void updateCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback);
 	
