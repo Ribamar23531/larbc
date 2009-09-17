@@ -11,14 +11,16 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
+import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.AdminBean;
+import com.googlecode.projeto1.client.panels.manage.ManagePanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBoxConfig;
 
-public class AdminPanel extends CaptionPanel{
+public class EditAdminPanel extends CaptionPanel{
 	
 	private String defaultName;
 	private String defaultLogin;
@@ -30,11 +32,12 @@ public class AdminPanel extends CaptionPanel{
 	private CheckBox isRootCheckBox;
 	private Button changePassButton;
 	private Button changeButton;
+	private Button removeButton;
 	private PasswordChangerWindow passwordChangerWindow;
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 
-	public AdminPanel(AdminBean admin, int index) {
+	public EditAdminPanel(AdminBean admin, int index) {
 		super("Administrador " + index);
 		this.myAdmin = admin;
 		this.defaultName = myAdmin.getNome();
@@ -70,10 +73,21 @@ public class AdminPanel extends CaptionPanel{
 		absolutePanel.add(changePassButton, 5, 59);
 		changeButton = getChangeButton();
 		absolutePanel.add(changeButton, 167, 59);
-		Button removeButton = new Button("Remover");
-		absolutePanel.add(removeButton, 255, 59);
-		removeButton.setSize("109px", "34px");
+		removeButton = getRemoveButton();
+		absolutePanel.add(removeButton, 255, 59);		
 
+	}
+	
+	private Button getRemoveButton(){
+		Button button = new Button("Remover");
+		button.addClickListener(new ClickListener() {
+			
+			public void onClick(Widget arg0) {
+				removeAdmin();
+			}			
+		});
+		button.setSize("109px", "34px");
+		return button;
 	}
 	
 	private Button getChangePassButton(){
@@ -132,6 +146,26 @@ public class AdminPanel extends CaptionPanel{
 		myAdmin.setLogin(defaultLogin);
 		myAdmin.setIsRoot(defaultIsRoot);
 		myAdmin.setPassword(defaultPassword);
+	}
+	
+	private void removeAdmin() {
+		PERSISTENCE_SERVICE.removeAdministrador(LoginManager.getLogedAdministrator(), myAdmin, new AsyncCallback<String>() {
+			
+			public void onSuccess(String arg0) {
+				if(arg0.equals("")){
+					PanelSwitcher.switchPanel(new ManagePanel());
+					MessageBox.alert("Administrador removido com sucesso");
+				}else{
+					MessageBox.alert("Erro: " + arg0);
+				}
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Não foi possível remover esse administrador");
+				
+			}
+		});
+		
 	}
 	
 	private void updateAdmin() {

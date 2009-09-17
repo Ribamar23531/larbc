@@ -191,16 +191,19 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void removeAdministrador(AdminBean root, AdminBean adminToRemove) {
+	public String removeAdministrador(AdminBean root, AdminBean adminToRemove) {
 		try {
 			this.getSystemFacade().removeAdministrador(this.getAdmin(root), this.getAdmin(adminToRemove));
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.getMessage();
 		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.getMessage();
 		}
+		return "";
 	}
 
 
@@ -240,16 +243,19 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void saveAdministrador(AdminBean root, AdminBean adminToInsert) {
+	public String saveAdministrador(AdminBean root, AdminBean adminToInsert) {
 		try {
 			this.getSystemFacade().saveAdministrador(this.getAdmin(root), this.getAdmin(adminToInsert));
 		} catch (LoginAlreadyRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.getMessage();
 		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.getMessage();
 		}
+		return "";
 	}
 
 
