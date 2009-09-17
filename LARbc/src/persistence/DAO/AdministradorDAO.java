@@ -21,7 +21,7 @@ public interface AdministradorDAO {
 	
 	public void createRootIfNeeded();
 	
-	public void updateAdministrador(Administrador admin) throws AdministradorNotFoundException;
+	public void updateAdministrador(Administrador admin) throws AdministradorNotFoundException, PermissionDeniedException;
 	
 	public void removeAllAdministradores();
 	

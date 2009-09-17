@@ -120,8 +120,14 @@ public class AdministradorHibernateDAO extends HibernateDAO implements Administr
 
 	@Override
 	public void updateAdministrador(Administrador admin)
-			throws AdministradorNotFoundException {
+			throws AdministradorNotFoundException, PermissionDeniedException {
 //		getAdministrador(admin.getLogin());//verifica se existe o administrador a ser removido
+		if(!admin.isRoot()){
+			List<Administrador> roots = getRoots();
+			if(roots.size() == 1 && roots.get(0).getIdAdministrador() == admin.getIdAdministrador()){
+				throw new PermissionDeniedException();
+			}
+		}
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(admin);
