@@ -40,7 +40,7 @@ public interface PersistenceServiceAsync {
 	
 	public void getFotos(CaseBean caso, AsyncCallback<List<PhotoBean>> callback);
 	
-	public void removeAdministrador(AdminBean root, AdminBean adminToRemove, AsyncCallback<?> callback);
+	public void removeAdministrador(AdminBean root, AdminBean adminToRemove, AsyncCallback<String> callback);
 	
 	public void removeCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback);
 	
@@ -48,7 +48,7 @@ public interface PersistenceServiceAsync {
 	
 	public void removeFoto(CaseBean caso, String path, AsyncCallback<?> callback);
 	
-	public void saveAdministrador(AdminBean root, AdminBean adminToInsert, AsyncCallback<?> callback);
+	public void saveAdministrador(AdminBean root, AdminBean adminToInsert, AsyncCallback<String> callback);
 	
 	public void saveDemanda(DemandBean demanda, AsyncCallback<?> callback);
 	
@@ -59,8 +59,6 @@ public interface PersistenceServiceAsync {
 	public void updateDemanda(DemandBean demanda, AsyncCallback<?> callback);
 	
 	public void updateFoto(PhotoBean oldPhoto, PhotoBean newPhoto, AsyncCallback<?> callback);
-	
-//	public void setAdminPassword(String oldAdminPassword, String newAdminPassword);
 	
 	public void listEstados(AsyncCallback<List<String>> callback);
 	
