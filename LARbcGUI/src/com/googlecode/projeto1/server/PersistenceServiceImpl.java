@@ -257,17 +257,20 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		this.getSystemFacade().saveDemanda(this.getDemanda(demanda));
 	}
 
-	public void updateAdministrador(AdminBean root,
+	public String updateAdministrador(AdminBean root,
 									AdminBean adminToUpdate) {
 		try {
 			this.getSystemFacade().updateAdministrador(this.getAdmin(root), this.getAdmin(adminToUpdate));
 		} catch (AdministradorNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.getMessage();
 		} catch (PermissionDeniedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.getMessage();
 		}
+		return "";
 	}
 
 
@@ -414,6 +417,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		admin.setLogin(adminBean.getLogin());
 		admin.setNome(adminBean.getNome());
 		admin.setPassword(adminBean.getPassword());
+		admin.setIsRoot(adminBean.getIsRoot()?"true":"false");
 		return admin;
 	}
 	
