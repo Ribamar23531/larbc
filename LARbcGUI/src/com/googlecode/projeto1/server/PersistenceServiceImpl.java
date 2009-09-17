@@ -195,12 +195,8 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		try {
 			this.getSystemFacade().removeAdministrador(this.getAdmin(root), this.getAdmin(adminToRemove));
 		} catch (AdministradorNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return e.getMessage();
 		} catch (PermissionDeniedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return e.getMessage();
 		}
 		return "";
@@ -247,12 +243,8 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		try {
 			this.getSystemFacade().saveAdministrador(this.getAdmin(root), this.getAdmin(adminToInsert));
 		} catch (LoginAlreadyRegisteredException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return e.getMessage();
 		} catch (PermissionDeniedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return e.getMessage();
 		}
 		return "";
@@ -268,12 +260,8 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		try {
 			this.getSystemFacade().updateAdministrador(this.getAdmin(root), this.getAdmin(adminToUpdate));
 		} catch (AdministradorNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return e.getMessage();
 		} catch (PermissionDeniedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return e.getMessage();
 		}
 		return "";
