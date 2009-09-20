@@ -22,7 +22,7 @@ public class ResultsPanel extends Panel{
 		super();		
 		vp = new VerticalPanel();
 		this.setFrame(true);
-		vp.add(Util.createImage(Util.LARBC_IMAGE_PATH));
+//		vp.add(Util.createImage(Util.LARBC_IMAGE_PATH));
 		vp.add(Util.createImage(Util.IMMOBILE_IMAGE_PATH));
 		int index = 1;
 		for (CaseBean caseBean : cases) {
@@ -31,7 +31,7 @@ public class ResultsPanel extends Panel{
 		}				
 //		Button button = new ButtonListenerAdapter();
 
-		this.add(vp, new ColumnLayoutData(50));
+		this.add(vp, new ColumnLayoutData(60));
 		Button button = new Button("Não encontrou o que queria?", new ButtonListenerAdapter() {  
 			public void onClick(Button button, EventObject e) {
 				MessageBox.show(new MessageBoxConfig() {
