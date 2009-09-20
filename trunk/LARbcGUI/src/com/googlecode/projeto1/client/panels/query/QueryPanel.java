@@ -136,6 +136,10 @@ public class QueryPanel extends Panel{
 		comboTipo = new ListBox();
 		queryPanel.add(comboTipo, 98, 329);
 		comboTipo.setSize("205px", "21px");	
+		comboTipo.addItem("Casa");
+		comboTipo.addItem("Apartamento");
+		comboTipo.addItem("Terreno");
+		comboTipo.addItem("Sala comercial");
 		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
@@ -272,7 +276,9 @@ public class QueryPanel extends Panel{
 					}
 				}				
 				
-				//type = ;
+				int indexType = comboTipo.getSelectedIndex();
+				type = comboTipo.getItemText(indexType);
+				
 				try{
 					price = Float.parseFloat(textPreco.getText());
 				}catch(Exception e){
