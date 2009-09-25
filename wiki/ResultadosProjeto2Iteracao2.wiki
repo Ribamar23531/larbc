@@ -8,3 +8,7 @@
 ||Obter informações de "quais os pontos de interesse precisam ser avaliados em cada tipo de consulta" e "se a seleção de pontos de interesse deve ser feita automaticamente ou manualmente pelo usuário"||João Felipe||Concluída||
 ||Implementar as funções de similaridade de acordo com as indicaçãoes do cliente||João Felipe||...||
 ||Documentação||Equipe||Concluída||
+
+== Descrição dos resultados ==
+
+As atividades "Refatoramento de código da interface gráfica" e "Acrescentar as funcionalidades na interface gráfica" estão em andamento porque são atividades que não poderiam ser concluídas nessa iteração. As funcionalidades ainda estão aparecendo e sendo adicionadas por demanda, já o refatoramento de código é uma atividade constante da aplicação, no entanto, foi enfatizada nessa iteração.
