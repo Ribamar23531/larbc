@@ -10,3 +10,7 @@
  *  Iteração 2 (7/Set | 21/Set)
    *  [Projeto2Iteracao2 Planejamento]
    *  [ResultadosProjeto2Iteracao2 Resultados]
+
+
+ *  Iteração 3 (21/Set | 5/Out)
+   *  [Projeto2Iteracao3 Planejamento]
