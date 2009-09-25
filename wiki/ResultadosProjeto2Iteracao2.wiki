@@ -1,0 +1,10 @@
+= Resultados da iteração 2 = 
+
+|| *Atividade* || *Responsável* || *Status* ||
+||Refatoramento de código da interface gráfica||Alcione||Em andamento||
+||Acrescentar as funcionalidades na interface gráfica||Alcione||Em andamento||
+||Identificar pontos de interesse (Quais pontos de interesse serão levados em conta)||Diego||Concluída||
+||Iniciar integração de base de dados com o google maps (Salvar e recuperar do disco localizações dos imóveis e pontos de interesse) ||Diego||...||
+||Obter informações de "quais os pontos de interesse precisam ser avaliados em cada tipo de consulta" e "se a seleção de pontos de interesse deve ser feita automaticamente ou manualmente pelo usuário"||João Felipe||Concluída||
+||Implementar as funções de similaridade de acordo com as indicaçãoes do cliente||João Felipe||...||
+||Documentação||Equipe||Concluída||
