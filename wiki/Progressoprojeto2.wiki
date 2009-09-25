@@ -1,0 +1,15 @@
+= Progresso do Projeto = 
+
+== Acompanhamento das Iterações ==
+
+ *  Iteração 1 (24/Ago | 7/Set)
+   *  [Iteracao1 Plano]
+   *  [ResultadosIteracao1 Resultados]
+
+
+ *  Iteração 2 (7/Set | 21/Set)
+   *  [Iteracao2 Plano]
+   *  [ResultadosIteracao2 Resultados]
+
+
+
