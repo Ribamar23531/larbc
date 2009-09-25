@@ -1,6 +1,6 @@
 = Resultados da iteração 1 = 
 
-||*Atividade*||*Responsável*||*Status*||
+|| *Atividade* || *Responsável* || *Status* ||
 ||Melhoria de qualidade de imagens||Alcione||Concluída||
 ||Correção de acentuação e de padrão de codificação||Alcione||Concluída||
 ||Correção de defeitos na interface gráfica||Alcione||Em andamento||
