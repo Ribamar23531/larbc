@@ -18,7 +18,7 @@
 
 A atividade de melhoria das imagens da interface gráfica foi realizada com sucesso, e validada pelos clientes. A correção da acentuação também foi efetuada e a codificação utilizada atualmente é a UTF-8. A correção de defeitos da interface gráfica continua em andamento, devido ao fato dos erros serem encontrados durante o desenvolvimento, os testes e a utilização da ferramenta, bem como, pode ocorrer o surgimento de outros erros durante a implementação do projeto. A verificação dos tipos dos formulários também pode ser considerada concluída, no entanto, outras validações podem surgir.
 
-a implementação de mapas tamém foi concluída e validada pelos clientes. Como parte dessa atividade foi gerado um documento sobre a migração do MySQL (banco usado em projeto 1) para o Postgres que nos dá a possibidade de georeferenciamento. Esse documento pode ser visto [http://larbc.googlecode.com/files/Reuni%C3%A3o%20com%20Glauber.doc [aqui]] .
+a implementação de mapas tamém foi concluída e validada pelos clientes. Como parte dessa atividade foi gerado um documento sobre a migração do MySQL (banco usado em projeto 1) para o Postgres que nos dá a possibidade de georeferenciamento. Esse documento pode ser visto [http://larbc.googlecode.com/files/Instala%C3%A7%C3%A3o%2Be%2Bconfigura%C3%A7%C3%A3o%2Bdo%2BSGBD%2B%283%29.doc [aqui]] .
 
 O levantamento de casos para povoamento da base de dados do sistema foi feito inicialmente com a utilização da internet, porém, o clienteforneceu casos reais de Imobiliária Souto Maior para serem inseridos na nossa base de dados, isso ocorreu na última reunião realizada entre a equipe o cliente.
 
