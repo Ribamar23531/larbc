@@ -3,11 +3,10 @@
 == Acompanhamento das Iterações ==
 
  *  Iteração 1 (24/Ago | 7/Set)
-   *  [Iteracao1 Planejamento]
-   *  [ResultadosIteracao1 Resultados]
+   *  [Projeto2Iteracao1 Planejamento]
+   *  [ResultadosProjeto2Iteracao1 Resultados]
 
 
  *  Iteração 2 (7/Set | 21/Set)
-   *  [Iteracao2 Plano]
-   *  [ResultadosIteracao2 Resultados]
-
+   *  [Projeto2Iteracao2 Planejamento]
+   *  [ResultadosProjeto2Iteracao2 Resultados]
