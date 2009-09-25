@@ -1,5 +1,8 @@
 = Progresso do Projeto = 
 
+ *  [RiscosProjeto2 Riscos]
+ *  [BigChart]
+
 == Acompanhamento das Iterações ==
 
  *  Iteração 1 (24/Ago | 7/Set)
