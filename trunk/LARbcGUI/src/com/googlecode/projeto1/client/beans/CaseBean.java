@@ -2,6 +2,12 @@ package com.googlecode.projeto1.client.beans;
 
 import java.io.Serializable;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class CaseBean implements Serializable{
 	/**
 	 * 
@@ -164,7 +170,6 @@ public class CaseBean implements Serializable{
 	}
 
 	public String toString(){
-//		String newLine = System.getProperty("line.separator");
 		String newLine = "\n";
 		String result = "Id: " + getId() + newLine +
 						"State: + " + getState() + newLine + 
