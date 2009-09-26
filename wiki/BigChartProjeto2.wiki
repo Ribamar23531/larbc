@@ -2,4 +2,4 @@
 
 Abaixo segue um gráfico que ilustra o progresso dos principais elementos que compõem o nosso projeto.
 
-<link>
+http://larbc.googlecode.com/files/BigChartv6.png
