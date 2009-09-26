@@ -2,10 +2,13 @@ package com.googlecode.projeto1.client.beans;
 
 import java.io.Serializable;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class DemandBean implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private long idDemanda;
 	private String estado;
