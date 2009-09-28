@@ -39,6 +39,11 @@ public class NewWelcomePanel extends Panel {
 			image.setSize("22%", "63%");
 		}
 		{
+			Image image = new Image("images/slogan.png");
+			rootPanel.add(image, 495, 410);
+			image.setSize("22%", "5%");
+		}
+		{
 			Image image = new Image("images/welcome.png");
 			rootPanel.add(image, 420, 150);
 			image.setSize("35%", "45%");
@@ -85,9 +90,9 @@ public class NewWelcomePanel extends Panel {
 	
 	private void buildButtonsPanel() {
 		if(!isSelectedEntrarButton){
-			rootPanel.add(entrarButton, 540, 420);
+			rootPanel.add(entrarButton, 540, 450);
 		}else{
-			rootPanel.add(entrarSelectedButton, 540, 420);
+			rootPanel.add(entrarSelectedButton, 540, 450);
 		}
 	}
 
