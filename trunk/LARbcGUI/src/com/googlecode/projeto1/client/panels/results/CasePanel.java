@@ -7,6 +7,12 @@ import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.Util;
 import com.gwtext.client.widgets.Panel;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class CasePanel extends Panel{
 	
 	private Image picture;
