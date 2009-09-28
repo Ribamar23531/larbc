@@ -8,6 +8,12 @@ import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public interface PersistenceServiceAsync {
 
 	public void doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,

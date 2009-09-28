@@ -9,6 +9,12 @@ import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 @RemoteServiceRelativePath("persistence")
 public interface PersistenceService extends RemoteService {
 
