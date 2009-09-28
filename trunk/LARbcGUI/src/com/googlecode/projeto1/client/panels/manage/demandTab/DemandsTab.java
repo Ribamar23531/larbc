@@ -15,6 +15,12 @@ import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.form.Label;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class DemandsTab extends AbsolutePanel{
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
