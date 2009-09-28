@@ -18,6 +18,10 @@ import facade.SystemManager;
 /**
  * Servlet implementation class for Servlet: Upload
  *
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
  */
  public class Upload extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
    static final long serialVersionUID = 1L;
