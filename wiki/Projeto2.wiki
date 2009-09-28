@@ -9,3 +9,7 @@
   *  Refinamento do cálculo do grau de similaridade
 
 *O arquivo contendo o planejamento completo do nosso projeto pode ser visto [http://larbc.googlecode.com/files/Planejamento%20-%20projeto%202.pdf [aqui]].*
+
+Com a finalidade de satisfazer as novas demandas da aplicação a ser desenvolvida em Projeto II, novos documentos de especificação foram produzidos. São eles:
+
+  *  [Requisitos Requisitos2]
