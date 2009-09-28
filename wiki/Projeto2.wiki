@@ -12,4 +12,4 @@
 
 Com a finalidade de satisfazer as novas demandas da aplicação a ser desenvolvida em Projeto II, novos documentos de especificação foram produzidos. São eles:
 
-  *  [Requisitos Requisitos2]
+  *  [Requisitos2 Requisitos]
