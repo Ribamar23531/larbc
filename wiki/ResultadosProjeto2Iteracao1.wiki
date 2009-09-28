@@ -8,7 +8,7 @@
 ||Levantamento de dados para povoamento da base de dados||Diego||Concluída||
 ||Implementação de mapas na interface gráfica||Diego||Concluída||
 ||Ler o artigo-referência para apresentação para Joseana e preparar a apresentação||João Felipe||Concluída||
-||Implementar as funções de similaridade local para os atributos||João Felipe||Em andamento||
+||Implementar as funções de similaridade local para os atributos||João Felipe||Concluída||
 ||Elaborar questionamentos sobre "como avaliar os atributos de um caso?" para análise junto ao cliente||João Felipe||Concluída||
 ||Obter do cliente novas formas de avaliar os atributos de um caso, segundo a experiência real com os clientes||João Felipe||Concluída||
 ||Validar com o cliente a interface gráfica e obter as modificações necessárias||Equipe||Concluída||
