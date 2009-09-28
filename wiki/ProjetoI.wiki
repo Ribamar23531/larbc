@@ -1,0 +1,13 @@
+= Artefatos referentes a Projeto em Computação I =
+
+ *  [Fundamentacao Fundamentos Teóricos]
+
+ *  [Planejamento]
+
+ *  [Projeto]
+
+ *  [Testes]
+
+ *  [Reunioes Reuniões com os Clientes]
+
+ *  [Progresso Progresso do Projeto]
