@@ -26,7 +26,12 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
- */
+ * 
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+*/
 public class QueryPanel extends Panel{
 	
 	private AbsolutePanel queryPanel;
