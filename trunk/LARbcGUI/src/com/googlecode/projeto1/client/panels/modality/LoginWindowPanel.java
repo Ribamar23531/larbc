@@ -7,6 +7,12 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.FitLayout;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class LoginWindowPanel extends Panel{
 	
 	private AbsolutePanel panel;

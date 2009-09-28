@@ -9,6 +9,12 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.ColumnLayoutData;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class NorthModalityPanel extends Panel{
 	
 	private Image managerButtonImage;

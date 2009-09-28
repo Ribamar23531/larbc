@@ -12,6 +12,12 @@ import com.googlecode.projeto1.client.panels.query.QueryPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.ColumnLayout;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class CenterModalityPanel extends Panel{
 	
 	private AbsolutePanel vp;
