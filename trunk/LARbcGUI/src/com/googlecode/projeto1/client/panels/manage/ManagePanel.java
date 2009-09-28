@@ -8,6 +8,12 @@ import com.googlecode.projeto1.client.panels.manage.demandTab.DemandsTab;
 import com.googlecode.projeto1.client.panels.manage.editTab.EditTab;
 import com.gwtext.client.widgets.Panel;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class ManagePanel extends Panel{
 	
 	private AbsolutePanel managePanel;	

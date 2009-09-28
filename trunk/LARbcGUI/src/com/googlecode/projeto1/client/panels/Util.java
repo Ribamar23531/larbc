@@ -2,6 +2,12 @@ package com.googlecode.projeto1.client.panels;
 
 import com.google.gwt.user.client.ui.Image;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class Util {
 	
 	public final static String LARBC_IMAGE_PATH = "images/larbc.png";
