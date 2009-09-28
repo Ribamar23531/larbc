@@ -6,6 +6,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.googlecode.projeto1.client.beans.DemandBean;
 import com.google.gwt.user.client.ui.Button;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class DemandPanel extends CaptionPanel{
 	
 	private DemandBean myDemandBean;
