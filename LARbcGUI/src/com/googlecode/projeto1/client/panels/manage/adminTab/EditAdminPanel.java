@@ -21,6 +21,12 @@ import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBoxConfig;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class EditAdminPanel extends CaptionPanel{
 	
 	private String defaultName;
