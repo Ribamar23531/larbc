@@ -1,5 +1,11 @@
 package com.googlecode.projeto1.client.panels.manage;
 
+/**
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
+ */
 public class SelectedLocation {
 	
 	private static String location = null;

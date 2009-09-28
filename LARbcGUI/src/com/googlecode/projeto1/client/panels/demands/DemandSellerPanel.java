@@ -26,8 +26,13 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ * 
+ * @author Alcione Pinheiro
+ * @author Diego Rodrigues
+ * @author João Felipe
+ * @version LARbc 1.0
  */
-public class DemandSellerPanel extends Panel{
+ public class DemandSellerPanel extends Panel{
 	
 	private AbsolutePanel rootPanel;
 	private Image pesquisarButton;
