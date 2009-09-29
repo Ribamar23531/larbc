@@ -39,16 +39,18 @@ public class Help extends Panel{
 		store.setGroupField("categoria");  
 		store.load();  
 	  
+		ColumnConfig columnConfigLARbc = new ColumnConfig("LARbc", "larbc", 160, true, null, "larbc");
+		ColumnConfig columnConfigCategoria = new ColumnConfig("Categoria", "categoria", 1, true);
 		ColumnConfig[] columns = new ColumnConfig[]{  
-				new ColumnConfig("LARbc", "larbc", 160, true, null, "larbc"),  
-				new ColumnConfig("", "categoria", 60, true)  
+				columnConfigLARbc,  
+				columnConfigCategoria  
 		};  
 	    
 		ColumnModel columnModel = new ColumnModel(columns);  
 
 		GridPanel grid = new GridPanel();  
 		grid.setStore(store);  
-		grid.setColumnModel(columnModel);  
+		grid.setColumnModel(columnModel);
 		grid.setFrame(true);  
 		grid.setStripeRows(true);  
 		grid.setAutoExpandColumn("larbc");  
@@ -57,13 +59,13 @@ public class Help extends Panel{
 		grid.setWidth(600);  
 	    
 		GroupingView gridView = new GroupingView();  
-		gridView.setForceFit(true);  
+		gridView.setForceFit(true); 
 		gridView.setGroupTextTpl("{text}");  
 
 		grid.setView(gridView);  
 		grid.setFrame(true);  
-		grid.setWidth(520);  
-		grid.setHeight(400);  
+		grid.setWidth(580);  
+		grid.setHeight(500);  
 		grid.setCollapsible(true);  
 		grid.setAnimCollapse(false);  
 		grid.setTitle("Ajuda");  
