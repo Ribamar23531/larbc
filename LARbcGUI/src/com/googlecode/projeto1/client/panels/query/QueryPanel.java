@@ -52,16 +52,16 @@ public class QueryPanel extends Panel{
 	private float totalArea;
 	private int suite;
 	private int bedroom;
-	private TextBox textRua;
-	private TextBox textBairro;
-	private TextBox textCidade;
-	private TextBox textNome;
+	private TextBox textStreet;
+	private TextBox textNeighborhood;
+	private TextBox textCity;
+	private TextBox textName;
 	private TextBox textAreaConstruida;
 	private TextBox textGaragem;
 	private TextBox textQuartos;
 	private ListBox comboTipo;
 	private TextBox textPreco;
-	private ListBox listTipoNegocio;
+	private ListBox listbusinessType;
 	private ListBox listEstado;
 	private TextBox textAreaTotal;
 	private TextBox textSuites;
@@ -80,35 +80,35 @@ public class QueryPanel extends Panel{
 		image.setSize("60%", "100%");
 		
 		//Nome da Rua
-		textRua = new TextBox();
-		queryPanel.add(textRua, 91, 111);
-		textRua.setSize("278px", "21px");
+		textStreet = new TextBox();
+		queryPanel.add(textStreet, 91, 111);
+		textStreet.setSize("278px", "21px");
 		Label rua = new Label("Nome da rua:");
 		queryPanel.add(rua, 17, 114);
 		rua.setSize("127px", "18px");
 		
 		//Bairro
-		textBairro = new TextBox();
-		queryPanel.add(textBairro, 59, 137);
-		textBairro.setSize("265px", "21px");
+		textNeighborhood = new TextBox();
+		queryPanel.add(textNeighborhood, 59, 137);
+		textNeighborhood.setSize("265px", "21px");
 		Label lblBairro = new Label("Bairro:");
 		queryPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("61px", "18px");
 		
 		//Cidade
-		textCidade = new TextBox();
-		queryPanel.add(textCidade, 60, 163);
-		textCidade.setSize("224px", "21px");
-		textCidade.setText("Campina Grande");
-		textCidade.setEnabled(false);		
+		textCity = new TextBox();
+		queryPanel.add(textCity, 60, 163);
+		textCity.setSize("224px", "21px");
+		textCity.setText("Campina Grande");
+		textCity.setEnabled(false);		
 		Label lblCidade = new Label("Cidade:");
 		queryPanel.add(lblCidade, 17, 166);
 		lblCidade.setSize("61px", "18px");
 		
 		//Nome do imovel
-		textNome = new TextBox();
-		queryPanel.add(textNome, 100, 194);
-		textNome.setSize("265px", "21px");
+		textName = new TextBox();
+		queryPanel.add(textName, 100, 194);
+		textName.setSize("265px", "21px");
 		Label lblNome = new Label("Nome do imóvel:");
 		queryPanel.add(lblNome, 17, 197);
 		lblNome.setSize("100px", "18px");
@@ -158,11 +158,11 @@ public class QueryPanel extends Panel{
 		lblPreoEmTorno.setSize("151px", "24px");
 		
 		//Tipo de negocio
-		listTipoNegocio = new ListBox();
-		queryPanel.add(listTipoNegocio, 108, 387);
-		listTipoNegocio.setSize("166px", "21px");
-		listTipoNegocio.addItem("Comprar");
-		listTipoNegocio.addItem("Alugar");
+		listbusinessType = new ListBox();
+		queryPanel.add(listbusinessType, 108, 387);
+		listbusinessType.setSize("166px", "21px");
+		listbusinessType.addItem("Comprar");
+		listbusinessType.addItem("Alugar");
 		Label lblTipoDeNegcio = new Label("Tipo de negócio:");
 		queryPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("151px", "24px");
@@ -251,10 +251,10 @@ public class QueryPanel extends Panel{
 		});
 		selectedPesquisarButton.addClickListener(new ClickListener(){
 			public void onClick(Widget arg0) {			
-				street = textRua.getText();
-				neighborhood = textBairro.getText();
-				city = textCidade.getText();
-				name = textNome.getText();
+				street = textStreet.getText();
+				neighborhood = textNeighborhood.getText();
+				city = textCity.getText();
+				name = textName.getText();
 				String message = "Digite um valor numérico válido para: ";
 				try{
 					builtArea = Float.parseFloat(textAreaConstruida.getText());					
@@ -293,7 +293,7 @@ public class QueryPanel extends Panel{
 					}
 				}				
 				
-				businessType = listTipoNegocio.getSelectedIndex();
+				businessType = listbusinessType.getSelectedIndex();
 				
 				int indexState = listEstado.getSelectedIndex();
 				state = listEstado.getItemText(indexState);
