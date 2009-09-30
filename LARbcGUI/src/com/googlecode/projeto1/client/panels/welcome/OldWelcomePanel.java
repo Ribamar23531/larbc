@@ -19,14 +19,14 @@ import com.gwtext.client.widgets.layout.FitLayout;
  * @author João Felipe
  * @version LARbc 1.0
  */
-public class NewWelcomePanel extends Panel {
+public class OldWelcomePanel extends Panel {
 	
 	private AbsolutePanel rootPanel;
 	private Image entrarButton;
 	private Image entrarSelectedButton;
 	private boolean isSelectedEntrarButton;
 	
-	public NewWelcomePanel() {
+	public OldWelcomePanel() {
 		rootPanel = new AbsolutePanel();
 		{
 			Image image = new Image("images/larbc.png");
@@ -39,14 +39,9 @@ public class NewWelcomePanel extends Panel {
 			image.setSize("22%", "63%");
 		}
 		{
-			Image image = new Image("images/slogan.png");
-			rootPanel.add(image, 495, 410);
-			image.setSize("22%", "5%");
-		}
-		{
-			Image image = new Image("images/welcome.png");
-			rootPanel.add(image, 420, 150);
-			image.setSize("35%", "45%");
+			Image image = new Image("images/soutoMaior.png");
+			rootPanel.add(image, 350, 220);
+			image.setSize("40%", "20%");
 		}
 		createEntrarButton();
 		this.add(rootPanel);
@@ -90,9 +85,9 @@ public class NewWelcomePanel extends Panel {
 	
 	private void buildButtonsPanel() {
 		if(!isSelectedEntrarButton){
-			rootPanel.add(entrarButton, 540, 450);
+			rootPanel.add(entrarButton, 540, 365);
 		}else{
-			rootPanel.add(entrarSelectedButton, 540, 450);
+			rootPanel.add(entrarSelectedButton, 540, 365);
 		}
 	}
 
