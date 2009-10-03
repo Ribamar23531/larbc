@@ -60,7 +60,9 @@ public class Caso{
 	@Column(updatable = true, nullable = false)
 	private float preco;	
 	@Column(updatable = true, nullable = false)
-	private int tipoNegocio;
+	private String tipoNegocio;
+	@Column(updatable = true, nullable = true)
+	private String observacoes;
 	@Transient
 	private String location;
 	
@@ -166,10 +168,10 @@ public class Caso{
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}	
-	public int getTipoNegocio() {
+	public String getTipoNegocio() {
 		return tipoNegocio;
 	}
-	public void setTipoNegocio(int tipoNegocio) {
+	public void setTipoNegocio(String tipoNegocio) {
 		this.tipoNegocio = tipoNegocio;
 	}
 //	public void setInseridoPor(Administrador inseridoPor) {

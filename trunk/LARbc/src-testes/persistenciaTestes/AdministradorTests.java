@@ -84,7 +84,7 @@ public class AdministradorTests {
 		int baneiros = 3;
 		String tipo = "tipo";
 		float preco = 5;
-		int tipoNegocio = 8;
+		String tipoNegocio = "tipo negocio";
 		
 		Caso caso = new Caso();
 		caso.setAreaConstruida(areaConst);

@@ -40,7 +40,7 @@ public class QueryConfig {
 	 */
 	public void setQuery(String state, String city, String neighborhood, String street, String name,
 						 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-						 int bathroom, String type, float price, int businessType){
+						 int bathroom, String type, float price, String businessType){
 		this.problemDescription.setState(state);
 		this.problemDescription.setCity(city);
 		this.problemDescription.setNeighborhood(neighborhood);

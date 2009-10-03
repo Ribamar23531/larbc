@@ -39,7 +39,8 @@ public class OneFieldQueryTest {
 		int baneiros = 3;
 		String tipo = "tipo";
 		float preco = 5;
-		int tipoNegocio = 8;
+		String tipoNegocio = "tipo negocio";
+		String location = "0 0";
 
 		Caso caso = new Caso();
 		caso.setAreaConstruida(areaConst);
@@ -57,6 +58,7 @@ public class OneFieldQueryTest {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
+		caso.setLocation(location);
 		return caso;
 	}
 	
@@ -75,7 +77,8 @@ public class OneFieldQueryTest {
 		int baneiros = 3;
 		String tipo = "tipo";
 		float preco = 6;
-		int tipoNegocio = 8;
+		String tipoNegocio = "tipo negocio";
+		String location = "0 0";
 
 		Caso caso = new Caso();
 		caso.setAreaConstruida(areaConst);
@@ -93,6 +96,7 @@ public class OneFieldQueryTest {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
+		caso.setLocation(location);
 		return caso;
 	}
 
@@ -111,31 +115,29 @@ public class OneFieldQueryTest {
 			persistenceManager.createCaso(administrador, caso1);
 			persistenceManager.createCaso(administrador, caso2);
 		} catch (AdministradorNotFoundException e) {
-			e.printStackTrace();
+			assertTrue(false);
 		} catch (LoginAlreadyRegisteredException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertTrue(false);
 		} catch (PermissionDeniedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertTrue(false);
 		}
 	}
 	
 	@Test
 	public void testRetrieve(){
-		List<Caso> queryResult= CBRManager.doQuery(1, "", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, 0);
+		List<Caso> queryResult= CBRManager.doQuery(1, "", "", "bairro", "", "", 0, 0, 0, 0, 0, 0, "", 0, "");
 		assertTrue(queryResult.size() == 1);
 	}
 	
 	@Test
 	public void testRetrieve2(){
-		List<Caso> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 2, 0, 0, 0, 0, 0, "", 0, 0);
+		List<Caso> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 2, 0, 0, 0, 0, 0, "", 0, "");
 		assertTrue(queryResult.size() == 2);
 	}
 	
 	@Test
 	public void testRetrieve3(){
-		List<Caso> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 0, 0, 0, 0, 0, 0, "", 1, 0);
+		List<Caso> queryResult = CBRManager.doQuery(2, "", "", "", "", "", 0, 0, 0, 0, 0, 0, "", 1, "");
 		assertTrue(queryResult.size() == 2);
 		for (Caso caseReturned : queryResult) {
 			System.out.println("Price: " + caseReturned.getPreco());

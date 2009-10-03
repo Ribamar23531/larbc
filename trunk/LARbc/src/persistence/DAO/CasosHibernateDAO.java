@@ -153,7 +153,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
         query.setInteger("banheiros", caso.getBanheiros());
         query.setString("tipo", caso.getTipo());
         query.setFloat("preco", caso.getPreco());
-        query.setInteger("tipoNegocio", caso.getTipoNegocio());
+        query.setString("tipoNegocio", caso.getTipoNegocio());
         List<Caso> casos = query.list();
         transaction.commit();
         session.close();

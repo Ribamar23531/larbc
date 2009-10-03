@@ -51,7 +51,8 @@ public class CasoTests {
 		int baneiros = 3;
 		String tipo = "tipo";
 		float preco = 5;
-		int tipoNegocio = 8;
+		String tipoNegocio = "tipo de negocio";
+		String location = "0 0";
 		
 		caso.setAreaConstruida(areaConst);
 		caso.setAreaTotal(areaTotal);
@@ -68,6 +69,7 @@ public class CasoTests {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
+		caso.setLocation(location);
 //		caso.setInseridoPor(inseridoPor);
 		gerente.saveCaso(caso);		 
 		if(gerente.getAllCasos().size() == 1){

@@ -5,7 +5,7 @@ import jcolibri.cbrcore.CaseComponent;
 
 /**
  * This class implements the behavior of the description of the case of the system.
- * @author João Felipe
+ * @author Joï¿½o Felipe
  *
  */
 public class ImmobileDescription implements CaseComponent {
@@ -24,7 +24,7 @@ public class ImmobileDescription implements CaseComponent {
 	private int bathroom;
 	private String type;
 	private float price;
-	private int businessType;
+	private String businessType;
 	
 	public int getIdCase() {
 		return idCase;
@@ -138,11 +138,11 @@ public class ImmobileDescription implements CaseComponent {
 		this.price = price;
 	}
 
-	public int getBusinessType() {
+	public String getBusinessType() {
 		return businessType;
 	}
 
-	public void setBusinessType(int businessType) {
+	public void setBusinessType(String businessType) {
 		this.businessType = businessType;
 	}
 

@@ -70,11 +70,11 @@ public interface SystemFacade {
 //=== Query operation ===
 	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType);
+			 int bathroom, String type, float price, String businessType);
 	
 	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType);
+			 int bathroom, String type, float price, String businessType);
 
 //===Listing operation ===
 	public List<String> listBairros();
