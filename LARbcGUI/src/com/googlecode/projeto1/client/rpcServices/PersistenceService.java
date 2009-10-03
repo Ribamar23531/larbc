@@ -20,11 +20,11 @@ public interface PersistenceService extends RemoteService {
 
 	public List<CaseBean> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType);
+			 int bathroom, String type, float price, String businessType);
 	
 	public List<CaseBean> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType);
+			 int bathroom, String type, float price, String businessType);
 	
 	public AdminBean doLogin(String login, String password);
 	

@@ -18,11 +18,11 @@ public interface PersistenceServiceAsync {
 
 	public void doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType, AsyncCallback<List<CaseBean>> callback);
+			 int bathroom, String type, float price, String businessType, AsyncCallback<List<CaseBean>> callback);
 	
 	public void doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType, AsyncCallback<List<CaseBean>> callback);
+			 int bathroom, String type, float price, String businessType, AsyncCallback<List<CaseBean>> callback);
 	
 	public void doLogin(String login, String password, AsyncCallback<AdminBean> callback);
 	
