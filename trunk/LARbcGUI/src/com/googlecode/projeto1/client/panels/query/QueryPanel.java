@@ -47,7 +47,7 @@ public class QueryPanel extends Panel{
 	private int bathroom;
 	private String type;
 	private float price;
-	private int businessType;
+	private String businessType;
 	private String state;
 	private float totalArea;
 	private int suite;
@@ -293,7 +293,7 @@ public class QueryPanel extends Panel{
 					}
 				}				
 				
-				businessType = listbusinessType.getSelectedIndex();
+				businessType = listbusinessType.getItemText(listbusinessType.getSelectedIndex());
 				
 				int indexState = listEstado.getSelectedIndex();
 				state = listEstado.getItemText(indexState);

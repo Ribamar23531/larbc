@@ -28,7 +28,7 @@ public class CaseBean implements Serializable{
 	private int bathroom;
 	private String type;
 	private float price;
-	private int businessType;
+	private String businessType;
 	private String location;
 	
 	public CaseBean(){}
@@ -153,11 +153,11 @@ public class CaseBean implements Serializable{
 		this.price = price;
 	}
 
-	public int getBusinessType() {
+	public String getBusinessType() {
 		return businessType;
 	}
 
-	public void setBusinessType(int businessType) {
+	public void setBusinessType(String businessType) {
 		this.businessType = businessType;
 	}	
 	

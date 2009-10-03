@@ -53,7 +53,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public List<CaseBean> doQuery(int resultNumber, String state, String city,
 			String neighborhood, String street, String name, float builtArea,
 			float totalArea, int garageSpace, int bedroom, int suite,
-			int bathroom, String type, float price, int businessType) {
+			int bathroom, String type, float price, String businessType) {
 		
 		List<Caso> results = this.getSystemFacade().doQuery(resultNumber, state, city, 
 										 neighborhood, street, name, builtArea, totalArea, 
@@ -68,7 +68,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public List<CaseBean> doQuery(String state, String city,
 			String neighborhood, String street, String name, float builtArea,
 			float totalArea, int garageSpace, int bedroom, int suite,
-			int bathroom, String type, float price, int businessType) {
+			int bathroom, String type, float price, String businessType) {
 
 		List<Caso> results = this.getSystemFacade().doQuery(state, city, 
 				 neighborhood, street, name, builtArea, totalArea, 
