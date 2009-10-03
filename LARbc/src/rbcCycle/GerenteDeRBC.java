@@ -26,7 +26,7 @@ public class GerenteDeRBC {
 	
 	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType){
+			 int bathroom, String type, float price, String businessType){
 		try {
 			this.casesRetriever.configure();
 			QueryConfig queryConfigurer = new QueryConfig();
@@ -50,7 +50,7 @@ public class GerenteDeRBC {
 	
 	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
-			 int bathroom, String type, float price, int businessType){
+			 int bathroom, String type, float price, String businessType){
 		try {
 			this.casesRetriever.configure();
 			QueryConfig queryConfigurer = new QueryConfig();
