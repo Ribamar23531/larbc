@@ -144,7 +144,7 @@ public class QueryPanel extends Panel{
 		comboTipo.addItem("Casa");
 		comboTipo.addItem("Apartamento");
 		comboTipo.addItem("Terreno");
-		comboTipo.addItem("Sala comercial");
+		comboTipo.addItem("Sala Comercial");
 		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
