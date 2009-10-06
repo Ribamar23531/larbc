@@ -1,8 +1,8 @@
 package com.googlecode.projeto1.client.panels.manage.editTab;
 
 import com.googlecode.projeto1.client.beans.CaseBean;
-import com.googlecode.projeto1.client.panels.manage.MappingWindow;
 import com.googlecode.projeto1.client.panels.manage.SelectedLocation;
+import com.googlecode.projeto1.client.panels.maps.EditCaseMap;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
@@ -19,7 +19,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 public class EditWindow extends Window{
 	
 	private EditWindowPanel windowPanel;
-	private MappingWindow mappingWindow;
+	private EditCaseMap editCaseMap;
 	private CaseBean myCaseBean;
 	private boolean mapOpened;
 	
@@ -30,7 +30,7 @@ public class EditWindow extends Window{
 		super();
 		this.myCaseBean = caseBean;
 		this.mapOpened = false;
-		this.mappingWindow = MappingWindow.getInstance(true);
+		this.editCaseMap = new EditCaseMap();
 		this.windowPanel = new EditWindowPanel(myCaseBean);
 		this.setTitle("Editar");
 		this.setClosable(false);
@@ -52,7 +52,7 @@ public class EditWindow extends Window{
 		button.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
 				windowPanel.updateCase(mapOpened);
-				mappingWindow.clearMap();				
+				editCaseMap.clearMap();
 				hide();
 			}
 
@@ -68,9 +68,9 @@ public class EditWindow extends Window{
 					MessageBox.alert("Não foi possível localizar a posição geográfica desse caso");
 				}else{
 					if(SelectedLocation.getLocation() == null || SelectedLocation.getLocation().equals("")){
-						mappingWindow.setLocation(myCaseBean.getLocation());						
+						editCaseMap.setLocation(myCaseBean.getLocation());						
 					}
-					mappingWindow.show(button.getElement());
+					editCaseMap.show(button.getElement());
 					mapOpened = true;
 				}
 
