@@ -23,8 +23,8 @@ public class LARbc implements EntryPoint {
 	 * Carrega a página que deve iniciar a aplicacao.
 	 */
 	public void onModuleLoad() {
-		PanelSwitcher.switchPanel(new WelcomePanel());
-//		fazerLogin();
+//		PanelSwitcher.switchPanel(new WelcomePanel());
+		fazerLogin();
 	}
 
 	
