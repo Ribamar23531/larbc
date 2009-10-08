@@ -8,6 +8,7 @@ import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import rbcCycle.caseElement.ImmobileDescription;
 import rbcCycle.retrieve.localSimilarityFunctions.Like;
+import rbcCycle.retrieve.localSimilarityFunctions.RelativePreferencingGreater;
 
 public class SimilarityConfiguration {
 	
@@ -59,14 +60,14 @@ public class SimilarityConfiguration {
 		this.defineAttributeConfigurationLike("neighborhood", neigborhoodWeight); //ver pesos
 		this.defineAttributeConfigurationEqual("street", streetWeight); //ver pesos
 		this.defineAttributeConfigurationEqual("name", nameWeight);
-		this.defineAttributeConfigurationEqual("builtArea", builtAreaWeight); //ver pesos
-		this.defineAttributeConfigurationEqual("totalArea", totalAreaWeight); //ver pesos
-		this.defineAttributeConfigurationEqual("garageSpace", garageSpaceWeight);
-		this.defineAttributeConfigurationEqual("bedroom", bedroomWeight);
-		this.defineAttributeConfigurationEqual("suite", suiteWeight);
-		this.defineAttributeConfigurationEqual("bathroom", bathroomWeight);
+		this.defineAttributeConfigurationRelativeGreater("builtArea", builtAreaWeight); //ver pesos
+		this.defineAttributeConfigurationRelativeGreater("totalArea", totalAreaWeight); //ver pesos
+		this.defineAttributeConfigurationRelativeGreater("garageSpace", garageSpaceWeight);
+		this.defineAttributeConfigurationRelativeGreater("bedroom", bedroomWeight);
+		this.defineAttributeConfigurationRelativeGreater("suite", suiteWeight);
+		this.defineAttributeConfigurationRelativeGreater("bathroom", bathroomWeight);
 		this.defineAttributeConfigurationEqual("type", typeWeight);
-		this.defineAttributeConfigurationInterval("price", priceWeight, new Double("5")); //ver intervalos
+		this.defineAttributeConfigurationRelativeGreater("price", priceWeight); //ver intervalos
 		this.defineAttributeConfigurationEqual("businessType", businessTypeWeight);
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
@@ -88,6 +89,13 @@ public class SimilarityConfiguration {
 	private void defineAttributeConfigurationLike(String attributeName, Double weight){
 		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
 		this.configuration.addMapping(attribute, new Like());
+		this.configuration.setWeight(attribute, weight);
+	}
+	
+	private void defineAttributeConfigurationRelativeGreater(String attributeName, Double weight){
+		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
+		this.function = new RelativePreferencingGreater();
+		this.configuration.addMapping(attribute, function);
 		this.configuration.setWeight(attribute, weight);
 	}
 	
