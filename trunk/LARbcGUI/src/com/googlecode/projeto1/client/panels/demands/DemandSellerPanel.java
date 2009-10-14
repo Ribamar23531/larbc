@@ -48,7 +48,6 @@ import com.gwtext.client.widgets.layout.FitLayout;
 	private int bathroom;
 	private String type;
 	private float price;
-	private int businessType;
 	private String state;
 	private float totalArea;
 	private int suite;
@@ -143,7 +142,11 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		//Tipo de imovel
 		comboTipo = new ListBox();
 		rootPanel.add(comboTipo, 98, 329);
-		comboTipo.setSize("205px", "21px");		
+		comboTipo.setSize("205px", "21px");	
+		comboTipo.addItem("Casa");
+		comboTipo.addItem("Apartamento");
+		comboTipo.addItem("Terreno");
+		comboTipo.addItem("Sala comercial");
 		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		rootPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("151px", "24px");
@@ -289,7 +292,19 @@ import com.gwtext.client.widgets.layout.FitLayout;
 						return;
 					}
 				}				
-				//				type;
+
+				int indexType = comboTipo.getSelectedIndex();
+				type = comboTipo.getItemText(indexType);
+				
+				try{
+					price = Float.parseFloat(textPreco.getText());
+				}catch(Exception e){
+					if(!textPreco.getText().equals("")){
+						MessageBox.alert(message + "Preço");
+						return;
+					}
+				}
+						
 				try{
 					price = Float.parseFloat(textPreco.getText());
 				}catch(Exception e){
@@ -335,6 +350,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				demanda.setBairro(neighborhood);
 				demanda.setBanheiros(bathroom);
 				demanda.setCidade(city);
+				demanda.setTipo(type);
 				demanda.setEmailCliente(email);
 				demanda.setNomeCliente(name);
 				demanda.setTelefone(telefone);
