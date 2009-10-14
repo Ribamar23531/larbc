@@ -19,6 +19,10 @@ public class CasePanel extends Panel{
 
 	public CasePanel(CaseBean caseBean, int index){
 		super("Caso " + index);
+		String bodyStyle = "text-align:left;padding:5px 0;" +  
+		"border:1px dotted #99bbe8;background:#dfe8f6;" +  
+		"color:#15428b;cursor:default;margin:10px;" +  
+		"font:normal 12px tahoma,arial,sans-serif;"; 
 		picture = Util.createImage(Util.RESIDENTIAL_IMMOBILE_PATH, 120);
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.add(picture);
@@ -27,10 +31,11 @@ public class CasePanel extends Panel{
 							caseBean.getGarageSpace() + " vaga(s) na garagem.";
 		String price = "R$ " + caseBean.getPrice();
 		Panel p = new Panel();
-		String html = 	"<br>Endereço: " + address + " </br> " +
+		String html = 	"<br>Endereço: " + address + "</br> " + 
 						"<br>Características: " + features + " </br> " +
 						"<br>Preço: " + price + " </br>";
 		p.setHtml(html);
+		p.setBodyStyle(bodyStyle);
 		hp.add(p);
 		hp.add(new Button("Detalhes"));
 		this.add(hp);

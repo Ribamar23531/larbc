@@ -26,25 +26,15 @@ public class ResultsPanel extends Panel{
 	
 	public ResultsPanel(List<CaseBean> cases){
 		super();		
-		String bodyStyle = "text-align:center;padding:5px 0;" +  
-		"border:1px dotted #99bbe8;background:#dfe8f6;" +  
-		"color:#15428b;cursor:default;margin:10px;" +  
-		"font:bold 11px tahoma,arial,sans-serif;"; 
 		vp = new VerticalPanel();
 		this.setFrame(true);
-//		vp.add(Util.createImage(Util.LARBC_IMAGE_PATH));
 		vp.add(Util.createImage(Util.IMMOBILE_IMAGE_PATH));
-		vp.addStyleName(bodyStyle);
 		int index = 1;
 		for (CaseBean caseBean : cases) {
 			vp.add(new CasePanel(caseBean, index));
 			index++;
 		}	
 		
-		
-		
-//		Button button = new ButtonListenerAdapter();
-
 		this.add(vp, new ColumnLayoutData(60));
 		Button button = new Button("Não encontrou o que queria?", new ButtonListenerAdapter() {  
 			public void onClick(Button button, EventObject e) {
@@ -68,16 +58,7 @@ public class ResultsPanel extends Panel{
 						});
 					}
 				});
-//				MessageBox.confirm("Confirmação", "Você deseja enviar essas informações para o administrador?",  
-//						new MessageBox.ConfirmCallback() {  
-//					public void execute(String btnID) {
-//						if(btnID.equals("yes")){
-//							new ContactWindow().show();
-//						}
-//						System.out.println("Button Click : " +  
-//								Format.format("You clicked the {0} button", btnID));  
-//					}  
-//				});  
+
 			}  
 		}); 
 		vp.add(button);
