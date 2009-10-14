@@ -39,14 +39,9 @@ public class WelcomePanel extends Panel {
 			image.setSize("22%", "63%");
 		}
 		{
-			Image image = new Image("images/slogan.png");
-			rootPanel.add(image, 495, 410);
-			image.setSize("22%", "5%");
-		}
-		{
 			Image image = new Image("images/welcome.png");
 			rootPanel.add(image, 420, 150);
-			image.setSize("35%", "45%");
+			image.setSize("35%", "50%");
 		}
 		createEntrarButton();
 		this.add(rootPanel);
