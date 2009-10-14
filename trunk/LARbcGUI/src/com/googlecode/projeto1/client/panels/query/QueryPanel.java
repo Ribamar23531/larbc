@@ -75,9 +75,9 @@ public class QueryPanel extends Panel{
 		VerticalPanel verticalPanel = new VerticalPanel();
 		queryPanel.add(verticalPanel, 0, 0);
 		verticalPanel.setSize("440px", "59px");
-		Image image = new Image("images/pesquisaDeImoveis.PNG");
-		verticalPanel.add(image);
-		image.setSize("60%", "100%");
+		Image pesquisaDeImoveis = new Image("images/pesquisaDeImoveis.PNG");
+		verticalPanel.add(pesquisaDeImoveis);
+		pesquisaDeImoveis.setSize("60%", "100%");
 		
 		//Nome da Rua
 		textStreet = new TextBox();
