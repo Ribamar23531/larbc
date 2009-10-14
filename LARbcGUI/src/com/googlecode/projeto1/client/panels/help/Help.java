@@ -1,5 +1,6 @@
 package com.googlecode.projeto1.client.panels.help;
 
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.core.SortDir;
 import com.gwtext.client.data.ArrayReader;
 import com.gwtext.client.data.FieldDef;
@@ -13,11 +14,15 @@ import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
 import com.gwtext.client.widgets.grid.GroupingView;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Help extends Panel{
 
+	private VerticalPanel verticalPanel;	
+
 	public Help() {  
+		verticalPanel = new VerticalPanel();
 		Panel panel = new Panel();  
 		panel.setBorder(false);  
 		panel.setPaddings(15);  
@@ -71,20 +76,27 @@ public class Help extends Panel{
 		grid.setTitle("Ajuda");  
 		grid.setIconCls("grid-icon");  
 	    
+		panel.add(verticalPanel, new ColumnLayoutData(60));
 		panel.add(grid);  
 		this.add(panel);
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
 	}  
 	  
-	private Object[][] getCompanyData() {  
+	private Object[][] getCompanyData() { 
+		Object[] visaoGeral = new Object[]{"O LARbc ...", "Visão geral sobre o LARbc"};
+		Object[] consulta = new Object[]{"Para realizar uma consulta ...", "Como fazer uma consulta no LARbc"};
+		Object[] loginAdministrador = new Object[]{"Como entrar como administrador", "Administrando o LARbc"};
+		Object[] criarDemanda = new Object[]{"Como criar uma demanda","Administrando o LARbc"};
+		Object[] criarAdministrador = new Object[]{"Como criar um administrador", "Administrando o LARbc"};
+		Object[] gerenciarDemandas = new Object[]{"Como gerenciar demandas", "Administrando o LARbc"};
 		return new Object[][]{  
-				new Object[]{"O LARbc ...", "Visão geral sobre o LARbc"}, 
-				new Object[]{"Para realizar uma consulta ...", "Como fazer uma consulta no LARbc"},  
-				new Object[]{"Como entrar como administrador", "Administrando o LARbc"},  
-				new Object[]{"Como criar uma demanda","Administrando o LARbc"},  
-				new Object[]{"Como criar um administrador", "Administrando o LARbc"},  
-				new Object[]{"Como gerenciar demandas", "Administrando o LARbc"},  
+				visaoGeral, 
+				consulta,  
+				loginAdministrador,  
+				criarDemanda,  
+				criarAdministrador,  
+				gerenciarDemandas,  
 		};  
 	}
 
