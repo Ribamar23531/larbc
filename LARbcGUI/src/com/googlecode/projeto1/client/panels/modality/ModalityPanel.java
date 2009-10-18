@@ -57,8 +57,9 @@ public class ModalityPanel extends Panel {
 		createVenderButton();
 		createComprarButton();
 		rootPanel.add(image, 300, 250);
-		rootPanel.add(buttonsComprarPanel, 220, 360);
+		rootPanel.add(buttonsComprarPanel, 215, 357);
 		rootPanel.add(buttonsPanel, 490, 360);
+		
 		this.add(rootPanel);
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
@@ -72,7 +73,7 @@ public class ModalityPanel extends Panel {
 		Panel rightPanel = new Panel();
 		rightPanel.add(managerButtonImage);
 		wrapperPanel.add(rightPanel);  
-		rootPanel.add(wrapperPanel, 1080, 40);
+		rootPanel.add(wrapperPanel, 950, 40);
 		this.loginWindow = new LoginWindow();
 
 	}
@@ -80,7 +81,7 @@ public class ModalityPanel extends Panel {
 	//BOTAO COMPRAR
 	private void createComprarButton() {
 		comprarButton = Util.createImage(Util.COMPRAR_BUTTON_IMAGE);
-		comprarButton.setPixelSize(160, 40);
+		comprarButton.setPixelSize(175, 43);
 		comprarButton.addMouseListener(new MouseListenerAdapter(){
 
 			public void onMouseEnter(Widget arg0) {
@@ -90,7 +91,7 @@ public class ModalityPanel extends Panel {
 			}
 		});
 		selectedComprarButton = Util.createImage(Util.SELECTED_COMPRAR_BUTTON_IMAGE);
-		selectedComprarButton.setPixelSize(160, 40);
+		selectedComprarButton.setPixelSize(175, 43);
 		selectedComprarButton.addMouseListener(new MouseListenerAdapter(){			
 
 			public void onMouseLeave(Widget arg0) {
