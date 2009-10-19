@@ -1,14 +1,12 @@
 package com.googlecode.projeto1.client.panels.maps;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
+import com.google.gwt.maps.client.overlay.Polyline;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.Button;
@@ -25,27 +23,44 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 public class POIMap extends MappingWindow{
 	
 	private POIKind kind;
-	private List<Marker> inMemoryMarkers;
+	private Marker marker;
+	private int qtePoints;
+	private Polyline line;
 	
 	public POIMap(){
 		super();
 		myMap.clearOverlays();
 		kind =  POIKind.POINT;
-		inMemoryMarkers = new ArrayList<Marker>();
+		qtePoints = 0;
 		this.setTitle("Pontos de Interesse");		
 		this.addButton(getSaveButton());	
 		this.addMapEvent();
 	}	
+	
+	public void setPointKind(){
+		this.kind = POIKind.POINT;
+	}
+	
+	public void setLineKind(){
+		this.kind = POIKind.LINE;
+//		this.line = new Polyline(new LatLng[20], "#111111", 2, 0.0);
+		this.line = new Polyline(new LatLng[20]);
+	}
+	
+	public void setAreaKind(){
+		this.kind = POIKind.AREA;
+	}
 
 	private void addMapEvent() {		
 		myMap.addMapClickHandler(new MapClickHandler() {
 			public void onClick(final MapClickEvent clickEvent) {
-				if(!(kind == POIKind.POINT && inMemoryMarkers.size() >= 1)){
-					Marker poi = getMarker(clickEvent.getLatLng());
-					inMemoryMarkers.add(poi);
-					myMap.addOverlay(poi);
+				if(kind == POIKind.POINT && qtePoints == 0){
+					marker = getMarker(clickEvent.getLatLng());					
+					myMap.addOverlay(marker);
+					qtePoints++;
 				}else if(kind == POIKind.LINE){
-					
+					line.insertVertex(line.getVertexCount(), clickEvent.getLatLng());
+					myMap.addOverlay(line);
 				}
 			}
 		});
@@ -69,7 +84,7 @@ public class POIMap extends MappingWindow{
 							public void execute(String btnID, String text) {
 								if (btnID.equals("yes")) {
 									myMap.removeOverlay(marker);
-									inMemoryMarkers.remove(marker);
+									qtePoints--;
 								}
 
 							}							
