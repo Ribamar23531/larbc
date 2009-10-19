@@ -20,21 +20,6 @@ public class SimilarityConfiguration {
 	 */
 	public SimilarityConfiguration(){
 		this.configuration = new NNConfig();
-//		this.defineAttributeConfigurationEqual("state", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("city", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("neighborhood", new Double("1")); //ver pesos
-//		this.defineAttributeConfigurationEqual("street", new Double("0.6")); //ver pesos
-//		this.defineAttributeConfigurationEqual("name", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("builtArea", new Double("0.8")); //ver pesos
-//		this.defineAttributeConfigurationEqual("totalArea", new Double("0.3")); //ver pesos
-//		this.defineAttributeConfigurationEqual("garageSpace", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("bedroom", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("suite", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("bathroom", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("type", new Double("0.1"));
-//		this.defineAttributeConfigurationEqual("price", new Double("0.7")); //ver pesos
-//		this.defineAttributeConfigurationEqual("businessType", new Double("0.1"));
-
 		this.defineAttributeConfigurationEqual("state", new Double("1"));
 		this.defineAttributeConfigurationEqual("city", new Double("1"));
 		this.defineAttributeConfigurationLike("neighborhood", new Double("1")); //ver pesos
@@ -52,27 +37,32 @@ public class SimilarityConfiguration {
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
 	
-	public SimilarityConfiguration(Double stateWeight, Double cityWeight, Double neigborhoodWeight, Double streetWeight, Double nameWeight,
-								   Double builtAreaWeight, Double totalAreaWeight, Double garageSpaceWeight, Double bedroomWeight,
-								   Double suiteWeight, Double bathroomWeight, Double typeWeight, Double priceWeight, Double businessTypeWeight){
-		this.defineAttributeConfigurationEqual("state", stateWeight);
-		this.defineAttributeConfigurationEqual("city", cityWeight);
-		this.defineAttributeConfigurationLike("neighborhood", neigborhoodWeight); //ver pesos
-		this.defineAttributeConfigurationEqual("street", streetWeight); //ver pesos
-		this.defineAttributeConfigurationEqual("name", nameWeight);
-		this.defineAttributeConfigurationRelativeGreater("builtArea", builtAreaWeight); //ver pesos
-		this.defineAttributeConfigurationRelativeGreater("totalArea", totalAreaWeight); //ver pesos
-		this.defineAttributeConfigurationRelativeGreater("garageSpace", garageSpaceWeight);
-		this.defineAttributeConfigurationRelativeGreater("bedroom", bedroomWeight);
-		this.defineAttributeConfigurationRelativeGreater("suite", suiteWeight);
-		this.defineAttributeConfigurationRelativeGreater("bathroom", bathroomWeight);
-		this.defineAttributeConfigurationEqual("type", typeWeight);
-		this.defineAttributeConfigurationRelativeGreater("price", priceWeight); //ver intervalos
-		this.defineAttributeConfigurationEqual("businessType", businessTypeWeight);
+	public SimilarityConfiguration(Double priceWeight, Double localeWeight){
+		this.configuration = new NNConfig();
+		this.defineAttributeConfigurationEqual("state", new Double("3"));
+		this.defineAttributeConfigurationEqual("city", new Double("3"));
+		this.defineAttributeConfigurationLike("neighborhood", new Double("3"));
+		this.defineAttributeConfigurationEqual("street", new Double("3"));
+		this.defineAttributeConfigurationEqual("name", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("builtArea", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("totalArea", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("garageSpace", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("bedroom", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("suite", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("bathroom", new Double("3"));
+		this.defineAttributeConfigurationEqual("type", new Double("3"));
+		this.defineAttributeConfigurationRelativeGreater("price", priceWeight);
+		this.defineAttributeConfigurationEqual("businessType", new Double("3"));
+//		this.defineAttributeConfigurationThereIsNear("");
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
 	
 	
+	private void defineAttributeConfigurationThereIsNear() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void defineAttributeConfigurationEqual(String attributeName, Double weight){
 		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
 		function = new Equal();
