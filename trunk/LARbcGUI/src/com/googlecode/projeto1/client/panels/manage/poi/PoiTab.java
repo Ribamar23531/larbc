@@ -57,11 +57,15 @@ public class PoiTab extends AbsolutePanel{
 
 			public void onClick(Widget arg0) {				
 				if(rdbtnEscola.isChecked()){
-					new POIMap().show(arg0.getElement());
+					POIMap poiMap = new POIMap();
+					poiMap.setPointKind();
+					poiMap.show(arg0.getElement());
 				}else if(rdbtnUniversidade.isChecked()){
 					
 				}else if(rdbtnViaPrincipalDe.isChecked()){
-					
+					POIMap poiMap = new POIMap();
+					poiMap.setLineKind();
+					poiMap.show(arg0.getElement());
 				}else if(rdbtnShoppingCenter.isChecked()){
 					
 				}else if(rdbtnAreaVerde.isChecked()){
