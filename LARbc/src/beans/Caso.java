@@ -195,6 +195,14 @@ public class Caso{
 
 	public String getLocation() {
 		return location;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}	
 	
 }

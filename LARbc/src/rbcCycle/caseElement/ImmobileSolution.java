@@ -27,7 +27,10 @@ public class ImmobileSolution implements CaseComponent {
 	private float price;
 	private String businessType;
 	private int addedBy;
+	private String observations;
 	
+	
+
 	public int getId() {
 		return id;
 	}
@@ -161,6 +164,14 @@ public class ImmobileSolution implements CaseComponent {
 		return new Attribute("id", this.getClass());
 	}
 	
+	public String getObservations() {
+		return observations;
+	}
+
+	public void setObservations(String observations) {
+		this.observations = observations;
+	}
+	
 	public String toString(){
 		String newLine = System.getProperty("line.separator");
 		String result = "Id: " + getId() + newLine +
@@ -177,7 +188,8 @@ public class ImmobileSolution implements CaseComponent {
 						"Bathroom: " + getBathroom() + newLine +
 						"Type: " + getType() + newLine +
 						"Price: " + getPrice() + newLine +
-						"Business type: " + getBusinessType() + newLine;
+						"Business type: " + getBusinessType() + newLine + 
+						"Observations: " + getObservations() + newLine;
 		return result;
 	}
 }
