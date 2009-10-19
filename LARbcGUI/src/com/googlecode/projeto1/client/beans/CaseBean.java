@@ -30,6 +30,7 @@ public class CaseBean implements Serializable{
 	private float price;
 	private String businessType;
 	private String location;
+	private String observations;
 	
 	public CaseBean(){}
 	
@@ -169,6 +170,14 @@ public class CaseBean implements Serializable{
 		return location;
 	}
 
+	public void setObservations(String observations) {
+		this.observations = observations;
+	}
+
+	public String getObservations() {
+		return observations;
+	}
+
 	public String toString(){
 		String newLine = "\n";
 		String result = "Id: " + getId() + newLine +
@@ -186,7 +195,8 @@ public class CaseBean implements Serializable{
 						"Type: " + getType() + newLine +
 						"Price: " + getPrice() + newLine +
 						"Business type: " + getBusinessType() + newLine +
-						"Location: " + getLocation() + newLine;
+						"Location: " + getLocation() + newLine +
+						"Observations: " + getObservations() + newLine;
 		return result;
 	}
 }
