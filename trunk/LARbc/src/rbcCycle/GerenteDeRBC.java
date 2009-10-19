@@ -89,6 +89,7 @@ public class GerenteDeRBC {
 		caso.setSuites(caseBean.getSuite());
 		caso.setAreaTotal(caseBean.getTotalArea());
 		caso.setTipo(caseBean.getType());
+		caso.setObservacoes(caseBean.getObservations());
 		return caso;
 	}
 }

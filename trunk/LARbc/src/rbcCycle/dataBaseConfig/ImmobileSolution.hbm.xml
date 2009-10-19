@@ -11,7 +11,6 @@
 		<property name="city" column="cidade" />
 		<property name="neighborhood" column="bairro" />
 		<property name="street" column="rua" />
-		<property name="number" column="numero" />
 		<property name="name" column="nome" />
 		<property name="builtArea" column="areaConstruida" />
 		<property name="totalArea" column="areaTotal" />
@@ -22,5 +21,6 @@
 		<property name="type" column="tipo" />
 		<property name="price" column="preco" />
 		<property name="businessType" column="tipoNegocio" />
+		<property name="observations" column="observacoes" />
 	</class>
 </hibernate-mapping>
