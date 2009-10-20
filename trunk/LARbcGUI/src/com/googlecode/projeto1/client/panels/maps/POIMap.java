@@ -3,6 +3,7 @@ package com.googlecode.projeto1.client.panels.maps;
 
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
+import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
@@ -26,6 +27,7 @@ public class POIMap extends MappingWindow{
 	private Marker marker;
 	private int qtePoints;
 	private Polyline line;
+	private LatLng[] points;
 	
 	public POIMap(){
 		super();
@@ -43,10 +45,26 @@ public class POIMap extends MappingWindow{
 	
 	public void setLineKind(){
 		this.kind = POIKind.LINE;
-//		this.line = new Polyline(new LatLng[20], "#111111", 2, 0.0);
-		this.line = new Polyline(new LatLng[20]);
+//		this.line = new Polyline(new LatLng[20], "#111111", 100, 100.0, getPolylineOptions());
+		this.line = new Polyline(new LatLng[20]);		
+		this.line.addPolylineClickHandler(new PolylineClickHandler(){
+
+			public void onClick(PolylineClickEvent event) {
+				System.out.println("asfdasdf");		
+			}
+			
+		});	
+		points = new LatLng[20];
+		qtePoints = 0;
+//		line.setDrawingEnabled();
+//		line.setEditingEnabled(true);
 	}
 	
+//	private PolylineOptions getPolylineOptions() {
+//		PolylineOptions options = PolylineOptions.newInstance();
+//		return options;
+//	}
+
 	public void setAreaKind(){
 		this.kind = POIKind.AREA;
 	}
@@ -59,8 +77,28 @@ public class POIMap extends MappingWindow{
 					myMap.addOverlay(marker);
 					qtePoints++;
 				}else if(kind == POIKind.LINE){
-					line.insertVertex(line.getVertexCount(), clickEvent.getLatLng());
-					myMap.addOverlay(line);
+					points[qtePoints] = clickEvent.getLatLng();					
+					qtePoints++;
+					Polyline p = new Polyline(points);
+					if(line.getVertexCount() == 0){
+						myMap.clearOverlays();
+						myMap.addOverlay(p);						
+					}
+//					line.insertVertex(line.getVertexCount(), clickEvent.getLatLng());					
+//					line.insertVertex(qtePoints, clickEvent.getLatLng());
+//					qtePoints++;
+//					if(line.getVertexCount() == 0){
+//						myMap.addOverlay(line);						
+//					}
+//					LatLngBounds bounds = line.getBounds();
+//					if(bounds == null){
+//						line.insertVertex(line.getVertexCount(), clickEvent.getLatLng());						
+//					}else if(!bounds.containsLatLng(clickEvent.getLatLng())){
+//						line.insertVertex(line.getVertexCount(), clickEvent.getLatLng());
+//					}
+//					if(line.getVertexCount() == 0){
+//						myMap.addOverlay(line);						
+//					}
 				}
 			}
 		});
