@@ -2,6 +2,7 @@ package com.googlecode.projeto1.client.panels.help;
 
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.SortDir;
@@ -12,26 +13,20 @@ import com.gwtext.client.data.MemoryProxy;
 import com.gwtext.client.data.RecordDef;
 import com.gwtext.client.data.SortState;
 import com.gwtext.client.data.StringFieldDef;
-import com.gwtext.client.util.Format;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
 import com.gwtext.client.widgets.grid.GroupingView;
 import com.gwtext.client.widgets.grid.event.GridCellListener;
-import com.gwtext.client.widgets.grid.event.GridColumnListener;
-import com.gwtext.client.widgets.grid.event.GridHeaderListener;
-import com.gwtext.client.widgets.grid.event.GridListener;
-import com.gwtext.client.widgets.grid.event.GridRowListener;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Help extends Panel{
-	
 	private VerticalPanel verticalPanel;
 	private String visaoGeralString = "LARbc é uma aplicação que sugere imóveis aos usuários, levando em consideração as suas preferências como um apartamento ou casa com certo número de quartos, área útil, dentre outros fatores.";
-	private String consultaString = "Para realizar uma consulta o usuário deve seguir os seguintes passos: 1. Ao iniciar a plicação clicar no botão ENTRAR \n 2. Na próxima tela aparecerá a pergunta 'O que você deseja?', então o usuário deve clicar no botão COMPRAR/ALUGAR \n" +
-	"							3. Aparecerá um formulário para que o usuário preencha, com os seguintes itens (opcionais): Nome da rua, Bairro, Cidade, UF, Nome do imóvel, Área construída," +
-	"							Área total, Vagas na garagem, Quartos, Suítes, Banheiros Sociais, tipo do Imóvel, Preço e Tipo de Negócio "; 
+	private String consultaString = "<br>Para realizar uma consulta o usuário deve seguir os seguintes passos:</br> <br>1. Ao iniciar a aplicação clicar no botão ENTRAR </br> <br>2. Na próxima tela aparecerá a pergunta 'O que você deseja?', então o usuário deve clicar no botão COMPRAR/ALUGAR </br>" +
+	"							<br> 3. Aparecerá um formulário para que o usuário preencha, com os seguintes itens, todos eles opcionais: </br> <br>Nome da rua - nome da rua que o cliente deseja morar</br> <br>Bairro - nome do bairro que o cliente deseja morar </br> <br>Cidade - nome da cidade que o cliente deseja morar</br><br> UF: Estado (Unidade Federativa onde está localizado o imóvel procurado)</br> <br>Nome do imóvel - Nome do edifício no caso de apartamentos </br> <br> Área construída - Tamanho da área construída do imóvel (metros)</br>" +
+	"							<br>Área total - Tamanho da área completa ocupada pelo imóvel (incluindo quintal por exemplo)</br> <br>Vagas na garagem - quantidades de vagas disponíveis na garagem</br> <br>Quartos - quantidade de quartos no imóvel, incluindo suítes</br> <br>Suítes - quantidade de suítes no imóvel</br> <br>Banheiros Sociais - quantidade de banheiros no imóvel, exceto as suítes</br> <br>tipo do Imóvel - Tipo do imóvel procurado: casa, apartamento, terreno, área comercial...</br> <br>Preço - Valor aproximado do que o cliente deseja pagar pelo imóvel</br> <br>Tipo de Negócio - Aluguel ou Compra </br>"; 
 	private String loginAdministradorString = "Como entrar como administrador"; 
 	private String criarDemandaString = "Como criar uma demanda";
 	private String criarAdministradorString = "Como criar um administrador";
@@ -47,6 +42,9 @@ public class Help extends Panel{
 		ajudaPanel.setShadow(true);  
 		ajudaPanel.setAutoScroll(true);
 		ajudaPanel.setFrame(true);
+		Image image = new Image("images/welcome.png");
+		ajudaPanel.add(image);
+		image.setSize("50%", "50%");
 		verticalPanel = new VerticalPanel();
 		verticalPanel.add(ajudaPanel);
 		verticalPanel.setVisible(true);
@@ -137,74 +135,6 @@ public class Help extends Panel{
 						 "), col(" + colIndex + ");");  
 			 }  
 		 });  
-
-		 grid.addGridColumnListener(new GridColumnListener() {  
-			 public void onColumnMove(GridPanel grid, int oldIndex, int newIndex) {  
-				 System.out.println(Format.format("GridCellListener.onColumnMove::oldIndex({0}),newIndex({1})", oldIndex, newIndex));  
-			 }  
-
-			 public void onColumnResize(GridPanel grid, int colIndex, int newSize) {  
-				 System.out.println(Format.format("GridCellListener.onColumnResize::oldIndex({0}), newSize({1})", colIndex, newSize));  
-			 }  
-		 });  
-
-		 grid.addGridHeaderListener(new GridHeaderListener() {  
-			 public void onHeaderClick(GridPanel grid, int colIndex, EventObject e) {  
-				 System.out.println(Format.format("GridHeaderListener.onHeaderClick::colIndex({0}))", colIndex));  
-			 }  
-
-			 public void onHeaderContextMenu(GridPanel grid, int colIndex, EventObject e) {  
-				 System.out.println(Format.format("GridHeaderListener.onHeaderContextMenu::colIndex({0}))", colIndex));  
-			 }  
-
-			 public void onHeaderDblClick(GridPanel grid, int colIndex, EventObject e) {  
-				 System.out.println(Format.format("GridHeaderListener.onHeaderDblClick::colIndex({0}))",colIndex));  
-			 }  
-		 });  
-
-		 grid.addGridListener(new GridListener() {  
-			 public void onBodyScroll(int scrollLeft, int scrollTop) {  
-				 System.out.println(Format.format("GridListener.onBodyScroll::scrollLeft({0},scrollTop({1})))", scrollLeft, scrollTop));  
-			 }  
-
-			 public void onClick(EventObject e) { 
-//				 verticalPanel.add(w);
-				 System.out.println("GridListener.onClick");  
-			 }  
-
-			 public void onContextMenu(EventObject e) {  
-				 System.out.println("GridListener.onContextMenu");  
-			 }  
-
-			 public void onDblClick(EventObject e) {  
-				 System.out.println("GridListener.onDblClick");  
-			 }  
-
-			 public void onKeyDown(EventObject e) {  
-				 System.out.println("GridListener.onKeyDown");  
-			 }  
-
-			 public void onKeyPress(EventObject e) {  
-				 System.out.println("GridListener.onKeyPress");  
-			 }  
-		 });  
-
-
-		 grid.addGridRowListener(new GridRowListener() {  
-			 public void onRowClick(GridPanel grid, int rowIndex, EventObject e) {  
-				 System.out.println(Format.format("GridRowListener.onRowClick::rowIndex({0})",  
-						 rowIndex));  
-			 }  
-
-			 public void onRowDblClick(GridPanel grid, int rowIndex, EventObject e) {  
-				 System.out.println(Format.format("GridRowListener.onRowDblClick::rowIndex({0})",  
-						 rowIndex));  
-			 }  
-
-			 public void onRowContextMenu(GridPanel grid, int rowIndex, EventObject e) {  
-				 System.out.println(Format.format("GridRowListener.onRowContextMenu::rowIndex({0}),({1}), y({2})", rowIndex, e.getPageX(), e.getPageY()));  
-			 }  
-		 });		
 		
 		panel.add(grid);
 		panel.add(verticalPanel, 410, 0);
@@ -214,12 +144,12 @@ public class Help extends Panel{
 	}  
 	  
 	private Object[][] getCompanyData() { 
-		Object[] visaoGeral = new Object[]{visaoGeralString, "Visão geral sobre o LARbc"};
-		Object[] consulta = new Object[]{consultaString, "Como fazer uma consulta no LARbc"};
-		Object[] loginAdministrador = new Object[]{loginAdministradorString, "Administrando o LARbc"};
-		Object[] criarDemanda = new Object[]{criarDemandaString,"Administrando o LARbc"};
-		Object[] criarAdministrador = new Object[]{criarAdministradorString, "Administrando o LARbc"};
-		Object[] gerenciarDemandas = new Object[]{gerenciarDemandasString, "Administrando o LARbc"};
+		Object[] visaoGeral = new Object[]{"Visão Geral", "Visão geral sobre o LARbc"};
+		Object[] consulta = new Object[]{"Realizando uma consulta", "Como fazer uma consulta no LARbc"};
+		Object[] loginAdministrador = new Object[]{"Efetuando login como administrador", "Administrando o LARbc"};
+		Object[] criarDemanda = new Object[]{"Criando demandas","Administrando o LARbc"};
+		Object[] criarAdministrador = new Object[]{"Criando um administrador", "Administrando o LARbc"};
+		Object[] gerenciarDemandas = new Object[]{"Gerenciando demandas", "Administrando o LARbc"};
 		return new Object[][]{  
 				visaoGeral, 
 				consulta,  
