@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.panels.Util;
 import com.googlecode.projeto1.client.panels.demands.DemandSellerPanel;
+import com.googlecode.projeto1.client.panels.help.Help;
 import com.googlecode.projeto1.client.panels.query.QueryPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.ColumnLayout;
@@ -31,10 +32,14 @@ public class ModalityPanel extends Panel {
 	private Image selectedVenderButton;
 	private boolean isSelectedVenderButton;
 	private boolean isAdministrarVenderButton;
+	private boolean isSelectedAjudaButton;
 	private Panel buttonsComprarPanel;
 	private Panel buttonsPanel;
+	private Panel buttonsAjudaPanel;
 	private Image managerButtonImage;
 	private Image selectedManagerButtonImage;
+	private Image ajudaButtonImage;
+	private Image selectedAjudaButtonImage;
 	private LoginWindow loginWindow;
 	private Panel wrapperPanel;
 
@@ -48,10 +53,13 @@ public class ModalityPanel extends Panel {
 		}
 		buttonsPanel = new Panel();		
 		buttonsComprarPanel = new Panel();
+		buttonsAjudaPanel = new Panel();
+		buttonsAjudaPanel.setLayout(new ColumnLayout());
 		wrapperPanel = new Panel();
 		wrapperPanel.setLayout(new ColumnLayout());
 		this.isSelectedVenderButton = false;
 		this.isSelectedComprarButton = false;
+		this.isSelectedAjudaButton = false;
 		Image image = Util.createImage(Util.QUESTION);
 		image.setPixelSize(280, 70);
 		createVenderButton();
@@ -68,11 +76,15 @@ public class ModalityPanel extends Panel {
 		
 		createManagerButton();
 		createSelectedManagerButton();
+		createAjudaButton();
+		createSelectedAjudaButton();
 
 		wrapperPanel = new Panel();
 		Panel rightPanel = new Panel();
 		rightPanel.add(managerButtonImage);
-		wrapperPanel.add(rightPanel);  
+		wrapperPanel.add(managerButtonImage);
+		buttonsAjudaPanel.add(ajudaButtonImage);
+		rootPanel.add(buttonsAjudaPanel, 887, 39);
 		rootPanel.add(wrapperPanel, 950, 40);
 		this.loginWindow = new LoginWindow();
 
@@ -193,7 +205,7 @@ public class ModalityPanel extends Panel {
 	//BOTAO ADMINISTRAR
 	private void createSelectedManagerButton() {
 		selectedManagerButtonImage = Util.createImage(Util.SELECTED_ADMINISTRAR_BUTTON_IMAGE);
-		selectedManagerButtonImage.setPixelSize(160, 40);
+		selectedManagerButtonImage.setPixelSize(60, 10);
 		selectedManagerButtonImage.addMouseListener(new MouseListenerAdapter(){
 
 			public void onMouseLeave(Widget arg0) {
@@ -216,13 +228,57 @@ public class ModalityPanel extends Panel {
 
 	private void createManagerButton() {
 		managerButtonImage = Util.createImage(Util.ADMINISTRAR_BUTTON_IMAGE);
-		managerButtonImage.setPixelSize(160, 40);
+		managerButtonImage.setPixelSize(60, 10);
 		managerButtonImage.addMouseListener(new MouseListenerAdapter(){
 			
 			public void onMouseEnter(Widget arg0) {
 				rebuildNorthPanel(selectedManagerButtonImage);
 			}
 		});
+	}
+	
+	//BOTAO AJUDA
+	private void createSelectedAjudaButton() {
+		selectedAjudaButtonImage = Util.createImage(Util.AJUDA_SELECTED_BUTTON_IMAGE);
+		selectedAjudaButtonImage.setPixelSize(33, 13);
+		selectedAjudaButtonImage.addMouseListener(new MouseListenerAdapter(){
+
+			public void onMouseLeave(Widget arg0) {
+				rebuildAjudaPanel(ajudaButtonImage);
+				
+			}			
+			
+		});
+		
+		selectedAjudaButtonImage.addClickListener(new ClickListener(){
+
+			public void onClick(Widget arg0) {
+				PanelSwitcher.switchPanel(new Help());				
+			}
+			
+		});		
+		
+	}
+
+	private void createAjudaButton() {
+		ajudaButtonImage = Util.createImage(Util.AJUDA_BUTTON_IMAGE);
+		ajudaButtonImage.setPixelSize(33, 13);
+		ajudaButtonImage.addMouseListener(new MouseListenerAdapter(){
+			
+			public void onMouseEnter(Widget arg0) {
+				rebuildAjudaPanel(selectedAjudaButtonImage);
+			}
+		});
+	}
+	
+	private void rebuildAjudaPanel(Image buttonImage){
+		buttonsAjudaPanel.removeAll();
+		if(!isSelectedAjudaButton){
+			buttonsAjudaPanel.add(buttonImage);
+		}else{
+			buttonsAjudaPanel.add(buttonImage);
+		}
+		buttonsAjudaPanel.doLayout();	
 	}
 }
 
