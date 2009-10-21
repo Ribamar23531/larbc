@@ -1,5 +1,7 @@
 package com.googlecode.projeto1.client.panels.help;
 
+
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.SortDir;
@@ -24,11 +26,31 @@ import com.gwtext.client.widgets.grid.event.GridRowListener;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Help extends Panel{
-
+	
+	private VerticalPanel verticalPanel;
+	private String visaoGeralString = "LARbc é uma aplicação que sugere imóveis aos usuários, levando em consideração as suas preferências como um apartamento ou casa com certo número de quartos, área útil, dentre outros fatores.";
+	private String consultaString = "Para realizar uma consulta o usuário deve seguir os seguintes passos: 1. Ao iniciar a plicação clicar no botão ENTRAR \n 2. Na próxima tela aparecerá a pergunta 'O que você deseja?', então o usuário deve clicar no botão COMPRAR/ALUGAR \n" +
+	"							3. Aparecerá um formulário para que o usuário preencha, com os seguintes itens (opcionais): Nome da rua, Bairro, Cidade, UF, Nome do imóvel, Área construída," +
+	"							Área total, Vagas na garagem, Quartos, Suítes, Banheiros Sociais, tipo do Imóvel, Preço e Tipo de Negócio "; 
+	private String loginAdministradorString = "Como entrar como administrador"; 
+	private String criarDemandaString = "Como criar uma demanda";
+	private String criarAdministradorString = "Como criar um administrador";
+	private String gerenciarDemandasString = "Como gerenciar demandas";
+	
 	public Help() {  
-		Panel panel = new Panel();  
-		panel.setBorder(false);  
-		panel.setPaddings(15);  
+		AbsolutePanel panel = new AbsolutePanel(); 
+		final Panel ajudaPanel = new Panel();  
+		ajudaPanel.setTitle("Detalhes");  
+		ajudaPanel.setIconCls("paste-icon");  
+		ajudaPanel.setWidth(500); 
+		ajudaPanel.setHeight(500);
+		ajudaPanel.setShadow(true);  
+		ajudaPanel.setAutoScroll(true);
+		ajudaPanel.setFrame(true);
+		verticalPanel = new VerticalPanel();
+		verticalPanel.add(ajudaPanel);
+		verticalPanel.setVisible(true);
+		verticalPanel.setPixelSize(500, 500);
 	  
 		MemoryProxy proxy = new MemoryProxy(getCompanyData());  
 		RecordDef recordDef = new RecordDef(  
@@ -62,9 +84,7 @@ public class Help extends Panel{
 		grid.setFrame(true);  
 		grid.setStripeRows(true);  
 		grid.setAutoExpandColumn("larbc");  
-		grid.setTitle("Grid Events");  
-		grid.setHeight(350);  
-		grid.setWidth(600);  
+		grid.setTitle("Grid Events"); 
 	    
 		GroupingView gridView = new GroupingView();  
 		gridView.setForceFit(true); 
@@ -72,17 +92,35 @@ public class Help extends Panel{
 
 		grid.setView(gridView);  
 		grid.setFrame(true);  
-		grid.setWidth(580);  
-		grid.setHeight(500);  
+		grid.setWidth(400);  
+		grid.setHeight(500); 
+		
 		grid.setCollapsible(true);  
 		grid.setAnimCollapse(false);  
 		grid.setTitle("Ajuda");  
 		grid.setIconCls("grid-icon");  
 	    
-		//TESTANDO
-		 grid.addGridCellListener(new GridCellListener() {  
+		grid.addGridCellListener(new GridCellListener() {  
 			 public void onCellClick(GridPanel grid, int rowIndex, int colindex,  
-					 EventObject e) {  
+					 EventObject e) { 
+				 if(rowIndex == 0){
+					 ajudaPanel.setHtml(visaoGeralString);
+				 }
+				 else if(rowIndex == 1){
+					 ajudaPanel.setHtml(consultaString);
+				 }
+				 else if(rowIndex == 2){
+					 ajudaPanel.setHtml(loginAdministradorString);
+				 }
+				 else if(rowIndex == 3){
+					 ajudaPanel.setHtml(criarDemandaString);
+				 }
+				 else if(rowIndex == 4){
+					 ajudaPanel.setHtml(criarAdministradorString);
+				 }
+				 else{
+					 ajudaPanel.setHtml(gerenciarDemandasString);
+				 }
 				 System.out.println("GridCellListener.onCellClick::row(" + rowIndex +  
 						 "), col(" + colindex + ");");  
 			 }  
@@ -129,7 +167,8 @@ public class Help extends Panel{
 				 System.out.println(Format.format("GridListener.onBodyScroll::scrollLeft({0},scrollTop({1})))", scrollLeft, scrollTop));  
 			 }  
 
-			 public void onClick(EventObject e) {  
+			 public void onClick(EventObject e) { 
+//				 verticalPanel.add(w);
 				 System.out.println("GridListener.onClick");  
 			 }  
 
@@ -166,24 +205,21 @@ public class Help extends Panel{
 				 System.out.println(Format.format("GridRowListener.onRowContextMenu::rowIndex({0}),({1}), y({2})", rowIndex, e.getPageX(), e.getPageY()));  
 			 }  
 		 });		
-		 //TESTANDO
 		
-		panel.add(grid);  
+		panel.add(grid);
+		panel.add(verticalPanel, 410, 0);
 		this.add(panel);
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
 	}  
 	  
 	private Object[][] getCompanyData() { 
-		String newLine = "\n";
-		Object[] visaoGeral = new Object[]{"LARbc é uma aplicação que sugere imóveis aos usuários, levando em consideração as suas preferências como um apartamento ou casa com certo número de quartos, área útil, dentre outros fatores.", "Visão geral sobre o LARbc"};
-		Object[] consulta = new Object[]{"Para realizar uma consulta o usuário deve seguir os seguintes passos: " + newLine + " 1. Ao iniciar a plicação clicar no botão ENTRAR \n 2. Na próxima tela aparecerá a pergunta 'O que você deseja?', então o usuário deve clicar no botão COMPRAR/ALUGAR \n" +
-				"							3. Aparecerá um formulário para que o usuário preencha, com os seguintes itens (opcionais): Nome da rua, Bairro, Cidade, UF, Nome do imóvel, Área construída," +
-				"							Área total, Vagas na garagem, Quartos, Suítes, Banheiros Sociais, tipo do Imóvel, Preço e Tipo de Negócio ", "Como fazer uma consulta no LARbc"};
-		Object[] loginAdministrador = new Object[]{"Como entrar como administrador", "Administrando o LARbc"};
-		Object[] criarDemanda = new Object[]{"Como criar uma demanda","Administrando o LARbc"};
-		Object[] criarAdministrador = new Object[]{"Como criar um administrador", "Administrando o LARbc"};
-		Object[] gerenciarDemandas = new Object[]{"Como gerenciar demandas", "Administrando o LARbc"};
+		Object[] visaoGeral = new Object[]{visaoGeralString, "Visão geral sobre o LARbc"};
+		Object[] consulta = new Object[]{consultaString, "Como fazer uma consulta no LARbc"};
+		Object[] loginAdministrador = new Object[]{loginAdministradorString, "Administrando o LARbc"};
+		Object[] criarDemanda = new Object[]{criarDemandaString,"Administrando o LARbc"};
+		Object[] criarAdministrador = new Object[]{criarAdministradorString, "Administrando o LARbc"};
+		Object[] gerenciarDemandas = new Object[]{gerenciarDemandasString, "Administrando o LARbc"};
 		return new Object[][]{  
 				visaoGeral, 
 				consulta,  
@@ -193,7 +229,6 @@ public class Help extends Panel{
 				gerenciarDemandas,  
 		};  
 	}
-
 }  
 
 
