@@ -49,13 +49,6 @@ public class POIMap extends MappingWindow{
 	public void setLineKind(){
 		this.kind = POIKind.LINE;
 		this.line = new Polyline(new LatLng[20]);		
-		this.line.addPolylineClickHandler(new PolylineClickHandler(){
-
-			public void onClick(PolylineClickEvent event) {
-				System.out.println("asfdasdf");		
-			}
-			
-		});	
 		points = new LatLng[MAX_POINTS];
 		qtePoints = 0;
 	}
@@ -72,7 +65,7 @@ public class POIMap extends MappingWindow{
 				if(kind == POIKind.POINT && qtePoints == 0){
 					marker = getMarker(clickEvent.getLatLng());					
 					myMap.addOverlay(marker);
-					qtePoints++;
+					qtePoints++;					
 				}else if(kind == POIKind.LINE){
 					if(qtePoints >= MAX_POINTS){
 						MessageBox.alert("Você atingiu a quantidade máxima de pontos");						
@@ -84,7 +77,15 @@ public class POIMap extends MappingWindow{
 						myMap.addOverlay(line);						
 					}
 				}else if(kind == POIKind.AREA){
-					
+//					if(qtePoints >= MAX_POINTS){
+//						MessageBox.alert("Você atingiu a quantidade máxima de pontos");						
+//					}else{
+//						points[qtePoints] = clickEvent.getLatLng();
+//						qtePoints++;					
+//						myMap.removeOverlay(line);
+//						line = new Polyline(points);
+//						myMap.addOverlay(line);						
+//					}
 				}
 			}
 		});
