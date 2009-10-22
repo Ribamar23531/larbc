@@ -50,6 +50,24 @@ public class PoiTab extends AbsolutePanel{
 		this.add(okButton, 5, 246);
 
 	}
+	
+	private void showPointKindMap(Widget widget){
+		POIMap poiMap = new POIMap();
+		poiMap.setPointKind();
+		poiMap.show(widget.getElement());
+	}
+	
+	private void showLineKindMap(Widget widget){
+		POIMap poiMap = new POIMap();
+		poiMap.setLineKind();
+		poiMap.show(widget.getElement());
+	}
+	
+	private void showAreaKindMap(Widget widget){
+		POIMap poiMap = new POIMap();
+		poiMap.setAreaKind();
+		poiMap.show(widget.getElement());
+	}
 
 	private Button getOkButton() {
 		Button button = new Button("OK");
@@ -57,19 +75,15 @@ public class PoiTab extends AbsolutePanel{
 
 			public void onClick(Widget arg0) {				
 				if(rdbtnEscola.isChecked()){
-					POIMap poiMap = new POIMap();
-					poiMap.setPointKind();
-					poiMap.show(arg0.getElement());
+					showPointKindMap(arg0);
 				}else if(rdbtnUniversidade.isChecked()){
-					
+					showPointKindMap(arg0);
 				}else if(rdbtnViaPrincipalDe.isChecked()){
-					POIMap poiMap = new POIMap();
-					poiMap.setLineKind();
-					poiMap.show(arg0.getElement());
+					showLineKindMap(arg0);
 				}else if(rdbtnShoppingCenter.isChecked()){
-					
+					showPointKindMap(arg0);
 				}else if(rdbtnAreaVerde.isChecked()){
-					
+					showAreaKindMap(arg0);
 				}else if(rdbtnSetorIndustrial.isChecked()){
 					
 				}else{
