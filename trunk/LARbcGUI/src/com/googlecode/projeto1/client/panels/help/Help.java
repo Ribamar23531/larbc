@@ -26,17 +26,32 @@ public class Help extends Panel {
 			+ "	<br> <p>No LARbc o cliente pode consultar imóveis à venda ou disponíveis para locação e pode cadastrar um imóvel para vender através da imobiliária.</p> </br>" +
 					" <br><p> O dono ou funcionário da imobiliária pode administrar a ferramenta gerenciando demandas, que são cadastros de vendas feitos por clientes e consultas realizadas pelos clientes que não retornaram para eles um resultado satisfatório. </p></br>"
 			;
-	private String consultaString = "<br>Para realizar uma consulta o usuário deve seguir os seguintes passos:</br> <br>1. Ao iniciar a aplicação clicar no botão ENTRAR </br> <br>2. Na próxima tela aparecerá a pergunta 'O que você deseja?', então o usuário deve clicar no botão COMPRAR/ALUGAR </br>"
-			+ "							<br> 3. Aparecerá um formulário para que o usuário preencha, com os seguintes itens, todos eles opcionais: </br> <ul> <br>Nome da rua - nome da rua que o cliente deseja morar</br> <br>Bairro - nome do bairro que o cliente deseja morar </br> <br>Cidade - nome da cidade que o cliente deseja morar</br><br> UF: Estado (Unidade Federativa onde está localizado o imóvel procurado)</br> <br>Nome do imóvel - Nome do edifício no caso de apartamentos </br> <br> Área construída - Tamanho da área construída do imóvel (metros)</br>"
-			+ "							<br>Área total - Tamanho da área completa ocupada pelo imóvel (incluindo quintal por exemplo)</br> <br>Vagas na garagem - quantidades de vagas disponíveis na garagem</br> <br>Quartos - quantidade de quartos no imóvel, incluindo suítes</br> <br>Suítes - quantidade de suítes no imóvel</br> <br>Banheiros Sociais - quantidade de banheiros no imóvel, exceto as suítes</br> <br>tipo do Imóvel - Tipo do imóvel procurado: casa, apartamento, terreno, área comercial...</br> <br>Preço - Valor aproximado do que o cliente deseja pagar pelo imóvel</br> <br>Tipo de Negócio - Aluguel ou Compra </ul></br>";
+	private String consultaString = "<html><p>Para realizar uma consulta o usuário deve seguir os seguintes passos:</p> " +
+			"<p>1. Ao iniciar a aplicação clicar no botão <b>ENTRAR</b> </p>" +
+			" <p>2. Na próxima tela aparecerá a pergunta <b>'O que você deseja?'</b>, então o usuário deve clicar no botão <b>COMPRAR/ALUGAR</b> </p>"
+			+ "<p> 3. Aparecerá um formulário para que o usuário preencha, com os seguintes itens, todos eles opcionais: </p> " +
+			"<ul><p><b>Nome da rua</b> - nome da rua que o cliente deseja morar</p> " +
+			"<p><b>Bairro</b> - nome do bairro que o cliente deseja morar </p> " +
+			"<p><b>Cidade</b> - nome da cidade que o cliente deseja morar</p> " +
+			"<p><b>UF: Estado</b> (Unidade Federativa onde está localizado o imóvel procurado)</p> " +
+			"<p><b>Nome do imóvel</b> - Nome do edifício no caso de apartamentos </p> " +
+			"<p><b>Área construída</b> - Tamanho da área construída do imóvel (metros)</p>"
+			+ "<p><b>Área total</b> - Tamanho da área completa ocupada pelo imóvel (incluindo quintal por exemplo)</p> " +
+			"<p><b>Vagas na garagem</b> - quantidades de vagas disponíveis na garagem</p> " +
+			"<p><b>Quartos</b> - quantidade de quartos no imóvel, incluindo suítes</p> " +
+			"<p><b>Suítes</b> - quantidade de suítes no imóvel</p> " +
+			"<p><b>Banheiros Sociais</b> - quantidade de banheiros no imóvel, exceto as suítes</p> " +
+			"<p><b>tipo do Imóvel</b> - Tipo do imóvel procurado: casa, apartamento, terreno, área comercial...</p> " +
+			"<p><b>Preço</b> - Valor aproximado do que o cliente deseja pagar pelo imóvel</p> " +
+			"<p><b>Tipo de Negócio</b> - Aluguel ou Compra </p></ul></html>";
 	private String loginAdministradorString = "<br> <p>Para administrar o LARbc, o usuário deve entrar na aplicação. Aparecerá a tela com a pergunta 'O que você deseja?', nessa tela, na parte superior direita está o botão Administrar, onde o usuário deve clicar. </p></br>" +
 			"<br> <p>Ao clicar no botão administrar aparecerá a tela de login, pedindo login e senha. os valores defaul são login e senha como root. Após entrar na tela de administração o usuário pode criar uma administrador com login e senha de sua preferência.</p></br>";
-	private String criarDemandaString = "<br>O cliente pode criar uma demanda de duas formas:</br>" +
-			"<br>1. Cadastrando um imóvel para venda :</br>" +
-			"     <br>- Para cadastrar um imóvel para venda o usuário deve fazer o seguinte: ao iniciar a aplicação clicar no botão ENTRAR, na tela seguinte clicar no botão VENDER. Aparecerá um formulário para ser preenchido pelo cliente com as informações de seu imóvel. Ao preencher o formulário o cliente deve clicar em CADASTRAR.</br>" +
-			"<br>2. Armazenando uma consulta</br>";
-	private String criarAdministradorString = "Como criar um administrador";
-	private String gerenciarDemandasString = "Como gerenciar demandas";
+	private String criarDemandaString = "<html><p>O cliente pode criar uma demanda de duas formas:</p>" +
+			"<p>1. Cadastrando um imóvel para venda :</p>" +
+			"     <p>- Para cadastrar um imóvel para venda o usuário deve fazer o seguinte: ao iniciar a aplicação clicar no botão ENTRAR, na tela seguinte clicar no botão VENDER. Aparecerá um formulário para ser preenchido pelo cliente com as informações de seu imóvel. Ao preencher o formulário o cliente deve clicar em CADASTRAR.</p>" +
+			"<p>2. Armazenando uma consulta</p></html>";
+	private String criarAdministradorString = "<html><p>Como criar um administrador</p></html>";
+	private String gerenciarDemandasString = "<html><p>Como gerenciar demandas</p></html>";
 
 	public Help() {
 		AbsolutePanel panel = new AbsolutePanel();
