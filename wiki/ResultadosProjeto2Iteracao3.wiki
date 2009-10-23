@@ -3,6 +3,8 @@
 || *Atividade* || *Responsável* || *Status* ||
 ||Implementar o "help" da aplicação||Alcione||Em andamento||
 ||Terminar integração de base de dados com o google maps||Diego||Concluída||
+||Implementar as funções de similaridade que o cliente indicou na reunião (a que prioriza o maior valor em caso em empate, para ser usada em alguns atributos)||João Felipe||Concluída||
+||Implementar o comparador de bairros segundo uma tabela com distâncias extraídas do mapa da cidade para comparação||João Felipe||Em andamento||
 ||Começar a implementar as funções de similaridade que avaliam a localização segundo os pontos de interesse ao redor do caso||João Felipe||Em andamento||
 ||Validação com o cliente das funções de similaridade, excluindo o atributo de localização ||Equipe||Concluída||
 ||Teste de usabilidade da interface gráfica||Equipe||Concluída||
