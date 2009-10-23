@@ -14,4 +14,12 @@ Nessa iteração foi desenvolvida a parte gráfica do gerenciamento de pontos de
 
 Devido a problemas de saúde e por ter ficado sem internet em casa durante 15 dias, a parte de implementação de consultas não foi concluída, porém foi dado um bom andamento quanto a isso.
 
+
+A atividade "Inserir funcionalidades na interface gráfica" foi feita em conjunto com a correção de erros encontrados na interface e melhoras sugeridas pelo cliente, que foram:
+
+  *  Mudança na apresentação do nome na tela inicial que pode ser visto na [http://larbc.googlecode.com/files/inicial.PNG Figura 6]. Já na [http://larbc.googlecode.com/files/modalidades.JPG Figura 7] é possível enxergar mudanças nos botões COMPRAR, como já foi citado nos resultados da iteração 3, e Administrar, que agora é diferente dos botões VENDER e COMPRAR/ALUGAR, ficando semelhante apenas ao botão Ajuda.
+
+  * Outra mudança necessária foi mudar a forma de implementação dos formulaários de consulta e cadastro de venda. Antes, eram implementados com TextBox e passaram a ser implementados com TextField, para permitir a validação online, como foi sugerido pela cliente. Essa validação ainda não está completa mas já pode ser visualizada na [http://larbc.googlecode.com/files/venda.PNG Figura 8], 
+
+
 A atividade de documentação é composta por: edição da página do projeto, elaboração de documentos que posteriormente serão inseridos na monografia e também documentação de código. Assim sendo, estará sempre em andamento até o término do projeto.
