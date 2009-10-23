@@ -1,0 +1,13 @@
+= Resultados da iteração 3 = 
+
+|| *Atividade* || *Responsável* || *Status* ||
+||Implementar o "help" da aplicação||Alcione||Em andamento||
+||Terminar integração de base de dados com o google maps||Diego||Concluída||
+||Começar a implementar as funções de similaridade que avaliam a localização segundo os pontos de interesse ao redor do caso||João Felipe||Em andamento||
+||Validação com o cliente das funções de similaridade, excluindo o atributo de localização ||Equipe||Concluída||
+||Teste de usabilidade da interface gráfica||Equipe||Concluída||
+||Documentação||Equipe||Em andamento||
+
+== Descrição dos resultados ==
+
+A atividade de documentação é composta por: edição da página do projeto, elaboração de documentos que posteriormente serão inseridos na monografia e também documentação de código. Assim sendo, estará sempre em andamento até o término do projeto.
