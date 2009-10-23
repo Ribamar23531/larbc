@@ -10,7 +10,7 @@
 
 == Descrição dos resultados ==
 
-Nessa iteração foi desenvolvida a parte gráfica do gerenciamento de pontos de interesse. São passíveis de edição os seguintes tipos de pontos de interesse conforme a FIGURA 1: Escola, Universidade, Via Principal de Acesso, Area Verde, Shopping Center, Setor Industrial. Foi necessário criar três tipos de iterações: criar e editar entidades referenciáveis através de ponto FIGURA 2 e FIGURA 3, criar e editar entidades referenciáveis através de linha FIGURA 4, criar e editar entidades referenciáveis através de área FIGURA 5
+Nessa iteração foi desenvolvida a parte gráfica do gerenciamento de pontos de interesse. São passíveis de edição os seguintes tipos de pontos de interesse conforme a [img1 Figura 1]: Escola, Universidade, Via Principal de Acesso, Area Verde, Shopping Center, Setor Industrial. Foi necessário criar três tipos de iterações: criar e editar entidades referenciáveis através de ponto FIGURA 2 e FIGURA 3, criar e editar entidades referenciáveis através de linha FIGURA 4, criar e editar entidades referenciáveis através de área FIGURA 5
 
 Devido a problemas de saúde e por ter ficado sem internet em casa durante 15 dias, a parte de implementação de consultas não foi concluída, porém foi dado um bom andamento quanto a isso.
 
