@@ -12,4 +12,10 @@
 
 == Descrição dos resultados ==
 
+A atividade "Implementar o 'help' da aplicação" está praticamente concluída faltando apenas melhoras na formatação e disposição dos textos mas com todas as funcionalidades completas.
+O cliente pode entrar nos tópicos de ajuda a partir da seguinte tela clicando no botão Ajuda:
+
+http://larbc.googlecode.com/files/modalidades.JPG
+
+Na tela anterior também foi modificado o botão COMPRAR que passou a ser COMPRAR/ALUGAR por sugestão do cliente.
 A atividade de documentação é composta por: edição da página do projeto, elaboração de documentos que posteriormente serão inseridos na monografia e também documentação de código. Assim sendo, estará sempre em andamento até o término do projeto.
