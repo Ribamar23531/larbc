@@ -18,3 +18,8 @@
  *  Iteração 3 (21/Set | 5/Out)
    *  [Projeto2Iteracao3 Planejamento]
    *  [ResultadosProjeto2Iteracao3 Resultados]
+
+
+ *  Iteração 4 (5/Out | 19/Out)
+   *  [Projeto2Iteracao4 Planejamento]
+   *  [ResultadosProjeto2Iteracao4 Resultados]
