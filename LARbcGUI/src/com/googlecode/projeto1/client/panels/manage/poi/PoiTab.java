@@ -7,7 +7,9 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
-import com.googlecode.projeto1.client.panels.maps.POIMap;
+import com.googlecode.projeto1.client.panels.maps.POILineMap;
+import com.googlecode.projeto1.client.panels.maps.POIPointMap;
+import com.googlecode.projeto1.client.panels.maps.POIPolygonMap;
 import com.gwtext.client.widgets.MessageBox;
 
 public class PoiTab extends AbsolutePanel{
@@ -52,21 +54,27 @@ public class PoiTab extends AbsolutePanel{
 	}
 	
 	private void showPointKindMap(Widget widget){
-		POIMap poiMap = new POIMap();
-		poiMap.setPointKind();
-		poiMap.show(widget.getElement());
+//		POIPointMap poiMap = new POIPointMap();
+//		poiMap.setPointKind();
+//		poiMap.show(widget.getElement());
+		POIPointMap poiPointMap = new POIPointMap();
+		poiPointMap.show(widget.getElement());
 	}
 	
 	private void showLineKindMap(Widget widget){
-		POIMap poiMap = new POIMap();
-		poiMap.setLineKind();
-		poiMap.show(widget.getElement());
+//		POIPointMap poiMap = new POIPointMap();
+//		poiMap.setLineKind();
+//		poiMap.show(widget.getElement());
+		POILineMap poiLineMap = new POILineMap();
+		poiLineMap.show(widget.getElement());
 	}
 	
 	private void showAreaKindMap(Widget widget){
-		POIMap poiMap = new POIMap();
-		poiMap.setAreaKind();
-		poiMap.show(widget.getElement());
+//		POIPointMap poiMap = new POIPointMap();
+//		poiMap.setAreaKind();
+//		poiMap.show(widget.getElement());
+		POIPolygonMap poiPolygonMap = new POIPolygonMap();
+		poiPolygonMap.show(widget.getElement());
 	}
 
 	private Button getOkButton() {

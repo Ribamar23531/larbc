@@ -3,12 +3,9 @@ package com.googlecode.projeto1.client.panels.maps;
 
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
-import com.google.gwt.maps.client.event.PolylineClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
-import com.google.gwt.maps.client.overlay.Polygon;
-import com.google.gwt.maps.client.overlay.Polyline;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.Button;
@@ -22,70 +19,28 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
  * @author João Felipe
  * @version LARbc 1.0
  */
-public class POIMap extends MappingWindow{
+public class POIPointMap extends MappingWindow{
 	
-	private POIKind kind;
 	private Marker marker;
-	private int qtePoints;
-	private Polyline line;
-	private Polygon polygon;
-	private LatLng[] points;
-	private final int MAX_POINTS = 50;
+	private int qtePoints;	
 	
-	public POIMap(){
+	public POIPointMap(){
 		super();
-		myMap.clearOverlays();
-		kind =  POIKind.POINT;
+		myMap.clearOverlays();		
 		qtePoints = 0;
 		this.setTitle("Pontos de Interesse");		
 		this.addButton(getSaveButton());	
 		this.addMapEvent();
-	}	
-	
-	public void setPointKind(){
-		this.kind = POIKind.POINT;
 	}
 	
-	public void setLineKind(){
-		this.kind = POIKind.LINE;
-		this.line = new Polyline(new LatLng[20]);		
-		points = new LatLng[MAX_POINTS];
-		qtePoints = 0;
-	}
-
-	public void setAreaKind(){
-		this.kind = POIKind.AREA;
-		points = new LatLng[MAX_POINTS];
-		this.polygon = new Polygon(points);
-	}
-
 	private void addMapEvent() {		
 		myMap.addMapClickHandler(new MapClickHandler() {
 			public void onClick(final MapClickEvent clickEvent) {
-				if(kind == POIKind.POINT && qtePoints == 0){
+				if(qtePoints == 0){
 					marker = getMarker(clickEvent.getLatLng());					
 					myMap.addOverlay(marker);
-					qtePoints++;					
-				}else if(kind == POIKind.LINE){
-					if(qtePoints >= MAX_POINTS){
-						MessageBox.alert("Você atingiu a quantidade máxima de pontos");						
-					}else{
-						points[qtePoints] = clickEvent.getLatLng();
-						qtePoints++;					
-						myMap.removeOverlay(line);
-						line = new Polyline(points);
-						myMap.addOverlay(line);						
-					}
-				}else if(kind == POIKind.AREA){
-//					if(qtePoints >= MAX_POINTS){
-//						MessageBox.alert("Você atingiu a quantidade máxima de pontos");						
-//					}else{
-//						points[qtePoints] = clickEvent.getLatLng();
-//						qtePoints++;					
-//						myMap.removeOverlay(line);
-//						line = new Polyline(points);
-//						myMap.addOverlay(line);						
-//					}
+					System.out.println(this.hashCode());
+					qtePoints++;
 				}
 			}
 		});
