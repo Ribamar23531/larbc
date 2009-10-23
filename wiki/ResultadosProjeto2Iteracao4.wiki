@@ -21,5 +21,9 @@ A atividade "Inserir funcionalidades na interface gráfica" foi feita em conjunt
 
   * Outra mudança necessária foi mudar a forma de implementação dos formulaários de consulta e cadastro de venda. Antes, eram implementados com Textbox e passaram a ser implementados com Textfield, para permitir a validação online, como foi sugerido pela cliente. Essa validação ainda não está completa mas já pode ser visualizada na [http://larbc.googlecode.com/files/venda.PNG Figura 8], onde há um erro no campo Nome da rua, porque o usuário deixou em branco e no cadastro de vendas isso não é permitido. O que falta é colocar alguma figura de indicação no momento em que o campo estiver validado para indicar o preenchimento para o cliente, isso já está sendo implementado. 
 
+  * Outra sugestão implementada foi a padronização da fonte em toda a interface. Isso pode ser visto na [http://larbc.googlecode.com/files/resultado.PNG Figura 9] onde foi criado um estilo para a fonte fosse Arial, tamanho 11 entre outras configurações já utilizadas na interface. Esta implementação já está sendo feita em toda a aplicação.
+
+  * Outro erro que estava ocorrendo é que a tecla TAB em alguns momentos não seguia a sequência correta da página. Esse problema já foi completamente resolvido.
+
 
 A atividade de documentação é composta por: edição da página do projeto, elaboração de documentos que posteriormente serão inseridos na monografia e também documentação de código. Assim sendo, estará sempre em andamento até o término do projeto.
