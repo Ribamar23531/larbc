@@ -13,9 +13,23 @@
 == Descrição dos resultados ==
 
 A atividade "Implementar o 'help' da aplicação" está praticamente concluída faltando apenas melhoras na formatação e disposição dos textos mas com todas as funcionalidades completas.
+
 O cliente pode entrar nos tópicos de ajuda a partir da seguinte tela clicando no botão Ajuda:
 
 http://larbc.googlecode.com/files/modalidades.JPG
 
 Na tela anterior também foi modificado o botão COMPRAR que passou a ser COMPRAR/ALUGAR por sugestão do cliente.
+
+A tela de Ajuda pode ser visualizada a seguir:
+
+http://larbc.googlecode.com/files/Help.PNG
+
+Uma melhora que deverá ser feita nessa tela é a centralização do logo da imobiliária.
+
+Do lado esquero da tela anterior temos um grid com categorias de ajuda e tópicos relacionados a cada categoria, do lado direito temos um Painel que apresenta o texto de cada tópico de ajuda que é clicado pelo cliente, como podemos ver a seguir:
+
+http://larbc.googlecode.com/files/HelpConsulta.PNG
+
+Nessa figura podemos ver o tópica "Como realizar uma consulta" selecionado e do lado direito o texto referente ao tópico sendo exibido. São necessárias algumas melhorar na formatação do texto que está sendo feito com o uso de HTML.
+
 A atividade de documentação é composta por: edição da página do projeto, elaboração de documentos que posteriormente serão inseridos na monografia e também documentação de código. Assim sendo, estará sempre em andamento até o término do projeto.
