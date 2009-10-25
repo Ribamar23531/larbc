@@ -22,9 +22,9 @@ import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Help extends Panel {
 	private VerticalPanel verticalPanel;
-	private String visaoGeralString = "<br><p>LARbc é uma aplicação que sugere imóveis aos usuários, levando em consideração as suas preferências como um apartamento ou casa com certo número de quartos, área útil, dentre outros fatores. </p></br>"
-			+ "	<br> <p>No LARbc o cliente pode consultar imóveis à venda ou disponíveis para locação e pode cadastrar um imóvel para vender através da imobiliária.</p> </br>" +
-					" <br><p> O dono ou funcionário da imobiliária pode administrar a ferramenta gerenciando demandas, que são cadastros de vendas feitos por clientes e consultas realizadas pelos clientes que não retornaram para eles um resultado satisfatório. </p></br>"
+	private String visaoGeralString = "<html><p>LARbc é uma aplicação que sugere imóveis aos usuários, levando em consideração as suas preferências como um apartamento ou casa com certo número de quartos, área útil, dentre outros fatores. </p>"
+			+ "	<p>No LARbc o cliente pode consultar imóveis à venda ou disponíveis para locação e pode cadastrar um imóvel para vender através da imobiliária.</p>" +
+					" <p> O dono ou funcionário da imobiliária pode administrar a ferramenta gerenciando demandas, que são cadastros de vendas feitos por clientes e consultas realizadas pelos clientes que não retornaram para eles um resultado satisfatório. </p></html>"
 			;
 	private String consultaString = "<html><p>Para realizar uma consulta o usuário deve seguir os seguintes passos:</p> " +
 			"<p>1. Ao iniciar a aplicação clicar no botão <b>ENTRAR</b> </p>" +
@@ -44,14 +44,17 @@ public class Help extends Panel {
 			"<p><b>tipo do Imóvel</b> - Tipo do imóvel procurado: casa, apartamento, terreno, área comercial...</p> " +
 			"<p><b>Preço</b> - Valor aproximado do que o cliente deseja pagar pelo imóvel</p> " +
 			"<p><b>Tipo de Negócio</b> - Aluguel ou Compra </p></ul></html>";
-	private String loginAdministradorString = "<br> <p>Para administrar o LARbc, o usuário deve entrar na aplicação. Aparecerá a tela com a pergunta 'O que você deseja?', nessa tela, na parte superior direita está o botão Administrar, onde o usuário deve clicar. </p></br>" +
-			"<br> <p>Ao clicar no botão administrar aparecerá a tela de login, pedindo login e senha. os valores defaul são login e senha como root. Após entrar na tela de administração o usuário pode criar uma administrador com login e senha de sua preferência.</p></br>";
+	private String loginAdministradorString = "<html><p>Para administrar o LARbc, o usuário deve entrar na aplicação. Aparecerá a tela com a pergunta 'O que você deseja?', nessa tela, na parte superior direita está o botão Administrar, onde o usuário deve clicar. </p>" +
+			"<p>Ao clicar no botão administrar aparecerá a tela de login, pedindo login e senha. os valores default são login e senha como root. Após entrar na tela de administração o usuário pode criar uma administrador com login e senha de sua preferência.</p></html>";
 	private String criarDemandaString = "<html><p>O cliente pode criar uma demanda de duas formas:</p>" +
 			"<p>1. Cadastrando um imóvel para venda :</p>" +
 			"     <p>- Para cadastrar um imóvel para venda o usuário deve fazer o seguinte: ao iniciar a aplicação clicar no botão ENTRAR, na tela seguinte clicar no botão VENDER. Aparecerá um formulário para ser preenchido pelo cliente com as informações de seu imóvel. Ao preencher o formulário o cliente deve clicar em CADASTRAR.</p>" +
 			"<p>2. Armazenando uma consulta</p></html>";
-	private String criarAdministradorString = "<html><p>Como criar um administrador</p></html>";
-	private String gerenciarDemandasString = "<html><p>Como gerenciar demandas</p></html>";
+	private String criarAdministradorString = "<html><p>Para criar um administrador o usuário precisa está logado na aplicação, estando no modo de administração o usuário deve utilizar a Aba Administradores.</p>" +
+			"<p>Em Administradores o usuário deve preencher o formulario para para criar um Administrador. As informações requeridas são: Nome, Login e Senha. Preenchidas essas informações o usuário deve decidir se o Administrador criado tem privilégios de Super Usuário (pode criar outros administradores) ou se é um administrador normal. Tudo isso feito o usuário pode clicar no botão Criar.</p></html>";
+	private String gerenciarDemandasString = "<html><p>Para gerenciar demandas, o usuário precisa está no modo de administração.</p>" +
+			"<p>Estando no Modo Administrador o cliente deve escolher a Aba Moderar Demandas, onde vão estar todas as demandas cadastradas na aplicação. Cada demanda possui um campo Situação que informa se ela já foi ou não moderada.</p>" +
+			"<p>Para moderar uma demanda específica, o cliente deve escolher a demanda e clicar no boão Editar</p></html>";
 
 	public Help() {
 		AbsolutePanel panel = new AbsolutePanel();
