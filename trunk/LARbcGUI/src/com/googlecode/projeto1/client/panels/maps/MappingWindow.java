@@ -30,8 +30,9 @@ public abstract class MappingWindow extends Window{
 		this.setSize("650px", "500px");
 		getMap();
 		RootPanel mapPanel = RootPanel.get("map_div");
+		mapPanel.clear();
 		mapPanel.add(myMap);
-		this.add(mapPanel);		
+		this.add(mapPanel);
 	}
 
 	protected void getMap() {
