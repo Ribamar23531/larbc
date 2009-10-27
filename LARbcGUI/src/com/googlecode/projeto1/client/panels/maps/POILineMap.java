@@ -1,12 +1,15 @@
 package com.googlecode.projeto1.client.panels.maps;
 
 
+import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.MapClickHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOutHandler;
+import com.google.gwt.maps.client.event.PolylineMouseOverHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.widgets.Button;
-import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 
 /**
@@ -17,38 +20,63 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
  */
 public class POILineMap extends MappingWindow{
 	
-	private int qtePoints;
-	private Polyline line;	
-	private LatLng[] points;
-	private final int MAX_POINTS = 50;
+	private Polyline line;
+	private boolean mouseOverLine;
+//	protected static POILineMap me = null;
 	
 	public POILineMap(){
 		super();
-		myMap.clearOverlays();		
-		this.line = new Polyline(new LatLng[20]);		
-		points = new LatLng[MAX_POINTS];
-		qtePoints = 0;
+//		myMap = new MapWidget(LatLng.newInstance(-7.22, -35.88), 13);		
+//		myMap.clearOverlays();
+		mouseOverLine = false;
+		this.line = null;
 		this.setTitle("Pontos de Interesse");		
-		this.addButton(getSaveButton());	
+		this.addButton(getSaveButton());
 		this.addMapEvent();
+//		setCloseAction(getCloseAction());
+	}	
+
+	private PolylineMouseOverHandler getPolylineMouseOverHandler() {
+		return new PolylineMouseOverHandler(){
+
+			public void onMouseOver(PolylineMouseOverEvent event) {
+				mouseOverLine = true;
+				
+			}
+			
+		};
 	}
+	
+	private PolylineMouseOutHandler getPolylineMouseOutHandler() {
+		return new PolylineMouseOutHandler(){
+
+			public void onMouseOut(PolylineMouseOutEvent event) {
+				mouseOverLine = false;				
+			}
+			
+		};
+	}	
 
 	private void addMapEvent() {
 		myMap.addMapClickHandler(new MapClickHandler() {
 			public void onClick(final MapClickEvent clickEvent) {
-				if (qtePoints >= MAX_POINTS) {
-					MessageBox.alert("Você atingiu a quantidade máxima de pontos");
-				} else {
-					points[qtePoints] = clickEvent.getLatLng();
-					qtePoints++;
-					// myMap.removeOverlay(line);
-					myMap.clearOverlays();
-					line = new Polyline(points);
+				if(line == null){
+					LatLng[] array = new LatLng[1];
+					array[0] = clickEvent.getLatLng();
+					line = new Polyline(array);
+					line.setEditingEnabled(true);
+					line.addPolylineMouseOverHandler(getPolylineMouseOverHandler());
+					line.addPolylineMouseOutHandler(getPolylineMouseOutHandler());
 					myMap.addOverlay(line);
-					System.out.println(this.hashCode());
 				}
-
-			}
+				if(!mouseOverLine){
+					line.insertVertex(line.getVertexCount(), clickEvent.getLatLng());					
+				}
+				System.out.println("this.hashCode() = " + this.hashCode());
+				System.out.println("myMap.hashCode() = " + myMap.hashCode());
+				System.out.println();
+			}			
+			
 		});
 	}	
 
@@ -56,6 +84,7 @@ public class POILineMap extends MappingWindow{
 		Button okButton = new Button("Salvar");
 		okButton.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
+				myMap.clearOverlays();
 				hide();
 			}
 

@@ -22,9 +22,14 @@ public class PoiTab extends AbsolutePanel{
 	private RadioButton rdbtnSetorIndustrial;
 	private Button okButton;
 	
+//	private POIPointMap pointMap;
+//	private POILineMap lineMap;
+	
 	public PoiTab(){
 		super();
 
+//		pointMap = new POIPointMap();
+//		lineMap = new POILineMap();
 		HTML explanationHtml = new HTML("New HTML", true);
 		explanationHtml
 				.setText("Escolha qual tipo de ponto de interesse voc\u00EA deseja adicionar ou remover");
@@ -57,24 +62,23 @@ public class PoiTab extends AbsolutePanel{
 //		POIPointMap poiMap = new POIPointMap();
 //		poiMap.setPointKind();
 //		poiMap.show(widget.getElement());
-		POIPointMap poiPointMap = new POIPointMap();
-		poiPointMap.show(widget.getElement());
+		new POIPointMap().show(widget.getElement());		
+//		pointMap.show(widget.getElement());
 	}
 	
 	private void showLineKindMap(Widget widget){
 //		POIPointMap poiMap = new POIPointMap();
 //		poiMap.setLineKind();
 //		poiMap.show(widget.getElement());
-		POILineMap poiLineMap = new POILineMap();
-		poiLineMap.show(widget.getElement());
+		new POILineMap().show(widget.getElement());
+//		POILineMap.getInstance().show(widget.getElement());
 	}
 	
 	private void showAreaKindMap(Widget widget){
 //		POIPointMap poiMap = new POIPointMap();
 //		poiMap.setAreaKind();
 //		poiMap.show(widget.getElement());
-		POIPolygonMap poiPolygonMap = new POIPolygonMap();
-		poiPolygonMap.show(widget.getElement());
+		new POIPolygonMap().show(widget.getElement());
 	}
 
 	private Button getOkButton() {
