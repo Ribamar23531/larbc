@@ -39,9 +39,6 @@ public class POIPointMap extends MappingWindow{
 				if(qtePoints == 0){
 					marker = getMarker(clickEvent.getLatLng());					
 					myMap.addOverlay(marker);
-					System.out.println("this.hashCode() = " + this.hashCode());
-					System.out.println("myMap.hashCode() = " + myMap.hashCode());
-					System.out.println();
 					qtePoints++;
 				}
 			}
