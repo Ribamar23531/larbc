@@ -15,11 +15,12 @@ import com.gwtext.client.widgets.Window;
  */
 public abstract class MappingWindow extends Window{
 	
-	protected static MapWidget myMap = null;	
+//	protected static MapWidget myMap = null;
+	protected MapWidget myMap;
 	private final LatLng CAMPINA_GRANDE_POINT = LatLng.newInstance(-7.22, -35.88);
 	private final int ZOOM = 13;
 	
-	protected MappingWindow(){
+	public MappingWindow(){
 		super();		
 		this.setClosable(true);
 		this.setPlain(true);		
@@ -31,26 +32,24 @@ public abstract class MappingWindow extends Window{
 		getMap();
 		RootPanel mapPanel = RootPanel.get("map_div");
 		mapPanel.clear();
-		mapPanel.add(myMap);
+		mapPanel.add(this.myMap);
 		this.add(mapPanel);
 	}
 
-	protected void getMap() {
-		if(myMap == null){
-			myMap = new MapWidget(CAMPINA_GRANDE_POINT, ZOOM);			
-		}
-		myMap.setSize("630px", "500px");
-		myMap.setUIToDefault();
-		myMap.setContinuousZoom(true);
-		myMap.setScrollWheelZoomEnabled(true);
-		myMap.setCurrentMapType(MapType.getNormalMap());	
+	private void getMap() {
+		this.myMap = new MapWidget(CAMPINA_GRANDE_POINT, ZOOM);
+		this.myMap.setSize("630px", "500px");
+		this.myMap.setUIToDefault();
+		this.myMap.setContinuousZoom(true);
+		this.myMap.setScrollWheelZoomEnabled(true);
+		this.myMap.setCurrentMapType(MapType.getNormalMap());	
 		
 	}
 	
 	protected void setDefaultMap(){
-		myMap.setCenter(CAMPINA_GRANDE_POINT);
-		myMap.setZoomLevel(ZOOM);
-		myMap.setCurrentMapType(MapType.getNormalMap());	
+		this.myMap.setCenter(CAMPINA_GRANDE_POINT);
+		this.myMap.setZoomLevel(ZOOM);
+		this.myMap.setCurrentMapType(MapType.getNormalMap());	
 	}	
 
 }
