@@ -15,7 +15,6 @@ import com.gwtext.client.widgets.Window;
  */
 public abstract class MappingWindow extends Window{
 	
-//	protected static MapWidget myMap = null;
 	protected MapWidget myMap;
 	private final LatLng CAMPINA_GRANDE_POINT = LatLng.newInstance(-7.22, -35.88);
 	private final int ZOOM = 13;

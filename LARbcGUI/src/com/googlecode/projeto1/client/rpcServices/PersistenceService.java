@@ -7,7 +7,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
+import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
+import com.googlecode.projeto1.client.beans.PointBean;
 
 /**
  * @author Alcione Pinheiro
@@ -73,4 +75,10 @@ public interface PersistenceService extends RemoteService {
 	public List<String> listBairros();
 	
 	public String getCaseLocation(CaseBean caseBean) ;
+	
+	public boolean savePoint(PointBean point);
+	
+	public List<PointBean> getPoints();
+	
+	public boolean saveLine(LineBean line);
 }
