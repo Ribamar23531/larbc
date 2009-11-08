@@ -29,12 +29,15 @@ public class Foto {
 	public long getIdCaso() {
 		return this.myComposedKey.getIdCaso();
 	}
+	
 	public void setIdCaso(long idCaso) {
 		this.myComposedKey.setIdCaso(idCaso);
 	}
+	
 	public String getPath() {
 		return this.myComposedKey.getPath();
 	}
+	
 	public void setPath(String path) {
 		this.myComposedKey.setPath(path);
 	}

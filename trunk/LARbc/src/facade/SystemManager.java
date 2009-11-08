@@ -11,13 +11,19 @@ import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
+import beans.poi.Line;
+import beans.poi.Point;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
+import exceptions.LineAlreadySavedException;
+import exceptions.LineNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
+import exceptions.PointAlreadySavedException;
+import exceptions.PointNotFoundException;
 
 
 public class SystemManager implements SystemFacade {
@@ -225,6 +231,51 @@ public class SystemManager implements SystemFacade {
 	@Override
 	public String getCasoLocation(long id) throws SQLException {
 		return this.persistenceManager.getCasoLocation(id);
+	}
+
+	@Override
+	public List<Point> getPoints() {
+		return this.persistenceManager.getPoints();
+	}
+
+	@Override
+	public void removePoint(Point point) throws PointNotFoundException {
+		this.persistenceManager.removePoint(point);
+		
+	}
+
+	@Override
+	public void savePoint(Point point) throws PointAlreadySavedException {
+		this.persistenceManager.savePoint(point);
+		
+	}
+
+	@Override
+	public void updatePoint(Point point) throws PointAlreadySavedException {
+		this.persistenceManager.updatePoint(point);
+		
+	}
+
+	@Override
+	public List<Line> getLines() {
+		return this.persistenceManager.getLines();
+	}
+
+	@Override
+	public void removeLine(Line line) throws LineNotFoundException {
+		this.persistenceManager.removeLine(line);
+		
+	}
+
+	@Override
+	public void saveLine(Line line) throws LineAlreadySavedException {
+		this.persistenceManager.saveLine(line);
+		
+	}
+
+	@Override
+	public void updateLine(Line line) throws LineAlreadySavedException {
+		this.persistenceManager.updateLine(line);		
 	}
 	
 }

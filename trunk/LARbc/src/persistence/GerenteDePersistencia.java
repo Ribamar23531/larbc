@@ -12,18 +12,28 @@ import persistence.DAO.DemandaDAO;
 import persistence.DAO.DemandasHibernateDAO;
 import persistence.DAO.FotoDAO;
 import persistence.DAO.FotoHibernateDAO;
+import persistence.DAO.LineDAO;
+import persistence.DAO.LineHibernateDAO;
+import persistence.DAO.PointDAO;
+import persistence.DAO.PointHibernateDAO;
 import persistence.util.Paths;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
+import beans.poi.Line;
+import beans.poi.Point;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
+import exceptions.LineAlreadySavedException;
+import exceptions.LineNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
+import exceptions.PointAlreadySavedException;
+import exceptions.PointNotFoundException;
 
 public class GerenteDePersistencia {	
 	
@@ -31,6 +41,8 @@ public class GerenteDePersistencia {
 	private FotoDAO fotoDAO;
 	private DemandaDAO demandaDAO;
 	private CasoDAO casoDAO;
+	private PointDAO pointDAO;
+	private LineDAO lineDAO;
 	private static GerenteDePersistencia minhaInstancia = null;
 	
 	public GerenteDePersistencia(boolean testing){
@@ -38,6 +50,9 @@ public class GerenteDePersistencia {
 		this.fotoDAO = new FotoHibernateDAO(testing);
 		this.demandaDAO = new DemandasHibernateDAO(testing);
 		this.casoDAO = new CasosHibernateDAO(testing);
+		this.pointDAO = new PointHibernateDAO(testing);
+		this.lineDAO =  new LineHibernateDAO(testing);
+		
 	}
 	
 	public GerenteDePersistencia(){
@@ -45,6 +60,8 @@ public class GerenteDePersistencia {
 		this.fotoDAO = new FotoHibernateDAO();
 		this.demandaDAO = new DemandasHibernateDAO();
 		this.casoDAO = new CasosHibernateDAO();
+		this.pointDAO = new PointHibernateDAO();
+		this.lineDAO =  new LineHibernateDAO();
 	}
 	
 	public static GerenteDePersistencia getInstance(boolean testando){
@@ -216,9 +233,6 @@ public class GerenteDePersistencia {
 	}
 
 	public void removeCaso(Administrador admin, Caso caso) throws AdministradorNotFoundException, PermissionDeniedException, CasoNotFoundException {
-//		if(!getCasoOwner(caso).equals(admin)){
-//			throw new PermissionDeniedException();
-//		}
 		this.removeCaso(caso);
 	}
 
@@ -231,9 +245,6 @@ public class GerenteDePersistencia {
 	}
 
 	public void updateCaso(Administrador admin, Caso caso) throws PermissionDeniedException, AdministradorNotFoundException, CasoNotFoundException {
-//		if(!getCasoOwner(caso).equals(admin)){
-//			throw new PermissionDeniedException();
-//		}
 		this.casoDAO.updateCaso(caso);
 	}
 
@@ -270,5 +281,39 @@ public class GerenteDePersistencia {
 	public String getCasoLocation(long id) throws SQLException {
 		return this.casoDAO.getCasoLocation(id);
 	}
+	
+	//=================================Operacoes sobre Pontos de Interesse===================================\\
+	
+	public void savePoint(Point point) throws PointAlreadySavedException{
+		this.pointDAO.savePoint(point);
+	}
+	
+	public void removePoint(Point point) throws PointNotFoundException{
+		this.pointDAO.removePoint(point);
+	}
+	
+	public List<Point> getPoints(){
+		return this.pointDAO.getPoints();
+	}
+	
+	public void updatePoint(Point point) throws PointAlreadySavedException{
+		this.pointDAO.updatePoint(point);
+	}
+	
+	public void saveLine(Line line) throws LineAlreadySavedException{
+		this.lineDAO.saveLine(line);
+	}
+	
+	public void removeLine(Line line) throws LineNotFoundException{
+		this.lineDAO.removeLine(line);
+	}
+	
+	public List<Line> getLines(){
+		return this.lineDAO.getLines();
+	}
 
+	public void updateLine(Line line) throws LineAlreadySavedException{
+		this.lineDAO.updateLine(line);
+	}
+	
 }
