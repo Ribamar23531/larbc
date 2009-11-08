@@ -4,17 +4,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import rbcCycle.caseElement.ImmobileSolution;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
+import beans.poi.Line;
+import beans.poi.Point;
+import beans.poi.Vertex;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
+import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
+import com.googlecode.projeto1.client.beans.PointBean;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 
 import exceptions.AdministradorNotFoundException;
@@ -22,8 +26,10 @@ import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
+import exceptions.LineAlreadySavedException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
+import exceptions.PointAlreadySavedException;
 import facade.SystemFacade;
 import facade.SystemManager;
 
@@ -334,26 +340,26 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 
 //=== Conversors ===	
 	
-	private CaseBean getCaseBean(ImmobileSolution result){
-		CaseBean caseResult = new CaseBean();
-		caseResult.setBathroom(result.getBathroom());
-		caseResult.setBedroom(result.getBedroom());
-		caseResult.setBuiltArea(result.getBuiltArea());
-		caseResult.setBusinessType(result.getBusinessType());
-		caseResult.setCity(result.getCity());
-		caseResult.setGarageSpace(result.getGarageSpace());
-		caseResult.setId(result.getId());
-		caseResult.setName(result.getName());
-		caseResult.setNeighborhood(result.getNeighborhood());
-		caseResult.setNumber(result.getNumber());
-		caseResult.setPrice(result.getPrice());
-		caseResult.setState(result.getState());
-		caseResult.setStreet(result.getStreet());
-		caseResult.setSuite(result.getSuite());
-		caseResult.setTotalArea(result.getTotalArea());
-		caseResult.setType(result.getType());
-		return caseResult;
-	}
+//	private CaseBean getCaseBean(ImmobileSolution result){
+//		CaseBean caseResult = new CaseBean();
+//		caseResult.setBathroom(result.getBathroom());
+//		caseResult.setBedroom(result.getBedroom());
+//		caseResult.setBuiltArea(result.getBuiltArea());
+//		caseResult.setBusinessType(result.getBusinessType());
+//		caseResult.setCity(result.getCity());
+//		caseResult.setGarageSpace(result.getGarageSpace());
+//		caseResult.setId(result.getId());
+//		caseResult.setName(result.getName());
+//		caseResult.setNeighborhood(result.getNeighborhood());
+//		caseResult.setNumber(result.getNumber());
+//		caseResult.setPrice(result.getPrice());
+//		caseResult.setState(result.getState());
+//		caseResult.setStreet(result.getStreet());
+//		caseResult.setSuite(result.getSuite());
+//		caseResult.setTotalArea(result.getTotalArea());
+//		caseResult.setType(result.getType());
+//		return caseResult;
+//	}
 	
 	private CaseBean getCaseBean(Caso result){
 		CaseBean caseResult = new CaseBean();
@@ -470,6 +476,38 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		return result;
 	}
 	
+	private Point getPoint(PointBean point) {
+		Point p = new Point();
+		p.setIdPoint(point.getIdPoint());
+		p.setObs(point.getObs());
+		p.setLocation(point.getLocation());
+		return p;
+	}
+	
+	private PointBean getPointBean(Point point){
+		PointBean pb = new PointBean();
+		pb.setIdPoint(point.getIdPoint());
+		pb.setObs(point.getObs());
+		pb.setLocation(point.getLocation());
+		return new PointBean(point.getLocation());
+	}
+	
+	private Line getLine(LineBean line) {
+		Line l = new Line();
+		l.setIdLine(line.getIdLine());
+		l.setObs(line.getObs());
+		
+		List<Vertex> vertexes = new ArrayList<Vertex>();
+		List<String> locations = line.getLocation();
+		int index = 0;
+		for (String location : locations) {						
+			vertexes.add(new Vertex(line.getIdLine(), index, location));
+			index++;
+		}
+		l.setVertexes(vertexes);
+		return l;
+	}
+	
 	private Foto getFoto(PhotoBean photoBean){
 		return new Foto(photoBean.getIdCaso(), photoBean.getPath());
 	}
@@ -479,6 +517,36 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		result.setIdCaso(foto.getIdCaso());
 		result.setPath(foto.getPath());
 		return result;
-	}	
+	}
+
+	public boolean savePoint(PointBean point) {
+		try {
+			this.systemManager.savePoint(getPoint(point));
+		} catch (PointAlreadySavedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public List<PointBean> getPoints() {
+		List<Point> points = this.systemManager.getPoints();
+		List<PointBean> pointBeans = new ArrayList<PointBean>();
+		for (Point point : points) {
+			pointBeans.add(getPointBean(point));
+		}
+		return pointBeans;
+	}
+
+	public boolean saveLine(LineBean line) {
+		try {
+			this.systemManager.saveLine(getLine(line));
+		} catch (LineAlreadySavedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	
 }

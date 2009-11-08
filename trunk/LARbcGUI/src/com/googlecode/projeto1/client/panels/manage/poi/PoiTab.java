@@ -22,17 +22,11 @@ public class PoiTab extends AbsolutePanel{
 	private RadioButton rdbtnSetorIndustrial;
 	private Button okButton;
 	
-//	private POIPointMap pointMap;
-//	private POILineMap lineMap;
-	
 	public PoiTab(){
 		super();
-
-//		pointMap = new POIPointMap();
-//		lineMap = new POILineMap();
 		HTML explanationHtml = new HTML("New HTML", true);
 		explanationHtml
-				.setText("Escolha qual tipo de ponto de interesse voc\u00EA deseja adicionar ou remover");
+				.setText("Escolha qual tipo de ponto de interesse você deseja adicionar ou remover");
 		this.add(explanationHtml, 5, 5);
 
 		rdbtnEscola = new RadioButton("POI", "Escola");
@@ -44,7 +38,7 @@ public class PoiTab extends AbsolutePanel{
 		rdbtnViaPrincipalDe = new RadioButton("POI", "Via Principal de Acesso");
 		this.add(rdbtnViaPrincipalDe, 5, 118);
 
-		rdbtnAreaVerde = new RadioButton("POI", "\u00C1rea Verde");
+		rdbtnAreaVerde = new RadioButton("POI", "Area Verde");
 		this.add(rdbtnAreaVerde, 5, 150);
 
 		rdbtnShoppingCenter = new RadioButton("POI", "Shopping Center");
@@ -59,25 +53,14 @@ public class PoiTab extends AbsolutePanel{
 	}
 	
 	private void showPointKindMap(Widget widget){
-//		POIPointMap poiMap = new POIPointMap();
-//		poiMap.setPointKind();
-//		poiMap.show(widget.getElement());
 		new POIPointMap().show(widget.getElement());		
-//		pointMap.show(widget.getElement());
 	}
 	
 	private void showLineKindMap(Widget widget){
-//		POIPointMap poiMap = new POIPointMap();
-//		poiMap.setLineKind();
-//		poiMap.show(widget.getElement());
 		new POILineMap().show(widget.getElement());
-//		POILineMap.getInstance().show(widget.getElement());
 	}
 	
 	private void showAreaKindMap(Widget widget){
-//		POIPointMap poiMap = new POIPointMap();
-//		poiMap.setAreaKind();
-//		poiMap.show(widget.getElement());
 		new POIPolygonMap().show(widget.getElement());
 	}
 
@@ -97,7 +80,7 @@ public class PoiTab extends AbsolutePanel{
 				}else if(rdbtnAreaVerde.isChecked()){
 					showAreaKindMap(arg0);
 				}else if(rdbtnSetorIndustrial.isChecked()){
-					
+					showAreaKindMap(arg0);
 				}else{
 					MessageBox.alert("Favor selecionar alguma das opções");
 				}

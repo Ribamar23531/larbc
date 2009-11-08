@@ -1,11 +1,18 @@
 package com.googlecode.projeto1.client.panels.maps;
 
 
+import java.util.List;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.event.MarkerDoubleClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.googlecode.projeto1.client.beans.PointBean;
+import com.googlecode.projeto1.client.rpcServices.PersistenceService;
+import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.Button;
@@ -22,24 +29,25 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 public class POIPointMap extends MappingWindow{
 	
 	private Marker marker;
-	private int qtePoints;	
+	
+	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
 	public POIPointMap(){
 		super();
-		myMap.clearOverlays();		
-		qtePoints = 0;
+		myMap.clearOverlays();
+		this.marker = null;
 		this.setTitle("Pontos de Interesse");		
 		this.addButton(getSaveButton());	
 		this.addMapEvent();
-	}
-	
+		loadPoints();
+	}	
+
 	private void addMapEvent() {		
 		myMap.addMapClickHandler(new MapClickHandler() {
 			public void onClick(final MapClickEvent clickEvent) {
-				if(qtePoints == 0){
+				if(marker == null){
 					marker = getMarker(clickEvent.getLatLng());					
 					myMap.addOverlay(marker);
-					qtePoints++;
 				}
 			}
 		});
@@ -63,7 +71,7 @@ public class POIPointMap extends MappingWindow{
 							public void execute(String btnID, String text) {
 								if (btnID.equals("yes")) {
 									myMap.removeOverlay(marker);
-									qtePoints--;
+									POIPointMap.this.marker = null;
 								}
 
 							}							
@@ -92,12 +100,66 @@ public class POIPointMap extends MappingWindow{
 		Button okButton = new Button("Salvar");
 		okButton.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
-				hide();
-			}
+				if(marker == null){
+					MessageBox.alert("Favor escolha uma posição ou feche a janela");
+				}else{
+					savePoint();
+					hide();					
+				}
+			}		
 
 		});
 		return okButton;
 	}		
 	
+	private void savePoint() {
+		PERSISTENCE_SERVICE.savePoint(new PointBean(marker.getLatLng().toString()), new AsyncCallback<Boolean>() {
+			
+			public void onSuccess(Boolean success) {
+				if(success.booleanValue()){
+					MessageBox.alert("Ponto salvo com sucesso");
+				}else{
+					MessageBox.alert("Não foi possível salvar o ponto");
+				}
+				
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Ouve um erro ao salvar. Erro: " + arg0);
+				
+			}
+		});
+		
+	}
+	
+	private void loadPoints() {
+		PERSISTENCE_SERVICE.getPoints(new AsyncCallback<List<PointBean>>() {
+			
+			public void onSuccess(List<PointBean> points) {
+				for (PointBean pointBean : points) {
+					String location = pointBean.getLocation();					
+					String[] aux = location.split(",");
+					double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
+					double lng = Double.parseDouble(aux[1].substring(1, aux[0].length()));
+					Marker m = new Marker(LatLng.newInstance(lat, lng), getOptions());
+//					m.setImage(Util.ESCOLA_PATH);					
+					myMap.addOverlay(m);
+				}
+				
+			}
+			
+			private MarkerOptions getOptions() {
+				MarkerOptions options = MarkerOptions.newInstance();
+//				options.setIcon(Icon.newInstance(Util.ESCOLA_PATH));
+				return options;
+			}
+
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Ouve um erro ao salvar. Erro: " + arg0);
+				
+			}
+		});
+		
+	}
 
 }

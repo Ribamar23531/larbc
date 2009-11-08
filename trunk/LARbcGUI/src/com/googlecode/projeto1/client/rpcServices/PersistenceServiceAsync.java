@@ -5,7 +5,9 @@ import java.util.List;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
+import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
+import com.googlecode.projeto1.client.beans.PointBean;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -71,4 +73,10 @@ public interface PersistenceServiceAsync {
 	public void listBairros(AsyncCallback<List<String>> callback);
 	
 	public void getCaseLocation(CaseBean caseBean, AsyncCallback<String> callback) ;
+	
+	public void savePoint(PointBean point, AsyncCallback<Boolean> callback);
+	
+	public void getPoints(AsyncCallback<List<PointBean>> callback);
+	
+	public void saveLine(LineBean line, AsyncCallback<Boolean> callback);
 }

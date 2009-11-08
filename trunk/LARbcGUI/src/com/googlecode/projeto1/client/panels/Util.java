@@ -34,6 +34,7 @@ public class Util {
 	public final static String IMMOBILE_IMAGE_PATH = "images/imoveisEncontrados.PNG";
 	public final static String COMMERCIAL_IMMOBILE_PATH = "images/estabelecimentoComercial.PNG";
 	public final static String RESIDENTIAL_IMMOBILE_PATH = "images/estabelecimentoResidencial.PNG";
+	public final static String ESCOLA_PATH = "images/escola.png";
 	
 	public static Image createImage(String path){
 		Image image = new Image(path);
