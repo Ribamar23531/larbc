@@ -66,11 +66,6 @@ public class Caso{
 	@Transient
 	private String location;
 	
-	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="id_administrador", insertable=false, updatable=false, nullable=false)
-//	@Cascade(CascadeType.PERSIST)
-//	private Administrador inseridoPor;
 	@Column(updatable = false, nullable = false)
 	private long idAdministradorResponsavel;
 	
@@ -174,12 +169,6 @@ public class Caso{
 	public void setTipoNegocio(String tipoNegocio) {
 		this.tipoNegocio = tipoNegocio;
 	}
-//	public void setInseridoPor(Administrador inseridoPor) {
-//		this.inseridoPor = inseridoPor;
-//	}
-//	public Administrador getInseridoPor() {
-//		return inseridoPor;
-//	}
 
 	public void setIdAdministradorResponsavel(long idAdministradorResponsavel) {
 		this.idAdministradorResponsavel = idAdministradorResponsavel;

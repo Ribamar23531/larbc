@@ -7,6 +7,9 @@ import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
+import beans.poi.Line;
+import beans.poi.Point;
+import beans.poi.Vertex;
 
 
 public class HibernateConfig {
@@ -47,7 +50,11 @@ public class HibernateConfig {
 			config.addAnnotatedClass(Administrador.class);
 			config.addAnnotatedClass(Foto.class);
 			config.addAnnotatedClass(Demanda.class);
-			config.addAnnotatedClass(Caso.class);			
+			config.addAnnotatedClass(Caso.class);
+			config.addAnnotatedClass(Point.class);
+			config.addAnnotatedClass(Line.class);
+			config.addAnnotatedClass(Vertex.class);
+			
 			sessionFactory = config.buildSessionFactory();
 			createGeometryColumn(currentSchema, sessionFactory);
 		} catch (Throwable ex) {

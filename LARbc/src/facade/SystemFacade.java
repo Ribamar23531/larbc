@@ -7,13 +7,19 @@ import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
 import beans.Foto;
+import beans.poi.Line;
+import beans.poi.Point;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
+import exceptions.LineAlreadySavedException;
+import exceptions.LineNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
+import exceptions.PointAlreadySavedException;
+import exceptions.PointNotFoundException;
 
 public interface SystemFacade {
 	
@@ -66,6 +72,24 @@ public interface SystemFacade {
 	public Administrador getCasoOwner(Caso caso) throws AdministradorNotFoundException;
 	
 	public Caso getCaso(long idCaso) throws CasoNotFoundException;
+	
+//=== Points of interest operations
+	
+	public void savePoint(Point point) throws PointAlreadySavedException;
+	
+	public void removePoint(Point point) throws PointNotFoundException;
+	
+	public List<Point> getPoints();
+	
+	public void updatePoint(Point point) throws PointAlreadySavedException;
+	
+	public void saveLine(Line line) throws LineAlreadySavedException;
+	
+	public void removeLine(Line line) throws LineNotFoundException;
+	
+	public List<Line> getLines();
+	
+	public void updateLine(Line line) throws LineAlreadySavedException;
 	
 //=== Query operation ===
 	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
