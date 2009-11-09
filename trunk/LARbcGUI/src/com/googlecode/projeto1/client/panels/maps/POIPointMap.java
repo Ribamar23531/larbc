@@ -138,10 +138,7 @@ public class POIPointMap extends MappingWindow{
 			public void onSuccess(List<PointBean> points) {
 				for (PointBean pointBean : points) {
 					String location = pointBean.getLocation();					
-					String[] aux = location.split(",");
-					double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
-					double lng = Double.parseDouble(aux[1].substring(1, aux[0].length()));
-					Marker m = new Marker(LatLng.newInstance(lat, lng), getOptions());
+					Marker m = new Marker(getPoint(location), getOptions());
 //					m.setImage(Util.ESCOLA_PATH);					
 					myMap.addOverlay(m);
 				}
@@ -160,6 +157,13 @@ public class POIPointMap extends MappingWindow{
 			}
 		});
 		
+	}
+	
+	private LatLng getPoint(String location){
+		String[] aux = location.split(",");
+		double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
+		double lng = Double.parseDouble(aux[1].substring(1, aux[0].length()));
+		return LatLng.newInstance(lat, lng);
 	}
 
 }
