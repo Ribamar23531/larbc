@@ -508,6 +508,19 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		return l;
 	}
 	
+	private LineBean getLineBean(Line line) {
+		LineBean lineBean = new LineBean();
+		lineBean.setIdLine(line.getIdLine());
+		lineBean.setObs(line.getObs());
+		List<Vertex> vertexes = line.getVertexes();
+		List<String> location = new ArrayList<String>(vertexes.size());
+		for (Vertex vertex : vertexes) {
+			location.add((int) vertex.getIndex(), vertex.getLocation());
+		}
+		lineBean.setLocation(location);
+		return lineBean;
+	}
+	
 	private Foto getFoto(PhotoBean photoBean){
 		return new Foto(photoBean.getIdCaso(), photoBean.getPath());
 	}
@@ -546,6 +559,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			return false;
 		}
 		return true;
+	}
+
+	public List<LineBean> getLines() {
+		List<Line> lines = this.systemManager.getLines();
+		List<LineBean> lineBeans = new ArrayList<LineBean>();
+		for (Line line : lines) {
+			lineBeans.add(getLineBean(line));
+		}
+		return lineBeans;
 	}
 	
 	
