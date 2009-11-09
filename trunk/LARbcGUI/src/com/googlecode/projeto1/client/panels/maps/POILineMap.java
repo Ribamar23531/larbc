@@ -39,7 +39,8 @@ public class POILineMap extends MappingWindow{
 		this.setTitle("Pontos de Interesse");		
 		this.addButton(getSaveButton());
 		this.addMapEvent();
-	}	
+		loadLines();
+	}
 
 	private PolylineMouseOverHandler getPolylineMouseOverHandler() {
 		return new PolylineMouseOverHandler(){
@@ -124,6 +125,27 @@ public class POILineMap extends MappingWindow{
 			}
 		});
 		
-	}	
+	}
+	
+	private void loadLines() {
+		PERSISTENCE_SERVICE.getLines(new AsyncCallback<List<LineBean>>() {
+			
+			public void onSuccess(List<LineBean> lines) {
+				for (LineBean line : lines) {
+					LatLng[] points = new LatLng[line.getLocation().size()];
+					for (String location : line.getLocation()) {
+						
+					}
+				}
+				
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Não foi possível carregar as linhas da base de dados");
+				
+			}
+		});
+		
+	}
 
 }
