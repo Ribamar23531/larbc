@@ -133,9 +133,14 @@ public class POILineMap extends MappingWindow{
 			public void onSuccess(List<LineBean> lines) {
 				for (LineBean line : lines) {
 					LatLng[] points = new LatLng[line.getLocation().size()];
+					int index = 0;
 					for (String location : line.getLocation()) {
-						
+						 points[index] = getPoint(location);
+						 index++;
 					}
+					Polyline p = new Polyline(points);
+					p.setEditingEnabled(false);
+					myMap.addOverlay(p);
 				}
 				
 			}
@@ -146,6 +151,13 @@ public class POILineMap extends MappingWindow{
 			}
 		});
 		
+	}
+	
+	private LatLng getPoint(String location){
+		String[] aux = location.split(",");
+		double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
+		double lng = Double.parseDouble(aux[1].substring(1, aux[0].length()));
+		return LatLng.newInstance(lat, lng);
 	}
 
 }
