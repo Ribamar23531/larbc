@@ -20,6 +20,8 @@ public class Polygon {
 	@Column(name = "id_polygon", updatable = false, nullable = false)
 	private long idPolygon;
 	@Column(updatable = true, nullable = false)
+	private String type;
+	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Transient
 	private List<Vertex> vertexes;
@@ -48,6 +50,14 @@ public class Polygon {
 
 	public List<Vertex> getVertexes() {
 		return vertexes;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
 	}
 	
 	

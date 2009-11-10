@@ -19,6 +19,8 @@ public class Line {
 	@Column(name = "id_line", updatable = false, nullable = false)
 	private long idLine;
 	@Column(updatable = true, nullable = false)
+	private String type;
+	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Transient
 	private List<Vertex> vertexes;
@@ -47,6 +49,14 @@ public class Line {
 
 	public List<Vertex> getVertexes() {
 		return vertexes;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }
