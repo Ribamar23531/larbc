@@ -20,6 +20,8 @@ public class Point {
 	@Column(name = "id_point", updatable = false, nullable = false)
 	private long idPoint;
 	@Column(updatable = true, nullable = false)
+	private String type;
+	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Column(updatable = true, nullable = false)
 	private String location;	
@@ -56,4 +58,12 @@ public class Point {
 		return obs;
 	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
 }

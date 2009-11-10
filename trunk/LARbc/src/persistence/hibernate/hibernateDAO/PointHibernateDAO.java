@@ -7,7 +7,6 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import persistence.DAO.PointDAO;
-
 import beans.poi.Point;
 import exceptions.PointAlreadySavedException;
 import exceptions.PointNotFoundException;
@@ -66,7 +65,7 @@ public class PointHibernateDAO extends HibernateDAO implements PointDAO {
 	public void savePoint(Point point) throws PointAlreadySavedException {
 		if(exists(point)){
 			throw new PointAlreadySavedException();
-		}
+		}		
 		Session session = sf.openSession();
 		Transaction transaction = session.beginTransaction();		
 		session.save(point);
