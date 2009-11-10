@@ -10,6 +10,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Polygon;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.googlecode.projeto1.client.beans.PolygonBean;
+import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.EventObject;
@@ -27,14 +28,16 @@ public class POIPolygonMap extends MappingWindow{
 		
 	private Polygon polygon;
 	private ArrayList<LatLng> points;
+	private Type polygonType;
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
-	public POIPolygonMap(){
+	public POIPolygonMap(Type polygonType){
 		super();
 		myMap.clearOverlays();
 		points = new ArrayList<LatLng>();
 		polygon = null;
+		this.polygonType = polygonType;
 		this.setTitle("Pontos de Interesse");		
 		this.addButton(getSaveButton());
 		this.addButton(getUndoButton());
@@ -104,15 +107,17 @@ public class POIPolygonMap extends MappingWindow{
 			
 			public void onSuccess(List<PolygonBean> polygons) {
 				for (PolygonBean polygon : polygons) {
-					LatLng[] points = new LatLng[polygon.getLocation().size()];
-					int index = 0;
-					for (String location : polygon.getLocation()) {
-						 points[index] = getPoint(location);
-						 index++;
+					if(polygon.getType() == polygonType){
+						LatLng[] points = new LatLng[polygon.getLocation().size()];
+						int index = 0;
+						for (String location : polygon.getLocation()) {
+							points[index] = getPoint(location);
+							index++;
+						}
+						Polygon p = new Polygon(points);
+						p.setEditingEnabled(false);
+						myMap.addOverlay(p);						
 					}
-					Polygon p = new Polygon(points);
-					p.setEditingEnabled(false);
-					myMap.addOverlay(p);
 				}
 				
 			}
@@ -137,7 +142,7 @@ public class POIPolygonMap extends MappingWindow{
 		for (int i = 0; i < polygon.getVertexCount(); i++) {
 			points.add(polygon.getVertex(i).toString());
 		}
-		return new PolygonBean(points);
+		return new PolygonBean(polygonType, points);
 	}
 
 	private Button getUndoButton() {

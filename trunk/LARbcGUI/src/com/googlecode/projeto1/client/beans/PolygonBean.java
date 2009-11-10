@@ -10,12 +10,14 @@ public class PolygonBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private long idPolygon;
+	private Type type;
 	private String obs;
 	private List<String> location;
 	
 	public PolygonBean(){}
 	
-	public PolygonBean(List<String> location){
+	public PolygonBean(Type type, List<String> location){
+		this.type = type;
 		this.setObs("");
 		this.setLocation(location);
 	}
@@ -42,6 +44,14 @@ public class PolygonBean implements Serializable{
 
 	public List<String> getLocation() {
 		return location;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Type getType() {
+		return type;
 	}
 
 }

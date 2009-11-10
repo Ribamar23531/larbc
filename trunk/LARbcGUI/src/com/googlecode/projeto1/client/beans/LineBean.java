@@ -11,12 +11,14 @@ public class LineBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private long idLine;
+	private Type type;
 	private String obs;
 	private List<String> location;
 	
 	public LineBean(){}
 	
-	public LineBean(List<String> location){
+	public LineBean(Type type, List<String> location){
+		this.type = type;
 		this.obs = "";
 		this.setLocation(location);
 	}
@@ -43,6 +45,14 @@ public class LineBean implements Serializable{
 
 	public List<String> getLocation() {
 		return location;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Type getType() {
+		return type;
 	}	
 
 }

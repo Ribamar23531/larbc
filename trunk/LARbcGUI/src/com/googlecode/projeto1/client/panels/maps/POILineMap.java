@@ -12,6 +12,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Polyline;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.googlecode.projeto1.client.beans.LineBean;
+import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.EventObject;
@@ -29,13 +30,15 @@ public class POILineMap extends MappingWindow{
 	
 	private Polyline line;
 	private boolean mouseOverLine;
+	private Type lineType;
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
-	public POILineMap(){
+	public POILineMap(Type lineType){
 		super();
 		mouseOverLine = false;
 		this.line = null;
+		this.lineType = lineType;
 		this.setTitle("Pontos de Interesse");		
 		this.addButton(getSaveButton());
 		this.addMapEvent();
@@ -104,7 +107,7 @@ public class POILineMap extends MappingWindow{
 		for (int i = 0; i < line.getVertexCount(); i++) {
 			points.add(line.getVertex(i).toString());
 		}
-		return new LineBean(points);
+		return new LineBean(lineType, points);
 	}
 
 	private void saveLine() {
@@ -131,15 +134,17 @@ public class POILineMap extends MappingWindow{
 			
 			public void onSuccess(List<LineBean> lines) {
 				for (LineBean line : lines) {
-					LatLng[] points = new LatLng[line.getLocation().size()];
-					int index = 0;
-					for (String location : line.getLocation()) {
-						 points[index] = getPoint(location);
-						 index++;
+					if(line.getType() == lineType){
+						LatLng[] points = new LatLng[line.getLocation().size()];
+						int index = 0;
+						for (String location : line.getLocation()) {
+							points[index] = getPoint(location);
+							index++;
+						}
+						Polyline p = new Polyline(points);
+						p.setEditingEnabled(false);
+						myMap.addOverlay(p);						
 					}
-					Polyline p = new Polyline(points);
-					p.setEditingEnabled(false);
-					myMap.addOverlay(p);
 				}
 				
 			}

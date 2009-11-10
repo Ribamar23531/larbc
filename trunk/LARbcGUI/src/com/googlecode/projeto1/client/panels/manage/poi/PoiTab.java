@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.panels.maps.POILineMap;
 import com.googlecode.projeto1.client.panels.maps.POIPointMap;
 import com.googlecode.projeto1.client.panels.maps.POIPolygonMap;
@@ -26,7 +27,7 @@ public class PoiTab extends AbsolutePanel{
 		super();
 		HTML explanationHtml = new HTML("New HTML", true);
 		explanationHtml
-				.setText("Escolha qual tipo de ponto de interesse você deseja adicionar ou remover");
+				.setText("Escolha o tipo de ponto de interesse você deseja adicionar ou remover");
 		this.add(explanationHtml, 5, 5);
 
 		rdbtnEscola = new RadioButton("POI", "Escola");
@@ -52,16 +53,16 @@ public class PoiTab extends AbsolutePanel{
 
 	}
 	
-	private void showPointKindMap(Widget widget){
-		new POIPointMap().show(widget.getElement());		
+	private void showPointKindMap(Type type, Widget widget){
+		new POIPointMap(type).show(widget.getElement());		
 	}
 	
-	private void showLineKindMap(Widget widget){
-		new POILineMap().show(widget.getElement());
+	private void showLineKindMap(Type type, Widget widget){
+		new POILineMap(type).show(widget.getElement());
 	}
 	
-	private void showAreaKindMap(Widget widget){
-		new POIPolygonMap().show(widget.getElement());
+	private void showAreaKindMap(Type type, Widget widget){
+		new POIPolygonMap(type).show(widget.getElement());
 	}
 
 	private Button getOkButton() {
@@ -70,17 +71,17 @@ public class PoiTab extends AbsolutePanel{
 
 			public void onClick(Widget arg0) {				
 				if(rdbtnEscola.isChecked()){
-					showPointKindMap(arg0);
+					showPointKindMap(Type.SCHOOL, arg0);
 				}else if(rdbtnUniversidade.isChecked()){
-					showPointKindMap(arg0);
+					showPointKindMap(Type.UNIVERSITY, arg0);
 				}else if(rdbtnViaPrincipalDe.isChecked()){
-					showLineKindMap(arg0);
+					showLineKindMap(Type.ACCESS_ROAD, arg0);
 				}else if(rdbtnShoppingCenter.isChecked()){
-					showPointKindMap(arg0);
+					showPointKindMap(Type.SHOPPING_CENTER, arg0);
 				}else if(rdbtnAreaVerde.isChecked()){
-					showAreaKindMap(arg0);
+					showAreaKindMap(Type.GREEN_AREA, arg0);
 				}else if(rdbtnSetorIndustrial.isChecked()){
-					showAreaKindMap(arg0);
+					showAreaKindMap(Type.INDUSTRIAL, arg0);
 				}else{
 					MessageBox.alert("Favor selecionar alguma das opções");
 				}
