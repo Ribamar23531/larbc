@@ -9,6 +9,7 @@ import beans.Demanda;
 import beans.Foto;
 import beans.poi.Line;
 import beans.poi.Point;
+import beans.poi.Polygon;
 import beans.poi.Vertex;
 
 
@@ -53,6 +54,7 @@ public class HibernateConfig {
 			config.addAnnotatedClass(Caso.class);
 			config.addAnnotatedClass(Point.class);
 			config.addAnnotatedClass(Line.class);
+			config.addAnnotatedClass(Polygon.class);
 			config.addAnnotatedClass(Vertex.class);
 			
 			sessionFactory = config.buildSessionFactory();

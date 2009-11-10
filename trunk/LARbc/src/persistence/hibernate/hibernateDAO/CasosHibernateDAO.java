@@ -1,4 +1,4 @@
-package persistence.DAO;
+package persistence.hibernate.hibernateDAO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
+import persistence.DAO.CasoDAO;
 import persistence.hibernate.HibernateConfig;
 import persistence.jdbc.PointRecover;
 import beans.Administrador;

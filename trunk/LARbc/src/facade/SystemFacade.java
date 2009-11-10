@@ -9,13 +9,12 @@ import beans.Demanda;
 import beans.Foto;
 import beans.poi.Line;
 import beans.poi.Point;
+import beans.poi.Polygon;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
-import exceptions.LineAlreadySavedException;
-import exceptions.LineNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
 import exceptions.PointAlreadySavedException;
@@ -83,13 +82,21 @@ public interface SystemFacade {
 	
 	public void updatePoint(Point point) throws PointAlreadySavedException;
 	
-	public void saveLine(Line line) throws LineAlreadySavedException;
+	public void saveLine(Line line);
 	
-	public void removeLine(Line line) throws LineNotFoundException;
+	public void removeLine(Line line);
 	
 	public List<Line> getLines();
 	
-	public void updateLine(Line line) throws LineAlreadySavedException;
+	public void updateLine(Line line);
+	
+	public void savePolygon(Polygon polygon);
+	
+	public void removePolygon(Polygon polygon);
+	
+	public List<Polygon> getPolygons();
+	
+	public void updatePolygon(Polygon polygon);
 	
 //=== Query operation ===
 	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,
