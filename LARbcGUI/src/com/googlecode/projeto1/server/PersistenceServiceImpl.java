@@ -10,6 +10,7 @@ import beans.Demanda;
 import beans.Foto;
 import beans.poi.Line;
 import beans.poi.Point;
+import beans.poi.Polygon;
 import beans.poi.Vertex;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -19,6 +20,7 @@ import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 import com.googlecode.projeto1.client.beans.PointBean;
+import com.googlecode.projeto1.client.beans.PolygonBean;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 
 import exceptions.AdministradorNotFoundException;
@@ -26,7 +28,6 @@ import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
-import exceptions.LineAlreadySavedException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
 import exceptions.PointAlreadySavedException;
@@ -512,6 +513,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		LineBean lineBean = new LineBean();
 		lineBean.setIdLine(line.getIdLine());
 		lineBean.setObs(line.getObs());
+		
 		List<Vertex> vertexes = line.getVertexes();
 		List<String> location = new ArrayList<String>(vertexes.size());
 		for (Vertex vertex : vertexes) {
@@ -520,6 +522,36 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		lineBean.setLocation(location);
 		return lineBean;
 	}
+	
+	private PolygonBean getPolygonBean(Polygon polygon) {
+		PolygonBean polygonBean = new PolygonBean();
+		polygonBean.setIdPolygon(polygon.getIdPolygon());
+		polygonBean.setObs(polygon.getObs());
+		
+		List<Vertex> vertexes = polygon.getVertexes();
+		List<String> location = new ArrayList<String>(vertexes.size());
+		for (Vertex vertex : vertexes) {
+			location.add((int) vertex.getIndex(), vertex.getLocation());
+		}
+		polygonBean.setLocation(location);
+		return polygonBean;
+	}
+	
+	private Polygon getPolygon(PolygonBean polygonBean) {
+		Polygon p = new Polygon();
+		p.setIdPolygon(polygonBean.getIdPolygon());
+		p.setObs(polygonBean.getObs());
+		
+		List<Vertex> vertexes = new ArrayList<Vertex>();
+		List<String> locations = polygonBean.getLocation();
+		int index = 0;
+		for (String location : locations) {						
+			vertexes.add(new Vertex(polygonBean.getIdPolygon(), index, location));
+			index++;
+		}
+		p.setVertexes(vertexes);
+		return p;
+	}	
 	
 	private Foto getFoto(PhotoBean photoBean){
 		return new Foto(photoBean.getIdCaso(), photoBean.getPath());
@@ -554,12 +586,12 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	public boolean saveLine(LineBean line) {
 		try {
 			this.systemManager.saveLine(getLine(line));
-		} catch (LineAlreadySavedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
-	}
+	}	
 
 	public List<LineBean> getLines() {
 		List<Line> lines = this.systemManager.getLines();
@@ -569,6 +601,23 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return lineBeans;
 	}
-	
+
+	public boolean savePolygon(PolygonBean polygonBean) {
+		try{
+			this.systemManager.savePolygon(getPolygon(polygonBean));			
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
+
+	public List<PolygonBean> getPolygons() {
+		List<Polygon> polygons = this.systemManager.getPolygons();
+		List<PolygonBean> polygonBeans = new ArrayList<PolygonBean>();
+		for (Polygon polygon : polygons) {
+			polygonBeans.add(getPolygonBean(polygon));
+		}
+		return polygonBeans;
+	}
 	
 }

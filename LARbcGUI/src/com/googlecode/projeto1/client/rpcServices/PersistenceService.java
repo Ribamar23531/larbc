@@ -10,6 +10,7 @@ import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 import com.googlecode.projeto1.client.beans.PointBean;
+import com.googlecode.projeto1.client.beans.PolygonBean;
 
 /**
  * @author Alcione Pinheiro
@@ -83,4 +84,9 @@ public interface PersistenceService extends RemoteService {
 	public boolean saveLine(LineBean line);
 	
 	public List<LineBean> getLines();
+	
+	public boolean savePolygon(PolygonBean polygonBean);
+	
+	public List<PolygonBean> getPolygons();
+	
 }

@@ -8,6 +8,7 @@ import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 import com.googlecode.projeto1.client.beans.PointBean;
+import com.googlecode.projeto1.client.beans.PolygonBean;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -81,4 +82,9 @@ public interface PersistenceServiceAsync {
 	public void saveLine(LineBean line, AsyncCallback<Boolean> callback);
 	
 	public void getLines(AsyncCallback<List<LineBean>> callback);
+	
+	public void savePolygon(PolygonBean polygonBean, AsyncCallback<Boolean> callback);
+	
+	public void getPolygons(AsyncCallback<List<PolygonBean>> callback);
+	
 }

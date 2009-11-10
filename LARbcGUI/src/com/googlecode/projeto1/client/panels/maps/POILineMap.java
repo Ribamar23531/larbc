@@ -90,9 +90,8 @@ public class POILineMap extends MappingWindow{
 				if(line == null){
 					MessageBox.alert("Favor crie uma linha ou feche a janela");
 				}else{
-//					myMap.clearOverlays();
 					saveLine();
-					hide();					
+					hide();
 				}
 			}		
 
@@ -121,7 +120,7 @@ public class POILineMap extends MappingWindow{
 			}
 			
 			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Ouve um erro ao salvar. Erro: " + arg0);				
+				MessageBox.alert("Ouve um erro ao salvar. Erro: " + arg0);
 			}
 		});
 		
@@ -156,7 +155,7 @@ public class POILineMap extends MappingWindow{
 	private LatLng getPoint(String location){
 		String[] aux = location.split(",");
 		double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
-		double lng = Double.parseDouble(aux[1].substring(1, aux[0].length()));
+		double lng = Double.parseDouble(aux[1].substring(1, aux[1].length() - 1));
 		return LatLng.newInstance(lat, lng);
 	}
 
