@@ -1,9 +1,11 @@
-package persistence.DAO;
+package persistence.hibernate.hibernateDAO;
 
 import java.util.List;
 
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+
+import persistence.DAO.DemandaDAO;
 
 import beans.Demanda;
 import exceptions.DemandaNotFoundException;

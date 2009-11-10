@@ -13,13 +13,12 @@ import beans.Demanda;
 import beans.Foto;
 import beans.poi.Line;
 import beans.poi.Point;
+import beans.poi.Polygon;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
-import exceptions.LineAlreadySavedException;
-import exceptions.LineNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
 import exceptions.PointAlreadySavedException;
@@ -262,20 +261,40 @@ public class SystemManager implements SystemFacade {
 	}
 
 	@Override
-	public void removeLine(Line line) throws LineNotFoundException {
+	public void removeLine(Line line) {
 		this.persistenceManager.removeLine(line);
 		
 	}
 
 	@Override
-	public void saveLine(Line line) throws LineAlreadySavedException {
+	public void saveLine(Line line) {
 		this.persistenceManager.saveLine(line);
 		
 	}
 
 	@Override
-	public void updateLine(Line line) throws LineAlreadySavedException {
+	public void updateLine(Line line) {
 		this.persistenceManager.updateLine(line);		
+	}
+
+	@Override
+	public List<Polygon> getPolygons() {
+		return this.persistenceManager.getPolygons();
+	}
+
+	@Override
+	public void removePolygon(Polygon polygon) {
+		this.persistenceManager.removePolygon(polygon);
+	}
+
+	@Override
+	public void savePolygon(Polygon polygon) {
+		this.persistenceManager.savePolygon(polygon);		
+	}
+
+	@Override
+	public void updatePolygon(Polygon polygon) {
+		this.persistenceManager.updatePolygon(polygon);	
 	}
 	
 }

@@ -5,17 +5,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 import persistence.DAO.AdministradorDAO;
-import persistence.DAO.AdministradorHibernateDAO;
 import persistence.DAO.CasoDAO;
-import persistence.DAO.CasosHibernateDAO;
 import persistence.DAO.DemandaDAO;
-import persistence.DAO.DemandasHibernateDAO;
 import persistence.DAO.FotoDAO;
-import persistence.DAO.FotoHibernateDAO;
 import persistence.DAO.LineDAO;
-import persistence.DAO.LineHibernateDAO;
 import persistence.DAO.PointDAO;
-import persistence.DAO.PointHibernateDAO;
+import persistence.DAO.PolygonDAO;
+import persistence.hibernate.hibernateDAO.AdministradorHibernateDAO;
+import persistence.hibernate.hibernateDAO.CasosHibernateDAO;
+import persistence.hibernate.hibernateDAO.DemandasHibernateDAO;
+import persistence.hibernate.hibernateDAO.FotoHibernateDAO;
+import persistence.hibernate.hibernateDAO.LineHibernateDAO;
+import persistence.hibernate.hibernateDAO.PointHibernateDAO;
+import persistence.hibernate.hibernateDAO.PolygonHibernateDAO;
 import persistence.util.Paths;
 import beans.Administrador;
 import beans.Caso;
@@ -23,13 +25,12 @@ import beans.Demanda;
 import beans.Foto;
 import beans.poi.Line;
 import beans.poi.Point;
+import beans.poi.Polygon;
 import exceptions.AdministradorNotFoundException;
 import exceptions.CasoNotFoundException;
 import exceptions.DemandaNotFoundException;
 import exceptions.FotoAlreadySavedException;
 import exceptions.FotoNotFoundException;
-import exceptions.LineAlreadySavedException;
-import exceptions.LineNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
 import exceptions.PointAlreadySavedException;
@@ -43,6 +44,7 @@ public class GerenteDePersistencia {
 	private CasoDAO casoDAO;
 	private PointDAO pointDAO;
 	private LineDAO lineDAO;
+	private PolygonDAO polygonDAO;
 	private static GerenteDePersistencia minhaInstancia = null;
 	
 	public GerenteDePersistencia(boolean testing){
@@ -52,7 +54,7 @@ public class GerenteDePersistencia {
 		this.casoDAO = new CasosHibernateDAO(testing);
 		this.pointDAO = new PointHibernateDAO(testing);
 		this.lineDAO =  new LineHibernateDAO(testing);
-		
+		this.polygonDAO = new PolygonHibernateDAO(testing);
 	}
 	
 	public GerenteDePersistencia(){
@@ -62,6 +64,7 @@ public class GerenteDePersistencia {
 		this.casoDAO = new CasosHibernateDAO();
 		this.pointDAO = new PointHibernateDAO();
 		this.lineDAO =  new LineHibernateDAO();
+		this.polygonDAO = new PolygonHibernateDAO();
 	}
 	
 	public static GerenteDePersistencia getInstance(boolean testando){
@@ -300,11 +303,11 @@ public class GerenteDePersistencia {
 		this.pointDAO.updatePoint(point);
 	}
 	
-	public void saveLine(Line line) throws LineAlreadySavedException{
+	public void saveLine(Line line){
 		this.lineDAO.saveLine(line);
 	}
 	
-	public void removeLine(Line line) throws LineNotFoundException{
+	public void removeLine(Line line){
 		this.lineDAO.removeLine(line);
 	}
 	
@@ -312,8 +315,24 @@ public class GerenteDePersistencia {
 		return this.lineDAO.getLines();
 	}
 
-	public void updateLine(Line line) throws LineAlreadySavedException{
+	public void updateLine(Line line){
 		this.lineDAO.updateLine(line);
+	}
+	
+	public void savePolygon(Polygon polygon){
+		this.polygonDAO.savePolygon(polygon);
+	}
+	
+	public void removePolygon(Polygon polygon){
+		this.polygonDAO.removePolygon(polygon);
+	}
+	
+	public List<Polygon> getPolygons(){
+		return this.polygonDAO.getPolygons();
+	}
+	
+	public void updatePolygon(Polygon polygon){
+		this.polygonDAO.updatePolygon(polygon);
 	}
 	
 }
