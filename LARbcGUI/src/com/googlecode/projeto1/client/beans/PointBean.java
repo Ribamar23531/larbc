@@ -9,13 +9,15 @@ public class PointBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private long idPoint;
+	private Type type;
 	private String obs;
 	private String location;
 	
 	public PointBean(){}
 	
-	public PointBean(String location){
+	public PointBean(Type type, String location){
 		this.setObs("");
+		this.type = type;
 		this.setLocation(location);
 	}
 
@@ -41,6 +43,14 @@ public class PointBean implements Serializable{
 
 	public String getObs() {
 		return obs;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Type getType() {
+		return type;
 	}
 
 }

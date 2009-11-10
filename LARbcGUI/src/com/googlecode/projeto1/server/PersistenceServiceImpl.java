@@ -21,6 +21,7 @@ import com.googlecode.projeto1.client.beans.LineBean;
 import com.googlecode.projeto1.client.beans.PhotoBean;
 import com.googlecode.projeto1.client.beans.PointBean;
 import com.googlecode.projeto1.client.beans.PolygonBean;
+import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 
 import exceptions.AdministradorNotFoundException;
@@ -481,6 +482,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		Point p = new Point();
 		p.setIdPoint(point.getIdPoint());
 		p.setObs(point.getObs());
+		p.setType(point.getType().toString());
 		p.setLocation(point.getLocation());
 		return p;
 	}
@@ -490,12 +492,22 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		pb.setIdPoint(point.getIdPoint());
 		pb.setObs(point.getObs());
 		pb.setLocation(point.getLocation());
-		return new PointBean(point.getLocation());
+		if(point.getType().equals(Type.SCHOOL.toString())){
+			return new PointBean(Type.SCHOOL, point.getLocation());
+		}else if(point.getType().equals(Type.UNIVERSITY.toString())){
+			return new PointBean(Type.UNIVERSITY, point.getLocation());
+		}else if(point.getType().equals(Type.SHOPPING_CENTER.toString())){
+			return new PointBean(Type.SHOPPING_CENTER, point.getLocation());
+		}else if(point.getType().equals(Type.DOWNTOWN.toString())){
+			return new PointBean(Type.DOWNTOWN, point.getLocation());
+		}
+		return new PointBean(Type.UNDEFINED, point.getLocation());
 	}
 	
 	private Line getLine(LineBean line) {
 		Line l = new Line();
 		l.setIdLine(line.getIdLine());
+		l.setType(line.getType().toString());
 		l.setObs(line.getObs());
 		
 		List<Vertex> vertexes = new ArrayList<Vertex>();
@@ -512,6 +524,11 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	private LineBean getLineBean(Line line) {
 		LineBean lineBean = new LineBean();
 		lineBean.setIdLine(line.getIdLine());
+		if(line.getType().equals(Type.ACCESS_ROAD.toString())){
+			lineBean.setType(Type.ACCESS_ROAD);
+		}else{
+			lineBean.setType(Type.UNDEFINED);
+		}
 		lineBean.setObs(line.getObs());
 		
 		List<Vertex> vertexes = line.getVertexes();
@@ -526,6 +543,11 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	private PolygonBean getPolygonBean(Polygon polygon) {
 		PolygonBean polygonBean = new PolygonBean();
 		polygonBean.setIdPolygon(polygon.getIdPolygon());
+		if(polygon.getType().equals(Type.GREEN_AREA.toString())){
+			polygonBean.setType(Type.GREEN_AREA);
+		}else if(polygon.getType().equals(Type.INDUSTRIAL.toString())){
+			polygonBean.setType(Type.INDUSTRIAL);
+		}
 		polygonBean.setObs(polygon.getObs());
 		
 		List<Vertex> vertexes = polygon.getVertexes();
@@ -540,6 +562,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	private Polygon getPolygon(PolygonBean polygonBean) {
 		Polygon p = new Polygon();
 		p.setIdPolygon(polygonBean.getIdPolygon());
+		p.setType(polygonBean.getType().toString());
 		p.setObs(polygonBean.getObs());
 		
 		List<Vertex> vertexes = new ArrayList<Vertex>();

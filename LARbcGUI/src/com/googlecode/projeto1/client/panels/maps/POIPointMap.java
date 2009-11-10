@@ -11,6 +11,7 @@ import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.googlecode.projeto1.client.beans.PointBean;
+import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.EventObject;
@@ -29,15 +30,17 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 public class POIPointMap extends MappingWindow{
 	
 	private Marker marker;
+	private Type pointType;
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
-	public POIPointMap(){
+	public POIPointMap(Type pointType){
 		super();
 		myMap.clearOverlays();
 		this.marker = null;
+		this.pointType = pointType;
 		this.setTitle("Pontos de Interesse");		
-		this.addButton(getSaveButton());	
+		this.addButton(getSaveButton());		
 		this.addMapEvent();
 		loadPoints();
 	}	
@@ -113,7 +116,7 @@ public class POIPointMap extends MappingWindow{
 	}		
 	
 	private void savePoint() {
-		PERSISTENCE_SERVICE.savePoint(new PointBean(marker.getLatLng().toString()), new AsyncCallback<Boolean>() {
+		PERSISTENCE_SERVICE.savePoint(new PointBean(pointType, marker.getLatLng().toString()), new AsyncCallback<Boolean>() {
 			
 			public void onSuccess(Boolean success) {
 				if(success.booleanValue()){
@@ -137,10 +140,12 @@ public class POIPointMap extends MappingWindow{
 			
 			public void onSuccess(List<PointBean> points) {
 				for (PointBean pointBean : points) {
-					String location = pointBean.getLocation();					
-					Marker m = new Marker(getPoint(location), getOptions());
-//					m.setImage(Util.ESCOLA_PATH);					
-					myMap.addOverlay(m);
+					if(pointBean.getType() == pointType){
+						String location = pointBean.getLocation();					
+						Marker m = new Marker(getPoint(location), getOptions());
+//						m.setImage(Util.ESCOLA_PATH);					
+						myMap.addOverlay(m);						
+					}
 				}
 				
 			}

@@ -58,15 +58,16 @@ public class ManagePanel extends Panel{
 			adminsMainPanel.setSize("620px", "400px");
 
 			Button logoutButton = getLogoutButton();
-			tabPanel.add(logoutButton, "Logout", false);
+			tabPanel.add(logoutButton, "Sair", false);
+			tabPanel.selectTab(0);
 
-		}
-		this.add(managePanel);
+		}		
+		this.add(managePanel);		
 		this.setFrame(true);
 	}
 
 	private Button getLogoutButton() {
-		Button button = new Button("Logout");
+		Button button = new Button("Sair");
 		button.addClickListener(new ClickListener() {
 			
 			public void onClick(Widget arg0) {
