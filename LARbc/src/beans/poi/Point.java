@@ -12,7 +12,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "points")
-@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.location = :location")})
+@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.latitude = :latitude and p.longitude = :longitude")})
 public class Point {
 	
 	@Id
@@ -24,14 +24,18 @@ public class Point {
 	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Column(updatable = true, nullable = false)
-	private String location;	
+	private double latitude;
+	@Column(updatable = true, nullable = false)
+	private double longitude;
+	
 	
 	//construtor vazio necessario pelo hibernate
 	public Point(){}
 	
-	public Point(String location){
+	public Point(double latitude, double longitude){
 		this.setObs("");
-		this.setLocation(location);
+		this.setLatitude(latitude);
+		this.setLongitude(longitude);
 	}
 
 	public void setIdPoint(long idPoint) {
@@ -40,14 +44,6 @@ public class Point {
 
 	public long getIdPoint() {
 		return idPoint;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getLocation() {
-		return location;
 	}
 
 	public void setObs(String obs) {
@@ -64,6 +60,22 @@ public class Point {
 
 	public String getType() {
 		return type;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
 	}
 	
 }
