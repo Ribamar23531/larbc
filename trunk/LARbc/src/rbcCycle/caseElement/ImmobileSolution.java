@@ -28,6 +28,7 @@ public class ImmobileSolution implements CaseComponent {
 	private String businessType;
 	private int addedBy;
 	private String observations;
+	private String location;
 	
 	
 
@@ -191,5 +192,13 @@ public class ImmobileSolution implements CaseComponent {
 						"Business type: " + getBusinessType() + newLine + 
 						"Observations: " + getObservations() + newLine;
 		return result;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }

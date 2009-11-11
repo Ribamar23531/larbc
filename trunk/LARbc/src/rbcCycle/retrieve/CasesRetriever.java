@@ -24,6 +24,8 @@ public class CasesRetriever implements StandardCBRApplication {
 	private Collection<RetrievalResult> queryResult;
 	
 	private boolean testing;
+	private double priceWeight;
+	private double locationWeight;
 	
 	public CasesRetriever(boolean testing){
 		try {
@@ -34,6 +36,11 @@ public class CasesRetriever implements StandardCBRApplication {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setWeights(double priceWeight, double locationWeight){
+		this.priceWeight = priceWeight;
+		this.locationWeight = locationWeight;
 	}
 
 	public void configure() throws ExecutionException {
@@ -58,7 +65,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery queryToDo) throws ExecutionException {
-		SimilarityConfiguration configuration = new SimilarityConfiguration();
+		SimilarityConfiguration configuration = new SimilarityConfiguration(this.priceWeight, this.locationWeight);
 		NNConfig config = configuration.getConfiguration();
 		this.queryResult = NNScoringMethod.evaluateSimilarity(this.caseBase.getCases(), queryToDo, config);
 	}
