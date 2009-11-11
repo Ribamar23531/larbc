@@ -21,5 +21,6 @@
 		<property name="type" column="tipo" />
 		<property name="price" column="preco" />
 		<property name="businessType" column="tipoNegocio" />
+		<property name="location" column="location" />
 	</class>
 </hibernate-mapping>

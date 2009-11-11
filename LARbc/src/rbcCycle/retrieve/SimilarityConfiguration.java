@@ -53,10 +53,9 @@ public class SimilarityConfiguration {
 		this.defineAttributeConfigurationEqual("type", new Double("3"));
 		this.defineAttributeConfigurationRelativeGreater("price", priceWeight);
 		this.defineAttributeConfigurationEqual("businessType", new Double("3"));
-//		this.defineAttributeConfigurationThereIsNear("");
+//		this.defineAttributeConfigurationThereIsNear("location", localeWeight);
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
-	
 	
 	private void defineAttributeConfigurationThereIsNear() {
 		// TODO Auto-generated method stub

@@ -66,4 +66,28 @@ public class QueryConfig {
 		return this.query;
 	}
 
+	public void setQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, String businessType,
+			String location) {
+		this.problemDescription.setState(state);
+		this.problemDescription.setCity(city);
+		this.problemDescription.setNeighborhood(neighborhood);
+		this.problemDescription.setStreet(street);
+		this.problemDescription.setName(name);
+		this.problemDescription.setBuiltArea(builtArea);
+		this.problemDescription.setTotalArea(totalArea);
+		this.problemDescription.setGarageSpace(garageSpace);
+		this.problemDescription.setBedroom(bedroom);
+		this.problemDescription.setSuite(suite);
+		this.problemDescription.setBathroom(bathroom);
+		this.problemDescription.setType(type);
+		this.problemDescription.setPrice(price);
+		this.problemDescription.setBusinessType(businessType);
+		this.problemDescription.setLocation(location);
+		this.query.setDescription(this.problemDescription);
+		
+	}
+
 }

@@ -25,6 +25,7 @@ public class ImmobileDescription implements CaseComponent {
 	private String type;
 	private float price;
 	private String businessType;
+	private String location; 
 	
 	public int getIdCase() {
 		return idCase;
@@ -146,6 +147,14 @@ public class ImmobileDescription implements CaseComponent {
 		this.businessType = businessType;
 	}
 
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
 	/**
 	 * Get the attribute of the id of this class.
 	 * @return The attribute. 

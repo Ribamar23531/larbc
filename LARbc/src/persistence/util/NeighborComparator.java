@@ -12,7 +12,16 @@ public class NeighborComparator {
 	private List<String> neighborIndexes;
 	private Integer[][] distances;
 	
-	public NeighborComparator(){
+	private static NeighborComparator uniqueInstance;
+	
+	public static NeighborComparator getInstance(){
+		if(uniqueInstance != null){
+			uniqueInstance = new NeighborComparator();
+		}
+		return uniqueInstance;
+	}
+	
+	private NeighborComparator(){
 		this.processFile();
 		this.floydWarshall();
 	}
@@ -89,5 +98,9 @@ public class NeighborComparator {
 	
 	public List<String> getNeigborList(){
 		return this.neighborIndexes;
+	}
+
+	public boolean isANeighbor(String caseValue) {
+		return this.neighborIndexes.contains(caseValue);
 	}
 }

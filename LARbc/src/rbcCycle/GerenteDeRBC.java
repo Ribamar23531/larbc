@@ -92,4 +92,31 @@ public class GerenteDeRBC {
 		caso.setObservacoes(caseBean.getObservations());
 		return caso;
 	}
+
+	public List<Caso> doQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, float priceWeight, String businessType,
+			String location, double pOIWeight) {
+
+		try {
+			this.casesRetriever.configure();
+			this.casesRetriever.setWeights(priceWeight, pOIWeight);
+			QueryConfig queryConfigurer = new QueryConfig();
+			queryConfigurer.setQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, 
+					bedroom, suite, bathroom, type, price, businessType, location);
+			CBRQuery query = queryConfigurer.getQuery(); 
+			this.casesRetriever.preCycle();
+			this.casesRetriever.cycle(query);
+			Collection<RetrievalResult> results = this.casesRetriever.getResults();
+			List<Caso> result = new ArrayList<Caso>();
+			for (RetrievalResult case1 : results) {
+				result.add(this.getCaso((ImmobileSolution)case1.get_case().getSolution()));
+			}
+			return result;
+		} catch (ExecutionException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
 }
