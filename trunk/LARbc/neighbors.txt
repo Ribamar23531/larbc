@@ -1,0 +1,112 @@
+Acácio Figueirêdo
+Alto Branco
+Araxá
+Bairro das Cidades
+Bairro das Nações
+Bairro Universitário
+Bela Vista
+Bodocongó
+Castelo Branco
+Catolé
+Centenário
+Centro
+Conceição
+Cruzeiro
+Cuités
+Dinamérica
+Distrito Industrial
+Estação Velha
+Itararé
+Jardim Continental
+Jardim Paulistano
+Jardim Tavares
+Jeremias
+José Pinheiro
+Lauritzen
+Liberdade
+Louzeiro
+Malvinas
+Mirante
+Monte Castelo
+Monte Santo
+Nova Brasília
+Novo Bodocongó
+Palmeira
+Pedregal
+Prata
+Presidente Médice
+Quarenta
+Ramadinha
+Sandra Cavalcante
+Santa Cruz
+Santa Rosa
+Santa Terezinha
+Santo Antônio
+São José
+Serrotão
+Tambor
+Três Irmãs
+Velame
+Vila Cabral
+#
+Centro#Prata#2
+Prata#Bela Vista#2
+Bela Vista#Pedregal#2
+Bela Vista#Bairro Universitário#2
+Bela Vista#Centenário#2
+Prata#Centenário#3
+Centenário#Bodocongó#2
+Centenário#Quarenta#3
+Centenário#Santa Rosa#4
+Bairro Universitário#Bodocongó#2
+Bairro Universitário#Araxá#2
+Bairro Universitário#Novo Bodocongó#2
+Bodocongó#Ramadinha#2
+Bodocongó#Malvinas#3
+Bodocongó#Dinamérica#3
+Dinamérica#Malvinas#2
+Dinamérica#Santa Cruz#2
+Malvinas#Serrotão#4
+Ramadinha#Serrotão#3
+Quarenta#Santa Rosa#2
+Centro#José Pinheiro#3
+Centro#Santo Antônio#2
+José Pinheiro#Santo Antônio#2
+José Pinheiro#Monte Castelo#2
+José Pinheiro#Mirante#2
+Monte Castelo#Castelo Branco#2
+Monte Castelo#Nova Brasília#3
+Mirante#Santa Terezinha#3
+Centro#Catolé#3
+Centro#São José#2
+Centro#Estação Velha#2
+São José#Liberdade#2
+Catolé#Sandra Cavalcante#2
+Catolé#Tambor#2
+Catolé#Itararé#2
+Sandra Cavalcante#Vila Cabral#3
+Vila Cabral#Santa Terezinha#4
+Liberdade#Jardim Paulistano#3
+Liberdade#Cruzeiro#2
+Jardim Paulistano#Cruzeiro#2
+Itararé#Distrito Industrial#2
+Tambor#Distrito Industrial#2
+Jardim Paulistano#Distrito Industrial#2
+Cruzeiro#Distrito Industrial#2
+Distrito Industrial#Velame#4
+Cruzeiro#Presidente Médice#3
+Presidente Médice#Três Irmãs#4
+Presidente Médice#Acácio Figueirêdo#3
+Três Irmãs#Bairro das Cidades#3
+Centro#Lauritzen#2
+Lauritzen#Conceição#2
+Lauritzen#Alto Branco#2
+Lauritzen#Jardim Tavares#2
+Conceição#Louzeiro#3
+Conceição#Palmeira#3
+Louzeiro#Jardim Continental#3
+Alto Branco#Bairro das Nações#4
+Palmeira#Jeremias#2
+Palmeira#Monte Santo#2
+Jeremias#Araxá#2
+Araxá#Cuités#3
