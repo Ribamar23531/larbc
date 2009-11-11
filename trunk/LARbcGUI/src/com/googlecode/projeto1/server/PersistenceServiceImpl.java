@@ -483,25 +483,27 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		p.setIdPoint(point.getIdPoint());
 		p.setObs(point.getObs());
 		p.setType(point.getType().toString());
-		p.setLocation(point.getLocation());
+		p.setLatitude(point.getLatitude());
+		p.setLongitude(point.getLongitude());
 		return p;
 	}
 	
 	private PointBean getPointBean(Point point){
 		PointBean pb = new PointBean();
 		pb.setIdPoint(point.getIdPoint());
-		pb.setObs(point.getObs());
-		pb.setLocation(point.getLocation());
+		pb.setObs(point.getObs());		
+		double latitude = point.getLatitude();
+		double longitude = point.getLongitude();
 		if(point.getType().equals(Type.SCHOOL.toString())){
-			return new PointBean(Type.SCHOOL, point.getLocation());
+			return new PointBean(Type.SCHOOL, latitude, longitude);
 		}else if(point.getType().equals(Type.UNIVERSITY.toString())){
-			return new PointBean(Type.UNIVERSITY, point.getLocation());
+			return new PointBean(Type.UNIVERSITY, latitude, longitude);
 		}else if(point.getType().equals(Type.SHOPPING_CENTER.toString())){
-			return new PointBean(Type.SHOPPING_CENTER, point.getLocation());
+			return new PointBean(Type.SHOPPING_CENTER, latitude, longitude);
 		}else if(point.getType().equals(Type.DOWNTOWN.toString())){
-			return new PointBean(Type.DOWNTOWN, point.getLocation());
+			return new PointBean(Type.DOWNTOWN, latitude, longitude);
 		}
-		return new PointBean(Type.UNDEFINED, point.getLocation());
+		return new PointBean(Type.UNDEFINED, latitude, longitude);
 	}
 	
 	private Line getLine(LineBean line) {
@@ -511,11 +513,11 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		l.setObs(line.getObs());
 		
 		List<Vertex> vertexes = new ArrayList<Vertex>();
-		List<String> locations = line.getLocation();
-		int index = 0;
-		for (String location : locations) {						
-			vertexes.add(new Vertex(line.getIdLine(), index, location));
-			index++;
+		List<Double> latitudes = line.getLatitudes();
+		List<Double> longitudes = line.getLongitudes();
+		
+		for (int i = 0; i < latitudes.size(); i++) {				
+			vertexes.add(new Vertex(line.getIdLine(), i, latitudes.get(i), longitudes.get(i)));			
 		}
 		l.setVertexes(vertexes);
 		return l;
@@ -532,11 +534,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		lineBean.setObs(line.getObs());
 		
 		List<Vertex> vertexes = line.getVertexes();
-		List<String> location = new ArrayList<String>(vertexes.size());
+		List<Double> latitudes = new ArrayList<Double>(vertexes.size());
+		List<Double> longitudes = new ArrayList<Double>(vertexes.size());
 		for (Vertex vertex : vertexes) {
-			location.add((int) vertex.getIndex(), vertex.getLocation());
+			int index = (int) vertex.getIndex();
+			latitudes.add(index, vertex.getLatitude());
+			longitudes.add(index, vertex.getLongitude());
 		}
-		lineBean.setLocation(location);
+		lineBean.setLatitudes(latitudes);
+		lineBean.setLongitudes(longitudes);
 		return lineBean;
 	}
 	
@@ -551,11 +557,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		polygonBean.setObs(polygon.getObs());
 		
 		List<Vertex> vertexes = polygon.getVertexes();
-		List<String> location = new ArrayList<String>(vertexes.size());
+		List<Double> latitudes = new ArrayList<Double>(vertexes.size());
+		List<Double> longitudes = new ArrayList<Double>(vertexes.size());
 		for (Vertex vertex : vertexes) {
-			location.add((int) vertex.getIndex(), vertex.getLocation());
+			int index = (int) vertex.getIndex();
+			latitudes.add(index, vertex.getLatitude());
+			longitudes.add(index, vertex.getLongitude());
 		}
-		polygonBean.setLocation(location);
+		polygonBean.setLatitudes(latitudes);
+		polygonBean.setLongitudes(longitudes);
 		return polygonBean;
 	}
 	
@@ -566,11 +576,11 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		p.setObs(polygonBean.getObs());
 		
 		List<Vertex> vertexes = new ArrayList<Vertex>();
-		List<String> locations = polygonBean.getLocation();
-		int index = 0;
-		for (String location : locations) {						
-			vertexes.add(new Vertex(polygonBean.getIdPolygon(), index, location));
-			index++;
+		List<Double> latitudes = polygonBean.getLatitudes();
+		List<Double> longitudes = polygonBean.getLongitudes();
+		
+		for (int i = 0; i < latitudes.size(); i++) {				
+			vertexes.add(new Vertex(polygonBean.getIdPolygon(), i, latitudes.get(i), longitudes.get(i)));			
 		}
 		p.setVertexes(vertexes);
 		return p;

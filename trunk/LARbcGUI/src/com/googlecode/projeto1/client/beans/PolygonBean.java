@@ -12,14 +12,16 @@ public class PolygonBean implements Serializable{
 	private long idPolygon;
 	private Type type;
 	private String obs;
-	private List<String> location;
+	private List<Double> latitudes;
+	private List<Double> longitudes;
 	
 	public PolygonBean(){}
 	
-	public PolygonBean(Type type, List<String> location){
+	public PolygonBean(Type type, List<Double> latitudes, List<Double> longitudes){
 		this.type = type;
 		this.setObs("");
-		this.setLocation(location);
+		this.setLatitudes(latitudes);
+		this.setLongitudes(longitudes);
 	}
 
 	public void setIdPolygon(long idPolygon) {
@@ -38,20 +40,28 @@ public class PolygonBean implements Serializable{
 		return obs;
 	}
 
-	public void setLocation(List<String> location) {
-		this.location = location;
-	}
-
-	public List<String> getLocation() {
-		return location;
-	}
-
 	public void setType(Type type) {
 		this.type = type;
 	}
 
 	public Type getType() {
 		return type;
+	}
+
+	public void setLatitudes(List<Double> latitudes) {
+		this.latitudes = latitudes;
+	}
+
+	public List<Double> getLatitudes() {
+		return latitudes;
+	}
+
+	public void setLongitudes(List<Double> longitudes) {
+		this.longitudes = longitudes;
+	}
+
+	public List<Double> getLongitudes() {
+		return longitudes;
 	}
 
 }

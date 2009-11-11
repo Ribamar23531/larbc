@@ -103,11 +103,13 @@ public class POILineMap extends MappingWindow{
 	}
 	
 	private LineBean getLineBean() {
-		List<String> points = new ArrayList<String>();
+		List<Double> latitudes = new ArrayList<Double>();
+		List<Double> longitudes = new ArrayList<Double>();
 		for (int i = 0; i < line.getVertexCount(); i++) {
-			points.add(line.getVertex(i).toString());
+			latitudes.add(line.getVertex(i).getLatitude());
+			longitudes.add(line.getVertex(i).getLongitude());
 		}
-		return new LineBean(lineType, points);
+		return new LineBean(lineType, latitudes, longitudes);
 	}
 
 	private void saveLine() {
@@ -135,11 +137,11 @@ public class POILineMap extends MappingWindow{
 			public void onSuccess(List<LineBean> lines) {
 				for (LineBean line : lines) {
 					if(line.getType() == lineType){
-						LatLng[] points = new LatLng[line.getLocation().size()];
-						int index = 0;
-						for (String location : line.getLocation()) {
-							points[index] = getPoint(location);
-							index++;
+						List<Double> latitudes = line.getLatitudes();
+						List<Double> longitudes = line.getLongitudes();
+						LatLng[] points = new LatLng[latitudes.size()];						
+						for (int i = 0; i < latitudes.size(); i++) {					
+							points[i] = LatLng.newInstance(latitudes.get(i), longitudes.get(i));							
 						}
 						Polyline p = new Polyline(points);
 						p.setEditingEnabled(false);
@@ -155,13 +157,6 @@ public class POILineMap extends MappingWindow{
 			}
 		});
 		
-	}
-	
-	private LatLng getPoint(String location){
-		String[] aux = location.split(",");
-		double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
-		double lng = Double.parseDouble(aux[1].substring(1, aux[1].length() - 1));
-		return LatLng.newInstance(lat, lng);
-	}
+	}	
 
 }
