@@ -11,14 +11,16 @@ public class PointBean implements Serializable{
 	private long idPoint;
 	private Type type;
 	private String obs;
-	private String location;
+	private double latitude;
+	private double longitude;
 	
 	public PointBean(){}
 	
-	public PointBean(Type type, String location){
+	public PointBean(Type type, double latitude, double longitude){
 		this.setObs("");
 		this.type = type;
-		this.setLocation(location);
+		this.setLatitude(latitude);
+		this.setLongitude(longitude);
 	}
 
 	public void setIdPoint(long idPoint) {
@@ -27,14 +29,6 @@ public class PointBean implements Serializable{
 
 	public long getIdPoint() {
 		return idPoint;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getLocation() {
-		return location;
 	}
 
 	public void setObs(String obs) {
@@ -51,6 +45,22 @@ public class PointBean implements Serializable{
 
 	public Type getType() {
 		return type;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
 	}
 
 }

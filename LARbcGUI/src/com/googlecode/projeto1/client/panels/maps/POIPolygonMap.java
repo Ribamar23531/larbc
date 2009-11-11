@@ -84,7 +84,7 @@ public class POIPolygonMap extends MappingWindow{
 	}
 	
 	private void savePolygon() {
-		PERSISTENCE_SERVICE.savePolygon(getPolygon(), new AsyncCallback<Boolean>() {
+		PERSISTENCE_SERVICE.savePolygon(getPolygonBean(), new AsyncCallback<Boolean>() {
 			
 			public void onSuccess(Boolean result) {
 				if(result.booleanValue()){
@@ -108,11 +108,11 @@ public class POIPolygonMap extends MappingWindow{
 			public void onSuccess(List<PolygonBean> polygons) {
 				for (PolygonBean polygon : polygons) {
 					if(polygon.getType() == polygonType){
-						LatLng[] points = new LatLng[polygon.getLocation().size()];
-						int index = 0;
-						for (String location : polygon.getLocation()) {
-							points[index] = getPoint(location);
-							index++;
+						List<Double> latitudes = polygon.getLatitudes();
+						List<Double> longitudes = polygon.getLongitudes();
+						LatLng[] points = new LatLng[latitudes.size()];
+						for (int i = 0; i < latitudes.size(); i++) {					
+							points[i] = LatLng.newInstance(latitudes.get(i), longitudes.get(i));							
 						}
 						Polygon p = new Polygon(points);
 						p.setEditingEnabled(false);
@@ -129,20 +129,15 @@ public class POIPolygonMap extends MappingWindow{
 		});
 		
 	}
-	
-	private LatLng getPoint(String location){
-		String[] aux = location.split(",");
-		double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
-		double lng = Double.parseDouble(aux[1].substring(1, aux[1].length() - 1));
-		return LatLng.newInstance(lat, lng);
-	}
-	
-	private PolygonBean getPolygon() {
-		List<String> points = new ArrayList<String>();
+
+	private PolygonBean getPolygonBean() {
+		List<Double> latitudes = new ArrayList<Double>();
+		List<Double> longitudes = new ArrayList<Double>();
 		for (int i = 0; i < polygon.getVertexCount(); i++) {
-			points.add(polygon.getVertex(i).toString());
+			latitudes.add(polygon.getVertex(i).getLatitude());
+			longitudes.add(polygon.getVertex(i).getLongitude());
 		}
-		return new PolygonBean(polygonType, points);
+		return new PolygonBean(polygonType, latitudes, longitudes);
 	}
 
 	private Button getUndoButton() {

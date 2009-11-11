@@ -116,7 +116,7 @@ public class POIPointMap extends MappingWindow{
 	}		
 	
 	private void savePoint() {
-		PERSISTENCE_SERVICE.savePoint(new PointBean(pointType, marker.getLatLng().toString()), new AsyncCallback<Boolean>() {
+		PERSISTENCE_SERVICE.savePoint(getPointBean(), new AsyncCallback<Boolean>() {
 			
 			public void onSuccess(Boolean success) {
 				if(success.booleanValue()){
@@ -135,14 +135,20 @@ public class POIPointMap extends MappingWindow{
 		
 	}
 	
+	private PointBean getPointBean() {
+		double latitude = marker.getLatLng().getLatitude();
+		double longitude = marker.getLatLng().getLongitude();		
+		return new PointBean(pointType, latitude, longitude);
+	}
+
 	private void loadPoints() {
 		PERSISTENCE_SERVICE.getPoints(new AsyncCallback<List<PointBean>>() {
 			
 			public void onSuccess(List<PointBean> points) {
 				for (PointBean pointBean : points) {
 					if(pointBean.getType() == pointType){
-						String location = pointBean.getLocation();					
-						Marker m = new Marker(getPoint(location), getOptions());
+						LatLng point = LatLng.newInstance(pointBean.getLatitude(), pointBean.getLongitude());
+						Marker m = new Marker(point, getOptions());
 //						m.setImage(Util.ESCOLA_PATH);					
 						myMap.addOverlay(m);						
 					}
@@ -162,13 +168,6 @@ public class POIPointMap extends MappingWindow{
 			}
 		});
 		
-	}
-	
-	private LatLng getPoint(String location){
-		String[] aux = location.split(",");
-		double lat = Double.parseDouble(aux[0].substring(1, aux[0].length()));
-		double lng = Double.parseDouble(aux[1].substring(1, aux[0].length()));
-		return LatLng.newInstance(lat, lng);
-	}
+	}	
 
 }
