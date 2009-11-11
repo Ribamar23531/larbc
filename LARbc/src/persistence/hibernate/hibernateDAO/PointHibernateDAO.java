@@ -15,10 +15,22 @@ public class PointHibernateDAO extends HibernateDAO implements PointDAO {
 
 	public PointHibernateDAO(boolean testing) {
 		super(testing);
+		createDowntownIfNeeded();
 	}
 	
 	public PointHibernateDAO(){
 		super(false);
+		createDowntownIfNeeded();
+	}
+
+	private void createDowntownIfNeeded() {
+		Point downtown = new Point("(-7.219900245183879, -35.88412642478943)");
+		downtown.setObs("Centro comercial");
+		downtown.setType("DOWNTOWN");
+		try {
+			savePoint(downtown);
+		} catch (PointAlreadySavedException e) {}
+
 	}
 
 	@SuppressWarnings("unchecked")
