@@ -48,7 +48,7 @@ public class POIPointMap extends MappingWindow{
 	private void addMapEvent() {		
 		myMap.addMapClickHandler(new MapClickHandler() {
 			public void onClick(final MapClickEvent clickEvent) {
-				if(marker == null){
+				if(marker == null){					
 					marker = getMarker(clickEvent.getLatLng());					
 					myMap.addOverlay(marker);
 				}
