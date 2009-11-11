@@ -21,8 +21,8 @@ public class Vertex {
 	
 	public Vertex(){}
 	
-	public Vertex(long idVertex, int index, String location){
-		this.myComposedKey = new MyComposedKey(idVertex, index, location);
+	public Vertex(long idVertex, int index, double latitude, double longitude){
+		this.myComposedKey = new MyComposedKey(idVertex, index, latitude, longitude);
 	}
 	
 	public void setMyComposedKey(MyComposedKey myComposedKey) {
@@ -49,12 +49,20 @@ public class Vertex {
 		return myComposedKey.index;
 	}
 
-	public void setLocation(String location) {
-		this.myComposedKey.location = location;
+	public void setLatitude(double latitude){
+		this.myComposedKey.setLatitude(latitude);
 	}
-
-	public String getLocation() {
-		return myComposedKey.location;
+	
+	public double getLatitude(){
+		return this.myComposedKey.getLatitude();
+	}
+	
+	public void setLongitude(double longitude){
+		this.myComposedKey.setLongitude(longitude);
+	}
+	
+	public double getLongitude(){
+		return this.myComposedKey.getLongitude();
 	}
 	
 	@Embeddable	
@@ -73,14 +81,18 @@ public class Vertex {
 		private long index;
 
 		@Column(updatable = true, nullable = false)
-		private String location;
+		private double latitude;
+		
+		@Column(updatable = true, nullable = false)
+		private double longitude;
 		
 		public MyComposedKey(){}
 		
-		public MyComposedKey(long idVertex, int index, String location){
+		public MyComposedKey(long idVertex, int index, double latitude, double longitude){
 			this.idVertex = idVertex;
 			this.index = index;
-			this.location = location;
+			this.setLatitude(latitude);
+			this.setLongitude(longitude);
 		}
 
 		public void setIdVertex(long idVertex) {
@@ -98,15 +110,22 @@ public class Vertex {
 		public long getIndex() {
 			return index;
 		}
-		
-		public void setLocation(String location) {
-			this.location = location;
+
+		public void setLatitude(double latitude) {
+			this.latitude = latitude;
 		}
 
-		public String getLocation() {
-			return location;
+		public double getLatitude() {
+			return latitude;
 		}
 
+		public void setLongitude(double longitude) {
+			this.longitude = longitude;
+		}
+
+		public double getLongitude() {
+			return longitude;
+		}
 		
 	}
 
