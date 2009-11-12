@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.event.MapClickHandler;
+import com.google.gwt.maps.client.event.MarkerClickHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
@@ -31,7 +32,8 @@ public class POIPointMap extends MappingWindow{
 	
 	private Marker marker;
 	private Type pointType;
-	private CreatePointSubPanel createPointSubPanel;
+	private PointMapSubPanel pointMapSubPanel;
+	private PointBean clickedPointBean;
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
@@ -39,16 +41,28 @@ public class POIPointMap extends MappingWindow{
 		super();
 		myMap.clearOverlays();
 		this.marker = null;
+		this.clickedPointBean = null;
 		this.pointType = pointType;
-		this.setTitle("Pontos de Interesse");
+		this.setTitle("Pontos de Interesse");		
+	}
+	
+	public void setSavePointMap(){
 		this.myMap.setSize("625px", "370px");
 		this.setSize("650px", "590px");
-		createPointSubPanel = new CreatePointSubPanel(getSaveButton(), getRemoveButton());
-		this.add(createPointSubPanel);
-		this.setResizable(true);
+		pointMapSubPanel = new PointMapSubPanel(getSaveButton(), getRemoveButton());
+		this.add(pointMapSubPanel);
 		this.addMapEvent();
-		loadPoints();
 		setButtonsEnabled(false);
+		loadPoints1();
+	}
+	
+	public void setRemovePointMap(){
+		this.myMap.setSize("625px", "370px");
+		this.setSize("650px", "590px");
+		pointMapSubPanel = new PointMapSubPanel(getRemoveButton());
+		this.add(pointMapSubPanel);
+		setButtonsEnabled(false);
+		loadPoints2();
 	}
 
 	private void addMapEvent() {		
@@ -115,8 +129,8 @@ public class POIPointMap extends MappingWindow{
 				if(marker == null){
 					MessageBox.alert("Favor escolha uma posição ou feche a janela");
 				}else{
-					String name = createPointSubPanel.getName();
-					String obs = createPointSubPanel.getObs();
+					String name = pointMapSubPanel.getName();
+					String obs = pointMapSubPanel.getObs();
 					if(name.equals("")){
 						MessageBox.alert("Favor preencher o campo nome");
 					}else{
@@ -162,8 +176,18 @@ public class POIPointMap extends MappingWindow{
 									myMap.removeOverlay(marker);
 									POIPointMap.this.marker = null;
 									setButtonsEnabled(false);
+									pointMapSubPanel.clearName();
+									pointMapSubPanel.clearObs();
+									if(clickedPointBean != null){
+										removePointBean();
+									}
 								}
 
+							}
+
+							private void removePointBean() {
+								System.out.println("Faz de conta que removeu");
+								clickedPointBean = null;								
 							}							
 						});
 					}
@@ -175,8 +199,8 @@ public class POIPointMap extends MappingWindow{
 	}
 	
 	private void setButtonsEnabled(boolean enabled){
-		createPointSubPanel.setSaveButtonEnabled(enabled);
-		createPointSubPanel.setRemoveButtonEnabled(enabled);
+		pointMapSubPanel.setSaveButtonEnabled(enabled);
+		pointMapSubPanel.setRemoveButtonEnabled(enabled);
 	}
 	
 	private void savePoint(String name, String obs) {
@@ -205,7 +229,7 @@ public class POIPointMap extends MappingWindow{
 		return new PointBean(name, obs, pointType, latitude, longitude);
 	}
 
-	private void loadPoints() {
+	private void loadPoints1() {
 		PERSISTENCE_SERVICE.getPoints(new AsyncCallback<List<PointBean>>() {
 			
 			public void onSuccess(List<PointBean> points) {
@@ -220,6 +244,50 @@ public class POIPointMap extends MappingWindow{
 				
 			}
 			
+			private MarkerOptions getOptions() {
+				MarkerOptions options = MarkerOptions.newInstance();
+//				options.setIcon(Icon.newInstance(Util.ESCOLA_PATH));
+				return options;
+			}
+
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Ouve um erro ao salvar. Erro: " + arg0);
+				
+			}
+		});
+		
+	}
+	
+	private void loadPoints2() {
+		PERSISTENCE_SERVICE.getPoints(new AsyncCallback<List<PointBean>>() {
+			
+			public void onSuccess(List<PointBean> points) {
+				for (PointBean pointBean : points) {
+					if(pointBean.getType() == pointType){
+						LatLng point = LatLng.newInstance(pointBean.getLatitude(), pointBean.getLongitude());
+						Marker m = new Marker(point, getOptions());
+						m.addMarkerClickHandler(getMarkerClickHandler(pointBean, m));
+//						m.setImage(Util.ESCOLA_PATH);					
+						myMap.addOverlay(m);						
+					}
+				}
+				
+			}
+			
+			private MarkerClickHandler getMarkerClickHandler(final PointBean pointBean, final Marker m) {
+				return new MarkerClickHandler(){
+
+					public void onClick(MarkerClickEvent event) {
+						marker = m;
+						pointMapSubPanel.setName(pointBean.getName());
+						pointMapSubPanel.setObs(pointBean.getObs());
+						setButtonsEnabled(true);
+						clickedPointBean = pointBean;
+					}
+					
+				};				
+			}
+
 			private MarkerOptions getOptions() {
 				MarkerOptions options = MarkerOptions.newInstance();
 //				options.setIcon(Icon.newInstance(Util.ESCOLA_PATH));

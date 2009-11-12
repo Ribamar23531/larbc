@@ -54,7 +54,10 @@ public class PoiTab extends AbsolutePanel{
 	}
 	
 	private void showPointKindMap(Type type, Widget widget){
-		new POIPointMap(type).show(widget.getElement());		
+		POIPointMap map = new POIPointMap(type);
+		map.setSavePointMap();
+//		map.setRemovePointMap();
+		map.show(widget.getElement());		
 	}
 	
 	private void showLineKindMap(Type type, Widget widget){
