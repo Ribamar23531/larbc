@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.widgets.Panel;
 
-public class CreatePointSubPanel extends Panel{
+public class PointMapSubPanel extends Panel{
 	
 	private AbsolutePanel absolutePanel;
 	private TextBox nameTextBox;
@@ -15,13 +15,34 @@ public class CreatePointSubPanel extends Panel{
 	private Button saveButton;
 	private Button removeButton;
 	
-	public CreatePointSubPanel(Button saveButton, Button removeButton){
+	public PointMapSubPanel(Button saveButton, Button removeButton){
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setSize("613px", "167px");
 		
+		loadComponents();
+		
 		this.saveButton = saveButton;
-		this.removeButton = removeButton;
+		this.removeButton = removeButton;	
 
+		absolutePanel.add(saveButton, 415, 127);
+		absolutePanel.add(removeButton, 499, 127);		
+	}
+	
+	public PointMapSubPanel(Button removeButton){
+		absolutePanel = new AbsolutePanel();
+		absolutePanel.setSize("613px", "167px");
+		
+		loadComponents();
+		
+		this.saveButton = new Button();//apenas para evitar null pointer exception
+		this.removeButton = removeButton;
+		
+		absolutePanel.add(removeButton, 499, 127);
+
+		
+	}
+	
+	private void loadComponents(){
 		Label nameLabel = new Label("Nome:");
 		absolutePanel.add(nameLabel, 5, 5);
 
@@ -35,11 +56,7 @@ public class CreatePointSubPanel extends Panel{
 		obsTextArea = new TextArea();
 		absolutePanel.add(obsTextArea, 56, 28);
 		obsTextArea.setSize("553px", "94px");
-
-		absolutePanel.add(saveButton, 415, 127);
-
-		absolutePanel.add(removeButton, 499, 127);
-
+		
 		this.add(absolutePanel);
 		this.setFrame(true);
 	}
@@ -54,6 +71,14 @@ public class CreatePointSubPanel extends Panel{
 	
 	public void clearName(){
 		this.nameTextBox.setText("");
+	}
+	
+	public void setName(String name){
+		this.nameTextBox.setText(name);
+	}
+	
+	public void setObs(String obs){
+		this.obsTextArea.setText(obs);
 	}
 	
 	public void clearObs(){
