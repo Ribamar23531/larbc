@@ -10,14 +10,16 @@ public class PointBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long idPoint;
 	private Type type;
+	private String name;
 	private String obs;
 	private double latitude;
 	private double longitude;
 	
 	public PointBean(){}
 	
-	public PointBean(Type type, double latitude, double longitude){
-		this.setObs("");
+	public PointBean(String name, String obs, Type type, double latitude, double longitude){
+		this.setName(name);
+		this.obs = obs;
 		this.type = type;
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
@@ -61,6 +63,14 @@ public class PointBean implements Serializable{
 
 	public double getLongitude() {
 		return longitude;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

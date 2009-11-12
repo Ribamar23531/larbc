@@ -20,7 +20,7 @@ public class Point {
 	@Column(name = "id_point", updatable = false, nullable = false)
 	private long idPoint;
 	@Column(updatable = true, nullable = false)
-	private String type;
+	private String type;	
 	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Column(updatable = true, nullable = false)
@@ -76,6 +76,6 @@ public class Point {
 
 	public double getLongitude() {
 		return longitude;
-	}
+	}	
 	
 }
