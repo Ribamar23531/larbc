@@ -6,6 +6,7 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.layout.VerticalLayout;
 
 /**
  * @author Alcione Pinheiro
@@ -28,6 +29,7 @@ public abstract class MappingWindow extends Window{
 		this.setCloseAction(Window.HIDE);		
 		this.setResizable(false);
 		this.setSize("650px", "500px");
+		this.setLayout(new VerticalLayout(2));
 		getMap();
 		RootPanel mapPanel = RootPanel.get("map_div");
 		mapPanel.clear();
@@ -37,7 +39,7 @@ public abstract class MappingWindow extends Window{
 
 	private void getMap() {
 		this.myMap = new MapWidget(CAMPINA_GRANDE_POINT, ZOOM);
-		this.myMap.setSize("630px", "500px");
+		this.myMap.setSize("625px", "418px");
 		this.myMap.setUIToDefault();
 		this.myMap.setContinuousZoom(true);
 		this.myMap.setScrollWheelZoomEnabled(true);

@@ -481,6 +481,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	private Point getPoint(PointBean point) {
 		Point p = new Point();
 		p.setIdPoint(point.getIdPoint());
+//		p.setPointName(point.getName());
 		p.setObs(point.getObs());
 		p.setType(point.getType().toString());
 		p.setLatitude(point.getLatitude());
@@ -495,15 +496,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		double latitude = point.getLatitude();
 		double longitude = point.getLongitude();
 		if(point.getType().equals(Type.SCHOOL.toString())){
-			return new PointBean(Type.SCHOOL, latitude, longitude);
+			return new PointBean("", point.getObs(), Type.SCHOOL, latitude, longitude);
 		}else if(point.getType().equals(Type.UNIVERSITY.toString())){
-			return new PointBean(Type.UNIVERSITY, latitude, longitude);
+			return new PointBean("", point.getObs(), Type.UNIVERSITY, latitude, longitude);
 		}else if(point.getType().equals(Type.SHOPPING_CENTER.toString())){
-			return new PointBean(Type.SHOPPING_CENTER, latitude, longitude);
+			return new PointBean("", point.getObs(), Type.SHOPPING_CENTER, latitude, longitude);
 		}else if(point.getType().equals(Type.DOWNTOWN.toString())){
-			return new PointBean(Type.DOWNTOWN, latitude, longitude);
+			return new PointBean("", point.getObs(), Type.DOWNTOWN, latitude, longitude);
 		}
-		return new PointBean(Type.UNDEFINED, latitude, longitude);
+		return new PointBean("", point.getObs(), Type.UNDEFINED, latitude, longitude);
 	}
 	
 	private Line getLine(LineBean line) {

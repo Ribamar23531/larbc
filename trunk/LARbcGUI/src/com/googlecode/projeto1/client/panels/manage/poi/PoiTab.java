@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.panels.maps.POILineMap;
-import com.googlecode.projeto1.client.panels.maps.POIPointMap;
 import com.googlecode.projeto1.client.panels.maps.POIPolygonMap;
+import com.googlecode.projeto1.client.panels.maps.point.POIPointMap;
 import com.gwtext.client.widgets.MessageBox;
 
 public class PoiTab extends AbsolutePanel{
