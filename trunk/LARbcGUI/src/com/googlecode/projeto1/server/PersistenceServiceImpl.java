@@ -32,6 +32,7 @@ import exceptions.FotoNotFoundException;
 import exceptions.LoginAlreadyRegisteredException;
 import exceptions.PermissionDeniedException;
 import exceptions.PointAlreadySavedException;
+import exceptions.PointNotFoundException;
 import facade.SystemFacade;
 import facade.SystemManager;
 
@@ -481,30 +482,36 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	private Point getPoint(PointBean point) {
 		Point p = new Point();
 		p.setIdPoint(point.getIdPoint());
-//		p.setPointName(point.getName());
+		p.setName(point.getName());
 		p.setObs(point.getObs());
 		p.setType(point.getType().toString());
-		p.setLatitude(point.getLatitude());
-		p.setLongitude(point.getLongitude());
+		p.setLatitudeStr(point.getLatitude());
+		p.setLongitudeStr(point.getLongitude());
 		return p;
 	}
 	
 	private PointBean getPointBean(Point point){
-		PointBean pb = new PointBean();
-		pb.setIdPoint(point.getIdPoint());
-		pb.setObs(point.getObs());		
-		double latitude = point.getLatitude();
-		double longitude = point.getLongitude();
+		PointBean pointBean = new PointBean();
+		pointBean.setIdPoint(point.getIdPoint());
+		pointBean.setName(point.getName());
+		pointBean.setObs(point.getObs());
+		pointBean.setLatitude(point.getLatitude());
+		pointBean.setLongitude(point.getLongitude());		
 		if(point.getType().equals(Type.SCHOOL.toString())){
-			return new PointBean("", point.getObs(), Type.SCHOOL, latitude, longitude);
+			pointBean.setType(Type.SCHOOL);
+			return pointBean;
 		}else if(point.getType().equals(Type.UNIVERSITY.toString())){
-			return new PointBean("", point.getObs(), Type.UNIVERSITY, latitude, longitude);
+			pointBean.setType(Type.UNIVERSITY);
+			return pointBean;
 		}else if(point.getType().equals(Type.SHOPPING_CENTER.toString())){
-			return new PointBean("", point.getObs(), Type.SHOPPING_CENTER, latitude, longitude);
+			pointBean.setType(Type.SHOPPING_CENTER);
+			return pointBean;
 		}else if(point.getType().equals(Type.DOWNTOWN.toString())){
-			return new PointBean("", point.getObs(), Type.DOWNTOWN, latitude, longitude);
+			pointBean.setType(Type.DOWNTOWN);
+			return pointBean;
 		}
-		return new PointBean("", point.getObs(), Type.UNDEFINED, latitude, longitude);
+		pointBean.setType(Type.UNDEFINED);
+		return pointBean;
 	}
 	
 	private Line getLine(LineBean line) {
@@ -607,6 +614,16 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return true;
 	}
+	
+	public boolean removePoint(PointBean point) {
+		try {
+			this.systemManager.removePoint(getPoint(point));
+		} catch (PointNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	public List<PointBean> getPoints() {
 		List<Point> points = this.systemManager.getPoints();
@@ -652,6 +669,6 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			polygonBeans.add(getPolygonBean(polygon));
 		}
 		return polygonBeans;
-	}
+	}	
 	
 }

@@ -77,6 +77,8 @@ public interface PersistenceServiceAsync {
 	
 	public void savePoint(PointBean point, AsyncCallback<Boolean> callback);
 	
+	public void removePoint(PointBean point, AsyncCallback<Boolean> callback);
+	
 	public void getPoints(AsyncCallback<List<PointBean>> callback);
 	
 	public void saveLine(LineBean line, AsyncCallback<Boolean> callback);

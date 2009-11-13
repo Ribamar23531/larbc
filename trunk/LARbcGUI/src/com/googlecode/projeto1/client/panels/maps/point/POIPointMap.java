@@ -39,7 +39,7 @@ public class POIPointMap extends MappingWindow{
 	
 	public POIPointMap(Type pointType){
 		super();
-		myMap.clearOverlays();
+		myMap.clearOverlays();		
 		this.marker = null;
 		this.clickedPointBean = null;
 		this.pointType = pointType;
@@ -172,23 +172,14 @@ public class POIPointMap extends MappingWindow{
 								new NameValuePair("no", "Não") });
 						setCallback(new MessageBox.PromptCallback() {
 							public void execute(String btnID, String text) {
-								if (btnID.equals("yes")) {
-									myMap.removeOverlay(marker);
-									POIPointMap.this.marker = null;
-									setButtonsEnabled(false);
-									pointMapSubPanel.clearName();
-									pointMapSubPanel.clearObs();
+								if (btnID.equals("yes")) {									
 									if(clickedPointBean != null){
-										removePointBean();
+										removePoint();
 									}
 								}
 
 							}
-
-							private void removePointBean() {
-								System.out.println("Faz de conta que removeu");
-								clickedPointBean = null;								
-							}							
+																				
 						});
 					}
 				});		
@@ -217,6 +208,32 @@ public class POIPointMap extends MappingWindow{
 			
 			public void onFailure(Throwable arg0) {
 				MessageBox.alert("Ouve um erro ao salvar. Erro: " + arg0);
+				
+			}
+		});
+		
+	}
+	
+	private void removePoint() {
+		PERSISTENCE_SERVICE.removePoint(clickedPointBean, new AsyncCallback<Boolean>() {
+			
+			public void onSuccess(Boolean success) {
+				if(success.booleanValue()){
+					myMap.removeOverlay(marker);
+					POIPointMap.this.marker = null;
+					setButtonsEnabled(false);
+					pointMapSubPanel.clearName();
+					pointMapSubPanel.clearObs();
+					clickedPointBean = null;
+					MessageBox.alert("Ponto removido com sucesso");
+				}else{
+					MessageBox.alert("Não foi possível remover o ponto");
+				}
+				
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Ouve um erro ao remover. Erro: " + arg0);
 				
 			}
 		});

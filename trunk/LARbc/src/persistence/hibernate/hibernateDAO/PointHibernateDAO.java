@@ -25,6 +25,7 @@ public class PointHibernateDAO extends HibernateDAO implements PointDAO {
 
 	private void createDowntownIfNeeded() {
 		Point downtown = new Point(-7.219900245183879, -35.88412642478943);
+		downtown.setName("");
 		downtown.setObs("Centro comercial");
 		downtown.setType("DOWNTOWN");
 		try {
@@ -61,9 +62,10 @@ public class PointHibernateDAO extends HibernateDAO implements PointDAO {
 	private boolean exists(Point point) {
 		Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.getNamedQuery("getPoint");        
-        query.setDouble("latitude", point.getLatitude());
-        query.setDouble("longitude", point.getLatitude());
+        Query query = session.getNamedQuery("getPoint");
+        System.out.println(point.getLatitudeStr());
+        query.setString("latitude", point.getLatitudeStr());
+        query.setString("longitude", point.getLongitudeStr());
         List<Point> points = query.list();
         transaction.commit();
         session.close();
