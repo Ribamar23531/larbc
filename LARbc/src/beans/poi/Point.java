@@ -12,7 +12,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "points")
-@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.latitude = :latitude and p.longitude = :longitude")})
+@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.latitudeStr = :latitude AND p.longitudeStr = :longitude")})
 public class Point {
 	
 	@Id
@@ -20,13 +20,15 @@ public class Point {
 	@Column(name = "id_point", updatable = false, nullable = false)
 	private long idPoint;
 	@Column(updatable = true, nullable = false)
-	private String type;	
+	private String name;
+	@Column(updatable = true, nullable = false)
+	private String type;
 	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Column(updatable = true, nullable = false)
-	private double latitude;
+	private String latitudeStr;
 	@Column(updatable = true, nullable = false)
-	private double longitude;
+	private String longitudeStr;
 	
 	
 	//construtor vazio necessario pelo hibernate
@@ -34,8 +36,8 @@ public class Point {
 	
 	public Point(double latitude, double longitude){
 		this.setObs("");
-		this.setLatitude(latitude);
-		this.setLongitude(longitude);
+		this.setLatitudeStr(latitude + "");
+		this.setLongitudeStr(longitude + "");
 	}
 
 	public void setIdPoint(long idPoint) {
@@ -60,22 +62,46 @@ public class Point {
 
 	public String getType() {
 		return type;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLatitude() {
-		return latitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public double getLongitude() {
-		return longitude;
 	}	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setLatitudeStr(String latitudeStr) {
+		this.latitudeStr = latitudeStr;
+	}
+	
+	public void setLatitudeStr(double latitude) {
+		this.latitudeStr = latitude + "";
+	}
+
+	public String getLatitudeStr() {
+		return latitudeStr;
+	}
+
+	public void setLongitudeStr(String longitudeStr) {
+		this.longitudeStr = longitudeStr;
+	}
+	
+	public void setLongitudeStr(double longitude) {
+		this.longitudeStr = longitude + "";
+	}
+
+	public String getLongitudeStr() {
+		return longitudeStr;
+	}
+	
+	public double getLatitude(){
+		return Double.parseDouble(latitudeStr);
+	}
+	
+	public double getLongitude(){
+		return Double.parseDouble(longitudeStr);
+	}
 	
 }

@@ -79,6 +79,8 @@ public interface PersistenceService extends RemoteService {
 	
 	public boolean savePoint(PointBean point);
 	
+	public boolean removePoint(PointBean point);
+	
 	public List<PointBean> getPoints();
 	
 	public boolean saveLine(LineBean line);

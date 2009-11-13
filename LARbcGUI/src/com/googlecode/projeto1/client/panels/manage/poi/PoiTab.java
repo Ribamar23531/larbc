@@ -20,8 +20,7 @@ public class PoiTab extends AbsolutePanel{
 	private RadioButton rdbtnViaPrincipalDe;
 	private RadioButton rdbtnAreaVerde;
 	private RadioButton rdbtnShoppingCenter;
-	private RadioButton rdbtnSetorIndustrial;
-	private Button okButton;
+	private RadioButton rdbtnSetorIndustrial;	
 	
 	public PoiTab(){
 		super();
@@ -46,45 +45,51 @@ public class PoiTab extends AbsolutePanel{
 		this.add(rdbtnShoppingCenter, 5, 182);
 
 		rdbtnSetorIndustrial = new RadioButton("POI", "Setor Industrial");
-		this.add(rdbtnSetorIndustrial, 5, 214);
+		this.add(rdbtnSetorIndustrial, 5, 214);		
 		
-		okButton = getOkButton();
-		this.add(okButton, 5, 246);
+		this.add(getCreateButton(), 5, 246);
+		this.add(getRemoveButton(), 110, 246);
 
 	}
 	
-	private void showPointKindMap(Type type, Widget widget){
+	private void showSavePointMap(Type type, Widget widget){
 		POIPointMap map = new POIPointMap(type);
 		map.setSavePointMap();
 //		map.setRemovePointMap();
 		map.show(widget.getElement());		
 	}
 	
-	private void showLineKindMap(Type type, Widget widget){
+	private void showRemovePointMap(Type type, Widget widget){
+		POIPointMap map = new POIPointMap(type);		
+		map.setRemovePointMap();
+		map.show(widget.getElement());		
+	}
+	
+	private void showSaveLineMap(Type type, Widget widget){
 		new POILineMap(type).show(widget.getElement());
 	}
 	
-	private void showAreaKindMap(Type type, Widget widget){
+	private void showSaveAreaMap(Type type, Widget widget){
 		new POIPolygonMap(type).show(widget.getElement());
 	}
 
-	private Button getOkButton() {
-		Button button = new Button("OK");
+	private Button getCreateButton() {
+		Button button = new Button("Criar");
 		button.addClickListener(new ClickListener() {
 
 			public void onClick(Widget arg0) {				
 				if(rdbtnEscola.isChecked()){
-					showPointKindMap(Type.SCHOOL, arg0);
+					showSavePointMap(Type.SCHOOL, arg0);
 				}else if(rdbtnUniversidade.isChecked()){
-					showPointKindMap(Type.UNIVERSITY, arg0);
+					showSavePointMap(Type.UNIVERSITY, arg0);
 				}else if(rdbtnViaPrincipalDe.isChecked()){
-					showLineKindMap(Type.ACCESS_ROAD, arg0);
+					showSaveLineMap(Type.ACCESS_ROAD, arg0);
 				}else if(rdbtnShoppingCenter.isChecked()){
-					showPointKindMap(Type.SHOPPING_CENTER, arg0);
+					showSavePointMap(Type.SHOPPING_CENTER, arg0);
 				}else if(rdbtnAreaVerde.isChecked()){
-					showAreaKindMap(Type.GREEN_AREA, arg0);
+					showSaveAreaMap(Type.GREEN_AREA, arg0);
 				}else if(rdbtnSetorIndustrial.isChecked()){
-					showAreaKindMap(Type.INDUSTRIAL, arg0);
+					showSaveAreaMap(Type.INDUSTRIAL, arg0);
 				}else{
 					MessageBox.alert("Favor selecionar alguma das opções");
 				}
@@ -92,7 +97,35 @@ public class PoiTab extends AbsolutePanel{
 			}
 			
 		});
-		button.setSize("195px", "34px");
+		button.setSize("100px", "34px");
+		return button;
+	}
+	
+	private Button getRemoveButton() {
+		Button button = new Button("Remover");
+		button.addClickListener(new ClickListener() {
+
+			public void onClick(Widget arg0) {				
+				if(rdbtnEscola.isChecked()){
+					showRemovePointMap(Type.SCHOOL, arg0);
+				}else if(rdbtnUniversidade.isChecked()){
+					showRemovePointMap(Type.UNIVERSITY, arg0);
+				}else if(rdbtnViaPrincipalDe.isChecked()){
+//					showSaveLineMap(Type.ACCESS_ROAD, arg0);
+				}else if(rdbtnShoppingCenter.isChecked()){
+					showRemovePointMap(Type.SHOPPING_CENTER, arg0);
+				}else if(rdbtnAreaVerde.isChecked()){
+//					showSaveAreaMap(Type.GREEN_AREA, arg0);
+				}else if(rdbtnSetorIndustrial.isChecked()){
+//					showSaveAreaMap(Type.INDUSTRIAL, arg0);
+				}else{
+					MessageBox.alert("Favor selecionar alguma das opções");
+				}
+				
+			}
+			
+		});
+		button.setSize("100px", "34px");
 		return button;
 	}
 
