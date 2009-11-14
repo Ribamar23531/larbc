@@ -564,6 +564,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}else if(polygon.getType().equals(Type.INDUSTRIAL.toString())){
 			polygonBean.setType(Type.INDUSTRIAL);
 		}
+		polygonBean.setName(polygon.getName());
 		polygonBean.setObs(polygon.getObs());
 		
 		List<Vertex> vertexes = polygon.getVertexes();
@@ -583,6 +584,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		Polygon p = new Polygon();
 		p.setIdPolygon(polygonBean.getIdPolygon());
 		p.setType(polygonBean.getType().toString());
+		p.setName(polygonBean.getName());
 		p.setObs(polygonBean.getObs());
 		
 		List<Vertex> vertexes = new ArrayList<Vertex>();
@@ -672,6 +674,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return true;
 	}
+	
+	public boolean removePolygon(PolygonBean polygonBean) {
+		try{
+			this.systemManager.removePolygon(getPolygon(polygonBean));			
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
 
 	public List<PolygonBean> getPolygons() {
 		List<Polygon> polygons = this.systemManager.getPolygons();
@@ -680,6 +691,6 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			polygonBeans.add(getPolygonBean(polygon));
 		}
 		return polygonBeans;
-	}
+	}	
 	
 }

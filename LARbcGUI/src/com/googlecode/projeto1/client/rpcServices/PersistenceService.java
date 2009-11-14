@@ -91,6 +91,8 @@ public interface PersistenceService extends RemoteService {
 	
 	public boolean savePolygon(PolygonBean polygonBean);
 	
+	public boolean removePolygon(PolygonBean polygonBean);
+	
 	public List<PolygonBean> getPolygons();
 	
 }

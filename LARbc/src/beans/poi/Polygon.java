@@ -20,6 +20,8 @@ public class Polygon {
 	@Column(name = "id_polygon", updatable = false, nullable = false)
 	private long idPolygon;
 	@Column(updatable = true, nullable = false)
+	private String name;
+	@Column(updatable = true, nullable = false)
 	private String type;
 	@Column(updatable = true, nullable = false)
 	private String obs;
@@ -58,6 +60,14 @@ public class Polygon {
 
 	public String getType() {
 		return type;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 	

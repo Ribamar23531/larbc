@@ -89,6 +89,8 @@ public interface PersistenceServiceAsync {
 	
 	public void savePolygon(PolygonBean polygonBean, AsyncCallback<Boolean> callback);
 	
+	public void removePolygon(PolygonBean polygonBean, AsyncCallback<Boolean> callback);
+	
 	public void getPolygons(AsyncCallback<List<PolygonBean>> callback);
 	
 }

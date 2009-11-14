@@ -11,15 +11,17 @@ public class PolygonBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private long idPolygon;
 	private Type type;
+	private String name;
 	private String obs;
 	private List<Double> latitudes;
 	private List<Double> longitudes;
 	
 	public PolygonBean(){}
 	
-	public PolygonBean(Type type, List<Double> latitudes, List<Double> longitudes){
-		this.type = type;
-		this.setObs("");
+	public PolygonBean(String name, String obs, Type type, List<Double> latitudes, List<Double> longitudes){
+		this.name = name;
+		this.obs = obs;
+		this.type = type;		
 		this.setLatitudes(latitudes);
 		this.setLongitudes(longitudes);
 	}
@@ -62,6 +64,14 @@ public class PolygonBean implements Serializable{
 
 	public List<Double> getLongitudes() {
 		return longitudes;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
