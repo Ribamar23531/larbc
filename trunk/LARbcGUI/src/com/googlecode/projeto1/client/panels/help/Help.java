@@ -1,8 +1,14 @@
 package com.googlecode.projeto1.client.panels.help;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.projeto1.client.PanelSwitcher;
+import com.googlecode.projeto1.client.panels.Util;
+import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.SortDir;
 import com.gwtext.client.data.ArrayReader;
@@ -18,6 +24,7 @@ import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
 import com.gwtext.client.widgets.grid.GroupingView;
 import com.gwtext.client.widgets.grid.event.GridCellListener;
+import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Help extends Panel {
@@ -57,8 +64,23 @@ public class Help extends Panel {
 			"<p><br></br></p><p>Estando no Modo Administrador o cliente deve escolher a <b>Aba Moderar Demandas</b>, onde vão estar todas as demandas cadastradas na aplicação. Cada demanda possui um campo <b>Situação</b> que informa se ela já foi ou não moderada.</p>" +
 			"<p><br></br></p><p>Para moderar uma demanda específica, o cliente deve escolher a demanda e clicar no boão <b>Editar</b></p></font></html>";
 
+	private Image voltarButtonImage;
+	private Image selectedVoltarButtonImage;
+	private boolean isSelectedVoltarButton;
+	private Panel buttonsVoltarPanel;
+	
 	public Help() {
+		
+		buttonsVoltarPanel = new Panel();
+		buttonsVoltarPanel.setLayout(new ColumnLayout());
+		this.isSelectedVoltarButton = false;
+		createVoltarButton();
+		createSelectedVoltarButton();
+		buttonsVoltarPanel.add(voltarButtonImage);
+		
 		AbsolutePanel panel = new AbsolutePanel();
+		panel.add(buttonsVoltarPanel, 827, 40);
+
 		final Panel ajudaPanel = new Panel();
 		ajudaPanel.setTitle("Detalhes");
 		ajudaPanel.setIconCls("paste-icon");
@@ -174,5 +196,49 @@ public class Help extends Panel {
 				"Administrando o LARbc" };
 		return new Object[][] { visaoGeral, consulta, loginAdministrador,
 				criarDemanda, criarAdministrador, gerenciarDemandas, };
+	}
+	
+	//BOTAO VOLTAR
+	private void createSelectedVoltarButton() {
+		selectedVoltarButtonImage = Util.createImage(Util.VOLTAR_SELECTED_BUTTON_IMAGE);
+		selectedVoltarButtonImage.setPixelSize(33, 10);
+		selectedVoltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+
+			public void onMouseLeave(Widget arg0) {
+				rebuildVoltarPanel(voltarButtonImage);
+				
+			}			
+			
+		});
+		
+		selectedVoltarButtonImage.addClickListener(new ClickListener(){
+
+			public void onClick(Widget arg0) {
+				PanelSwitcher.switchPanel(new ModalityPanel());				
+			}
+			
+		});		
+		
+	}
+
+	private void createVoltarButton() {
+		voltarButtonImage = Util.createImage(Util.VOLTAR_BUTTON_IMAGE);
+		voltarButtonImage.setPixelSize(33, 10);
+		voltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+			
+			public void onMouseEnter(Widget arg0) {
+				rebuildVoltarPanel(selectedVoltarButtonImage);
+			}
+		});
+	}
+	
+	private void rebuildVoltarPanel(Image buttonImage){
+		buttonsVoltarPanel.removeAll();
+		if(!isSelectedVoltarButton){
+			buttonsVoltarPanel.add(buttonImage);
+		}else{
+			buttonsVoltarPanel.add(buttonImage);
+		}
+		buttonsVoltarPanel.doLayout();	
 	}
 }
