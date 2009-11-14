@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.beans.Type;
 import com.googlecode.projeto1.client.panels.maps.POILineMap;
+import com.googlecode.projeto1.client.panels.maps.POIPointMap;
 import com.googlecode.projeto1.client.panels.maps.POIPolygonMap;
-import com.googlecode.projeto1.client.panels.maps.point.POIPointMap;
 import com.gwtext.client.widgets.MessageBox;
 
 public class PoiTab extends AbsolutePanel{
@@ -66,7 +66,15 @@ public class PoiTab extends AbsolutePanel{
 	}
 	
 	private void showSaveLineMap(Type type, Widget widget){
-		new POILineMap(type).show(widget.getElement());
+		POILineMap map = new POILineMap(type);
+		map.setSaveLineMap();
+		map.show(widget.getElement());
+	}
+	
+	private void showRemoveLineMap(Type type, Widget widget){
+		POILineMap map = new POILineMap(type);
+		map.setRemoveLineMap();
+		map.show(widget.getElement());
 	}
 	
 	private void showSaveAreaMap(Type type, Widget widget){
@@ -111,7 +119,7 @@ public class PoiTab extends AbsolutePanel{
 				}else if(rdbtnUniversidade.isChecked()){
 					showRemovePointMap(Type.UNIVERSITY, arg0);
 				}else if(rdbtnViaPrincipalDe.isChecked()){
-//					showSaveLineMap(Type.ACCESS_ROAD, arg0);
+					showRemoveLineMap(Type.ACCESS_ROAD, arg0);
 				}else if(rdbtnShoppingCenter.isChecked()){
 					showRemovePointMap(Type.SHOPPING_CENTER, arg0);
 				}else if(rdbtnAreaVerde.isChecked()){

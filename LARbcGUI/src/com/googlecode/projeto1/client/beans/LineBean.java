@@ -12,15 +12,17 @@ public class LineBean implements Serializable{
 	
 	private long idLine;
 	private Type type;
+	private String name;
 	private String obs;
 	private List<Double> latitudes;
 	private List<Double> longitudes;
 	
 	public LineBean(){}
 	
-	public LineBean(Type type, List<Double> latitudes, List<Double> longitudes){
+	public LineBean(String name, String obs, Type type, List<Double> latitudes, List<Double> longitudes){
 		this.type = type;
-		this.obs = "";
+		this.name = name;
+		this.obs = obs;
 		this.setLatitudes(latitudes);
 		this.setLongitudes(longitudes);
 	}
@@ -63,6 +65,14 @@ public class LineBean implements Serializable{
 
 	public List<Double> getLongitudes() {
 		return longitudes;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}	
 
 }
