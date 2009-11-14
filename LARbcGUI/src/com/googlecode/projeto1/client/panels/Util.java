@@ -12,6 +12,8 @@ public class Util {
 	
 	public final static String AJUDA_BUTTON_IMAGE = "images/ajudaButton.png";
 	public final static String AJUDA_SELECTED_BUTTON_IMAGE = "images/ajudaSelectedButton.png";
+	public final static String VOLTAR_BUTTON_IMAGE = "images/botaoVoltar.png";
+	public final static String VOLTAR_SELECTED_BUTTON_IMAGE = "images/voltarSelected.png";
 	public final static String LARBC_IMAGE_PATH = "images/larbc.png";
 	public final static String CADASTRAR_BUTTON_IMAGE = "images/cadastrar.PNG";
 	public final static String SELECTED_CADASTRAR_BUTTON_IMAGE = "images/cadastrarSelected.PNG";
