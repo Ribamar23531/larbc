@@ -518,6 +518,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		Line l = new Line();
 		l.setIdLine(line.getIdLine());
 		l.setType(line.getType().toString());
+		l.setName(line.getName());
 		l.setObs(line.getObs());
 		
 		List<Vertex> vertexes = new ArrayList<Vertex>();
@@ -534,6 +535,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	private LineBean getLineBean(Line line) {
 		LineBean lineBean = new LineBean();
 		lineBean.setIdLine(line.getIdLine());
+		lineBean.setName(line.getName());
 		if(line.getType().equals(Type.ACCESS_ROAD.toString())){
 			lineBean.setType(Type.ACCESS_ROAD);
 		}else{
@@ -643,6 +645,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return true;
 	}	
+	
+	public boolean removeLine(LineBean line) {
+		try{
+			this.systemManager.removeLine(getLine(line));			
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}	
 
 	public List<LineBean> getLines() {
 		List<Line> lines = this.systemManager.getLines();
@@ -669,6 +680,6 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 			polygonBeans.add(getPolygonBean(polygon));
 		}
 		return polygonBeans;
-	}	
+	}
 	
 }
