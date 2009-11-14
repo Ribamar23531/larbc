@@ -10,6 +10,7 @@ import com.googlecode.projeto1.client.panels.Util;
 import com.googlecode.projeto1.client.panels.demands.DemandSellerPanel;
 import com.googlecode.projeto1.client.panels.help.Help;
 import com.googlecode.projeto1.client.panels.query.QueryPanel;
+import com.googlecode.projeto1.client.panels.welcome.WelcomePanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.FitLayout;
@@ -25,23 +26,33 @@ import com.gwtext.client.widgets.layout.FitLayout;
 public class ModalityPanel extends Panel {
 	
 	private AbsolutePanel rootPanel;
+	
 	private Image comprarButton;
 	private Image selectedComprarButton;
 	private boolean isSelectedComprarButton;
+	private Panel buttonsComprarPanel;
+
 	private Image venderButton;
 	private Image selectedVenderButton;
 	private boolean isSelectedVenderButton;
-	private boolean isAdministrarVenderButton;
-	private boolean isSelectedAjudaButton;
-	private Panel buttonsComprarPanel;
 	private Panel buttonsPanel;
-	private Panel buttonsAjudaPanel;
+
 	private Image managerButtonImage;
 	private Image selectedManagerButtonImage;
+	private boolean isAdministrarVenderButton;
+	private Panel wrapperPanel;
+
 	private Image ajudaButtonImage;
 	private Image selectedAjudaButtonImage;
+	private boolean isSelectedAjudaButton;
+	private Panel buttonsAjudaPanel;
+
+	private Image voltarButtonImage;
+	private Image selectedVoltarButtonImage;
+	private boolean isSelectedVoltarButton;
+	private Panel buttonsVoltarPanel;
+	
 	private LoginWindow loginWindow;
-	private Panel wrapperPanel;
 
 	public ModalityPanel() {
 		super();
@@ -54,16 +65,24 @@ public class ModalityPanel extends Panel {
 		buttonsPanel = new Panel();		
 		buttonsComprarPanel = new Panel();
 		buttonsAjudaPanel = new Panel();
-		buttonsAjudaPanel.setLayout(new ColumnLayout());
+		buttonsVoltarPanel = new Panel();
 		wrapperPanel = new Panel();
+
+		buttonsAjudaPanel.setLayout(new ColumnLayout());
 		wrapperPanel.setLayout(new ColumnLayout());
+		buttonsVoltarPanel.setLayout(new ColumnLayout());
+		
 		this.isSelectedVenderButton = false;
 		this.isSelectedComprarButton = false;
 		this.isSelectedAjudaButton = false;
+		this.isSelectedVoltarButton = false;
+		
 		Image image = Util.createImage(Util.QUESTION);
 		image.setPixelSize(280, 70);
+		
 		createVenderButton();
 		createComprarButton();
+		
 		rootPanel.add(image, 300, 250);
 		rootPanel.add(buttonsComprarPanel, 215, 357);
 		rootPanel.add(buttonsPanel, 490, 360);
@@ -78,12 +97,16 @@ public class ModalityPanel extends Panel {
 		createSelectedManagerButton();
 		createAjudaButton();
 		createSelectedAjudaButton();
+		createVoltarButton();
+		createSelectedVoltarButton();
 
-		wrapperPanel = new Panel();
 		Panel rightPanel = new Panel();
 		rightPanel.add(managerButtonImage);
 		wrapperPanel.add(managerButtonImage);
 		buttonsAjudaPanel.add(ajudaButtonImage);
+		buttonsVoltarPanel.add(voltarButtonImage);
+		
+		rootPanel.add(buttonsVoltarPanel, 827, 40);
 		rootPanel.add(buttonsAjudaPanel, 887, 39);
 		rootPanel.add(wrapperPanel, 950, 40);
 		this.loginWindow = new LoginWindow();
@@ -279,6 +302,50 @@ public class ModalityPanel extends Panel {
 			buttonsAjudaPanel.add(buttonImage);
 		}
 		buttonsAjudaPanel.doLayout();	
+	}
+	
+	//BOTAO VOLTAR
+	private void createSelectedVoltarButton() {
+		selectedVoltarButtonImage = Util.createImage(Util.VOLTAR_SELECTED_BUTTON_IMAGE);
+		selectedVoltarButtonImage.setPixelSize(33, 10);
+		selectedVoltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+
+			public void onMouseLeave(Widget arg0) {
+				rebuildVoltarPanel(voltarButtonImage);
+				
+			}			
+			
+		});
+		
+		selectedVoltarButtonImage.addClickListener(new ClickListener(){
+
+			public void onClick(Widget arg0) {
+				PanelSwitcher.switchPanel(new WelcomePanel());				
+			}
+			
+		});		
+		
+	}
+
+	private void createVoltarButton() {
+		voltarButtonImage = Util.createImage(Util.VOLTAR_BUTTON_IMAGE);
+		voltarButtonImage.setPixelSize(33, 10);
+		voltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+			
+			public void onMouseEnter(Widget arg0) {
+				rebuildVoltarPanel(selectedVoltarButtonImage);
+			}
+		});
+	}
+	
+	private void rebuildVoltarPanel(Image buttonImage){
+		buttonsVoltarPanel.removeAll();
+		if(!isSelectedVoltarButton){
+			buttonsVoltarPanel.add(buttonImage);
+		}else{
+			buttonsVoltarPanel.add(buttonImage);
+		}
+		buttonsVoltarPanel.doLayout();	
 	}
 }
 
