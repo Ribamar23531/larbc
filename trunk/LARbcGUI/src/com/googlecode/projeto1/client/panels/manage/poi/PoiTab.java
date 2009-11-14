@@ -78,7 +78,15 @@ public class PoiTab extends AbsolutePanel{
 	}
 	
 	private void showSaveAreaMap(Type type, Widget widget){
-		new PolygonMap(type).show(widget.getElement());
+		PolygonMap map = new PolygonMap(type);
+		map.setSavePolygonMap();
+		map.show(widget.getElement());
+	}
+	
+	private void showRemoveAreaMap(Type type, Widget widget){
+		PolygonMap map = new PolygonMap(type);
+		map.setRemovePolygonMap();
+		map.show(widget.getElement());
 	}
 
 	private Button getCreateButton() {
@@ -123,9 +131,9 @@ public class PoiTab extends AbsolutePanel{
 				}else if(rdbtnShoppingCenter.isChecked()){
 					showRemovePointMap(Type.SHOPPING_CENTER, arg0);
 				}else if(rdbtnAreaVerde.isChecked()){
-//					showSaveAreaMap(Type.GREEN_AREA, arg0);
+					showRemoveAreaMap(Type.GREEN_AREA, arg0);
 				}else if(rdbtnSetorIndustrial.isChecked()){
-//					showSaveAreaMap(Type.INDUSTRIAL, arg0);
+					showRemoveAreaMap(Type.INDUSTRIAL, arg0);
 				}else{
 					MessageBox.alert("Favor selecionar alguma das opções");
 				}
