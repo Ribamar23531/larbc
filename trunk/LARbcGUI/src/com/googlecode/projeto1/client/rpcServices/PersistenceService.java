@@ -85,6 +85,8 @@ public interface PersistenceService extends RemoteService {
 	
 	public boolean saveLine(LineBean line);
 	
+	public boolean removeLine(LineBean line);
+	
 	public List<LineBean> getLines();
 	
 	public boolean savePolygon(PolygonBean polygonBean);
