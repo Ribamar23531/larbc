@@ -24,7 +24,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
  * @author João Felipe
  * @version LARbc 1.0
  */
-public class POIPolygonMap extends MappingWindow{
+public class PolygonMap extends MappingWindow{
 		
 	private Polygon polygon;
 	private ArrayList<LatLng> points;
@@ -32,7 +32,7 @@ public class POIPolygonMap extends MappingWindow{
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
-	public POIPolygonMap(Type polygonType){
+	public PolygonMap(Type polygonType){
 		super();
 		myMap.clearOverlays();
 		points = new ArrayList<LatLng>();
