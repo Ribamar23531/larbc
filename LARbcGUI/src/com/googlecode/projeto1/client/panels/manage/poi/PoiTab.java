@@ -8,9 +8,9 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.beans.Type;
-import com.googlecode.projeto1.client.panels.maps.POILineMap;
-import com.googlecode.projeto1.client.panels.maps.POIPointMap;
-import com.googlecode.projeto1.client.panels.maps.POIPolygonMap;
+import com.googlecode.projeto1.client.panels.maps.LineMap;
+import com.googlecode.projeto1.client.panels.maps.PointMap;
+import com.googlecode.projeto1.client.panels.maps.PolygonMap;
 import com.gwtext.client.widgets.MessageBox;
 
 public class PoiTab extends AbsolutePanel{
@@ -53,32 +53,32 @@ public class PoiTab extends AbsolutePanel{
 	}
 	
 	private void showSavePointMap(Type type, Widget widget){
-		POIPointMap map = new POIPointMap(type);
+		PointMap map = new PointMap(type);
 		map.setSavePointMap();
 //		map.setRemovePointMap();
 		map.show(widget.getElement());		
 	}
 	
 	private void showRemovePointMap(Type type, Widget widget){
-		POIPointMap map = new POIPointMap(type);		
+		PointMap map = new PointMap(type);		
 		map.setRemovePointMap();
 		map.show(widget.getElement());		
 	}
 	
 	private void showSaveLineMap(Type type, Widget widget){
-		POILineMap map = new POILineMap(type);
+		LineMap map = new LineMap(type);
 		map.setSaveLineMap();
 		map.show(widget.getElement());
 	}
 	
 	private void showRemoveLineMap(Type type, Widget widget){
-		POILineMap map = new POILineMap(type);
+		LineMap map = new LineMap(type);
 		map.setRemoveLineMap();
 		map.show(widget.getElement());
 	}
 	
 	private void showSaveAreaMap(Type type, Widget widget){
-		new POIPolygonMap(type).show(widget.getElement());
+		new PolygonMap(type).show(widget.getElement());
 	}
 
 	private Button getCreateButton() {
