@@ -136,7 +136,7 @@ public class QueryPanel extends Panel{
 			}
 			
 			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Os estados nÃ£o puderam ser carregados do disco");
+				MessageBox.alert("Os estados não puderam ser carregados do disco");
 				
 			}
 		});
@@ -148,7 +148,7 @@ public class QueryPanel extends Panel{
 		textName = new TextField();
 		queryPanel.add(textName, 100, 194);
 		textName.setSize("265px", "21px");
-		Label lblNome = new Label("Nome do imÃ³vel:");
+		Label lblNome = new Label("Nome do imóvel:");
 		queryPanel.add(lblNome, 17, 197);
 		lblNome.setSize("80px", "18px");
 		
@@ -156,7 +156,7 @@ public class QueryPanel extends Panel{
 		textAreaConstruida = new TextField();
 		queryPanel.add(textAreaConstruida, 108, 222);
 		textAreaConstruida.setSize("108px", "21px");
-		Label lblreaConstruda = new Label("Ã�rea construÃ­da:");
+		Label lblreaConstruda = new Label("Área construída:");
 		queryPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("107px", "18px");
 
@@ -164,7 +164,7 @@ public class QueryPanel extends Panel{
 		textAreaTotal = new TextField();
 		queryPanel.add(textAreaTotal, 290, 222);
 		textAreaTotal.setSize("108px", "21px");
-		Label lblreaTotal = new Label("Ã�rea total:");
+		Label lblreaTotal = new Label("Área total:");
 		queryPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("71px", "18px");
 		
@@ -188,7 +188,7 @@ public class QueryPanel extends Panel{
 		textSuites = new TextField();
 		queryPanel.add(textSuites, 197, 277);
 		textSuites.setSize("78px", "21px");
-		Label lblSutes = new Label("SuÃ­tes:");
+		Label lblSutes = new Label("Suítes:");
 		queryPanel.add(lblSutes, 156, 280);
 		lblSutes.setSize("37px", "18px");
 
@@ -208,7 +208,7 @@ public class QueryPanel extends Panel{
 		comboTipo.addItem("Apartamento");
 		comboTipo.addItem("Terreno");
 		comboTipo.addItem("Sala Comercial");
-		Label lblTipoDeImvel = new Label("Tipo de imÃ³vel:");
+		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("131px", "24px");
 		
@@ -216,7 +216,7 @@ public class QueryPanel extends Panel{
 		textPreco = new TextField();
 		queryPanel.add(textPreco, 120, 361);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("PreÃ§o em torno de:");
+		Label lblPreoEmTorno = new Label("Preço em torno de:");
 		queryPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("105px", "24px");
 		
@@ -226,7 +226,7 @@ public class QueryPanel extends Panel{
 		listbusinessType.setSize("166px", "21px");
 		listbusinessType.addItem("Comprar");
 		listbusinessType.addItem("Alugar");
-		Label lblTipoDeNegcio = new Label("Tipo de negÃ³cio:");
+		Label lblTipoDeNegcio = new Label("Tipo de negócio:");
 		queryPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("131px", "24px");
 
@@ -271,12 +271,12 @@ public class QueryPanel extends Panel{
 				neighborhood = textNeighborhood.getText();
 				city = textCity.getText();
 				name = textName.getText();
-				String message = "Digite um valor numÃ©rico vÃ¡lido para: ";
+				String message = "Digite um valor numérico válido para: ";
 				try{
 					builtArea = Float.parseFloat(textAreaConstruida.getText());					
 				}catch(Exception e){
 					if(!textAreaConstruida.getText().equals("")){
-						MessageBox.alert(message + "Ã�rea construÃ­da");
+						MessageBox.alert(message + "Área construída");
 						return;
 					}
 				}
@@ -304,7 +304,7 @@ public class QueryPanel extends Panel{
 					price = Float.parseFloat(textPreco.getText());
 				}catch(Exception e){
 					if(!textPreco.getText().equals("")){
-						MessageBox.alert(message + "PreÃ§o");
+						MessageBox.alert(message + "Preço");
 						return;
 					}
 				}				
@@ -318,7 +318,7 @@ public class QueryPanel extends Panel{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
 				}catch(Exception e){
 					if(!textAreaTotal.getText().equals("")){
-						MessageBox.alert(message + "Ã�rea total");
+						MessageBox.alert(message + "Área total");
 						return;
 					}
 				}
@@ -326,7 +326,7 @@ public class QueryPanel extends Panel{
 					suite = Integer.parseInt(textSuites.getText());
 				}catch(Exception e){
 					if(!textSuites.getText().equals("")){
-						MessageBox.alert(message + "SuÃ­tes");
+						MessageBox.alert(message + "Suítes");
 						return;
 					}
 				}	
@@ -346,7 +346,7 @@ public class QueryPanel extends Panel{
 					}
 					
 					public void onFailure(Throwable arg0) {
-						MessageBox.alert("A consulta nÃ£o pode ser realizada.");
+						MessageBox.alert("A consulta não pode ser realizada.");
 						
 					}
 				});
