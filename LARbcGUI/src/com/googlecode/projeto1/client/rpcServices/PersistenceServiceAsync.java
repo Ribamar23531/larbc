@@ -83,6 +83,8 @@ public interface PersistenceServiceAsync {
 	
 	public void saveLine(LineBean line, AsyncCallback<Boolean> callback);
 	
+	public void removeLine(LineBean line, AsyncCallback<Boolean> callback);
+	
 	public void getLines(AsyncCallback<List<LineBean>> callback);
 	
 	public void savePolygon(PolygonBean polygonBean, AsyncCallback<Boolean> callback);
