@@ -29,7 +29,7 @@ import com.gwtext.client.widgets.MessageBoxConfig;
  * @author João Felipe
  * @version LARbc 1.0
  */
-public class POILineMap extends MappingWindow{
+public class LineMap extends MappingWindow{
 	
 	private Polyline line;
 	private boolean mouseOverLine;
@@ -40,7 +40,7 @@ public class POILineMap extends MappingWindow{
 	
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
-	public POILineMap(Type lineType){
+	public LineMap(Type lineType){
 		super();
 		this.isRemoveMap = false;
 		this.line = null;
