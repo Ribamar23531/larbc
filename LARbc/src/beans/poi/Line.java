@@ -19,6 +19,8 @@ public class Line {
 	@Column(name = "id_line", updatable = false, nullable = false)
 	private long idLine;
 	@Column(updatable = true, nullable = false)
+	private String name;
+	@Column(updatable = true, nullable = false)
 	private String type;
 	@Column(updatable = true, nullable = false)
 	private String obs;
@@ -57,6 +59,14 @@ public class Line {
 
 	public String getType() {
 		return type;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
