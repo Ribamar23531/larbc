@@ -15,12 +15,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.Util;
+import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.panels.results.ResultsPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 
@@ -29,7 +31,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
  * 
  * @author Alcione Pinheiro
  * @author Diego Rodrigues
- * @author João Felipe
+ * @author JoÃ£o Felipe
  * @version LARbc 1.0
 */
 public class QueryPanel extends Panel{
@@ -69,8 +71,22 @@ public class QueryPanel extends Panel{
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	private List<CaseBean> cases;
 	
+	private Image voltarButtonImage;
+	private Image selectedVoltarButtonImage;
+	private boolean isSelectedVoltarButton;
+	private Panel buttonsVoltarPanel;
+	
 	public QueryPanel(){
+		buttonsVoltarPanel = new Panel();
+		buttonsVoltarPanel.setLayout(new ColumnLayout());
+		this.isSelectedVoltarButton = false;
+		createVoltarButton();
+		createSelectedVoltarButton();
+		buttonsVoltarPanel.add(voltarButtonImage);
+
 		queryPanel = new AbsolutePanel();
+		queryPanel.add(buttonsVoltarPanel, 827, 40);
+
 		queryPanel.setSize("809px", "546px");
 		VerticalPanel verticalPanel = new VerticalPanel();
 		queryPanel.add(verticalPanel, 0, 0);
@@ -120,7 +136,7 @@ public class QueryPanel extends Panel{
 			}
 			
 			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Os estados não puderam ser carregados do disco");
+				MessageBox.alert("Os estados nÃ£o puderam ser carregados do disco");
 				
 			}
 		});
@@ -132,7 +148,7 @@ public class QueryPanel extends Panel{
 		textName = new TextField();
 		queryPanel.add(textName, 100, 194);
 		textName.setSize("265px", "21px");
-		Label lblNome = new Label("Nome do imóvel:");
+		Label lblNome = new Label("Nome do imÃ³vel:");
 		queryPanel.add(lblNome, 17, 197);
 		lblNome.setSize("80px", "18px");
 		
@@ -140,7 +156,7 @@ public class QueryPanel extends Panel{
 		textAreaConstruida = new TextField();
 		queryPanel.add(textAreaConstruida, 108, 222);
 		textAreaConstruida.setSize("108px", "21px");
-		Label lblreaConstruda = new Label("Área construída:");
+		Label lblreaConstruda = new Label("Ã�rea construÃ­da:");
 		queryPanel.add(lblreaConstruda, 17, 225);
 		lblreaConstruda.setSize("107px", "18px");
 
@@ -148,7 +164,7 @@ public class QueryPanel extends Panel{
 		textAreaTotal = new TextField();
 		queryPanel.add(textAreaTotal, 290, 222);
 		textAreaTotal.setSize("108px", "21px");
-		Label lblreaTotal = new Label("Área total:");
+		Label lblreaTotal = new Label("Ã�rea total:");
 		queryPanel.add(lblreaTotal, 226, 225);
 		lblreaTotal.setSize("71px", "18px");
 		
@@ -172,7 +188,7 @@ public class QueryPanel extends Panel{
 		textSuites = new TextField();
 		queryPanel.add(textSuites, 197, 277);
 		textSuites.setSize("78px", "21px");
-		Label lblSutes = new Label("Suítes:");
+		Label lblSutes = new Label("SuÃ­tes:");
 		queryPanel.add(lblSutes, 156, 280);
 		lblSutes.setSize("37px", "18px");
 
@@ -192,7 +208,7 @@ public class QueryPanel extends Panel{
 		comboTipo.addItem("Apartamento");
 		comboTipo.addItem("Terreno");
 		comboTipo.addItem("Sala Comercial");
-		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
+		Label lblTipoDeImvel = new Label("Tipo de imÃ³vel:");
 		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("131px", "24px");
 		
@@ -200,7 +216,7 @@ public class QueryPanel extends Panel{
 		textPreco = new TextField();
 		queryPanel.add(textPreco, 120, 361);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("Preço em torno de:");
+		Label lblPreoEmTorno = new Label("PreÃ§o em torno de:");
 		queryPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("105px", "24px");
 		
@@ -210,7 +226,7 @@ public class QueryPanel extends Panel{
 		listbusinessType.setSize("166px", "21px");
 		listbusinessType.addItem("Comprar");
 		listbusinessType.addItem("Alugar");
-		Label lblTipoDeNegcio = new Label("Tipo de negócio:");
+		Label lblTipoDeNegcio = new Label("Tipo de negÃ³cio:");
 		queryPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("131px", "24px");
 
@@ -255,12 +271,12 @@ public class QueryPanel extends Panel{
 				neighborhood = textNeighborhood.getText();
 				city = textCity.getText();
 				name = textName.getText();
-				String message = "Digite um valor numérico válido para: ";
+				String message = "Digite um valor numÃ©rico vÃ¡lido para: ";
 				try{
 					builtArea = Float.parseFloat(textAreaConstruida.getText());					
 				}catch(Exception e){
 					if(!textAreaConstruida.getText().equals("")){
-						MessageBox.alert(message + "Área construída");
+						MessageBox.alert(message + "Ã�rea construÃ­da");
 						return;
 					}
 				}
@@ -288,7 +304,7 @@ public class QueryPanel extends Panel{
 					price = Float.parseFloat(textPreco.getText());
 				}catch(Exception e){
 					if(!textPreco.getText().equals("")){
-						MessageBox.alert(message + "Preço");
+						MessageBox.alert(message + "PreÃ§o");
 						return;
 					}
 				}				
@@ -302,7 +318,7 @@ public class QueryPanel extends Panel{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
 				}catch(Exception e){
 					if(!textAreaTotal.getText().equals("")){
-						MessageBox.alert(message + "Área total");
+						MessageBox.alert(message + "Ã�rea total");
 						return;
 					}
 				}
@@ -310,7 +326,7 @@ public class QueryPanel extends Panel{
 					suite = Integer.parseInt(textSuites.getText());
 				}catch(Exception e){
 					if(!textSuites.getText().equals("")){
-						MessageBox.alert(message + "Suítes");
+						MessageBox.alert(message + "SuÃ­tes");
 						return;
 					}
 				}	
@@ -330,7 +346,7 @@ public class QueryPanel extends Panel{
 					}
 					
 					public void onFailure(Throwable arg0) {
-						MessageBox.alert("A consulta não pode ser realizada.");
+						MessageBox.alert("A consulta nÃ£o pode ser realizada.");
 						
 					}
 				});
@@ -351,6 +367,50 @@ public class QueryPanel extends Panel{
 		}else{
 			queryPanel.add(selectedPesquisarButton, 326, 423);
 		}
+	}
+	
+	//BOTAO VOLTAR
+	private void createSelectedVoltarButton() {
+		selectedVoltarButtonImage = Util.createImage(Util.VOLTAR_SELECTED_BUTTON_IMAGE);
+		selectedVoltarButtonImage.setPixelSize(33, 10);
+		selectedVoltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+
+			public void onMouseLeave(Widget arg0) {
+				rebuildVoltarPanel(voltarButtonImage);
+				
+			}			
+			
+		});
+		
+		selectedVoltarButtonImage.addClickListener(new ClickListener(){
+
+			public void onClick(Widget arg0) {
+				PanelSwitcher.switchPanel(new ModalityPanel());				
+			}
+			
+		});		
+		
+	}
+
+	private void createVoltarButton() {
+		voltarButtonImage = Util.createImage(Util.VOLTAR_BUTTON_IMAGE);
+		voltarButtonImage.setPixelSize(33, 10);
+		voltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+			
+			public void onMouseEnter(Widget arg0) {
+				rebuildVoltarPanel(selectedVoltarButtonImage);
+			}
+		});
+	}
+	
+	private void rebuildVoltarPanel(Image buttonImage){
+		buttonsVoltarPanel.removeAll();
+		if(!isSelectedVoltarButton){
+			buttonsVoltarPanel.add(buttonImage);
+		}else{
+			buttonsVoltarPanel.add(buttonImage);
+		}
+		buttonsVoltarPanel.doLayout();	
 	}
 
 }
