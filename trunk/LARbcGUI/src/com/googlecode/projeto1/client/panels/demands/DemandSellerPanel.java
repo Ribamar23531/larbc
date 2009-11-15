@@ -119,7 +119,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		textCidade = new TextField();
 		textCidade.setAllowBlank(false);  
 		rootPanel.add(textCidade, 135, 163);
-		textCidade.setSize("224px", "21px");
+		textCidade.setSize("217px", "21px");
 		textCidade.setValue("Campina Grande");
 		textCidade.setDisabled(true);
 		Label lblCidade = new Label("Cidade: *");
@@ -146,8 +146,8 @@ import com.gwtext.client.widgets.layout.FitLayout;
 			}
 		});
 		Label lblUf = new Label("UF: *");
-		rootPanel.add(lblUf, 363, 165);
-		lblUf.setSize("14px", "18px");
+		rootPanel.add(lblUf, 356, 165);
+		lblUf.setSize("24px", "18px");
 		
 		//Nome do imóvel
 		textNome = new TextField();
