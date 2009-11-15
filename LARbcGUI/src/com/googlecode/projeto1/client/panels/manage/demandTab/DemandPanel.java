@@ -1,10 +1,12 @@
 package com.googlecode.projeto1.client.panels.manage.demandTab;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.CaptionPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.googlecode.projeto1.client.beans.DemandBean;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CaptionPanel;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.projeto1.client.beans.DemandBean;
 
 /**
  * @author Alcione Pinheiro
@@ -50,6 +52,13 @@ public class DemandPanel extends CaptionPanel{
 			{
 				Button editarButton = new Button("Editar");
 				absolutePanel_1.add(editarButton, 335, 96);
+				editarButton.addClickListener(new ClickListener(){
+
+					public void onClick(Widget arg0) {
+						new EditWindow(myDemandBean).show();
+					}
+					
+				});	
 			}
 		}
 	}
