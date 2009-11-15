@@ -100,8 +100,8 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		//Nome da Rua
 		textRua = new TextField("Nome da rua", "nome da rua", 230);
 		textRua.setAllowBlank(false);  
-		rootPanel.add(textRua, 91, 111);
-		textRua.setSize("278px", "21px");
+		rootPanel.add(textRua, 135, 111);
+		textRua.setSize("307px", "21px");
 		Label rua = new Label("Nome da rua: *");
 		rootPanel.add(rua, 17, 114);
 		rua.setSize("80px", "18px");
@@ -109,8 +109,8 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		//Bairro
 		textBairro = new TextField("Bairro", "bairro", 230);
 		textBairro.setAllowBlank(false);  
-		rootPanel.add(textBairro, 59, 137);
-		textBairro.setSize("265px", "21px");
+		rootPanel.add(textBairro, 135, 137);
+		textBairro.setSize("307px", "21px");
 		Label lblBairro = new Label("Bairro: *");
 		rootPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("41px", "18px");
@@ -118,7 +118,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		//Cidade
 		textCidade = new TextField();
 		textCidade.setAllowBlank(false);  
-		rootPanel.add(textCidade, 63, 163);
+		rootPanel.add(textCidade, 135, 163);
 		textCidade.setSize("224px", "21px");
 		textCidade.setValue("Campina Grande");
 		textCidade.setDisabled(true);
@@ -128,7 +128,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		
 		//Estado
 		listEstado = new ListBox();
-		rootPanel.add(listEstado, 318, 160);
+		rootPanel.add(listEstado, 382, 160);
 		listEstado.setSize("57px", "21px");
 		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
 			
@@ -146,13 +146,13 @@ import com.gwtext.client.widgets.layout.FitLayout;
 			}
 		});
 		Label lblUf = new Label("UF: *");
-		rootPanel.add(lblUf, 288, 165);
-		lblUf.setSize("23px", "18px");
+		rootPanel.add(lblUf, 363, 165);
+		lblUf.setSize("14px", "18px");
 		
 		//Nome do imóvel
 		textNome = new TextField();
-		rootPanel.add(textNome, 100, 194);
-		textNome.setSize("265px", "21px");
+		rootPanel.add(textNome, 135, 194);
+		textNome.setSize("307px", "21px");
 		Label lblNome = new Label("Nome do imóvel:");
 		rootPanel.add(lblNome, 17, 197);
 		lblNome.setSize("80px", "18px");
@@ -160,52 +160,56 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		//Area construida
 		textAreaConstruida = new TextField();
 		textAreaConstruida.setAllowBlank(false);  
-		rootPanel.add(textAreaConstruida, 108, 222);
-		textAreaConstruida.setSize("108px", "21px");
+		rootPanel.add(textAreaConstruida, 135, 222);
+		textAreaConstruida.setSize("78px", "21px");
 		Label lblreaConstruda = new Label("Área construída: *");
 		rootPanel.add(lblreaConstruda, 17, 225);
-		lblreaConstruda.setSize("90px", "18px");
+		lblreaConstruda.setSize("112px", "18px");
+		Label unidadeAreaConstruida = new Label("m²");
+		rootPanel.add(unidadeAreaConstruida, 212, 225);
 		
 		//Area total
 		textAreaTotal = new TextField();
 		textAreaTotal.setAllowBlank(false);  
-		rootPanel.add(textAreaTotal, 290, 222);
-		textAreaTotal.setSize("108px", "21px");
+		rootPanel.add(textAreaTotal, 308, 222);
+		textAreaTotal.setSize("78px", "21px");
 		Label lblreaTotal = new Label("Área total: *");
-		rootPanel.add(lblreaTotal, 226, 225);
-		lblreaTotal.setSize("65px", "18px");
+		rootPanel.add(lblreaTotal, 248, 225);
+		lblreaTotal.setSize("71px", "18px");
+		Label unidadeAreaTotal= new Label("m²");
+		rootPanel.add(unidadeAreaTotal, 387, 225);
 		
 		//Vagas na garagem
 		textGaragem = new TextField();
 		textGaragem.setAllowBlank(false);  
-		rootPanel.add(textGaragem, 121, 248);
-		textGaragem.setSize("146px", "21px");
+		rootPanel.add(textGaragem, 135, 248);
+		textGaragem.setSize("78px", "21px");
 		Label lblVagasNaGaragem = new Label("Vagas na garagem: *");
 		rootPanel.add(lblVagasNaGaragem, 17, 251);
-		lblVagasNaGaragem.setSize("110px", "18px");
-		
+		lblVagasNaGaragem.setSize("147px", "18px");
+				
 		//Quartos
 		textQuartos = new TextField();
 		textQuartos.setAllowBlank(false);  
-		rootPanel.add(textQuartos, 65, 277);
+		rootPanel.add(textQuartos, 135, 277);
 		textQuartos.setSize("78px", "21px");
 		Label lblQuartos = new Label("Quartos: *");
 		rootPanel.add(lblQuartos, 17, 280);
-		lblQuartos.setSize("50px", "18px");
-		
+		lblQuartos.setSize("55px", "18px");
+
 		//Suites
 		textSuites = new TextField();
 		textSuites.setAllowBlank(false);  
-		rootPanel.add(textSuites, 200, 277);
+		rootPanel.add(textSuites, 295, 277);
 		textSuites.setSize("78px", "21px");
 		Label lblSutes = new Label("Suítes: *");
-		rootPanel.add(lblSutes, 156, 280);
+		rootPanel.add(lblSutes, 248, 280);
 		lblSutes.setSize("40px", "18px");
-
+		
 		//Banheiros
 		textBanheiros = new TextField();
 		textBanheiros.setAllowBlank(false);  
-		rootPanel.add(textBanheiros, 114, 303);
+		rootPanel.add(textBanheiros, 135, 303);
 		textBanheiros.setSize("78px", "21px");
 		Label lblBanheirosSociais = new Label("Banheiros sociais: *");
 		rootPanel.add(lblBanheirosSociais, 17, 306);
@@ -213,7 +217,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		
 		//Tipo de imovel
 		comboTipo = new ListBox();
-		rootPanel.add(comboTipo, 98, 329);
+		rootPanel.add(comboTipo, 135, 329);
 		comboTipo.setSize("205px", "21px");	
 		comboTipo.addItem("Casa");
 		comboTipo.addItem("Apartamento");
@@ -225,16 +229,16 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		
 		//Preco do imovel
 		textPreco = new TextField();
-		rootPanel.add(textPreco, 120, 361);
+		rootPanel.add(textPreco, 135, 361);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("Preço em torno de:");
+		Label lblPreoEmTorno = new Label("Preço em torno de (R$):");
 		rootPanel.add(lblPreoEmTorno, 17, 364);
-		lblPreoEmTorno.setSize("105px", "24px");
+		lblPreoEmTorno.setSize("115px", "24px");
 		
 		//Nome da pessoa
 		textNomePessoa = new TextField();
 		textNomePessoa.setAllowBlank(false);  
-		rootPanel.add(textNomePessoa, 74, 390);
+		rootPanel.add(textNomePessoa, 135, 390);
 		textNomePessoa.setSize("265px", "21px");
 		Label lblNomePessoa = new Label("Seu nome: *");
 		rootPanel.add(lblNomePessoa, 17, 392);
@@ -244,7 +248,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		textEmail = new TextField();
 		textEmail.setAllowBlank(false);
 		textEmail.setVtype(VType.EMAIL);
-		rootPanel.add(textEmail, 53, 415);
+		rootPanel.add(textEmail, 135, 415);
 		textEmail.setSize("220px", "21px");		
 		Label lblEmail = new Label("Email: *");
 		rootPanel.add(lblEmail, 17, 418);
@@ -253,7 +257,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		//Telefone
 		textTelefone = new TextField();
 		textTelefone.setAllowBlank(false);  
-		rootPanel.add(textTelefone, 68, 441);
+		rootPanel.add(textTelefone, 135, 441);
 		textTelefone.setSize("150px", "21px");		
 		Label lblTelefone = new Label("Telefone: *");
 		rootPanel.add(lblTelefone, 17, 444);
