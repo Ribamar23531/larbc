@@ -2,7 +2,6 @@ package com.googlecode.projeto1.client.panels.results;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.FitLayout;
