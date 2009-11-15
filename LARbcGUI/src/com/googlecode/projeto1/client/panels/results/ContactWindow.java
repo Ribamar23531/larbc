@@ -22,7 +22,7 @@ public class ContactWindow extends Window{
 	public ContactWindow(){
 		super();
 		this.loginWindowPanel = new ContactWindowPanel();
-		this.setTitle("Entre com os dados");		
+		this.setTitle("Insira os dados");		
 		this.setClosable(true);
 		this.setPlain(true);		
 		this.setPaddings(5);  
@@ -40,8 +40,8 @@ public class ContactWindow extends Window{
 		Button okButton = new Button("OK");
 		okButton.addListener(new ButtonListenerAdapter(){
 			public void onClick(Button button, EventObject e) {
-				String login = loginWindowPanel.getLogin();
-				String password = loginWindowPanel.getPassword();
+				String login = loginWindowPanel.getEmail();
+				String password = loginWindowPanel.getTelefone();
 				if(login.equals("") || password.equals("")){				
 					MessageBox.alert("Favor preencher todos os campos.");					
 				}else{
