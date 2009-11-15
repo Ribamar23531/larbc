@@ -97,23 +97,23 @@ public class QueryPanel extends Panel{
 		
 		//Nome da Rua
 		textStreet = new TextField();
-		queryPanel.add(textStreet, 91, 111);
-		textStreet.setSize("278px", "21px");
+		queryPanel.add(textStreet, 135, 111);
+		textStreet.setSize("307px", "21px");
 		Label rua = new Label("Nome da rua:");
 		queryPanel.add(rua, 17, 114);
 		rua.setSize("80px", "18px");
 		
 		//Bairro
 		textNeighborhood = new TextField();
-		queryPanel.add(textNeighborhood, 59, 137);
-		textNeighborhood.setSize("265px", "21px");
+		queryPanel.add(textNeighborhood, 135, 137);
+		textNeighborhood.setSize("307px", "21px");
 		Label lblBairro = new Label("Bairro:");
 		queryPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("41px", "18px");
 		
 		//Cidade
 		textCity = new TextField();
-		queryPanel.add(textCity, 60, 163);
+		queryPanel.add(textCity, 135, 163);
 		textCity.setSize("224px", "21px");
 		textCity.setValue("Campina Grande");
 		textCity.setDisabled(true);		
@@ -123,7 +123,7 @@ public class QueryPanel extends Panel{
 		
 		//Estado
 		listEstado = new ListBox();
-		queryPanel.add(listEstado, 312, 160);
+		queryPanel.add(listEstado, 382, 160);
 		listEstado.setSize("57px", "21px");
 		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
 			
@@ -141,44 +141,48 @@ public class QueryPanel extends Panel{
 			}
 		});
 		Label lblUf = new Label("UF:");
-		queryPanel.add(lblUf, 292, 165);
+		queryPanel.add(lblUf, 363, 165);
 		lblUf.setSize("14px", "18px");
 				
 		//Nome do imovel
 		textName = new TextField();
-		queryPanel.add(textName, 100, 194);
-		textName.setSize("265px", "21px");
+		queryPanel.add(textName, 135, 194);
+		textName.setSize("307px", "21px");
 		Label lblNome = new Label("Nome do imóvel:");
 		queryPanel.add(lblNome, 17, 197);
 		lblNome.setSize("80px", "18px");
 		
 		//Area construida
 		textAreaConstruida = new TextField();
-		queryPanel.add(textAreaConstruida, 108, 222);
-		textAreaConstruida.setSize("108px", "21px");
+		queryPanel.add(textAreaConstruida, 135, 222);
+		textAreaConstruida.setSize("78px", "21px");
 		Label lblreaConstruda = new Label("Área construída:");
 		queryPanel.add(lblreaConstruda, 17, 225);
-		lblreaConstruda.setSize("107px", "18px");
+		lblreaConstruda.setSize("112px", "18px");
+		Label unidadeAreaConstruida = new Label("m²");
+		queryPanel.add(unidadeAreaConstruida, 212, 225);
 
 		//Area total
 		textAreaTotal = new TextField();
-		queryPanel.add(textAreaTotal, 290, 222);
-		textAreaTotal.setSize("108px", "21px");
+		queryPanel.add(textAreaTotal, 305, 222);
+		textAreaTotal.setSize("78px", "21px");
 		Label lblreaTotal = new Label("Área total:");
-		queryPanel.add(lblreaTotal, 226, 225);
+		queryPanel.add(lblreaTotal, 248, 225);
 		lblreaTotal.setSize("71px", "18px");
+		Label unidadeAreaTotal= new Label("m²");
+		queryPanel.add(unidadeAreaTotal, 384, 225);
 		
 		//Vagas na garagem
 		textGaragem = new TextField();
-		queryPanel.add(textGaragem, 121, 248);
-		textGaragem.setSize("146px", "21px");
+		queryPanel.add(textGaragem, 135, 248);
+		textGaragem.setSize("78px", "21px");
 		Label lblVagasNaGaragem = new Label("Vagas na garagem:");
 		queryPanel.add(lblVagasNaGaragem, 17, 251);
 		lblVagasNaGaragem.setSize("147px", "18px");
 		
 		//Quartos
 		textQuartos = new TextField();
-		queryPanel.add(textQuartos, 63, 277);
+		queryPanel.add(textQuartos, 135, 277);
 		textQuartos.setSize("78px", "21px");
 		Label lblQuartos = new Label("Quartos:");
 		queryPanel.add(lblQuartos, 17, 280);
@@ -186,15 +190,15 @@ public class QueryPanel extends Panel{
 
 		//Suites
 		textSuites = new TextField();
-		queryPanel.add(textSuites, 197, 277);
+		queryPanel.add(textSuites, 295, 277);
 		textSuites.setSize("78px", "21px");
 		Label lblSutes = new Label("Suítes:");
-		queryPanel.add(lblSutes, 156, 280);
+		queryPanel.add(lblSutes, 248, 280);
 		lblSutes.setSize("37px", "18px");
 
 		//Banheiros
 		textBanheiros = new TextField();
-		queryPanel.add(textBanheiros, 113, 303);
+		queryPanel.add(textBanheiros, 135, 303);
 		textBanheiros.setSize("78px", "21px");
 		Label lblBanheirosSociais = new Label("Banheiros sociais:");
 		queryPanel.add(lblBanheirosSociais, 17, 306);
@@ -202,7 +206,7 @@ public class QueryPanel extends Panel{
 		
 		//Tipo de imovel
 		comboTipo = new ListBox();
-		queryPanel.add(comboTipo, 98, 329);
+		queryPanel.add(comboTipo, 135, 329);
 		comboTipo.setSize("205px", "21px");	
 		comboTipo.addItem("Casa");
 		comboTipo.addItem("Apartamento");
@@ -214,15 +218,15 @@ public class QueryPanel extends Panel{
 		
 		//Preco do imovel
 		textPreco = new TextField();
-		queryPanel.add(textPreco, 120, 361);
+		queryPanel.add(textPreco, 135, 361);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("Preço em torno de:");
+		Label lblPreoEmTorno = new Label("Preço em torno de (R$):");
 		queryPanel.add(lblPreoEmTorno, 17, 364);
-		lblPreoEmTorno.setSize("105px", "24px");
+		lblPreoEmTorno.setSize("115px", "24px");
 		
 		//Tipo de negocio
 		listbusinessType = new ListBox();
-		queryPanel.add(listbusinessType, 108, 387);
+		queryPanel.add(listbusinessType, 135, 387);
 		listbusinessType.setSize("166px", "21px");
 		listbusinessType.addItem("Comprar");
 		listbusinessType.addItem("Alugar");
