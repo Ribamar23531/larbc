@@ -1,4 +1,4 @@
-package persistence.jdbc;
+package persistence.jdbc.poi;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,7 @@ import org.postgis.PGgeometry;
 import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
+import persistence.jdbc.ConnectionFactory;
 import persistence.util.Coordenates;
 
 public class LineRecover {
@@ -26,19 +27,7 @@ public class LineRecover {
 		}
 	}
 	
-//	private Point getPointByPGgeometry(PGgeometry pg) throws SQLException{		
-//    	String aux[] = pg.toString().split(" ");
-//    	String coordinates = aux[0].substring(6) + " " + aux[1].substring(0, aux[1].length() - 1);
-//    	Point p = new Point(coordinates); 
-//    	return p;
-//	}
-	
-	private LineString getLineStringByPGgeometry(PGgeometry pg) throws SQLException{		
-//    	String pointsSTR[] = pg.toString().split(",");
-//    	Point[] points = new Point[pointsSTR.length];
-//    	for (int i = 0; i < pointsSTR.length; i++) {
-//			points[i] = new Point(pointsSTR[i]);
-//		}
+	private LineString getLineStringByPGgeometry(PGgeometry pg) throws SQLException{
     	LineString ls = new LineString(pg.toString());
     	return ls;
 	}
@@ -65,22 +54,6 @@ public class LineRecover {
 		s.close();
 		return coordenates;
 	}
-	
-//	public Map<Long, String> getLocations() throws SQLException{
-//		Map<Long, String> result = new HashMap<Long, String>();
-//		String sqlQuery = "SELECT c.id_caso, c.location " + "FROM larbc_db."
-//		+ HibernateConfig.getCurrentSchema() + ".casos c;";
-//		PreparedStatement s = dbConn.prepareStatement(sqlQuery);
-//		ResultSet rs = s.executeQuery();
-//		while(rs.next()){			
-//			Long id = new Long(rs.getLong("id_caso"));
-//			PGgeometry pg = (PGgeometry) (rs.getObject("location"));
-//			Point p = getPointByPGgeometry(pg);
-//			String location = p.getX() + " " + p.getY();
-//			result.put(id, location);
-//		}
-//		s.close();
-//		return result;
-//	}
+
 
 }

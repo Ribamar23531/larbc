@@ -80,7 +80,7 @@ public interface SystemFacade {
 	
 	public List<Point> getPoints();
 	
-	public void updatePoint(Point point) throws PointAlreadySavedException;
+//	public void updatePoint(Point point) throws PointAlreadySavedException;
 	
 	public void saveLine(Line line);
 	
