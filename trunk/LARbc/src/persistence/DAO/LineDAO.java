@@ -12,6 +12,6 @@ public interface LineDAO {
 	
 	public List<Line> getLines();
 	
-	public void updateLine(Line line);
+//	public void updateLine(Line line);
 
 }

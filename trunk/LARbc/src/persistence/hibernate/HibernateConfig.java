@@ -55,20 +55,22 @@ public class HibernateConfig {
 			config.addAnnotatedClass(Point.class);
 			config.addAnnotatedClass(Line.class);
 			config.addAnnotatedClass(Polygon.class);
-			config.addAnnotatedClass(Vertex.class);
+			config.addAnnotatedClass(Vertex.class);		
 			
 			sessionFactory = config.buildSessionFactory();
-			createGeometryColumn(currentSchema, sessionFactory);
+			createGeometryColumns(currentSchema, sessionFactory);
 		} catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
 	
-	private static void createGeometryColumn(String currentSchema, SessionFactory sf){
-		String sqlQuery = "SELECT AddGeometryColumn('" + currentSchema + "','casos','location',-1,'POINT',2);";
+	private static void createGeometryColumns(String currentSchema, SessionFactory sf){
+		String casosColumn = "SELECT AddGeometryColumn('" + currentSchema + "','casos','location',-1,'POINT',2);";
+		String lineColumn = "SELECT AddGeometryColumn('" + currentSchema + "','lines','location',-1,'LINESTRING',2);";
 		try{
-			sf.openSession().createSQLQuery(sqlQuery).list();			
+			sf.openSession().createSQLQuery(casosColumn).list();
+			sf.openSession().createSQLQuery(lineColumn).list();
 		}catch(Exception e){}
 	}
 	

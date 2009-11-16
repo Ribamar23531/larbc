@@ -315,9 +315,9 @@ public class GerenteDePersistencia {
 		return this.lineDAO.getLines();
 	}
 
-	public void updateLine(Line line){
-		this.lineDAO.updateLine(line);
-	}
+//	public void updateLine(Line line){
+//		this.lineDAO.updateLine(line);
+//	}
 	
 	public void savePolygon(Polygon polygon){
 		this.polygonDAO.savePolygon(polygon);
