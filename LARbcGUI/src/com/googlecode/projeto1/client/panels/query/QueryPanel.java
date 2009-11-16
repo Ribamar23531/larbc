@@ -125,7 +125,7 @@ public class QueryPanel extends Panel{
 			public void onSuccess(List<String> bairros) {
 				for (String bairro : bairros) {
 					textNeighborhood.addItem(bairro);
-					textNeighborhood.setEnabled(false);
+					textNeighborhood.setEnabled(true);
 				}
 			}
 			
