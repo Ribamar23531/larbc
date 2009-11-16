@@ -30,13 +30,13 @@ public class SystemManager implements SystemFacade {
 
 	private GerenteDePersistencia persistenceManager;
 	private GerenteDeRBC rbcManager;
-//	private GerenteDeListagens listingManager;
+	private GerenteDeListagens listingManager;
 	private GerenteDeEMail mailManager;
 	
 	public SystemManager(){
 		this.persistenceManager = new GerenteDePersistencia();
 		this.rbcManager = new GerenteDeRBC(false);
-//		this.listingManager = new GerenteDeListagens();
+		this.listingManager = new GerenteDeListagens();
 		this.mailManager = new GerenteDeEMail();
 	}
 
@@ -221,8 +221,8 @@ public class SystemManager implements SystemFacade {
 	}
 
 	public List<String> listBairros() {
-//		return this.listingManager.getBairros();
-		return new ArrayList<String>();
+		return this.listingManager.getBairros();
+//		return new ArrayList<String>();
 
 	}
 	
@@ -230,8 +230,8 @@ public class SystemManager implements SystemFacade {
 	 * {@inheritDoc}
 	 */
 	public List<String> listEstados() {
-//		return this.listingManager.getEstados();
-		return new ArrayList<String>();
+		return this.listingManager.getEstados();
+//		return new ArrayList<String>();
 	}
 
 	@Override
