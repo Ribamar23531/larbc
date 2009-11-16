@@ -63,7 +63,7 @@ public class ManagePanel extends Panel{
 			editTab.setSize("620px", "500px");
 
 			DemandsTab demandsTab = new DemandsTab();
-			tabPanel.add(demandsTab, "Moderar Demandas", false);
+			tabPanel.add(demandsTab, "Analisar Demandas", false);
 			demandsTab.setSize("620px", "500px");
 						
 			PoiTab poiTab = new PoiTab();			
