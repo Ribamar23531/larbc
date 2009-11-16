@@ -53,5 +53,4 @@ public class GerenteDeListagens {
 	public List<String> getEstados() {
 		return this.estados;
 	}
-
 }
