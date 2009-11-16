@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import persistence.util.Coordenates;
+
 
 @Entity
 @Table(name = "polygons")
@@ -26,7 +28,7 @@ public class Polygon {
 	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Transient
-	private List<Vertex> vertexes;
+	private List<Coordenates> vertexes;
 	
 	public Polygon(){}
 
@@ -46,11 +48,11 @@ public class Polygon {
 		return obs;
 	}
 
-	public void setVertexes(List<Vertex> vertexes) {
+	public void setVertexes(List<Coordenates> vertexes) {
 		this.vertexes = vertexes;
 	}
 
-	public List<Vertex> getVertexes() {
+	public List<Coordenates> getVertexes() {
 		return vertexes;
 	}
 
@@ -70,6 +72,13 @@ public class Polygon {
 		return name;
 	}
 	
-	
+	public String getLocation(){
+		String location = "";
+		for (Coordenates coordenates : this.vertexes) {
+			location += coordenates.toString() + ",";
+		}		
+		location += this.vertexes.get(0).toString();
+		return location;
+	}
 
 }

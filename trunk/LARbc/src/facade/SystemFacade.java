@@ -88,15 +88,11 @@ public interface SystemFacade {
 	
 	public List<Line> getLines();
 	
-//	public void updateLine(Line line);
-	
 	public void savePolygon(Polygon polygon);
 	
 	public void removePolygon(Polygon polygon);
 	
 	public List<Polygon> getPolygons();
-	
-	public void updatePolygon(Polygon polygon);
 	
 //=== Query operation ===
 	public List<Caso> doQuery(int resultNumber, String state, String city, String neighborhood, String street, String name,

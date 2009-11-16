@@ -28,7 +28,6 @@ public class Line {
 	private String obs;
 	@Transient
 	private List<Coordenates> vertexes;
-//	private List<Vertex> vertexes;
 	
 	public Line(){}
 
@@ -47,19 +46,11 @@ public class Line {
 	public String getObs() {
 		return obs;
 	}
-
-//	public void setVertexes(List<Vertex> vertexes) {
-//		this.vertexes = vertexes;
-//	}
 	
 	public void setVertexes(List<Coordenates> vertexes) {
 		this.vertexes = vertexes;
 	}
 
-//	public List<Vertex> getVertexes() {
-//		return vertexes;
-//	}
-	
 	public List<Coordenates> getVertexes() {
 		return vertexes;
 	}

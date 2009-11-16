@@ -12,6 +12,6 @@ public interface PolygonDAO {
 	
 	public List<Polygon> getPolygons();
 	
-	public void updatePolygon(Polygon polygon);
+//	public void updatePolygon(Polygon polygon);
 
 }

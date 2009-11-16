@@ -1,14 +1,15 @@
 package persistence.hibernate.hibernateDAO;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import persistence.DAO.PolygonDAO;
+import persistence.hibernate.HibernateConfig;
+import persistence.jdbc.poi.PolygonRecover;
 import beans.poi.Polygon;
-import beans.poi.Vertex;
 
 public class PolygonHibernateDAO extends HibernateDAO implements PolygonDAO {
 
@@ -29,23 +30,10 @@ public class PolygonHibernateDAO extends HibernateDAO implements PolygonDAO {
 		transaction.commit();
 		session.close();
 		for (Polygon polygon : polygons) {
-			List<Vertex> vertexes = getVertexes(polygon);
-			polygon.setVertexes(vertexes);
+			getLocation(polygon);			
 		}
 		return polygons;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private List<Vertex> getVertexes(Polygon polygon) {
-		Session session = sf.openSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.getNamedQuery("getVertexes");
-        query.setLong("idVertex", polygon.getIdPolygon());
-        List<Vertex> vertexes = query.list();
-        transaction.commit();
-        session.close();
-        return vertexes;
-    }
+	}	
 
 	@Override
 	public void removePolygon(Polygon polygon) {
@@ -54,27 +42,7 @@ public class PolygonHibernateDAO extends HibernateDAO implements PolygonDAO {
 		session.delete(polygon);
 		transaction.commit();
 		session.close();
-		
-		removeVertexes(polygon);
-
-	}
-	
-	private void removeVertexes(Polygon polygon) {
-		List<Vertex> vertexes = getVertexes(polygon);
-		for (Vertex vertex : vertexes) {
-			removeVertex(vertex);
-		}
-		
-	}
-
-	private void removeVertex(Vertex vertex) {
-		Session session = sf.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.delete(vertex);
-		transaction.commit();
-		session.close();
-		
-	}
+	}	
 
 	@Override
 	public void savePolygon(Polygon polygon) {
@@ -84,53 +52,28 @@ public class PolygonHibernateDAO extends HibernateDAO implements PolygonDAO {
 		transaction.commit();
 		session.close();
 		
-		saveVertexes(polygon);
+		setLocation(polygon);
 
 	}
 	
-	private void saveVertexes(Polygon polygon) {
-		List<Vertex> vertexes = polygon.getVertexes();
-		for (Vertex vertex : vertexes) {
-			vertex.setIdVertex(polygon.getIdPolygon());
-			saveVertex(vertex);
-		}
-		
-	}
-
-	private void saveVertex(Vertex vertex) {
+	private void setLocation(Polygon polygon) {
+		//places the geometry column in the case witch has just been saved
 		Session session = sf.openSession();
-		Transaction transaction = session.beginTransaction();		
-		session.save(vertex);
-		transaction.commit();
+		String sqlQuery = 	"UPDATE larbc_db." + HibernateConfig.getCurrentSchema() + ".polygons " +
+							"SET location = GeometryFromText('POLYGON((" + polygon.getLocation() +"))',-1) " +
+							"WHERE id_polygon = " + polygon.getIdPolygon() + ";";
+		session.createSQLQuery(sqlQuery).executeUpdate();	
 		session.close();		
-	}
-
-	@Override
-	public void updatePolygon(Polygon polygon) {
-		Session session = sf.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(polygon);
-		transaction.commit();
-		session.close();
-		
-		updateVertexes(polygon);
-
-	}
+	}	
 	
-	private void updateVertexes(Polygon polygon) {
-		List<Vertex> vertexes = getVertexes(polygon);
-		for (Vertex vertex : vertexes) {
-			updateVertex(vertex);
+	private void getLocation(Polygon polygon) {
+		PolygonRecover pr = new PolygonRecover();
+		try {
+			polygon.setVertexes(pr.getLocation(polygon.getIdPolygon()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-	}
-
-	private void updateVertex(Vertex vertex) {
-		Session session = sf.openSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(vertex);
-		transaction.commit();
-		session.close();
 		
 	}
 

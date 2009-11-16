@@ -1,7 +1,6 @@
 package facade;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import persistence.GerenteDeEMail;
@@ -302,11 +301,6 @@ public class SystemManager implements SystemFacade {
 	@Override
 	public void savePolygon(Polygon polygon) {
 		this.persistenceManager.savePolygon(polygon);		
-	}
-
-	@Override
-	public void updatePolygon(Polygon polygon) {
-		this.persistenceManager.updatePolygon(polygon);	
 	}
 	
 }
