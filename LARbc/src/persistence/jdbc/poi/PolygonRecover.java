@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.postgis.LineString;
 import org.postgis.PGgeometry;
 import org.postgis.Point;
+import org.postgis.Polygon;
 
 import persistence.hibernate.HibernateConfig;
 import persistence.jdbc.ConnectionFactory;
 import persistence.util.Coordenates;
 
-public class LineRecover {
+public class PolygonRecover {
 	
 	private Connection dbConn;
 	
-	public LineRecover(){
+	public PolygonRecover(){
 		try {
 			dbConn = ConnectionFactory.newConnection();
 		} catch (SQLException e) {			
@@ -27,16 +27,16 @@ public class LineRecover {
 		}
 	}
 	
-	private LineString getLinestringByPGgeometry(PGgeometry pg) throws SQLException{
-    	LineString ls = new LineString(pg.toString());
-    	return ls;
+	private Polygon getPolygonByPGgeometry(PGgeometry pg) throws SQLException{
+		Polygon polygon = new Polygon(pg.toString());
+    	return polygon;
 	}
 	
 	public List<Coordenates> getLocation(long id) throws SQLException {	
 
-		String sqlQuery = "SELECT l.location " + "FROM larbc_db."
-				+ HibernateConfig.getCurrentSchema() + ".lines l "
-				+ "WHERE l.id_line = " + id + ";";
+		String sqlQuery = "SELECT p.location " + "FROM larbc_db."
+				+ HibernateConfig.getCurrentSchema() + ".polygons p "
+				+ "WHERE p.id_polygon = " + id + ";";
 
 		PreparedStatement s = dbConn.prepareStatement(sqlQuery);
 		ResultSet rs = s.executeQuery();
@@ -45,12 +45,12 @@ public class LineRecover {
 		while(rs.next()){
 			pg = (PGgeometry) (rs.getObject("location"));
 		}
-		LineString ls = getLinestringByPGgeometry(pg);		
-		Point[] points = ls.getPoints();
-		List<Coordenates> coordenates = new ArrayList<Coordenates>(points.length);
-		for (Point point : points) {
-			coordenates.add(new Coordenates(point.getX(), point.getY()));
-		}
+		Polygon polygon = getPolygonByPGgeometry(pg);		
+		List<Coordenates> coordenates = new ArrayList<Coordenates>(polygon.numPoints());
+		for (int i = 0; i < polygon.numPoints(); i++) {
+			Point p = polygon.getPoint(i);
+			coordenates.add(new Coordenates(p.getX(), p.getY()));			
+		}		
 		s.close();
 		return coordenates;
 	}

@@ -10,7 +10,6 @@ import beans.Foto;
 import beans.poi.Line;
 import beans.poi.Point;
 import beans.poi.Polygon;
-import beans.poi.Vertex;
 
 
 public class HibernateConfig {
@@ -54,8 +53,7 @@ public class HibernateConfig {
 			config.addAnnotatedClass(Caso.class);
 			config.addAnnotatedClass(Point.class);
 			config.addAnnotatedClass(Line.class);
-			config.addAnnotatedClass(Polygon.class);
-			config.addAnnotatedClass(Vertex.class);		
+			config.addAnnotatedClass(Polygon.class);				
 			
 			sessionFactory = config.buildSessionFactory();
 			createGeometryColumns(currentSchema, sessionFactory);
@@ -69,10 +67,18 @@ public class HibernateConfig {
 		String casosColumn = "SELECT AddGeometryColumn('" + currentSchema + "','casos','location',-1,'POINT',2);";
 		String pointColumn = "SELECT AddGeometryColumn('" + currentSchema + "','points','location',-1,'POINT',2);";
 		String lineColumn = "SELECT AddGeometryColumn('" + currentSchema + "','lines','location',-1,'LINESTRING',2);";
+		String polygonColumn = "SELECT AddGeometryColumn('" + currentSchema + "','polygons','location',-1,'POLYGON',2);";
 		try{
-			sf.openSession().createSQLQuery(casosColumn).list();
-			sf.openSession().createSQLQuery(pointColumn).list();
-			sf.openSession().createSQLQuery(lineColumn).list();
+			sf.openSession().createSQLQuery(casosColumn).list();			
+		}catch(Exception e){}
+		try{			
+			sf.openSession().createSQLQuery(pointColumn).list();			
+		}catch(Exception e){}
+		try{			
+			sf.openSession().createSQLQuery(lineColumn).list();			
+		}catch(Exception e){}
+		try{			
+			sf.openSession().createSQLQuery(polygonColumn).list();
 		}catch(Exception e){}
 	}
 	

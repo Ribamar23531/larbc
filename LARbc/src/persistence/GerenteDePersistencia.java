@@ -299,10 +299,6 @@ public class GerenteDePersistencia {
 		return this.pointDAO.getPoints();
 	}
 	
-//	public void updatePoint(Point point) throws PointAlreadySavedException{
-//		this.pointDAO.updatePoint(point);
-//	}
-	
 	public void saveLine(Line line){
 		this.lineDAO.saveLine(line);
 	}
@@ -314,10 +310,6 @@ public class GerenteDePersistencia {
 	public List<Line> getLines(){
 		return this.lineDAO.getLines();
 	}
-
-//	public void updateLine(Line line){
-//		this.lineDAO.updateLine(line);
-//	}
 	
 	public void savePolygon(Polygon polygon){
 		this.polygonDAO.savePolygon(polygon);
@@ -329,10 +321,6 @@ public class GerenteDePersistencia {
 	
 	public List<Polygon> getPolygons(){
 		return this.polygonDAO.getPolygons();
-	}
-	
-	public void updatePolygon(Polygon polygon){
-		this.polygonDAO.updatePolygon(polygon);
-	}
+	}	
 	
 }
