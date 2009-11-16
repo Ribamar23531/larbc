@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.PanelSwitcher;
@@ -19,8 +20,10 @@ import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.panels.results.ResultsPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.FitLayout;
@@ -75,8 +78,16 @@ public class QueryPanel extends Panel{
 	private Image selectedVoltarButtonImage;
 	private boolean isSelectedVoltarButton;
 	private Panel buttonsVoltarPanel;
+	private FormPanel formPanel;
 	
 	public QueryPanel(){
+		formPanel = new FormPanel();
+		formPanel.setFrame(true); 
+		formPanel.setBorder(true);
+		formPanel.setWidth(310); 
+		formPanel.setHeight(60);
+		formPanel.setButtonAlign(Position.LEFT);
+		
 		buttonsVoltarPanel = new Panel();
 		buttonsVoltarPanel.setLayout(new ColumnLayout());
 		this.isSelectedVoltarButton = false;
@@ -190,7 +201,7 @@ public class QueryPanel extends Panel{
 
 		//Suites
 		textSuites = new TextField();
-		queryPanel.add(textSuites, 295, 277);
+		queryPanel.add(textSuites, 305, 277);
 		textSuites.setSize("78px", "21px");
 		Label lblSutes = new Label("Suítes:");
 		queryPanel.add(lblSutes, 248, 280);
@@ -223,7 +234,7 @@ public class QueryPanel extends Panel{
 		Label lblPreoEmTorno = new Label("Preço em torno de (R$):");
 		queryPanel.add(lblPreoEmTorno, 17, 364);
 		lblPreoEmTorno.setSize("115px", "24px");
-		
+
 		//Tipo de negocio
 		listbusinessType = new ListBox();
 		queryPanel.add(listbusinessType, 135, 387);
@@ -233,9 +244,28 @@ public class QueryPanel extends Panel{
 		Label lblTipoDeNegcio = new Label("Tipo de negócio:");
 		queryPanel.add(lblTipoDeNegcio, 17, 392);
 		lblTipoDeNegcio.setSize("131px", "24px");
+		
+		//Pontos de interesse
+		Label pontos = new Label("Pontos de interesse:");
+		queryPanel.add(pontos, 17, 420);
+		formPanel.setButtonAlign(Position.RIGHT);
+		RadioButton escola = new RadioButton("Escola", "Escola");
+		RadioButton universidade = new RadioButton("Universidade", "Universidade");
+		RadioButton viaAcesso = new RadioButton("Via principal de acesso", "Via principal de acesso");
+		RadioButton areaVerde = new RadioButton("Área verde", "Área verde");
+		RadioButton shopping = new RadioButton("Shopping", "Shopping");
+		RadioButton setorIndustrial = new RadioButton("Setor industrial", "Setor industrial");
+		formPanel.add(escola);
+		formPanel.add(universidade);
+		formPanel.add(viaAcesso);
+		formPanel.add(areaVerde);
+		formPanel.add(shopping);
+		formPanel.add(setorIndustrial);
+		//Adicionando formulário
+		queryPanel.add(formPanel, 135,420);
 
 		Image image1 = new Image("images/familia.png");
-		queryPanel.add(image1, 463, 96);
+		queryPanel.add(image1, 650, 96);
 		image1.setSize("193px", "300px");
 		
 		createEntrarButton();
@@ -342,8 +372,8 @@ public class QueryPanel extends Panel{
 						return;
 					}
 				}
+				
 				PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType, new AsyncCallback<List<CaseBean>>() {
-					
 					public void onSuccess(List<CaseBean> arg0) {
 						PanelSwitcher.switchPanel(new ResultsPanel(arg0));
 						
@@ -367,9 +397,9 @@ public class QueryPanel extends Panel{
 	
 	private void buildButtonsPanel() {
 		if(!isSelectedPesquisarButton){
-			queryPanel.add(pesquisarButton, 326, 423);
+			queryPanel.add(pesquisarButton, 500, 500);
 		}else{
-			queryPanel.add(selectedPesquisarButton, 326, 423);
+			queryPanel.add(selectedPesquisarButton, 500, 500);
 		}
 	}
 	
