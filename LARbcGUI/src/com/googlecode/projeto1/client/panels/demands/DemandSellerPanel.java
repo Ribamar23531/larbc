@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -18,11 +17,18 @@ import com.googlecode.projeto1.client.panels.Util;
 import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.core.Connection;
+import com.gwtext.client.data.SimpleStore;
+import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.MultiFieldPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.layout.ColumnLayout;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 
@@ -65,13 +71,14 @@ import com.gwtext.client.widgets.layout.FitLayout;
 	private TextField textAreaConstruida;
 	private TextField textGaragem;
 	private TextField textQuartos;
-	private ListBox comboTipo;
+	private ComboBox comboTipo;
 	private TextField textPreco;
-	private ListBox listEstado;
+	private ComboBox listEstado;
 	private TextField textAreaTotal;
 	private TextField textSuites;
 	private TextField textBanheiros;
 	private TextField textNome;
+	private FormPanel formPanel;
 
 	private Image voltarButtonImage;
 	private Image selectedVoltarButtonImage;
@@ -79,6 +86,12 @@ import com.gwtext.client.widgets.layout.FitLayout;
 	private Panel buttonsVoltarPanel;
 	
 	public DemandSellerPanel(){
+		formPanel = new FormPanel();
+		formPanel.setFrame(false); 
+		formPanel.setBorder(false);
+		formPanel.setWidth(800);  
+		formPanel.setLabelWidth(140);  
+		
 		buttonsVoltarPanel = new Panel();
 		buttonsVoltarPanel.setLayout(new ColumnLayout());
 		this.isSelectedVoltarButton = false;
@@ -98,46 +111,38 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		image.setSize("70%", "100%");
 		
 		//Nome da Rua
-		textRua = new TextField("Nome da rua", "nome da rua", 230);
-		textRua.setAllowBlank(false);  
-		rootPanel.add(textRua, 135, 111);
+		textRua = new TextField("Nome da rua *", "nome da rua", 230);
+		textRua.setAllowBlank(false); 
+		textRua.setBlankText("Este campo é obrigatório");
+		formPanel.add(textRua);
 		textRua.setSize("307px", "21px");
-		Label rua = new Label("Nome da rua: *");
-		rootPanel.add(rua, 17, 114);
-		rua.setSize("80px", "18px");
 		
 		//Bairro
-		textBairro = new TextField("Bairro", "bairro", 230);
-		textBairro.setAllowBlank(false);  
-		rootPanel.add(textBairro, 135, 137);
+		textBairro = new TextField("Bairro *", "bairro", 230);
+		textBairro.setAllowBlank(false); 
+		textBairro.setBlankText("Este campo é obrigatório");
+		formPanel.add(textBairro);
 		textBairro.setSize("307px", "21px");
-		Label lblBairro = new Label("Bairro: *");
-		rootPanel.add(lblBairro, 17, 140);
-		lblBairro.setSize("41px", "18px");
 		
 		//Cidade
-		textCidade = new TextField();
-		textCidade.setAllowBlank(false);  
-		rootPanel.add(textCidade, 135, 163);
+		textCidade = new TextField("Cidade *", "cidade", 110);
+		textCidade.setAllowBlank(false); 
+		textCidade.setBlankText("Este campo é obrigatório");
 		textCidade.setSize("217px", "21px");
 		textCidade.setValue("Campina Grande");
 		textCidade.setDisabled(true);
-		Label lblCidade = new Label("Cidade: *");
-		rootPanel.add(lblCidade, 17, 166);
-		lblCidade.setSize("43px", "18px");
 		
 		//Estado
-		listEstado = new ListBox();
-		rootPanel.add(listEstado, 382, 160);
+		listEstado = new ComboBox("UF *", "uf", 110);
 		listEstado.setSize("57px", "21px");
+		listEstado.setHideLabel(true);
+		Label uf = new Label("UF *:");
+		rootPanel.add(uf, 385, 174);
 		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
 			
 			public void onSuccess(List<String> states) {
-				for (String state : states) {
-					listEstado.addItem(state);
-					listEstado.setSelectedIndex(14);
-					listEstado.setEnabled(false);
-				}
+				listEstado.setValue(states.get(14));
+				listEstado.setDisabled(true);			
 			}
 			
 			public void onFailure(Throwable arg0) {
@@ -145,126 +150,126 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				
 			}
 		});
-		Label lblUf = new Label("UF: *");
-		rootPanel.add(lblUf, 356, 165);
-		lblUf.setSize("24px", "18px");
+		
+		MultiFieldPanel cidadeEstadoPanel = new MultiFieldPanel();  
+		cidadeEstadoPanel.addToRow(textCidade,397);  
+		cidadeEstadoPanel.addToRow(listEstado,new ColumnLayoutData(1));  
+		formPanel.add(cidadeEstadoPanel);
 		
 		//Nome do imóvel
-		textNome = new TextField();
-		rootPanel.add(textNome, 135, 194);
+		textNome = new TextField("Nome do imóvel", "nome do imóvel", 230);
+		formPanel.add(textNome);
 		textNome.setSize("307px", "21px");
-		Label lblNome = new Label("Nome do imóvel:");
-		rootPanel.add(lblNome, 17, 197);
-		lblNome.setSize("80px", "18px");
 		
 		//Area construida
-		textAreaConstruida = new TextField();
+		textAreaConstruida = new TextField("Área construída *", "área construída", 230);
 		textAreaConstruida.setAllowBlank(false);  
-		rootPanel.add(textAreaConstruida, 135, 222);
+		textAreaConstruida.setBlankText("Este campo é obrigatório");
 		textAreaConstruida.setSize("78px", "21px");
-		Label lblreaConstruda = new Label("Área construída: *");
-		rootPanel.add(lblreaConstruda, 17, 225);
-		lblreaConstruda.setSize("112px", "18px");
 		Label unidadeAreaConstruida = new Label("m²");
-		rootPanel.add(unidadeAreaConstruida, 212, 225);
+		rootPanel.add(unidadeAreaConstruida, 242, 225);
 		
 		//Area total
-		textAreaTotal = new TextField();
-		textAreaTotal.setAllowBlank(false);  
-		rootPanel.add(textAreaTotal, 308, 222);
+		textAreaTotal = new TextField("Área total *", "área total", 230);
+		textAreaTotal.setAllowBlank(false); 
+		textAreaTotal.setBlankText("Este campo é obrigatório");
 		textAreaTotal.setSize("78px", "21px");
-		Label lblreaTotal = new Label("Área total: *");
-		rootPanel.add(lblreaTotal, 248, 225);
-		lblreaTotal.setSize("71px", "18px");
+		textAreaTotal.setHideLabel(true); 
+		Label areaTotal= new Label("Área Total *:");
+		rootPanel.add(areaTotal, 308, 225);
 		Label unidadeAreaTotal= new Label("m²");
-		rootPanel.add(unidadeAreaTotal, 387, 225);
+		rootPanel.add(unidadeAreaTotal, 457, 225);
+		
+		MultiFieldPanel areasPanel = new MultiFieldPanel();  
+		areasPanel.addToRow(textAreaConstruida,363);  
+		areasPanel.addToRow(textAreaTotal,new ColumnLayoutData(1) );  
+		formPanel.add(areasPanel);
 		
 		//Vagas na garagem
-		textGaragem = new TextField();
+		textGaragem = new TextField("Vagas na garagem *", "vagas na garagem", 230);
 		textGaragem.setAllowBlank(false);  
-		rootPanel.add(textGaragem, 135, 248);
+		textGaragem.setBlankText("Este campo é obrigatório");
+		formPanel.add(textGaragem);
 		textGaragem.setSize("78px", "21px");
-		Label lblVagasNaGaragem = new Label("Vagas na garagem: *");
-		rootPanel.add(lblVagasNaGaragem, 17, 251);
-		lblVagasNaGaragem.setSize("147px", "18px");
 				
 		//Quartos
-		textQuartos = new TextField();
+		textQuartos = new TextField("Quartos *", "quartos", 230);
 		textQuartos.setAllowBlank(false);  
-		rootPanel.add(textQuartos, 135, 277);
+		textQuartos.setBlankText("Este campo é obrigatório");
 		textQuartos.setSize("78px", "21px");
-		Label lblQuartos = new Label("Quartos: *");
-		rootPanel.add(lblQuartos, 17, 280);
-		lblQuartos.setSize("55px", "18px");
 
 		//Suites
-		textSuites = new TextField();
-		textSuites.setAllowBlank(false);  
-		rootPanel.add(textSuites, 295, 277);
+		textSuites = new TextField("Suítes *", "suítes", 230);
+		textSuites.setAllowBlank(false);
+		textSuites.setBlankText("Este campo é obrigatório");
+		textSuites.setHideLabel(true);
 		textSuites.setSize("78px", "21px");
-		Label lblSutes = new Label("Suítes: *");
-		rootPanel.add(lblSutes, 248, 280);
-		lblSutes.setSize("40px", "18px");
+		Label suites = new Label("Suítes *:");
+		rootPanel.add(suites, 308, 270);
+		
+		MultiFieldPanel quartosPanel = new MultiFieldPanel();  
+		quartosPanel.addToRow(textQuartos,363);  
+		quartosPanel.addToRow(textSuites,new ColumnLayoutData(1) );  
+		formPanel.add(quartosPanel);
 		
 		//Banheiros
-		textBanheiros = new TextField();
-		textBanheiros.setAllowBlank(false);  
-		rootPanel.add(textBanheiros, 135, 303);
+		textBanheiros = new TextField("Banheiros sociais *", "banheiros sociais", 230);
+		textBanheiros.setAllowBlank(false); 
+		textBanheiros.setBlankText("Este campo é obrigatório");
+		formPanel.add(textBanheiros);
 		textBanheiros.setSize("78px", "21px");
-		Label lblBanheirosSociais = new Label("Banheiros sociais: *");
-		rootPanel.add(lblBanheirosSociais, 17, 306);
-		lblBanheirosSociais.setSize("100px", "24px");
 		
 		//Tipo de imovel
-		comboTipo = new ListBox();
-		rootPanel.add(comboTipo, 135, 329);
+		comboTipo = new ComboBox("Tipo do imóvel *", "tipo do imóvel", 110);
 		comboTipo.setSize("205px", "21px");	
-		comboTipo.addItem("Casa");
-		comboTipo.addItem("Apartamento");
-		comboTipo.addItem("Terreno");
-		comboTipo.addItem("Sala comercial");
-		Label lblTipoDeImvel = new Label("Tipo de imóvel: *");
-		rootPanel.add(lblTipoDeImvel, 17, 334);
-		lblTipoDeImvel.setSize("131px", "24px");
+		Store store = new SimpleStore(new String[]{"abbr", "state"}, getTipos());  
+		store.load();  
+		comboTipo.setHiddenName("tipo do imóvel");  
+		comboTipo.setStore(store);  
+		comboTipo.setDisplayField("abbr");  
+		comboTipo.setTypeAhead(true);  
+		comboTipo.setMode(ComboBox.LOCAL);  
+		comboTipo.setTriggerAction(ComboBox.ALL); 
+		comboTipo.setValue("Casa");
+		comboTipo.setDisabled(false);
+		comboTipo.setSelectOnFocus(true);  
+		comboTipo.setWidth(190);  
+		formPanel.add(comboTipo);
 		
 		//Preco do imovel
-		textPreco = new TextField();
-		rootPanel.add(textPreco, 135, 361);
+		textPreco = new TextField("Preço em torno de (R$)", "bairro", 230);
+		formPanel.add(textPreco);
 		textPreco.setSize("146px", "21px");		
-		Label lblPreoEmTorno = new Label("Preço em torno de (R$):");
-		rootPanel.add(lblPreoEmTorno, 17, 364);
-		lblPreoEmTorno.setSize("115px", "24px");
 		
 		//Nome da pessoa
-		textNomePessoa = new TextField();
-		textNomePessoa.setAllowBlank(false);  
-		rootPanel.add(textNomePessoa, 135, 390);
+		textNomePessoa = new TextField("Seu nome *", "seu nome", 230);
+		textNomePessoa.setAllowBlank(false); 
+		textNomePessoa.setBlankText("Este campo é obrigatório");
+		formPanel.add(textNomePessoa);
 		textNomePessoa.setSize("265px", "21px");
-		Label lblNomePessoa = new Label("Seu nome: *");
-		rootPanel.add(lblNomePessoa, 17, 392);
-		lblNomePessoa.setSize("58px", "18px");
 		
 		//Email
-		textEmail = new TextField();
+		textEmail = new TextField("Email *", "email", 230);
 		textEmail.setAllowBlank(false);
+		textEmail.setBlankText("Este campo é obrigatório");
 		textEmail.setVtype(VType.EMAIL);
-		rootPanel.add(textEmail, 135, 415);
+		textEmail.setVtypeText("Digite um e-mail válido com o formato user@domain.com");
+		formPanel.add(textEmail);
 		textEmail.setSize("220px", "21px");		
-		Label lblEmail = new Label("Email: *");
-		rootPanel.add(lblEmail, 17, 418);
-		lblEmail.setSize("40px", "24px");
 		
 		//Telefone
-		textTelefone = new TextField();
-		textTelefone.setAllowBlank(false);  
-		rootPanel.add(textTelefone, 135, 441);
+		textTelefone = new TextField("Telefone *", "telefone", 230);
+		textTelefone.setAllowBlank(false); 
+		textTelefone.setBlankText("Este campo é obrigatório");
+		formPanel.add(textTelefone);
 		textTelefone.setSize("150px", "21px");		
-		Label lblTelefone = new Label("Telefone: *");
-		rootPanel.add(lblTelefone, 17, 444);
-		lblTelefone.setSize("55px", "24px");
+		
+		//Adicionando Formulario
+		rootPanel.add(formPanel, 17, 120);
+		
 		
 		Image image1 = new Image("images/familia.png");
-		rootPanel.add(image1, 463, 96);
+		rootPanel.add(image1, 650, 96);
 		image1.setSize("193px", "300px");
 		
 		createEntrarButton();
@@ -312,6 +317,44 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				city = textCidade.getText();
 				name = textNomePessoa.getText();
 				String message = "Digite um valor numérico válido para: ";
+				if(textRua.getText().equals("")){
+					MessageBox.alert("O campo Nome da rua é obrigatório");
+					return;
+				}else if(textBairro.getText().equals("")){
+					MessageBox.alert("O campo Bairro é obrigatório");
+					return;
+				}else if(textCidade.getText().equals("")){
+					MessageBox.alert("O campo Cidade é obrigatório");
+					return;
+				}else if(textAreaConstruida.getText().equals("")){
+					MessageBox.alert("O campo Área construída é obrigatório");
+					return;
+				}else if(textAreaTotal.getText().equals("")){
+					MessageBox.alert("O campo Área total é obrigatório");
+					return;
+				}else if(textGaragem.getText().equals("")){
+					MessageBox.alert("o campo Vagas na garagem é obrigatório");
+					return;
+				}else if(textQuartos.getText().equals("")){
+					MessageBox.alert("O campo Quartos é obrigatório");
+					return;
+				}else if(textSuites.getText().equals("")){
+					MessageBox.alert("O campo Suítes é obrigatório");
+					return;
+				}else if(textBanheiros.getText().equals("")){
+					MessageBox.alert("O campo Banheiros é obrigatório");
+					return;
+				}else if(textNomePessoa.getText().equals("")){
+					MessageBox.alert("O campo Seu nome é obrigatório");
+					return;
+				}else if(textEmail.getText().equals("")){
+					MessageBox.alert("O campo Email é obrigatório");
+					return;
+				}else if(textTelefone.getText().equals("")){
+					MessageBox.alert("O campo Telefone é obrigatório");
+					return;
+				}
+					
 				try{
 					builtArea = Float.parseFloat(textAreaConstruida.getText());					
 				}catch(Exception e){
@@ -337,8 +380,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 					}
 				}				
 
-				int indexType = comboTipo.getSelectedIndex();
-				type = comboTipo.getItemText(indexType);
+				type = comboTipo.getText();
 				
 				try{
 					price = Float.parseFloat(textPreco.getText());
@@ -358,8 +400,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 					}
 				}				
 
-				int index = listEstado.getSelectedIndex();
-				state  = listEstado.getItemText(index);
+				state  = listEstado.getText();
 				
 				try{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
@@ -385,6 +426,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 						return;
 					}
 				}
+				
 				email = textEmail.getText();
 				telefone = textTelefone.getText();
 				DemandBean demanda = new DemandBean();
@@ -472,4 +514,13 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		}
 		buttonsVoltarPanel.doLayout();	
 	}
+	
+	private String[][] getTipos() {  
+		return new String[][]{  
+				new String[]{"Casa", "casa", "1"},  
+				new String[]{"Apartamento", "2"},  
+				new String[]{"Terreno", "terreno", "3"},  
+				new String[]{"Sala comercial", "4"},  
+		};  
+	}  
 }
