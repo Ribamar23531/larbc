@@ -68,6 +68,8 @@ public class QueryPanel extends Panel{
 	private TextField textPreco;
 	private ListBox listbusinessType;
 	private ListBox listEstado;
+	private ListBox relevanciaPreco;
+	private ListBox relevanciaPontos;
 	private TextField textAreaTotal;
 	private TextField textSuites;
 	private TextField textBanheiros;
@@ -248,6 +250,18 @@ public class QueryPanel extends Panel{
 		Label lblPreoEmTorno = new Label("Preço em torno de (R$):");
 		queryPanel.add(lblPreoEmTorno, 17, 374);
 		lblPreoEmTorno.setSize("115px", "24px");
+		Label relevancia = new Label("Relevância:");
+		queryPanel.add(relevancia, 310, 374);
+		relevancia.setSize("115px", "24px");
+		relevanciaPreco = new ListBox();
+		queryPanel.add(relevanciaPreco, 382, 371);
+		relevanciaPreco.setSize("57px", "21px");	
+		relevanciaPreco.addItem("1");
+		relevanciaPreco.addItem("2");
+		relevanciaPreco.addItem("3");
+		relevanciaPreco.addItem("4");
+		relevanciaPreco.addItem("5");
+		relevanciaPreco.setItemSelected(2, true);
 
 		//Tipo de negocio
 		listbusinessType = new ListBox();
@@ -263,6 +277,18 @@ public class QueryPanel extends Panel{
 		Label pontos = new Label("Pontos de interesse:");
 		queryPanel.add(pontos, 17, 430);
 		formPanel.setButtonAlign(Position.RIGHT);
+		Label relevanciapontos = new Label("Relevância:");
+		queryPanel.add(relevanciapontos, 30, 448);
+		relevanciapontos.setSize("115px", "24px");
+		relevanciaPontos = new ListBox();
+		queryPanel.add(relevanciaPontos, 30, 465);
+		relevanciaPontos.setSize("57px", "21px");	
+		relevanciaPontos.addItem("1");
+		relevanciaPontos.addItem("2");
+		relevanciaPontos.addItem("3");
+		relevanciaPontos.addItem("4");
+		relevanciaPontos.addItem("5");
+		relevanciaPontos.setItemSelected(2, true);
 		RadioButton escola = new RadioButton("Escola", "Escola");
 		RadioButton universidade = new RadioButton("Universidade", "Universidade");
 		RadioButton viaAcesso = new RadioButton("Via principal de acesso", "Via principal de acesso");
