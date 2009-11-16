@@ -12,8 +12,10 @@ import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
+import com.googlecode.projeto1.client.panels.modality.LoginWindow;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.googlecode.projeto1.client.upload.UploadPanel;
 import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBoxConfig;
@@ -29,9 +31,13 @@ public class CaseEditPanel extends CaptionPanel{
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
 	private CaseBean myCaseBean;
+	private Button imagemButton;
+	private UploadPanel uploadPanel;
 	
 	public CaseEditPanel(CaseBean caseBean, int index){
 		super("Caso " + index);
+		this.uploadPanel = new UploadPanel(caseBean.getId());
+		uploadPanel.setSize(300, 100);
 		this.myCaseBean = caseBean;
 		this.setHeight("150px");
 		this.setWidth("150px");
@@ -57,7 +63,12 @@ public class CaseEditPanel extends CaptionPanel{
 				new EditWindow(myCaseBean).show();
 				
 			}
-		});		
+		});	
+		
+		{
+			imagemButton = getImagemButton();
+			absolutePanel.add(imagemButton, 45, 74);
+		}
 		absolutePanel.add(editarButton, 338, 74);
 		
 		Button removeButton = new Button("Remover");
@@ -104,6 +115,18 @@ public class CaseEditPanel extends CaptionPanel{
 				
 			}
 		});
+	}
+	
+	private Button getImagemButton() {
+		final Button button = new Button("Inserir Imagens");
+		button.addClickListener(new ClickListener() {
+
+			public void onClick(Widget arg0) {
+				uploadPanel.show(getImagemButton().getElement());
+			}
+			
+		});
+		return button;
 	}
 
 }
