@@ -19,7 +19,7 @@ import com.googlecode.projeto1.client.panels.WindowFieldsAlert;
 import com.googlecode.projeto1.client.panels.exceptions.FieldsNotFilledExeption;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
 import com.googlecode.projeto1.client.panels.manage.SelectedLocation;
-import com.googlecode.projeto1.client.panels.maps.CreateCaseMap;
+import com.googlecode.projeto1.client.panels.maps.AjustCoordinatesMap;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;
@@ -217,7 +217,7 @@ public class CreateTab extends AbsolutePanel{
 		button.addClickListener(new ClickListener() {
 
 			public void onClick(Widget arg0) {
-				new CreateCaseMap().show(button.getElement());
+				new AjustCoordinatesMap().show(button.getElement());
 			}
 			
 		});

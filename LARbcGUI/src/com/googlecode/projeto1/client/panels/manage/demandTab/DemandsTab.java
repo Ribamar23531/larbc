@@ -45,7 +45,7 @@ public class DemandsTab extends AbsolutePanel{
 				}
 				
 				public void onFailure(Throwable arg0) {
-					MessageBox.alert("Não foi possível carregar os casos");
+					MessageBox.alert("Não foi possível carregar os casos");					
 					
 				}
 
