@@ -1,12 +1,18 @@
 package com.googlecode.projeto1.client.panels.manage.demandTab;
 
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.beans.DemandBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
+import com.googlecode.projeto1.client.panels.maps.CreateCaseMap;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.EventObject;
@@ -38,7 +44,8 @@ public class EditWindow extends Window{
 		this.setPlain(true);		
 		this.setPaddings(5);  
 		this.setButtonAlign(Position.CENTER);
-		this.addButton(getOkButton());		
+		this.addButton(getOkButton());	
+		this.addButton(getMapButton());
 		this.setResizable(true);
 		this.setCloseAction(Window.HIDE);  
 		this.setPlain(true);
@@ -113,6 +120,12 @@ public class EditWindow extends Window{
 
 		});
 		return okButton;
+	}
+	
+	private Button getMapButton() {
+		final Button button = new Button("Ajustar Coordenadas");
+
+		return button;
 	}
 
 }
