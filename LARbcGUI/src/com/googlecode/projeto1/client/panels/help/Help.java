@@ -6,10 +6,12 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.panels.Util;
 import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.core.SortDir;
 import com.gwtext.client.data.ArrayReader;
 import com.gwtext.client.data.FieldDef;
@@ -28,7 +30,7 @@ import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.FitLayout;
 
 public class Help extends Panel {
-	private VerticalPanel verticalPanel;
+	private AbsolutePanel rootPanel;
 	private String visaoGeralString = "<html><font color=#000080><p><b><font size=3>Visão Geral</font></b></p><p><br></br></p><p><b>LARbc</b> é uma aplicação que sugere imóveis aos usuários, levando em consideração as suas preferências como um apartamento ou casa com certo número de quartos, área útil, dentre outros fatores. </p>"
 			+ "	<p><br></br></p><p>No <b>LARbc</b> o cliente pode consultar imóveis à venda ou disponíveis para locação e pode cadastrar um imóvel para vender através da imobiliária.</p>" +
 					" <p><br></br></p><p> O dono ou funcionário da imobiliária pode administrar a ferramenta gerenciando demandas, que são cadastros de vendas feitos por clientes e consultas realizadas pelos clientes que não retornaram para eles um resultado satisfatório. </p></font></html>"
@@ -91,11 +93,11 @@ public class Help extends Panel {
 		ajudaPanel.setFrame(true);
 		Image image = new Image("images/welcome.png");
 		ajudaPanel.add(image);
-		image.setSize("50%", "50%");
-		verticalPanel = new VerticalPanel();
-		verticalPanel.add(ajudaPanel);
-		verticalPanel.setVisible(true);
-		verticalPanel.setPixelSize(500, 500);
+		image.setSize("100%", "100%");
+		rootPanel = new AbsolutePanel();
+		rootPanel.add(ajudaPanel);
+		rootPanel.setVisible(true);
+		rootPanel.setPixelSize(500, 500);
 
 		MemoryProxy proxy = new MemoryProxy(getCompanyData());
 		RecordDef recordDef = new RecordDef(new FieldDef[] {
@@ -175,7 +177,7 @@ public class Help extends Panel {
 		});
 
 		panel.add(grid);
-		panel.add(verticalPanel, 410, 0);
+		panel.add(rootPanel, 410, 0);
 		this.add(panel);
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
