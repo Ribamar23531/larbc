@@ -24,6 +24,11 @@ private Connection dbConn;
 		}
 	}
 	
+	public int qteOfNearPOIByType(Coordenates coordenates, String type){
+		//TODO AINDA EM IMPLEMENTAÇÃO
+		return 0;
+	}
+	
 	/*
 	SELECT the_geom 
 	FROM geom_table 

@@ -18,6 +18,8 @@ import persistence.hibernate.hibernateDAO.FotoHibernateDAO;
 import persistence.hibernate.hibernateDAO.LineHibernateDAO;
 import persistence.hibernate.hibernateDAO.PointHibernateDAO;
 import persistence.hibernate.hibernateDAO.PolygonHibernateDAO;
+import persistence.jdbc.SpatialQueries;
+import persistence.util.Coordenates;
 import persistence.util.Paths;
 import beans.Administrador;
 import beans.Caso;
@@ -45,6 +47,7 @@ public class GerenteDePersistencia {
 	private PointDAO pointDAO;
 	private LineDAO lineDAO;
 	private PolygonDAO polygonDAO;
+	private SpatialQueries spatialQueries;
 	private static GerenteDePersistencia minhaInstancia = null;
 	
 	public GerenteDePersistencia(boolean testing){
@@ -55,6 +58,7 @@ public class GerenteDePersistencia {
 		this.pointDAO = new PointHibernateDAO(testing);
 		this.lineDAO =  new LineHibernateDAO(testing);
 		this.polygonDAO = new PolygonHibernateDAO(testing);
+		spatialQueries = new SpatialQueries();
 	}
 	
 	public GerenteDePersistencia(){
@@ -321,6 +325,14 @@ public class GerenteDePersistencia {
 	
 	public List<Polygon> getPolygons(){
 		return this.polygonDAO.getPolygons();
-	}	
+	}
+	
+	//=================================Operacoes sobre Consultas Espaciais===================================\\
+	
+	public int qteOfNearPOIByType(Coordenates coordenates, String type){
+		
+		//TODO AINDA EM IMPLEMENTAÇÃO
+		return spatialQueries.qteOfNearPOIByType(coordenates, type);
+	}
 	
 }
