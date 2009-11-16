@@ -58,7 +58,7 @@ public class QueryPanel extends Panel{
 	private int suite;
 	private int bedroom;
 	private TextField textStreet;
-	private TextField textNeighborhood;
+	private ListBox textNeighborhood;
 	private TextField textCity;
 	private TextField textName;
 	private TextField textAreaConstruida;
@@ -115,9 +115,23 @@ public class QueryPanel extends Panel{
 		rua.setSize("80px", "18px");
 		
 		//Bairro
-		textNeighborhood = new TextField();
+		textNeighborhood = new ListBox();
 		queryPanel.add(textNeighborhood, 135, 137);
 		textNeighborhood.setSize("307px", "21px");
+		PERSISTENCE_SERVICE.listBairros(new AsyncCallback<List<String>>() {
+			
+			public void onSuccess(List<String> bairros) {
+				for (String bairro : bairros) {
+					textNeighborhood.addItem(bairro);
+					textNeighborhood.setEnabled(false);
+				}
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Os bairros não puderam ser carregados do disco");
+				
+			}
+		});
 		Label lblBairro = new Label("Bairro:");
 		queryPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("41px", "18px");
@@ -226,7 +240,7 @@ public class QueryPanel extends Panel{
 		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
 		queryPanel.add(lblTipoDeImvel, 17, 334);
 		lblTipoDeImvel.setSize("131px", "24px");
-		
+
 		//Preco do imovel
 		textPreco = new TextField();
 		queryPanel.add(textPreco, 135, 361);
@@ -302,7 +316,8 @@ public class QueryPanel extends Panel{
 		selectedPesquisarButton.addClickListener(new ClickListener(){
 			public void onClick(Widget arg0) {			
 				street = textStreet.getText();
-				neighborhood = textNeighborhood.getText();
+				int indexBairro = textNeighborhood.getSelectedIndex();
+				neighborhood = textNeighborhood.getItemText(indexBairro);
 				city = textCity.getText();
 				name = textName.getText();
 				String message = "Digite um valor numérico válido para: ";
