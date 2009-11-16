@@ -10,7 +10,7 @@ import org.hibernate.classic.Session;
 
 import persistence.DAO.CasoDAO;
 import persistence.hibernate.HibernateConfig;
-import persistence.jdbc.PointRecover;
+import persistence.jdbc.PointCasoRecover;
 import beans.Administrador;
 import beans.Caso;
 import beans.Foto;
@@ -81,7 +81,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		List<Caso> casos = session.createQuery("from " + Caso.class.getCanonicalName()).list();
 		transaction.commit();
 		session.close();
-		PointRecover pr = new PointRecover();
+		PointCasoRecover pr = new PointCasoRecover();
 		try {
 			Map<Long, String> locations = pr.getLocations();
 			for (Caso caso : casos) {
@@ -166,7 +166,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	
 	@Override
 	public String getCasoLocation(long id) throws SQLException {
-		PointRecover pr = new PointRecover();
+		PointCasoRecover pr = new PointCasoRecover();
 		String location = pr.getLocation(id);		
 		return location;
 

@@ -4,22 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.postgis.PGgeometry;
 import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
-import beans.Caso;
 
-public class PointRecover {
+public class PointCasoRecover {
 	
 	private Connection dbConn;
 	
-	public PointRecover(){
+	public PointCasoRecover(){
 		try {
 			dbConn = ConnectionFactory.newConnection();
 		} catch (SQLException e) {			

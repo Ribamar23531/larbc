@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import persistence.util.Coordenates;
+
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -521,12 +523,13 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		l.setName(line.getName());
 		l.setObs(line.getObs());
 		
-		List<Vertex> vertexes = new ArrayList<Vertex>();
+		List<Coordenates> vertexes = new ArrayList<Coordenates>();
 		List<Double> latitudes = line.getLatitudes();
 		List<Double> longitudes = line.getLongitudes();
 		
 		for (int i = 0; i < latitudes.size(); i++) {				
-			vertexes.add(new Vertex(line.getIdLine(), i, latitudes.get(i), longitudes.get(i)));			
+//			vertexes.add(new Vertex(line.getIdLine(), i, latitudes.get(i), longitudes.get(i)));
+			vertexes.add(new Coordenates(latitudes.get(i), longitudes.get(i)));
 		}
 		l.setVertexes(vertexes);
 		return l;
@@ -543,13 +546,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		lineBean.setObs(line.getObs());
 		
-		List<Vertex> vertexes = line.getVertexes();
+		List<Coordenates> vertexes = line.getVertexes();
 		List<Double> latitudes = new ArrayList<Double>(vertexes.size());
 		List<Double> longitudes = new ArrayList<Double>(vertexes.size());
-		for (Vertex vertex : vertexes) {
-			int index = (int) vertex.getIndex();
-			latitudes.add(index, vertex.getLatitude());
-			longitudes.add(index, vertex.getLongitude());
+		for (Coordenates vertex : vertexes) {
+			latitudes.add(vertex.getLatitude());
+			longitudes.add(vertex.getLongitude());
+//			int index = (int) vertex.getIndex();
+//			latitudes.add(index, vertex.getLatitude());
+//			longitudes.add(index, vertex.getLongitude());
 		}
 		lineBean.setLatitudes(latitudes);
 		lineBean.setLongitudes(longitudes);

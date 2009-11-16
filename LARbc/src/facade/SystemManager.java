@@ -281,10 +281,10 @@ public class SystemManager implements SystemFacade {
 		
 	}
 
-	@Override
-	public void updateLine(Line line) {
-		this.persistenceManager.updateLine(line);		
-	}
+//	@Override
+//	public void updateLine(Line line) {
+//		this.persistenceManager.updateLine(line);		
+//	}
 
 	@Override
 	public List<Polygon> getPolygons() {
