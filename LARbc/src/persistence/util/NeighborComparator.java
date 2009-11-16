@@ -15,7 +15,7 @@ public class NeighborComparator {
 	private static NeighborComparator uniqueInstance;
 	
 	public static NeighborComparator getInstance(){
-		if(uniqueInstance != null){
+		if(uniqueInstance == null){
 			uniqueInstance = new NeighborComparator();
 		}
 		return uniqueInstance;
@@ -102,5 +102,10 @@ public class NeighborComparator {
 
 	public boolean isANeighbor(String caseValue) {
 		return this.neighborIndexes.contains(caseValue);
+	}
+	
+	public static void main(String[] args) {
+		NeighborComparator comparator = NeighborComparator.getInstance();
+		System.out.println(comparator.getNeigborList());
 	}
 }
