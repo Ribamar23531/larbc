@@ -18,9 +18,9 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
  * @author João Felipe
  * @version LARbc 1.0
  */
-public class CreateCaseMap extends MappingWindow{
+public class AjustCoordinatesMap extends MappingWindow{
 	
-	public CreateCaseMap(){
+	public AjustCoordinatesMap(){
 		super();
 		myMap.clearOverlays();
 		setLocation();
