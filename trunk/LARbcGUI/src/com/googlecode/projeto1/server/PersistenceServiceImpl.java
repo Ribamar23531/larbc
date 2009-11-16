@@ -487,8 +487,8 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		p.setName(point.getName());
 		p.setObs(point.getObs());
 		p.setType(point.getType().toString());
-		p.setLatitudeStr(point.getLatitude());
-		p.setLongitudeStr(point.getLongitude());
+		p.setLatitude(point.getLatitude());
+		p.setLongitude(point.getLongitude());
 		return p;
 	}
 	

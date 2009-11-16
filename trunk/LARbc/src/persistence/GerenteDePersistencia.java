@@ -299,9 +299,9 @@ public class GerenteDePersistencia {
 		return this.pointDAO.getPoints();
 	}
 	
-	public void updatePoint(Point point) throws PointAlreadySavedException{
-		this.pointDAO.updatePoint(point);
-	}
+//	public void updatePoint(Point point) throws PointAlreadySavedException{
+//		this.pointDAO.updatePoint(point);
+//	}
 	
 	public void saveLine(Line line){
 		this.lineDAO.saveLine(line);

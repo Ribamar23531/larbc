@@ -67,9 +67,11 @@ public class HibernateConfig {
 	
 	private static void createGeometryColumns(String currentSchema, SessionFactory sf){
 		String casosColumn = "SELECT AddGeometryColumn('" + currentSchema + "','casos','location',-1,'POINT',2);";
+		String pointColumn = "SELECT AddGeometryColumn('" + currentSchema + "','points','location',-1,'POINT',2);";
 		String lineColumn = "SELECT AddGeometryColumn('" + currentSchema + "','lines','location',-1,'LINESTRING',2);";
 		try{
 			sf.openSession().createSQLQuery(casosColumn).list();
+			sf.openSession().createSQLQuery(pointColumn).list();
 			sf.openSession().createSQLQuery(lineColumn).list();
 		}catch(Exception e){}
 	}

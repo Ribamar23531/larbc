@@ -5,6 +5,11 @@ public class Coordenates {
 	private double latitude;
 	private double longitude;
 	
+	public Coordenates(){
+		this.setLatitude(0);
+		this.setLongitude(0);
+	}
+	
 	public Coordenates(double latitude, double longitude){
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);

@@ -6,13 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
+import persistence.util.Coordenates;
 
+//@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.latitudeStr = :latitude AND p.longitudeStr = :longitude")})
 @Entity
 @Table(name = "points")
-@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.latitudeStr = :latitude AND p.longitudeStr = :longitude")})
 public class Point {
 	
 	@Id
@@ -25,19 +25,15 @@ public class Point {
 	private String type;
 	@Column(updatable = true, nullable = false)
 	private String obs;
-	@Column(updatable = true, nullable = false)
-	private String latitudeStr;
-	@Column(updatable = true, nullable = false)
-	private String longitudeStr;
-	
+	@Transient
+	private Coordenates coordenate;	
 	
 	//construtor vazio necessario pelo hibernate
 	public Point(){}
 	
 	public Point(double latitude, double longitude){
 		this.setObs("");
-		this.setLatitudeStr(latitude + "");
-		this.setLongitudeStr(longitude + "");
+		this.coordenate = new Coordenates(latitude, longitude);
 	}
 
 	public void setIdPoint(long idPoint) {
@@ -70,38 +66,82 @@ public class Point {
 
 	public String getName() {
 		return name;
-	}
+	}	
 
-	public void setLatitudeStr(String latitudeStr) {
-		this.latitudeStr = latitudeStr;
+	public void setLatitude(String latitude) {
+		if(coordenate == null){
+			this.coordenate = new Coordenates();
+		}
+		this.coordenate.setLatitude(Double.parseDouble(latitude));
 	}
 	
-	public void setLatitudeStr(double latitude) {
-		this.latitudeStr = latitude + "";
-	}
-
-	public String getLatitudeStr() {
-		return latitudeStr;
-	}
-
-	public void setLongitudeStr(String longitudeStr) {
-		this.longitudeStr = longitudeStr;
-	}
-	
-	public void setLongitudeStr(double longitude) {
-		this.longitudeStr = longitude + "";
-	}
-
-	public String getLongitudeStr() {
-		return longitudeStr;
+	public void setLatitude(double latitude) {
+		if(coordenate == null){
+			this.coordenate = new Coordenates();
+		}
+		this.coordenate.setLatitude(latitude);
 	}
 	
 	public double getLatitude(){
-		return Double.parseDouble(latitudeStr);
+		return this.coordenate.getLatitude();
+	}
+	
+	public void setLongitude(String longitude) {
+		if(coordenate == null){
+			this.coordenate = new Coordenates();
+		}
+		this.coordenate.setLongitude(Double.parseDouble(longitude));
+	}
+	
+	public void setLongitude(double longitude) {
+		if(coordenate == null){
+			this.coordenate = new Coordenates();
+		}
+		this.coordenate.setLongitude(longitude);
 	}
 	
 	public double getLongitude(){
-		return Double.parseDouble(longitudeStr);
+		return this.coordenate.getLongitude();
 	}
+
+	public void setCoordenate(Coordenates coordenate) {
+		this.coordenate = coordenate;
+	}
+
+	public Coordenates getCoordenate() {
+		return coordenate;
+	}
+	
+	public String toString(){
+		return this.coordenate.getLatitude() + " " + this.coordenate.getLongitude();
+	}
+	
+//	public void setLatitudeStr(double latitude) {
+//		this.latitudeStr = latitude + "";
+//	}
+//
+//	public String getLatitudeStr() {
+//		return latitudeStr;
+//	}
+//
+//	public void setLongitudeStr(String longitudeStr) {
+//		this.longitudeStr = longitudeStr;
+//	}
+//	
+//	public void setLongitudeStr(double longitude) {
+//		this.longitudeStr = longitude + "";
+//	}
+//
+//	public String getLongitudeStr() {
+//		return longitudeStr;
+//	}
+//	
+//	public double getLatitude(){
+//		return Double.parseDouble(latitudeStr);
+//	}
+//	
+//	public double getLongitude(){
+//		return Double.parseDouble(longitudeStr);
+//	}
 	
 }
