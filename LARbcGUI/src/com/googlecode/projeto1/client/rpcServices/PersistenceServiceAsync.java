@@ -27,6 +27,12 @@ public interface PersistenceServiceAsync {
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, String businessType, AsyncCallback<List<CaseBean>> callback);
 	
+	public void doQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, float priceWeight, String businessType, double latitude, double longitude, 
+			double POIWeight, List<String> kindsOfPOI, AsyncCallback<List<CaseBean>> callback);
+	
 	public void doLogin(String login, String password, AsyncCallback<AdminBean> callback);
 	
 	public void createCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback); 

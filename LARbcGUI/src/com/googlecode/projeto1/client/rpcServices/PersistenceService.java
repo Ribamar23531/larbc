@@ -29,6 +29,12 @@ public interface PersistenceService extends RemoteService {
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, String businessType);
 	
+	public List<CaseBean> doQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, float priceWeight, String businessType, double latitude, double longitude, 
+			double POIWeight, List<String> kindsOfPOI);
+	
 	public AdminBean doLogin(String login, String password);
 	
 	public void createCaso(AdminBean admin, CaseBean caso); 

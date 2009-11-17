@@ -89,6 +89,23 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		return returnedCases;
 	}
+	
+	public List<CaseBean> doQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, float priceWeight, String businessType, double latitude, double longitude, 
+			double POIWeight, List<String> kindsOfPOI){
+		
+			List<Caso> results = this.getSystemFacade().doQuery(state, city, 
+					neighborhood, street, name, builtArea, totalArea, garageSpace, 
+					bedroom, suite, bathroom, type, price, priceWeight, businessType, 
+					latitude, longitude, POIWeight, kindsOfPOI);
+			List<CaseBean> returnedCases = new ArrayList<CaseBean>();
+			for (Caso caso : results) {
+				returnedCases.add(this.getCaseBean(caso));
+			}
+			return returnedCases;
+	}
 
 	public void createCaso(AdminBean admin, CaseBean caso) {
 		try {
