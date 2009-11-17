@@ -102,6 +102,12 @@ public interface SystemFacade {
 	public List<Caso> doQuery(String state, String city, String neighborhood, String street, String name,
 			 float builtArea, float totalArea, int garageSpace, int bedroom, int suite,
 			 int bathroom, String type, float price, String businessType);
+	
+	public List<Caso> doQuery(String state, String city, String neighborhood,
+			String street, String name, float builtArea, float totalArea,
+			int garageSpace, int bedroom, int suite, int bathroom, String type,
+			float price, float priceWeight, String businessType, double latitude, 
+			double longitude, double POIWeight, List<String> kindsOfPOI);
 
 //===Listing operation ===
 	public List<String> listBairros();

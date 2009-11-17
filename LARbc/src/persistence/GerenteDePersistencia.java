@@ -336,5 +336,10 @@ public class GerenteDePersistencia {
 	public int qteOfNearPOIByType(Coordenates coordenates, String type) throws SQLException{
 		return spatialQueries.qteOfNearPOIByType(coordenates, type);
 	}
+
+	public Coordenates getCoordenadaCaso(long caseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

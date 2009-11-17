@@ -97,14 +97,16 @@ public class GerenteDeRBC {
 			String street, String name, float builtArea, float totalArea,
 			int garageSpace, int bedroom, int suite, int bathroom, String type,
 			float price, float priceWeight, String businessType,
-			String location, double pOIWeight) {
+			double latitude, double longitude, double pOIWeight, List<String> poiKinds) {
 
 		try {
 			this.casesRetriever.configure();
 			this.casesRetriever.setWeights(priceWeight, pOIWeight);
+			this.casesRetriever.setPOI(poiKinds);
+			this.casesRetriever.setQueryLocation(latitude, longitude);
 			QueryConfig queryConfigurer = new QueryConfig();
 			queryConfigurer.setQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, 
-					bedroom, suite, bathroom, type, price, businessType, location);
+					bedroom, suite, bathroom, type, price, businessType, 0);
 			CBRQuery query = queryConfigurer.getQuery(); 
 			this.casesRetriever.preCycle();
 			this.casesRetriever.cycle(query);
