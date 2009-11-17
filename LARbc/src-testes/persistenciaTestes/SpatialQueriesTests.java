@@ -3,14 +3,16 @@ package persistenciaTestes;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
-import persistence.jdbc.SpatialQueries;
 import persistence.util.Coordenates;
+import beans.poi.Line;
 import beans.poi.Point;
 import exceptions.PointAlreadySavedException;
 import exceptions.PointNotFoundException;
@@ -22,10 +24,13 @@ public class SpatialQueriesTests {
 	private static Point point2;
 	private static Point point3;
 	private static Point point4;
+	private static Line line;
 	
 	@BeforeClass
 	public static void configure(){
+		
 		gerente = GerenteDePersistencia.getInstance(true);
+		deleteAll();
 		point1 = new Point();
 		point1.setName("name");
 		point1.setObs("obs");
@@ -50,44 +55,68 @@ public class SpatialQueriesTests {
 		point4.setType("type");		
 		point4.setCoordenate(new Coordenates(-1, 0));
 		
-		savePoints();
+		line = new Line();
+		line.setName("name");
+		line.setObs("obs");
+		line.setType("type");
+		List<Coordenates> vertexes = new ArrayList<Coordenates>();
+		vertexes.add(new Coordenates(0, 1));
+		vertexes.add(new Coordenates(1, 1));
+		vertexes.add(new Coordenates(2, 1));
+		vertexes.add(new Coordenates(3, 1));
+		line.setVertexes(vertexes);
+		
+		saveAll();
+		
+	}	
+
+	@AfterClass
+	public static void clear(){		
+		deleteAll();		
 	}
 	
-	@AfterClass
-	public static void deleteAll(){		
-		try {
-			gerente.removePoint(point1);
-			gerente.removePoint(point2);
-			gerente.removePoint(point3);
-			gerente.removePoint(point4);
-		} catch (PointNotFoundException e) {
-			assertTrue(false);
+	private static void deleteAll() {
+		List<Point> points = gerente.getPoints();
+		for (Point point : points) {
+			try {
+				gerente.removePoint(point);
+			} catch (PointNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		List<Line> lines = gerente.getLines();
+		for (Line line : lines) {
+			gerente.removeLine(line);
+		}	
 		
 	}
 		
-	private static void savePoints(){		
+	private static void saveAll(){		
 		try {
 			gerente.savePoint(point1);
 			gerente.savePoint(point2);
 			gerente.savePoint(point3);
-			gerente.savePoint(point4);
+			gerente.savePoint(point4);			
 		} catch (PointAlreadySavedException e) {
 			assertTrue(false);
-		}		
+		}
+		gerente.saveLine(line);
 	}
 	
 	@Test
 	public void testDistance(){
-		SpatialQueries sq = new SpatialQueries();
+		gerente.setPOIDistance(1);
 		int qte = 0;
 		try {
-			qte = sq.qtePointsByDistance(new Coordenates(0, 0), 1);			
+			qte = gerente.qteOfNearPOIByType(point1.getCoordenate(), point1.getType());			
 		} catch (SQLException e) {
 			assertTrue(false);
 		}
 		if(qte == 4){
 			assertTrue(true);
+		}else{
+			assertTrue(false);
 		}
 	}
 

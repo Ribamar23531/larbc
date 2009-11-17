@@ -12,7 +12,6 @@ import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
 import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
-import com.googlecode.projeto1.client.panels.modality.LoginWindow;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.googlecode.projeto1.client.upload.UploadPanel;

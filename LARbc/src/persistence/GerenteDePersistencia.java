@@ -329,9 +329,11 @@ public class GerenteDePersistencia {
 	
 	//=================================Operacoes sobre Consultas Espaciais===================================\\
 	
-	public int qteOfNearPOIByType(Coordenates coordenates, String type){
-		
-		//TODO AINDA EM IMPLEMENTAÇÃO
+	public void setPOIDistance(double distance){
+		this.spatialQueries.setDistance(distance);
+	}
+	
+	public int qteOfNearPOIByType(Coordenates coordenates, String type) throws SQLException{
 		return spatialQueries.qteOfNearPOIByType(coordenates, type);
 	}
 	
