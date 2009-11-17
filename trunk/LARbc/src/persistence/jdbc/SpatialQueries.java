@@ -19,7 +19,7 @@ private Connection dbConn;
 	private double distance;
 	
 	public SpatialQueries(){
-		this.distance = 0.01191923732625763;
+		this.distance = 0.018045289547661728;
 		try {
 			dbConn = ConnectionFactory.newConnection();
 		} catch (SQLException e) {			
