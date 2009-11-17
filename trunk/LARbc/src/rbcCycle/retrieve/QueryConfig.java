@@ -69,8 +69,7 @@ public class QueryConfig {
 	public void setQuery(String state, String city, String neighborhood,
 			String street, String name, float builtArea, float totalArea,
 			int garageSpace, int bedroom, int suite, int bathroom, String type,
-			float price, String businessType,
-			String location) {
+			float price, String businessType, int location) {
 		this.problemDescription.setState(state);
 		this.problemDescription.setCity(city);
 		this.problemDescription.setNeighborhood(neighborhood);
@@ -85,7 +84,7 @@ public class QueryConfig {
 		this.problemDescription.setType(type);
 		this.problemDescription.setPrice(price);
 		this.problemDescription.setBusinessType(businessType);
-		this.problemDescription.setLocation(location);
+		this.problemDescription.setLocation(0);
 		this.query.setDescription(this.problemDescription);
 		
 	}

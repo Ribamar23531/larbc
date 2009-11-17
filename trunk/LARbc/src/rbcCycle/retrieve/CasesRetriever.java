@@ -2,6 +2,9 @@ package rbcCycle.retrieve;
 
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
+
+import persistence.util.Coordenates;
 
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
@@ -26,6 +29,8 @@ public class CasesRetriever implements StandardCBRApplication {
 	private boolean testing;
 	private double priceWeight;
 	private double locationWeight;
+	private List<String> pointsOfInterest;
+	private Coordenates queryCoordinate;
 	
 	public CasesRetriever(boolean testing){
 		try {
@@ -41,6 +46,10 @@ public class CasesRetriever implements StandardCBRApplication {
 	public void setWeights(double priceWeight, double locationWeight){
 		this.priceWeight = priceWeight;
 		this.locationWeight = locationWeight;
+	}
+	
+	public void setPOI(List<String> pointsOfInterest){
+		this.pointsOfInterest = pointsOfInterest;
 	}
 
 	public void configure() throws ExecutionException {
@@ -65,7 +74,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery queryToDo) throws ExecutionException {
-		SimilarityConfiguration configuration = new SimilarityConfiguration(this.priceWeight, this.locationWeight);
+		SimilarityConfiguration configuration = new SimilarityConfiguration(this.priceWeight, this.locationWeight, this.pointsOfInterest, this.queryCoordinate);
 		NNConfig config = configuration.getConfiguration();
 		this.queryResult = NNScoringMethod.evaluateSimilarity(this.caseBase.getCases(), queryToDo, config);
 	}
@@ -78,5 +87,10 @@ public class CasesRetriever implements StandardCBRApplication {
 	
 	public Collection<RetrievalResult> getResults(){
 		return this.queryResult;
+	}
+
+	public void setQueryLocation(double latitude, double longitude) {
+		Coordenates coordenate = new Coordenates(latitude, longitude);
+		this.queryCoordinate = coordenate;
 	}
 }

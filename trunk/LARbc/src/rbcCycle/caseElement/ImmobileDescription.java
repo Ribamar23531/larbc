@@ -25,7 +25,7 @@ public class ImmobileDescription implements CaseComponent {
 	private String type;
 	private float price;
 	private String businessType;
-	private String location; 
+	private int location; 
 	
 	public int getIdCase() {
 		return idCase;
@@ -147,11 +147,11 @@ public class ImmobileDescription implements CaseComponent {
 		this.businessType = businessType;
 	}
 
-	public String getLocation() {
+	public int getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(int location) {
 		this.location = location;
 	}
 	

@@ -213,10 +213,12 @@ public class SystemManager implements SystemFacade {
 	public List<Caso> doQuery(String state, String city, String neighborhood,
 			String street, String name, float builtArea, float totalArea,
 			int garageSpace, int bedroom, int suite, int bathroom, String type,
-			float price, float priceWeight, String businessType, String location, double POIWeight) {
+			float price, float priceWeight, String businessType, double latitude, 
+			double longitude, double POIWeight, List<String> kindsOfPOI) {
 
 		return this.rbcManager.doQuery(state, city, neighborhood, street, name, builtArea, 
-				   totalArea, garageSpace, bedroom, suite, bathroom, type, price, priceWeight, businessType, location, POIWeight);
+				   totalArea, garageSpace, bedroom, suite, bathroom, type, price, priceWeight, 
+				   businessType, latitude, longitude, POIWeight, kindsOfPOI);
 	}
 
 	public List<String> listBairros() {
