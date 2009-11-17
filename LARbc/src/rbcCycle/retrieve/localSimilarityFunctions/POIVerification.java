@@ -41,7 +41,7 @@ public class POIVerification implements LocalSimilarityFunction {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		return 0;
+		return 1./(Math.max(queryPOINumber, casePOINumber) - Math.min(queryPOINumber, casePOINumber));
 	}
 
 	@Override
