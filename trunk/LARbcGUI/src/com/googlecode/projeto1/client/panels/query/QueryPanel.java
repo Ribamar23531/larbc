@@ -1,8 +1,12 @@
 package com.googlecode.projeto1.client.panels.query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.geocode.Geocoder;
+import com.google.gwt.maps.client.geocode.LatLngCallback;
+import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -81,6 +85,13 @@ public class QueryPanel extends Panel{
 	private boolean isSelectedVoltarButton;
 	private Panel buttonsVoltarPanel;
 	private FormPanel formPanel;
+	
+	private RadioButton escola;
+	private RadioButton universidade;
+	private RadioButton viaAcesso;
+	private RadioButton areaVerde;
+	private RadioButton shopping;
+	private RadioButton setorIndustrial;
 	
 	public QueryPanel(){
 		formPanel = new FormPanel();
@@ -289,12 +300,12 @@ public class QueryPanel extends Panel{
 		relevanciaPontos.addItem("4");
 		relevanciaPontos.addItem("5");
 		relevanciaPontos.setItemSelected(2, true);
-		RadioButton escola = new RadioButton("Escola", "Escola");
-		RadioButton universidade = new RadioButton("Universidade", "Universidade");
-		RadioButton viaAcesso = new RadioButton("Via principal de acesso", "Via principal de acesso");
-		RadioButton areaVerde = new RadioButton("Área verde", "Área verde");
-		RadioButton shopping = new RadioButton("Shopping", "Shopping");
-		RadioButton setorIndustrial = new RadioButton("Setor industrial", "Setor industrial");
+		escola = new RadioButton("Escola", "Escola");
+		universidade = new RadioButton("Universidade", "Universidade");
+		viaAcesso = new RadioButton("Via principal de acesso", "Via principal de acesso");
+		areaVerde = new RadioButton("Área verde", "Área verde");
+		shopping = new RadioButton("Shopping", "Shopping");
+		setorIndustrial = new RadioButton("Setor industrial", "Setor industrial");
 		formPanel.add(escola);
 		formPanel.add(universidade);
 		formPanel.add(viaAcesso);
@@ -412,23 +423,91 @@ public class QueryPanel extends Panel{
 						MessageBox.alert(message + "Quartos");
 						return;
 					}
-				}
-				
-				PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, bedroom, suite, bathroom, type, price, businessType, new AsyncCallback<List<CaseBean>>() {
-					public void onSuccess(List<CaseBean> arg0) {
-						PanelSwitcher.switchPanel(new ResultsPanel(arg0));
-						
-					}
+				}				
+
+				Geocoder streetQuery = new Geocoder();
+				streetQuery.getLatLng("Campina Grande, " + street, new LatLngCallback() {
 					
-					public void onFailure(Throwable arg0) {
-						MessageBox.alert("A consulta não pode ser realizada.");
+					public void onSuccess(LatLng point) {
+						if(street.equals("")){
+							doQuery(Double.MAX_VALUE, Double.MAX_VALUE);
+						}else{
+							doQuery(point.getLatitude(), point.getLongitude());							
+						}
+						
+					}					
+					
+
+					public void onFailure() {
+						doQuery(Double.MAX_VALUE, Double.MAX_VALUE);
 						
 					}
 				});
+				
+				
+				
+				
 			}
 		});
 		
 		buildButtonsPanel();
+		
+	}
+	
+	private void doQuery(double latitude, double longitude) {
+		double POIWeight = relevanciaPontos.getSelectedIndex();
+		float priceWeight = relevanciaPreco.getSelectedIndex();
+		List<String> kindsOfPOI = new ArrayList<String>(6);
+		if(escola.isChecked()){
+			kindsOfPOI.add("SCHOOL");
+		}
+		if(universidade.isChecked()){
+			kindsOfPOI.add("UNIVERSITY");
+		}
+		if(viaAcesso.isChecked()){
+			kindsOfPOI.add("ACCESS_ROAD");
+		}
+		if(areaVerde.isChecked()){
+			kindsOfPOI.add("GREEN_AREA");
+		}
+		if(shopping.isChecked()){
+			kindsOfPOI.add("SHOPPING_CENTER");
+		}
+		if(setorIndustrial.isChecked()){
+			kindsOfPOI.add("INDUSTRIAL");
+		}
+		kindsOfPOI.add("DOWNTOWN");
+		
+		PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea,
+									garageSpace, bedroom, suite, bathroom, type, price, priceWeight,
+									businessType, latitude, longitude, POIWeight, kindsOfPOI,
+									new AsyncCallback<List<CaseBean>>() {
+			
+			public void onSuccess(List<CaseBean> arg0) {
+				PanelSwitcher.switchPanel(new ResultsPanel(arg0));
+				
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("A consulta não pode ser realizada.");
+				
+			}
+		});
+		
+//		PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea,
+//									garageSpace, bedroom, suite, bathroom, type, price, businessType,
+//									latitude, longitude, POIWeight, kindsOfPOI, 
+//									new AsyncCallback<List<CaseBean>>() {
+//			public void onSuccess(List<CaseBean> arg0) {
+//				PanelSwitcher.switchPanel(new ResultsPanel(arg0));
+//				
+//			}
+//			
+//			public void onFailure(Throwable arg0) {
+//				MessageBox.alert("A consulta não pode ser realizada.");
+//				
+//			}
+//		});
 		
 	}
 	
