@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import persistence.GerenteDePersistencia;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 import jcolibri.exception.NoApplicableSimilarityFunctionException;
 import jcolibri.method.retrieve.NNretrieval.similarity.LocalSimilarityFunction;
@@ -13,9 +13,9 @@ public class POIVerification implements LocalSimilarityFunction {
 
 	private List<String> kindsOfPOI;
 	private GerenteDePersistencia persistenceManager;
-	private Coordenates queryCoordinate;
+	private Coordinates queryCoordinate;
 
-	public POIVerification(List<String> kindsOfPOI, Coordenates queryCoordinate){
+	public POIVerification(List<String> kindsOfPOI, Coordinates queryCoordinate){
 		this.kindsOfPOI = kindsOfPOI;
 		this.queryCoordinate = queryCoordinate;
 		this.persistenceManager = new GerenteDePersistencia();
@@ -29,7 +29,13 @@ public class POIVerification implements LocalSimilarityFunction {
 			throw new NoApplicableSimilarityFunctionException(this.getClass(), caseObject.getClass());
 		}
 		Integer caseId = (Integer) caseObject;
-		Coordenates caseCoordinate = this.persistenceManager.getCoordenadaCaso(caseId);
+		Coordinates caseCoordinate = null;
+		try {
+			caseCoordinate = this.persistenceManager.getCasoLocation(caseId);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		int queryPOINumber = 0;
 		int casePOINumber = 0;
 			 try {
@@ -48,7 +54,14 @@ public class POIVerification implements LocalSimilarityFunction {
 	public boolean isApplicable(Object caseObject, Object queryObject) {
 		if(caseObject instanceof Integer){
 			Integer caseId = (Integer) caseObject;
-			Coordenates caseCoordinate = this.persistenceManager.getCoordenadaCaso(caseId);
+			Coordinates caseCoordinate;
+			try {
+				caseCoordinate = this.persistenceManager.getCasoLocation(caseId);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 			if(caseCoordinate != null){
 				return true;
 			}

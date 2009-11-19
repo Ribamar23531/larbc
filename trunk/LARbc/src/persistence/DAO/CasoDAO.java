@@ -3,6 +3,7 @@ package persistence.DAO;
 import java.sql.SQLException;
 import java.util.List;
 
+import persistence.util.Coordinates;
 import beans.Caso;
 import beans.Foto;
 import exceptions.CasoNotFoundException;
@@ -25,6 +26,6 @@ public interface CasoDAO {
 	
 	public void removeAllCasos();
 
-	public String getCasoLocation(long id) throws SQLException;
+	public Coordinates getCasoLocation(long id) throws SQLException;
 
 }

@@ -12,7 +12,7 @@ import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
 import persistence.jdbc.ConnectionFactory;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 public class PointRecover {
 	
@@ -33,7 +33,7 @@ public class PointRecover {
     	return p;
 	}
 	
-	public Coordenates getLocation(long id) throws SQLException {	
+	public Coordinates getLocation(long id) throws SQLException {	
 
 		String sqlQuery = "SELECT p.location " + "FROM larbc_db."
 				+ HibernateConfig.getCurrentSchema() + ".points p "
@@ -47,7 +47,7 @@ public class PointRecover {
 			pg = (PGgeometry) (rs.getObject("location"));
 		}
 		Point p = getPointByPGgeometry(pg);
-		Coordenates coordenates = new Coordenates(p.getX(), p.getY());		
+		Coordinates coordenates = new Coordinates(p.getX(), p.getY());		
 		return coordenates;
 	}
 	

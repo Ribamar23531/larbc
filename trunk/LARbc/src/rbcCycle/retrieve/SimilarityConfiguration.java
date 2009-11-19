@@ -2,7 +2,7 @@ package rbcCycle.retrieve;
 
 import java.util.List;
 
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 import jcolibri.cbrcore.Attribute;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
@@ -42,7 +42,7 @@ public class SimilarityConfiguration {
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
 	
-	public SimilarityConfiguration(Double priceWeight, Double localeWeight, List<String> pointsOfInterest, Coordenates queryCoordinate){
+	public SimilarityConfiguration(Double priceWeight, Double localeWeight, List<String> pointsOfInterest, Coordinates queryCoordinate){
 		this.configuration = new NNConfig();
 		this.defineAttributeConfigurationEqual("state", new Double("3"));
 		this.defineAttributeConfigurationEqual("city", new Double("3"));
@@ -62,7 +62,7 @@ public class SimilarityConfiguration {
 		this.configuration.setDescriptionSimFunction(new Average());
 	}
 	
-	private void defineAttributeConfigurationThereIsNear(String attributeName, Double localeWeight, List<String> pointsOfInterest, Coordenates queryCoordinate) {
+	private void defineAttributeConfigurationThereIsNear(String attributeName, Double localeWeight, List<String> pointsOfInterest, Coordinates queryCoordinate) {
 		Attribute attribute = new Attribute(attributeName, ImmobileDescription.class);
 		this.function = new POIVerification(pointsOfInterest, queryCoordinate);
 		this.configuration.addMapping(attribute, this.function);

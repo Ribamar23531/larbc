@@ -10,7 +10,7 @@ import java.util.List;
 import org.postgis.PGgeometry;
 
 import persistence.hibernate.HibernateConfig;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 public class SpatialQueries {
 	
@@ -27,7 +27,7 @@ private Connection dbConn;
 		}
 	}
 	
-	public int qteOfNearPOIByType(Coordenates coordenates, String type) throws SQLException{
+	public int qteOfNearPOIByType(Coordinates coordenates, String type) throws SQLException{
 		int qte = 0;
 		qte += qteNear(coordenates, type, "points");
 		qte += qteNear(coordenates, type, "lines");
@@ -39,7 +39,7 @@ private Connection dbConn;
 		this.distance = distance;
 	}
 	
-	private int qteNear(Coordenates coordenates, String type, String table) throws SQLException{
+	private int qteNear(Coordinates coordenates, String type, String table) throws SQLException{
 		String pointString = "POINT(" + coordenates.getLatitude() + " " + coordenates.getLongitude()  + ")";
 		String query = 	"SELECT location " + 
 		"FROM larbc_db." + HibernateConfig.getCurrentSchema() + "." + table + " p " +

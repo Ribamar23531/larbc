@@ -11,6 +11,7 @@ import org.hibernate.classic.Session;
 import persistence.DAO.CasoDAO;
 import persistence.hibernate.HibernateConfig;
 import persistence.jdbc.PointCasoRecover;
+import persistence.util.Coordinates;
 import beans.Administrador;
 import beans.Caso;
 import beans.Foto;
@@ -30,7 +31,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		//places the geometry column in the case witch has just been saved
 		Session session = sf.openSession();
 		String sqlQuery = 	"UPDATE larbc_db." + HibernateConfig.getCurrentSchema() + ".casos " +
-							"SET location = GeometryFromText('POINT(" + caso.getLocation().replaceAll(",", "")+")',-1) " +
+							"SET location = GeometryFromText('POINT(" + caso.getLocationString()+")',-1) " +
 							"WHERE id_caso = " + caso.getIdCaso() + ";";
 		session.createSQLQuery(sqlQuery).executeUpdate();	
 		session.close();
@@ -83,7 +84,7 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 		session.close();
 		PointCasoRecover pr = new PointCasoRecover();
 		try {
-			Map<Long, String> locations = pr.getLocations();
+			Map<Long, Coordinates> locations = pr.getLocations();
 			for (Caso caso : casos) {
 				caso.setLocation(locations.get(caso.getIdCaso()));
 			}
@@ -165,9 +166,9 @@ public class CasosHibernateDAO extends HibernateDAO implements CasoDAO{
 	}
 	
 	@Override
-	public String getCasoLocation(long id) throws SQLException {
+	public Coordinates getCasoLocation(long id) throws SQLException {
 		PointCasoRecover pr = new PointCasoRecover();
-		String location = pr.getLocation(id);		
+		Coordinates location = pr.getLocation(id);		
 		return location;
 
 

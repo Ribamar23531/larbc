@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 import beans.poi.Line;
 
 public class LineTests {
@@ -26,11 +26,11 @@ public class LineTests {
 		line.setObs("obs");
 		line.setType("type");
 		
-		List<Coordenates> coordinates = new ArrayList<Coordenates>();
-		coordinates.add(new Coordenates(0, 0));
-		coordinates.add(new Coordenates(0, 1));
-		coordinates.add(new Coordenates(0, 2));
-		coordinates.add(new Coordenates(0, 3));
+		List<Coordinates> coordinates = new ArrayList<Coordinates>();
+		coordinates.add(new Coordinates(0, 0));
+		coordinates.add(new Coordinates(0, 1));
+		coordinates.add(new Coordinates(0, 2));
+		coordinates.add(new Coordinates(0, 3));
 		line.setVertexes(coordinates);
 	}
 	

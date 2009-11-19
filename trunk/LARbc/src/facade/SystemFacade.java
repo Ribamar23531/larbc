@@ -3,6 +3,8 @@ package facade;
 import java.sql.SQLException;
 import java.util.List;
 
+import persistence.util.Coordinates;
+
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -114,7 +116,7 @@ public interface SystemFacade {
 	
 	public List<String> listEstados();
 	
-	public String getCasoLocation(long id) throws SQLException;
+	public Coordinates getCasoLocation(long id) throws SQLException;
 	
 	
 	

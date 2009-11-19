@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
@@ -30,7 +30,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	private double priceWeight;
 	private double locationWeight;
 	private List<String> pointsOfInterest;
-	private Coordenates queryCoordinate;
+	private Coordinates queryCoordinate;
 	
 	public CasesRetriever(boolean testing){
 		try {
@@ -90,7 +90,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	}
 
 	public void setQueryLocation(double latitude, double longitude) {
-		Coordenates coordenate = new Coordenates(latitude, longitude);
+		Coordinates coordenate = new Coordinates(latitude, longitude);
 		this.queryCoordinate = coordenate;
 	}
 }
