@@ -174,7 +174,7 @@ public class QueryPanel extends Panel{
 			}
 			
 			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Os estados não puderam ser carregados do disco");
+				MessageBox.alert("Os estados não puderam ser carregados da base de dados");
 				
 			}
 		});
