@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
+import persistence.util.Coordinates;
 import persistence.util.Estado;
 import rbcCycle.GerenteDeRBC;
 import beans.Administrador;
@@ -40,7 +41,7 @@ public class OneFieldQueryTest {
 		String tipo = "tipo";
 		float preco = 5;
 		String tipoNegocio = "tipo negocio";
-		String location = "0 0";
+		Coordinates location = new Coordinates(0, 0);
 
 		Caso caso = new Caso();
 		caso.setAreaConstruida(areaConst);
@@ -78,7 +79,7 @@ public class OneFieldQueryTest {
 		String tipo = "tipo";
 		float preco = 6;
 		String tipoNegocio = "tipo negocio";
-		String location = "0 0";
+		Coordinates location = new Coordinates(0, 0);
 
 		Caso caso = new Caso();
 		caso.setAreaConstruida(areaConst);

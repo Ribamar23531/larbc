@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
+import persistence.util.Coordinates;
 import persistence.util.Estado;
 import beans.Caso;
 import beans.Foto;
@@ -52,7 +53,7 @@ public class CasoTests {
 		String tipo = "tipo";
 		float preco = 5;
 		String tipoNegocio = "tipo de negocio";
-		String location = "0 0";
+		Coordinates location = new Coordinates(0, 0);
 		
 		caso.setAreaConstruida(areaConst);
 		caso.setAreaTotal(areaTotal);

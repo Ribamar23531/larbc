@@ -3,8 +3,9 @@ package com.googlecode.projeto1.server;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 import beans.Administrador;
 import beans.Caso;
 import beans.Demanda;
@@ -316,8 +317,10 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	
 	public String getCaseLocation(CaseBean caseBean)  {
 		String location = null;
+		Coordinates coordinates = null;
 		try {
-			location = this.getSystemFacade().getCasoLocation(caseBean.getId());
+			coordinates = this.getSystemFacade().getCasoLocation(caseBean.getId());
+			location = "(" + coordinates.getLatitude() + ", " + coordinates.getLongitude() + ")";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -360,27 +363,6 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 
 //=== Conversors ===	
 	
-//	private CaseBean getCaseBean(ImmobileSolution result){
-//		CaseBean caseResult = new CaseBean();
-//		caseResult.setBathroom(result.getBathroom());
-//		caseResult.setBedroom(result.getBedroom());
-//		caseResult.setBuiltArea(result.getBuiltArea());
-//		caseResult.setBusinessType(result.getBusinessType());
-//		caseResult.setCity(result.getCity());
-//		caseResult.setGarageSpace(result.getGarageSpace());
-//		caseResult.setId(result.getId());
-//		caseResult.setName(result.getName());
-//		caseResult.setNeighborhood(result.getNeighborhood());
-//		caseResult.setNumber(result.getNumber());
-//		caseResult.setPrice(result.getPrice());
-//		caseResult.setState(result.getState());
-//		caseResult.setStreet(result.getStreet());
-//		caseResult.setSuite(result.getSuite());
-//		caseResult.setTotalArea(result.getTotalArea());
-//		caseResult.setType(result.getType());
-//		return caseResult;
-//	}
-	
 	private CaseBean getCaseBean(Caso result){
 		CaseBean caseResult = new CaseBean();
 		caseResult.setBathroom(result.getBanheiros());
@@ -399,7 +381,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caseResult.setSuite(result.getSuites());
 		caseResult.setTotalArea(result.getAreaTotal());
 		caseResult.setType(result.getTipo());
-		caseResult.setLocation(result.getLocation());
+		caseResult.setLocation(result.getLocation().toString2());
 		return caseResult;
 	}
 	
@@ -421,7 +403,11 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caso.setSuites(caseBean.getSuite());
 		caso.setAreaTotal(caseBean.getTotalArea());
 		caso.setTipo(caseBean.getType());
-		caso.setLocation(caseBean.getLocation());
+		String location = caseBean.getLocation();
+		Scanner scan = new Scanner(location);
+		double latitude = scan.nextDouble();
+		double longitude = scan.nextDouble();		
+		caso.setLocation(new Coordinates(latitude, longitude));
 		return caso;
 	}
 	
@@ -538,13 +524,13 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		l.setName(line.getName());
 		l.setObs(line.getObs());
 		
-		List<Coordenates> vertexes = new ArrayList<Coordenates>();
+		List<Coordinates> vertexes = new ArrayList<Coordinates>();
 		List<Double> latitudes = line.getLatitudes();
 		List<Double> longitudes = line.getLongitudes();
 		
 		for (int i = 0; i < latitudes.size(); i++) {				
 //			vertexes.add(new Vertex(line.getIdLine(), i, latitudes.get(i), longitudes.get(i)));
-			vertexes.add(new Coordenates(latitudes.get(i), longitudes.get(i)));
+			vertexes.add(new Coordinates(latitudes.get(i), longitudes.get(i)));
 		}
 		l.setVertexes(vertexes);
 		return l;
@@ -561,10 +547,10 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		}
 		lineBean.setObs(line.getObs());
 		
-		List<Coordenates> vertexes = line.getVertexes();
+		List<Coordinates> vertexes = line.getVertexes();
 		List<Double> latitudes = new ArrayList<Double>(vertexes.size());
 		List<Double> longitudes = new ArrayList<Double>(vertexes.size());
-		for (Coordenates vertex : vertexes) {
+		for (Coordinates vertex : vertexes) {
 			latitudes.add(vertex.getLatitude());
 			longitudes.add(vertex.getLongitude());
 		}
@@ -584,10 +570,10 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		polygonBean.setName(polygon.getName());
 		polygonBean.setObs(polygon.getObs());
 		
-		List<Coordenates> vertexes = polygon.getVertexes();
+		List<Coordinates> vertexes = polygon.getVertexes();
 		List<Double> latitudes = new ArrayList<Double>(vertexes.size());
 		List<Double> longitudes = new ArrayList<Double>(vertexes.size());
-		for (Coordenates vertex : vertexes) {
+		for (Coordinates vertex : vertexes) {
 			latitudes.add(vertex.getLatitude());
 			longitudes.add(vertex.getLongitude());
 		}
@@ -603,12 +589,12 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		p.setName(polygonBean.getName());
 		p.setObs(polygonBean.getObs());
 		
-		List<Coordenates> vertexes = new ArrayList<Coordenates>();
+		List<Coordinates> vertexes = new ArrayList<Coordinates>();
 		List<Double> latitudes = polygonBean.getLatitudes();
 		List<Double> longitudes = polygonBean.getLongitudes();
 		
 		for (int i = 0; i < latitudes.size(); i++) {				
-			vertexes.add(new Coordenates(latitudes.get(i), longitudes.get(i)));			
+			vertexes.add(new Coordinates(latitudes.get(i), longitudes.get(i)));			
 		}
 		p.setVertexes(vertexes);
 		return p;

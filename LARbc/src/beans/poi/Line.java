@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 @Entity
 @Table(name = "lines")
@@ -27,7 +27,7 @@ public class Line {
 	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Transient
-	private List<Coordenates> vertexes;
+	private List<Coordinates> vertexes;
 	
 	public Line(){}
 
@@ -47,11 +47,11 @@ public class Line {
 		return obs;
 	}
 	
-	public void setVertexes(List<Coordenates> vertexes) {
+	public void setVertexes(List<Coordinates> vertexes) {
 		this.vertexes = vertexes;
 	}
 
-	public List<Coordenates> getVertexes() {
+	public List<Coordinates> getVertexes() {
 		return vertexes;
 	}
 
@@ -73,7 +73,7 @@ public class Line {
 	
 	public String getLocation(){
 		String location = "";
-		for (Coordenates coordenates : this.vertexes) {
+		for (Coordinates coordenates : this.vertexes) {
 			location += coordenates.toString() + ",";
 		}
 		int endIndex = location.lastIndexOf(",");

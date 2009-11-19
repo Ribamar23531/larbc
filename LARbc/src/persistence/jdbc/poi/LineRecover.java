@@ -13,7 +13,7 @@ import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
 import persistence.jdbc.ConnectionFactory;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 public class LineRecover {
 	
@@ -32,7 +32,7 @@ public class LineRecover {
     	return ls;
 	}
 	
-	public List<Coordenates> getLocation(long id) throws SQLException {	
+	public List<Coordinates> getLocation(long id) throws SQLException {	
 
 		String sqlQuery = "SELECT l.location " + "FROM larbc_db."
 				+ HibernateConfig.getCurrentSchema() + ".lines l "
@@ -47,9 +47,9 @@ public class LineRecover {
 		}
 		LineString ls = getLinestringByPGgeometry(pg);		
 		Point[] points = ls.getPoints();
-		List<Coordenates> coordenates = new ArrayList<Coordenates>(points.length);
+		List<Coordinates> coordenates = new ArrayList<Coordinates>(points.length);
 		for (Point point : points) {
-			coordenates.add(new Coordenates(point.getX(), point.getY()));
+			coordenates.add(new Coordinates(point.getX(), point.getY()));
 		}
 		s.close();
 		return coordenates;

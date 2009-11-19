@@ -11,6 +11,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
+import persistence.util.Coordinates;
+
 
 @Entity
 @Table(name = "casos")
@@ -64,7 +66,8 @@ public class Caso{
 	@Column(updatable = true, nullable = true)
 	private String observacoes;
 	@Transient
-	private String location;
+//	private String location;
+	private Coordinates location;
 	
 	@Column(updatable = false, nullable = false)
 	private long idAdministradorResponsavel;
@@ -178,13 +181,13 @@ public class Caso{
 		return idAdministradorResponsavel;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getLocation() {
-		return location;
-	}
+//	public void setLocation(String location) {
+//		this.location = location;
+//	}
+//
+//	public String getLocation() {
+//		return location;
+//	}
 
 	public String getObservacoes() {
 		return observacoes;
@@ -192,6 +195,18 @@ public class Caso{
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
-	}	
+	}
+
+	public void setLocation(Coordinates location) {
+		this.location = location;
+	}
+
+	public Coordinates getLocation() {
+		return location;
+	}
+	
+	public String getLocationString(){
+		return location.getLatitude() + " " + location.getLongitude();
+	}
 	
 }

@@ -19,7 +19,7 @@ import persistence.hibernate.hibernateDAO.LineHibernateDAO;
 import persistence.hibernate.hibernateDAO.PointHibernateDAO;
 import persistence.hibernate.hibernateDAO.PolygonHibernateDAO;
 import persistence.jdbc.SpatialQueries;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 import persistence.util.Paths;
 import beans.Administrador;
 import beans.Caso;
@@ -285,7 +285,7 @@ public class GerenteDePersistencia {
 		}
 	}
 
-	public String getCasoLocation(long id) throws SQLException {
+	public Coordinates getCasoLocation(long id) throws SQLException {
 		return this.casoDAO.getCasoLocation(id);
 	}
 	
@@ -333,13 +333,8 @@ public class GerenteDePersistencia {
 		this.spatialQueries.setDistance(distance);
 	}
 	
-	public int qteOfNearPOIByType(Coordenates coordenates, String type) throws SQLException{
+	public int qteOfNearPOIByType(Coordinates coordenates, String type) throws SQLException{
 		return spatialQueries.qteOfNearPOIByType(coordenates, type);
-	}
-
-	public Coordenates getCoordenadaCaso(long caseId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	}	
 	
 }

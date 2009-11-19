@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
+import persistence.util.Coordinates;
 import persistence.util.Estado;
 import beans.Administrador;
 import beans.Caso;
@@ -102,7 +103,7 @@ public class AdministradorTests {
 		caso.setTipo(tipo);
 		caso.setTipoNegocio(tipoNegocio);
 		caso.setVagasGaragem(vagasGaragem);
-		caso.setLocation("0 0");
+		caso.setLocation(new Coordinates(0, 0));
 		
 		return caso;
 	}

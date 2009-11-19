@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import persistence.GerenteDePersistencia;
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 import beans.poi.Point;
 import exceptions.PointAlreadySavedException;
 import exceptions.PointNotFoundException;
@@ -28,7 +28,7 @@ public class PointTests {
 		point.setObs("obs");
 		point.setType("type");
 		
-		point.setCoordenate(new Coordenates(0, 0));
+		point.setCoordenate(new Coordinates(0, 0));
 	}
 	
 	@AfterClass

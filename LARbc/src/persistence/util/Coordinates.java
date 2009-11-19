@@ -1,16 +1,16 @@
 package persistence.util;
 
-public class Coordenates {
+public class Coordinates {
 	
 	private double latitude;
 	private double longitude;
 	
-	public Coordenates(){
+	public Coordinates(){
 		this.setLatitude(0);
 		this.setLongitude(0);
 	}
 	
-	public Coordenates(double latitude, double longitude){
+	public Coordinates(double latitude, double longitude){
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 	}
@@ -33,6 +33,10 @@ public class Coordenates {
 	
 	public String toString(){
 		return this.latitude + " " + this.longitude;
+	}
+	
+	public String toString2(){
+		return "(" + this.latitude + ", " + this.longitude + ")";
 	}
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import persistence.util.Coordenates;
+import persistence.util.Coordinates;
 
 //@NamedQueries( {@NamedQuery(name = "getPoint", query = "select p from Point p where p.latitudeStr = :latitude AND p.longitudeStr = :longitude")})
 @Entity
@@ -26,14 +26,14 @@ public class Point {
 	@Column(updatable = true, nullable = false)
 	private String obs;
 	@Transient
-	private Coordenates coordenate;	
+	private Coordinates coordenate;	
 	
 	//construtor vazio necessario pelo hibernate
 	public Point(){}
 	
 	public Point(double latitude, double longitude){
 		this.setObs("");
-		this.coordenate = new Coordenates(latitude, longitude);
+		this.coordenate = new Coordinates(latitude, longitude);
 	}
 
 	public void setIdPoint(long idPoint) {
@@ -70,14 +70,14 @@ public class Point {
 
 	public void setLatitude(String latitude) {
 		if(coordenate == null){
-			this.coordenate = new Coordenates();
+			this.coordenate = new Coordinates();
 		}
 		this.coordenate.setLatitude(Double.parseDouble(latitude));
 	}
 	
 	public void setLatitude(double latitude) {
 		if(coordenate == null){
-			this.coordenate = new Coordenates();
+			this.coordenate = new Coordinates();
 		}
 		this.coordenate.setLatitude(latitude);
 	}
@@ -88,14 +88,14 @@ public class Point {
 	
 	public void setLongitude(String longitude) {
 		if(coordenate == null){
-			this.coordenate = new Coordenates();
+			this.coordenate = new Coordinates();
 		}
 		this.coordenate.setLongitude(Double.parseDouble(longitude));
 	}
 	
 	public void setLongitude(double longitude) {
 		if(coordenate == null){
-			this.coordenate = new Coordenates();
+			this.coordenate = new Coordinates();
 		}
 		this.coordenate.setLongitude(longitude);
 	}
@@ -104,11 +104,11 @@ public class Point {
 		return this.coordenate.getLongitude();
 	}
 
-	public void setCoordenate(Coordenates coordenate) {
+	public void setCoordenate(Coordinates coordenate) {
 		this.coordenate = coordenate;
 	}
 
-	public Coordenates getCoordenate() {
+	public Coordinates getCoordenate() {
 		return coordenate;
 	}
 	

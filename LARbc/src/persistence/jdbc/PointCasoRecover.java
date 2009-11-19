@@ -11,6 +11,7 @@ import org.postgis.PGgeometry;
 import org.postgis.Point;
 
 import persistence.hibernate.HibernateConfig;
+import persistence.util.Coordinates;
 
 public class PointCasoRecover {
 	
@@ -31,7 +32,7 @@ public class PointCasoRecover {
     	return p;
 	}
 	
-	public String getLocation(long id) throws SQLException {	
+	public Coordinates getLocation(long id) throws SQLException {	
 
 		String sqlQuery = "SELECT c.location " + "FROM larbc_db."
 				+ HibernateConfig.getCurrentSchema() + ".casos c "
@@ -45,13 +46,13 @@ public class PointCasoRecover {
 			pg = (PGgeometry) (rs.getObject("location"));
 		}
 		Point p = getPointByPGgeometry(pg);
-		String location = p.getX() + " " + p.getY();
+		Coordinates location = new Coordinates(p.getX(), p.getY());
 		s.close();
 		return location;
 	}
 	
-	public Map<Long, String> getLocations() throws SQLException{
-		Map<Long, String> result = new HashMap<Long, String>();
+	public Map<Long, Coordinates> getLocations() throws SQLException{
+		Map<Long, Coordinates> result = new HashMap<Long, Coordinates>();
 		String sqlQuery = "SELECT c.id_caso, c.location " + "FROM larbc_db."
 		+ HibernateConfig.getCurrentSchema() + ".casos c;";
 		PreparedStatement s = dbConn.prepareStatement(sqlQuery);
@@ -60,8 +61,7 @@ public class PointCasoRecover {
 			Long id = new Long(rs.getLong("id_caso"));
 			PGgeometry pg = (PGgeometry) (rs.getObject("location"));
 			Point p = getPointByPGgeometry(pg);
-			String location = p.getX() + " " + p.getY();
-			result.put(id, location);
+			result.put(id, new Coordinates(p.getX(), p.getY()));			
 		}
 		s.close();
 		return result;
