@@ -14,7 +14,7 @@ import com.googlecode.projeto1.client.beans.CaseBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
-import com.googlecode.projeto1.client.upload.UploadPanel;
+import com.googlecode.projeto1.client.upload.UploadWindow;
 import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.MessageBoxConfig;
@@ -31,11 +31,11 @@ public class CaseEditPanel extends CaptionPanel{
 	
 	private CaseBean myCaseBean;
 	private Button imagemButton;
-	private UploadPanel uploadPanel;
+	private UploadWindow uploadPanel;
 	
 	public CaseEditPanel(CaseBean caseBean, int index){
 		super("Caso " + index);
-		this.uploadPanel = new UploadPanel(caseBean.getId());
+		this.uploadPanel = new UploadWindow(caseBean.getId());
 		uploadPanel.setSize(300, 100);
 		this.myCaseBean = caseBean;
 		this.setHeight("150px");
