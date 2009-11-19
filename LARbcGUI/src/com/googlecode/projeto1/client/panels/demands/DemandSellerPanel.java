@@ -65,7 +65,8 @@ import com.gwtext.client.widgets.layout.FitLayout;
 	private String telefone;
 	private TextField textTelefone;
 	private TextField textRua;
-	private TextField textBairro;
+//	private TextField textBairro;
+	private ComboBox comboBairro;
 	private TextField textCidade;
 	private TextField textNomePessoa;
 	private TextField textAreaConstruida;
@@ -118,11 +119,23 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		textRua.setSize("307px", "21px");
 		
 		//Bairro
-		textBairro = new TextField("Bairro *", "bairro", 230);
-		textBairro.setAllowBlank(false); 
-		textBairro.setBlankText("Este campo é obrigatório");
-		formPanel.add(textBairro);
-		textBairro.setSize("307px", "21px");
+		comboBairro = new ComboBox("Bairro *", "bairro", 230);
+		comboBairro.setSize("57px", "21px");
+		comboBairro.setDisplayField("abbr1");  
+		comboBairro.setTypeAhead(true);  
+		comboBairro.setMode(ComboBox.LOCAL);  
+		comboBairro.setTriggerAction(ComboBox.ALL);
+		comboBairro.setWidth(307);
+		comboBairro.setDisabled(false);
+		comboBairro.setSelectOnFocus(true);				
+		formPanel.add(comboBairro);
+		getBairros();		
+		
+//		textBairro = new TextField("Bairro *", "bairro", 230);
+//		textBairro.setAllowBlank(false); 
+//		textBairro.setBlankText("Este campo é obrigatório");
+//		formPanel.add(textBairro);
+//		textBairro.setSize("307px", "21px");
 		
 		//Cidade
 		textCidade = new TextField("Cidade *", "cidade", 110);
@@ -285,7 +298,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		this.setLayout(new FitLayout());
 		this.setFrame(true);
 	}
-	
+
 	private void createEntrarButton() {
 		pesquisarButton = Util.createImage(Util.CADASTRAR_BUTTON_IMAGE);
 		pesquisarButton.setSize("11%", "5%");
@@ -313,15 +326,12 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		selectedCadastrarButton.addClickListener(new ClickListener(){
 			public void onClick(Widget arg0) {
 				street = textRua.getText();
-				neighborhood = textBairro.getText();
+				neighborhood = comboBairro.getText();
 				city = textCidade.getText();
 				namePessoa = textNomePessoa.getText();
 				String message = "Digite um valor numérico válido para: ";
 				if(textRua.getText().equals("")){
 					MessageBox.alert("O campo Nome da rua é obrigatório");
-					return;
-				}else if(textBairro.getText().equals("")){
-					MessageBox.alert("O campo Bairro é obrigatório");
 					return;
 				}else if(textCidade.getText().equals("")){
 					MessageBox.alert("O campo Cidade é obrigatório");
@@ -526,5 +536,30 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				new String[]{"Terreno", "terreno", "3"},  
 				new String[]{"Sala comercial", "4"},  
 		};  
-	}  
+	}
+	
+	private void getBairros() {		
+		PERSISTENCE_SERVICE.listBairros(new AsyncCallback<List<String>>() {
+			
+			public void onSuccess(List<String> bairros) {
+				String[][] lista = new String [bairros.size()][3];
+				for (int i = 0; i < bairros.size(); i++) {					
+					lista[i][0] = bairros.get(i);
+					lista[i][1] = bairros.get(i);
+					lista[i][2] = i + 1 + "";
+				}				
+				Store storeBairro = new SimpleStore(new String[]{"abbr1", "state1"}, lista);		
+				storeBairro.load();  
+//				comboBairro.setHiddenName("bairro");
+				comboBairro.setStore(storeBairro);
+				comboBairro.setValue(lista[0][0]);		
+				
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Não foi possível carregar os bairros da base de dados");
+				
+			}
+		});		
+	}
 }
