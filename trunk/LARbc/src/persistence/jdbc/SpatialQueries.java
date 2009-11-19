@@ -44,7 +44,7 @@ private Connection dbConn;
 		String query = 	"SELECT location " + 
 		"FROM larbc_db." + HibernateConfig.getCurrentSchema() + "." + table + " p " +
 		"WHERE ST_Distance(location, GeomFromText('" + pointString + "', -1)) <= "+ distance + " AND " +
-				"p.type = " + type + " AND NOT equals(p.location, GeomFromText('" + pointString + "', -1));";
+				"p.type = '" + type + "' AND NOT equals(p.location, GeomFromText('" + pointString + "', -1));";
 		PreparedStatement s = dbConn.prepareStatement(query);
 		ResultSet rs = s.executeQuery();
 		List<PGgeometry> pgGeometries = new ArrayList<PGgeometry>();
