@@ -69,6 +69,7 @@ public class GerenteDePersistencia {
 		this.pointDAO = new PointHibernateDAO();
 		this.lineDAO =  new LineHibernateDAO();
 		this.polygonDAO = new PolygonHibernateDAO();
+		this.spatialQueries = new SpatialQueries();
 	}
 	
 	public static GerenteDePersistencia getInstance(boolean testando){
