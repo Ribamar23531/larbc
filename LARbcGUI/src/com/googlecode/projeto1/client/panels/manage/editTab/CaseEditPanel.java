@@ -30,7 +30,6 @@ public class CaseEditPanel extends CaptionPanel{
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 	
 	private CaseBean myCaseBean;
-	private Button imagemButton;
 	private UploadWindow uploadPanel;
 	
 	public CaseEditPanel(CaseBean caseBean, int index){
@@ -63,11 +62,7 @@ public class CaseEditPanel extends CaptionPanel{
 				
 			}
 		});	
-		
-		{
-			imagemButton = getImagemButton();
-			absolutePanel.add(imagemButton, 45, 74);
-		}
+
 		absolutePanel.add(editarButton, 338, 74);
 		
 		Button removeButton = new Button("Remover");
@@ -114,18 +109,6 @@ public class CaseEditPanel extends CaptionPanel{
 				
 			}
 		});
-	}
-	
-	private Button getImagemButton() {
-		final Button button = new Button("Inserir Imagens");
-		button.addClickListener(new ClickListener() {
-
-			public void onClick(Widget arg0) {
-				uploadPanel.show(getImagemButton().getElement());
-			}
-			
-		});
-		return button;
 	}
 
 }
