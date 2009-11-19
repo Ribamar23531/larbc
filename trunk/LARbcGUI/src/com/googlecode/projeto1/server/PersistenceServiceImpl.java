@@ -405,8 +405,9 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caso.setTipo(caseBean.getType());
 		String location = caseBean.getLocation();
 		Scanner scan = new Scanner(location);
-		double latitude = scan.nextDouble();
-		double longitude = scan.nextDouble();		
+		String[] locations = location.split(" ");
+		double latitude = new Double(locations[0]);
+		double longitude = new Double(locations[1]);
 		caso.setLocation(new Coordinates(latitude, longitude));
 		return caso;
 	}
