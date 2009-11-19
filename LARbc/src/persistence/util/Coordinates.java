@@ -33,10 +33,6 @@ public class Coordinates {
 	
 	public String toString(){
 		return this.latitude + " " + this.longitude;
-	}
-	
-	public String toString2(){
-		return "(" + this.latitude + ", " + this.longitude + ")";
-	}
+	}	
 
 }
