@@ -1,8 +1,11 @@
 package rbcCycle;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import persistence.GerenteDePersistencia;
 
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CBRQuery;
@@ -90,6 +93,12 @@ public class GerenteDeRBC {
 		caso.setAreaTotal(caseBean.getTotalArea());
 		caso.setTipo(caseBean.getType());
 		caso.setObservacoes(caseBean.getObservations());
+		try {
+			caso.setLocation(new GerenteDePersistencia().getCasoLocation(caseBean.getLocation()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return caso;
 	}
 

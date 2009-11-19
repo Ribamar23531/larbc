@@ -25,6 +25,9 @@ public class POIVerification implements LocalSimilarityFunction {
 	public double compute(Object caseObject, Object queryObject)
 			throws NoApplicableSimilarityFunctionException {
 		
+		if(this.queryCoordinate.getLatitude() == Double.MAX_VALUE && this.queryCoordinate.getLongitude() == Double.MAX_VALUE){
+			return 0;
+		}
 		if(!(caseObject instanceof Integer)){
 			throw new NoApplicableSimilarityFunctionException(this.getClass(), caseObject.getClass());
 		}
