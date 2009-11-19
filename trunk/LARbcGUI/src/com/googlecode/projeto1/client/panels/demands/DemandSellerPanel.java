@@ -49,7 +49,8 @@ import com.gwtext.client.widgets.layout.FitLayout;
 	private String street;
 	private String neighborhood;
 	private String city;
-	private String name;
+	private String namePessoa;
+	private String nameImovel;
 	private float builtArea;
 	private int garageSpace;
 	private int bathroom;
@@ -76,7 +77,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 	private TextField textAreaTotal;
 	private TextField textSuites;
 	private TextField textBanheiros;
-	private TextField textNome;
+	private TextField textNomeImovel;
 	private FormPanel formPanel;
 
 	private Image voltarButtonImage;
@@ -156,9 +157,9 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		formPanel.add(cidadeEstadoPanel);
 		
 		//Nome do imóvel
-		textNome = new TextField("Nome do imóvel", "nome do imóvel", 230);
-		formPanel.add(textNome);
-		textNome.setSize("307px", "21px");
+		textNomeImovel = new TextField("Nome do imóvel", "nome do imóvel", 230);
+		formPanel.add(textNomeImovel);
+		textNomeImovel.setSize("307px", "21px");
 		
 		//Area construida
 		textAreaConstruida = new TextField("Área construída *", "área construída", 230);
@@ -314,7 +315,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				street = textRua.getText();
 				neighborhood = textBairro.getText();
 				city = textCidade.getText();
-				name = textNomePessoa.getText();
+				namePessoa = textNomePessoa.getText();
 				String message = "Digite um valor numérico válido para: ";
 				if(textRua.getText().equals("")){
 					MessageBox.alert("O campo Nome da rua é obrigatório");
@@ -352,8 +353,11 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				}else if(textTelefone.getText().equals("")){
 					MessageBox.alert("O campo Telefone é obrigatório");
 					return;
+				}else if(textNomeImovel.getText().equals("")){
+					MessageBox.alert("O campo Nome do Imóvel é obrigatório");
+					return;
 				}
-					
+				nameImovel = textNomeImovel.getText();	
 				try{
 					builtArea = Float.parseFloat(textAreaConstruida.getText());					
 				}catch(Exception e){
@@ -436,7 +440,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				demanda.setCidade(city);
 				demanda.setTipo(type);
 				demanda.setEmailCliente(email);
-				demanda.setNomeCliente(name);
+				demanda.setNomeCliente(namePessoa);
 				demanda.setTelefone(telefone);
 				demanda.setRua(street);
 				demanda.setSuites(suite);
@@ -444,6 +448,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				demanda.setEstado(state);
 				demanda.setVagasGaragem(garageSpace);
 				demanda.setPreco(price);
+				demanda.setNome(nameImovel);
 				PERSISTENCE_SERVICE.saveDemanda(demanda, new AsyncCallback<String>() {
 
 					public void onFailure(Throwable arg0) {

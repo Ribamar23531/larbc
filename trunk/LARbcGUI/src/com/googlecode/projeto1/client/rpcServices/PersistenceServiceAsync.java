@@ -59,7 +59,7 @@ public interface PersistenceServiceAsync {
 	
 	public void removeCaso(AdminBean admin, CaseBean caso, AsyncCallback<?> callback);
 	
-	public void removeDemanda(DemandBean demanda, AsyncCallback<?> callback);
+	public void removeDemanda(DemandBean demanda, AsyncCallback<Boolean> callback);
 	
 	public void removeFoto(CaseBean caso, String path, AsyncCallback<?> callback);
 	

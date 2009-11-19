@@ -3,7 +3,6 @@ package com.googlecode.projeto1.server;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import persistence.util.Coordinates;
 import beans.Administrador;
@@ -251,13 +250,15 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 	}
 
 
-	public void removeDemanda(DemandBean demanda) {
+	public boolean removeDemanda(DemandBean demanda) {
 		try {
 			this.getSystemFacade().removeDemanda(this.getDemanda(demanda));
 		} catch (DemandaNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 
@@ -381,7 +382,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caseResult.setSuite(result.getSuites());
 		caseResult.setTotalArea(result.getAreaTotal());
 		caseResult.setType(result.getTipo());
-		caseResult.setLocation(result.getLocation().toString2());
+		caseResult.setLocation(result.getLocation().toString());
 		return caseResult;
 	}
 	
@@ -403,8 +404,7 @@ public class PersistenceServiceImpl extends RemoteServiceServlet implements Pers
 		caso.setSuites(caseBean.getSuite());
 		caso.setAreaTotal(caseBean.getTotalArea());
 		caso.setTipo(caseBean.getType());
-		String location = caseBean.getLocation();
-		Scanner scan = new Scanner(location);
+		String location = caseBean.getLocation();		
 		String[] locations = location.split(" ");
 		double latitude = new Double(locations[0]);
 		double longitude = new Double(locations[1]);

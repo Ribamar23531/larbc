@@ -61,7 +61,7 @@ public interface PersistenceService extends RemoteService {
 	
 	public void removeCaso(AdminBean admin, CaseBean caso);
 	
-	public void removeDemanda(DemandBean demanda);
+	public boolean removeDemanda(DemandBean demanda);
 	
 	public void removeFoto(CaseBean caso, String path);
 	

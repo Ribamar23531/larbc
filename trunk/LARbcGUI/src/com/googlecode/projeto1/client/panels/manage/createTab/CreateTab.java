@@ -55,6 +55,8 @@ public class CreateTab extends AbsolutePanel{
 	
 	public CreateTab() {
 		super();
+		
+		SelectedLocation.setLocation("");
 
 		Label stateLabel = new Label("Estado:");
 		this.add(stateLabel, 308, 5);

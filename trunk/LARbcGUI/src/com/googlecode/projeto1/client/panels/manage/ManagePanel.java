@@ -3,13 +3,10 @@ package com.googlecode.projeto1.client.panels.manage;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
-import com.googlecode.projeto1.client.panels.Util;
 import com.googlecode.projeto1.client.panels.manage.adminTab.AdminTab;
 import com.googlecode.projeto1.client.panels.manage.createTab.CreateTab;
 import com.googlecode.projeto1.client.panels.manage.demandTab.DemandsTab;
@@ -31,19 +28,19 @@ import com.gwtext.client.widgets.layout.ColumnLayout;
 public class ManagePanel extends Panel{
 	
 	private AbsolutePanel managePanel;	
-	private Image voltarButtonImage;
-	private Image selectedVoltarButtonImage;
-	private boolean isSelectedVoltarButton;
+//	private Image voltarButtonImage;
+//	private Image selectedVoltarButtonImage;
+//	private boolean isSelectedVoltarButton;
 	private Panel buttonsVoltarPanel;
 	
 	public ManagePanel(){
 		super();	
 		buttonsVoltarPanel = new Panel();
 		buttonsVoltarPanel.setLayout(new ColumnLayout());
-		this.isSelectedVoltarButton = false;
-		createVoltarButton();
-		createSelectedVoltarButton();
-		buttonsVoltarPanel.add(voltarButtonImage);
+//		this.isSelectedVoltarButton = false;
+//		createVoltarButton();
+//		createSelectedVoltarButton();
+//		buttonsVoltarPanel.add(voltarButtonImage);
 		
 		managePanel = new AbsolutePanel();
 		managePanel.add(buttonsVoltarPanel, 827, 40);
@@ -116,47 +113,47 @@ public class ManagePanel extends Panel{
 	}
 	
 	//BOTAO VOLTAR
-	private void createSelectedVoltarButton() {
-		selectedVoltarButtonImage = Util.createImage(Util.VOLTAR_SELECTED_BUTTON_IMAGE);
-		selectedVoltarButtonImage.setPixelSize(33, 10);
-		selectedVoltarButtonImage.addMouseListener(new MouseListenerAdapter(){
-
-			public void onMouseLeave(Widget arg0) {
-				rebuildVoltarPanel(voltarButtonImage);
-				
-			}			
-			
-		});
-		
-		selectedVoltarButtonImage.addClickListener(new ClickListener(){
-
-			public void onClick(Widget arg0) {
-				PanelSwitcher.switchPanel(new ModalityPanel());				
-			}
-			
-		});		
-		
-	}
-
-	private void createVoltarButton() {
-		voltarButtonImage = Util.createImage(Util.VOLTAR_BUTTON_IMAGE);
-		voltarButtonImage.setPixelSize(33, 10);
-		voltarButtonImage.addMouseListener(new MouseListenerAdapter(){
-			
-			public void onMouseEnter(Widget arg0) {
-				rebuildVoltarPanel(selectedVoltarButtonImage);
-			}
-		});
-	}
-	
-	private void rebuildVoltarPanel(Image buttonImage){
-		buttonsVoltarPanel.removeAll();
-		if(!isSelectedVoltarButton){
-			buttonsVoltarPanel.add(buttonImage);
-		}else{
-			buttonsVoltarPanel.add(buttonImage);
-		}
-		buttonsVoltarPanel.doLayout();	
-	}
+//	private void createSelectedVoltarButton() {
+//		selectedVoltarButtonImage = Util.createImage(Util.VOLTAR_SELECTED_BUTTON_IMAGE);
+//		selectedVoltarButtonImage.setPixelSize(33, 10);
+//		selectedVoltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+//
+//			public void onMouseLeave(Widget arg0) {
+//				rebuildVoltarPanel(voltarButtonImage);
+//				
+//			}			
+//			
+//		});
+//		
+//		selectedVoltarButtonImage.addClickListener(new ClickListener(){
+//
+//			public void onClick(Widget arg0) {
+//				PanelSwitcher.switchPanel(new ModalityPanel());				
+//			}
+//			
+//		});		
+//		
+//	}
+//
+//	private void createVoltarButton() {
+//		voltarButtonImage = Util.createImage(Util.VOLTAR_BUTTON_IMAGE);
+//		voltarButtonImage.setPixelSize(33, 10);
+//		voltarButtonImage.addMouseListener(new MouseListenerAdapter(){
+//			
+//			public void onMouseEnter(Widget arg0) {
+//				rebuildVoltarPanel(selectedVoltarButtonImage);
+//			}
+//		});
+//	}
+//	
+//	private void rebuildVoltarPanel(Image buttonImage){
+//		buttonsVoltarPanel.removeAll();
+//		if(!isSelectedVoltarButton){
+//			buttonsVoltarPanel.add(buttonImage);
+//		}else{
+//			buttonsVoltarPanel.add(buttonImage);
+//		}
+//		buttonsVoltarPanel.doLayout();	
+//	}
 
 }
