@@ -3,15 +3,16 @@ package rbcCycle;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
-
-import persistence.GerenteDePersistencia;
+import java.util.Map;
 
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CBRQuery;
 import jcolibri.exception.ExecutionException;
 import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.selection.SelectCases;
+import persistence.GerenteDePersistencia;
 import rbcCycle.caseElement.ImmobileSolution;
 import rbcCycle.retrieve.CasesRetriever;
 import rbcCycle.retrieve.QueryConfig;
@@ -109,10 +110,28 @@ public class GerenteDeRBC {
 			double latitude, double longitude, double pOIWeight, List<String> poiKinds) {
 
 		try {
+			Map<String, String> values = new HashMap<String, String>();
+			values.put("state", state);
+			values.put("city", city);
+			values.put("neighborhood", neighborhood);
+			values.put("street", street);
+			values.put("name", name);
+			values.put("builtArea", new Float(builtArea).toString());
+			values.put("totalArea", new Float(totalArea).toString());
+			values.put("garageSpace", new Integer(garageSpace).toString());
+			values.put("bedroom", new Integer(bedroom).toString());
+			values.put("suite", new Integer(suite).toString());
+			values.put("bathroom", new Integer(bathroom).toString());
+			values.put("type", type);
+			values.put("price", new Float(price).toString());
+			values.put("businessType", businessType);
+			values.put("latitude", new Double(latitude).toString());
+			values.put("longitude", new Double(longitude).toString());
 			this.casesRetriever.configure();
 			this.casesRetriever.setWeights(priceWeight, pOIWeight);
 			this.casesRetriever.setPOI(poiKinds);
 			this.casesRetriever.setQueryLocation(latitude, longitude);
+			this.casesRetriever.setValues(values);
 			QueryConfig queryConfigurer = new QueryConfig();
 			queryConfigurer.setQuery(state, city, neighborhood, street, name, builtArea, totalArea, garageSpace, 
 					bedroom, suite, bathroom, type, price, businessType, 0);

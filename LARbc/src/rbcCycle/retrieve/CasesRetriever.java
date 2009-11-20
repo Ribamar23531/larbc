@@ -3,6 +3,7 @@ package rbcCycle.retrieve;
 import java.net.URL;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import persistence.util.Coordinates;
 
@@ -31,6 +32,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	private double locationWeight;
 	private List<String> pointsOfInterest;
 	private Coordinates queryCoordinate;
+	private Map<String, String> values;
 	
 	public CasesRetriever(boolean testing){
 		try {
@@ -74,7 +76,7 @@ public class CasesRetriever implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery queryToDo) throws ExecutionException {
-		SimilarityConfiguration configuration = new SimilarityConfiguration(this.priceWeight, this.locationWeight, this.pointsOfInterest, this.queryCoordinate);
+		SimilarityConfiguration configuration = new SimilarityConfiguration(this.values, this.priceWeight, this.locationWeight, this.pointsOfInterest, this.queryCoordinate);
 		NNConfig config = configuration.getConfiguration();
 		this.queryResult = NNScoringMethod.evaluateSimilarity(this.caseBase.getCases(), queryToDo, config);
 	}
@@ -92,5 +94,9 @@ public class CasesRetriever implements StandardCBRApplication {
 	public void setQueryLocation(double latitude, double longitude) {
 		Coordinates coordenate = new Coordinates(latitude, longitude);
 		this.queryCoordinate = coordenate;
+	}
+
+	public void setValues(Map<String, String> values) {
+		this.values = values;
 	}
 }
