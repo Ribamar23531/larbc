@@ -1,9 +1,6 @@
 package com.googlecode.projeto1.client.panels.results;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import beans.Foto;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;

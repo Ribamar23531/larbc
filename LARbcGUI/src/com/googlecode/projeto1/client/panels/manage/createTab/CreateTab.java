@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.geocode.Geocoder;
+import com.google.gwt.maps.client.geocode.LatLngCallback;
+import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -22,7 +25,9 @@ import com.googlecode.projeto1.client.panels.manage.SelectedLocation;
 import com.googlecode.projeto1.client.panels.maps.AjustCoordinatesMap;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.MessageBoxConfig;
 import com.gwtext.client.widgets.form.Label;
 
 /**
@@ -36,10 +41,9 @@ public class CreateTab extends AbsolutePanel{
 	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
 		
 	private TextBox cityTextBox;
-//	private TextBox neighborhoodTextBox;
+	private ListBox stateListBox;
 	private ListBox neighborhoodListBox;
 	private TextBox numberTextBox;
-	private ListBox stateListBox;
 	private TextBox streetTextBox;
 	private TextBox nameTextBox;
 	private TextBox areaConstruidaTextBox;
@@ -48,8 +52,9 @@ public class CreateTab extends AbsolutePanel{
 	private TextBox qteBedroomsTextBox;
 	private TextBox qteSuitesTextBox;
 	private TextBox qteBathroomsTextBox;
-	private ListBox typeComboBox;
+	private ListBox businessTypeComboBox;
 	private TextBox priceTextBox;	
+	private ListBox propertyType;
 	private Button criarButton;
 	private Button mapButton;
 	
@@ -75,23 +80,7 @@ public class CreateTab extends AbsolutePanel{
 		cityTextBox.setEnabled(false);
 		this.add(cityTextBox, 65, 5);
 		cityTextBox.setSize("238px", "22px");
-
-		neighborhoodListBox = new ListBox();
-		getNeighborhoods();
-		this.add(neighborhoodListBox, 65, 31);
-		neighborhoodListBox.setSize("238px", "22px");
-
-		streetTextBox = new TextBox();
-		this.add(streetTextBox, 65, 57);
-		streetTextBox.setSize("358px", "22px");
-
-		Label numberLabel = new Label("N\u00FAmero:");
-		this.add(numberLabel, 308, 31);
-
-		numberTextBox = new TextBox();
-		this.add(numberTextBox, 374, 31);
-		numberTextBox.setSize("49px", "22px");
-
+		
 		stateListBox = new ListBox();
 		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
 
@@ -105,13 +94,28 @@ public class CreateTab extends AbsolutePanel{
 			}
 
 			public void onFailure(Throwable arg0) {
-				MessageBox
-						.alert("Os estados não puderam ser carregados do disco");
+				MessageBox.alert("Os estados não puderam ser carregados da base de dados");
 
 			}
 		});
 		this.add(stateListBox, 374, 5);
-		stateListBox.setSize("49px", "27px");
+		stateListBox.setSize("49px", "27px");		
+
+		neighborhoodListBox = new ListBox();
+		getNeighborhoods();
+		this.add(neighborhoodListBox, 65, 31);
+		neighborhoodListBox.setSize("238px", "22px");
+		
+		Label numberLabel = new Label("Número:");
+		this.add(numberLabel, 308, 31);		
+		
+		numberTextBox = new TextBox();
+		this.add(numberTextBox, 374, 31);
+		numberTextBox.setSize("49px", "22px");
+
+		streetTextBox = new TextBox();
+		this.add(streetTextBox, 65, 57);
+		streetTextBox.setSize("358px", "22px");		
 
 		Label nameLabel = new Label("Nome:");
 		this.add(nameLabel, 5, 83);
@@ -120,7 +124,7 @@ public class CreateTab extends AbsolutePanel{
 		this.add(nameTextBox, 65, 84);
 		nameTextBox.setSize("358px", "22px");
 
-		Label areaConstruidaLabel = new Label("Area Constru\u00EDda:");
+		Label areaConstruidaLabel = new Label("Area Construída:");
 		this.add(areaConstruidaLabel, 5, 111);
 
 		areaConstruidaTextBox = new TextBox();
@@ -148,7 +152,7 @@ public class CreateTab extends AbsolutePanel{
 		this.add(qteBedroomsTextBox, 369, 138);
 		qteBedroomsTextBox.setSize("54px", "22px");
 
-		Label qteSuitesLabel = new Label("Qte de Su\u00EDtes:");
+		Label qteSuitesLabel = new Label("Qte de Suítes:");
 		this.add(qteSuitesLabel, 5, 163);
 
 		qteSuitesTextBox = new TextBox();
@@ -165,12 +169,12 @@ public class CreateTab extends AbsolutePanel{
 		Label businesTypeLabel = new Label("Tipo de negócio:");
 		this.add(businesTypeLabel, 5, 189);
 
-		typeComboBox = new ListBox();
-		typeComboBox.addItem("Comprar");
-		typeComboBox.addItem("Alugar");
-		this.add(typeComboBox, 157, 190);
-		typeComboBox.setSize("90px", "27px");
-
+		businessTypeComboBox = new ListBox();
+		businessTypeComboBox.addItem("Comprar");
+		businessTypeComboBox.addItem("Alugar");
+		this.add(businessTypeComboBox, 157, 190);
+		businessTypeComboBox.setSize("90px", "27px");
+		
 		Label priceLabel = new Label("Preço: R$");
 		this.add(priceLabel, 250, 189);
 
@@ -178,11 +182,24 @@ public class CreateTab extends AbsolutePanel{
 		this.add(priceTextBox, 338, 189);
 		priceTextBox.setSize("85px", "22px");
 
+		
+		Label propertyTypeLabel = new Label("Tipo de Imóvel:");
+		this.add(propertyTypeLabel, 5, 220);
+		
+		propertyType = new ListBox();
+		propertyType.setSize("135px", "21px");	
+		propertyType.addItem("Casa");
+		propertyType.addItem("Apartamento");
+		propertyType.addItem("Terreno");
+		propertyType.addItem("Sala Comercial");
+		this.add(propertyType, 157, 220);
+
+		
 		criarButton = getCreateButton();
-		this.add(criarButton, 361, 218);
+		this.add(criarButton, 361, 250);
 
 		mapButton = getMapButton();
-		this.add(mapButton, 157, 218);
+		this.add(mapButton, 157, 250);
 		mapButton.setSize("189px", "34px");
 
 	}
@@ -230,7 +247,6 @@ public class CreateTab extends AbsolutePanel{
 			public void onClick(Widget arg0) {
 				List<String[]> fields = new ArrayList<String[]>();				
 				fields.add(getStrArray("String", cityTextBox, "Cidade"));					
-//				fields.add(getStrArray("String", neighborhoodListBox, "Bairro"));
 				fields.add(getStrArray("int", numberTextBox, "Número"));
 				fields.add(getStrArray("String", streetTextBox, "Rua"));
 				fields.add(getStrArray("float", areaConstruidaTextBox, "Area Construída"));
@@ -247,7 +263,6 @@ public class CreateTab extends AbsolutePanel{
 					caseBean.setCity(cityTextBox.getText());					 
 					caseBean.setNeighborhood(neighborhoodListBox.getItemText(neighborhoodListBox.getSelectedIndex()));//					
 					caseBean.setNumber(Integer.parseInt(numberTextBox.getText()));
-//					caseBean.setState(stateListBox.getValue(stateListBox.getSelectedIndex()));
 					caseBean.setState("state");
 					caseBean.setStreet(streetTextBox.getText());
 					caseBean.setName(nameTextBox.getText());
@@ -257,33 +272,77 @@ public class CreateTab extends AbsolutePanel{
 					caseBean.setBedroom(Integer.parseInt(qteBedroomsTextBox.getText()));
 					caseBean.setSuite(Integer.parseInt(qteSuitesTextBox.getText()));
 					caseBean.setBathroom(Integer.parseInt(qteBathroomsTextBox.getText()));
-//					caseBean.setType(typeComboBox.getValue(typeComboBox.getSelectedIndex()));
-					caseBean.setType("type");
-					caseBean.setBusinessType("businessType");
+					caseBean.setBusinessType(businessTypeComboBox.getValue(businessTypeComboBox.getSelectedIndex()));
+					caseBean.setType(propertyType.getValue(propertyType.getSelectedIndex()));					
 					caseBean.setPrice(Float.parseFloat(priceTextBox.getText()));
 					caseBean.setLocation(SelectedLocation.getLocation());
 					
-					PERSISTENCE_SERVICE.createCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
-
-						public void onFailure(Throwable arg0) {
-							MessageBox.alert("Houve problemas durante o armazenamento desse caso.");
-							
-						}
-
-						public void onSuccess(String arg0) {
-							MessageBox.alert("Caso armazenado com sucesso");
-							PanelSwitcher.switchPanel(new ManagePanel());							
-						}
-					});
+					createCase(caseBean);
+					
+					
 				} catch (FieldsNotFilledExeption e) {
 					new WindowFieldsAlert().show(e.getMessage());
-				}			
+				}
 				
-			}
+			}				
 			
 		});
 		return button;
 	}
+	
+	private void createCase(final CaseBean caseBean) {
+		Geocoder streetQuery = new Geocoder();
+		streetQuery.getLatLng("Campina Grande, " + streetTextBox.getText(), new LatLngCallback() {
+			
+			public void onSuccess(LatLng point) {
+				create(caseBean);
+			}		
+
+			public void onFailure() {
+				MessageBox.show(new MessageBoxConfig() {
+
+					{
+						setTitle("Rua não Encontrada");
+						setMsg("Essa rua não consta entre as existentes em Campina Grande. "
+								+ "Deseja salvar esse imóvel assim mesmo?");
+						setIconCls(MessageBox.QUESTION);
+						setButtons(MessageBox.YESNO);
+						setButtons(new NameValuePair[] {
+								new NameValuePair("yes", "Sim"),
+								new NameValuePair("no", "Não") });
+						setCallback(new MessageBox.PromptCallback() {
+							public void execute(String btnID, String text) {
+								if (btnID.equals("yes")) {
+									create(caseBean);
+								}
+
+							}
+						});
+					}
+				});
+				
+			}
+			
+			private void create(CaseBean caseBean) {
+				PERSISTENCE_SERVICE.createCaso(LoginManager.getLogedAdministrator(), caseBean, new AsyncCallback<String>() {
+
+					public void onFailure(Throwable arg0) {
+						MessageBox.alert("Houve problemas durante o armazenamento desse caso.");
+						
+					}
+
+					public void onSuccess(String arg0) {
+						MessageBox.alert("Caso armazenado com sucesso");
+						PanelSwitcher.switchPanel(new ManagePanel());							
+					}
+				});
+				
+			}
+		});
+		
+		
+		
+	}	
 	
 	private String[] getStrArray(String type, TextBox value, String field){
 		String[] result = {type, value.getText(), field};
