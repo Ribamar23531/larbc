@@ -24,8 +24,10 @@ import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.panels.results.ResultsPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
+import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.MessageBox;
+import com.gwtext.client.widgets.MessageBoxConfig;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
@@ -439,7 +441,28 @@ public class QueryPanel extends Panel{
 					
 
 					public void onFailure() {
-						doQuery(Double.MAX_VALUE, Double.MAX_VALUE);
+						MessageBox.show(new MessageBoxConfig() {
+
+							{
+								setTitle("Rua não Encontrada");
+								setMsg("Essa rua não consta entre as existentes em Campina Grande. "
+										+ "Deseja continuar assim mesmo?");
+								setIconCls(MessageBox.QUESTION);
+								setButtons(MessageBox.YESNO);
+								setButtons(new NameValuePair[] {
+										new NameValuePair("yes", "Sim"),
+										new NameValuePair("no", "Não") });
+								setCallback(new MessageBox.PromptCallback() {
+									public void execute(String btnID, String text) {
+										if (btnID.equals("yes")) {
+											doQuery(Double.MAX_VALUE, Double.MAX_VALUE);
+										}
+
+									}
+								});
+							}
+						});
+						
 						
 					}
 				});

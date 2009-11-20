@@ -66,7 +66,6 @@ public class Caso{
 	@Column(updatable = true, nullable = true)
 	private String observacoes;
 	@Transient
-//	private String location;
 	private Coordinates location;
 	
 	@Column(updatable = false, nullable = false)
@@ -180,15 +179,7 @@ public class Caso{
 	public long getIdAdministradorResponsavel() {
 		return idAdministradorResponsavel;
 	}
-
-//	public void setLocation(String location) {
-//		this.location = location;
-//	}
-//
-//	public String getLocation() {
-//		return location;
-//	}
-
+	
 	public String getObservacoes() {
 		return observacoes;
 	}
