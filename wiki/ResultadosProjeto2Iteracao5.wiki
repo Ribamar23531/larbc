@@ -19,9 +19,9 @@ A atividade "Inserir funcionalidades na interface gráfica" foi feita em conjunt
 
   * Outro erro que estava ocorrendo é que a tecla TAB em alguns momentos não seguia a sequência correta da página. Esse problema já foi completamente resolvido.
 
-  * Melhorar o tratamento de erros feito online na aplicação, isso foi feito na tela de Vendas onde houve a necessidade de modificar o painel para FormPanel.
+  * Melhorar o tratamento de erros feito online na aplicação, isso foi feito na tela de Vendas onde houve a necessidade de modificar o painel para Formpanel.
 
-  * Mudar a forma de seleção de bairros pelos clientes, utilizar ComboBox em vez de TextField.
+  * Mudar a forma de seleção de bairros pelos clientes, utilizar Combobox em vez de Textfield.
   * Implementar a interface específica para uma resolução inicialmente (1280 x 720)
 
   * Acrescentar unidades de medida nos formulários.
