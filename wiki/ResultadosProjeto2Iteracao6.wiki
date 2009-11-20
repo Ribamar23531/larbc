@@ -12,4 +12,4 @@ O refatoramento e a melhoria da interface gráfica foram concluídos, restando a
 
 Os testes de usabilidade foram feitos pela equipe e pela professora Joseana, onde foram sugeridas algumas alterações já executadas.
 
-A monografia está praticamente concluída, mas ainda está em andamento até o dia 23/Nov quando devemos entregá-la para a nossa cliente Drª. Joseana para avaliação. Depois iremos seguir as sugestões da professora e entregar a versão final no dia 04/Dez.
+A monografia está praticamente concluída, mas ainda está em andamento até o dia 23/Nov quando devemos entregá-la para a nossa cliente Drª. Joseana Fechine para avaliação. Depois iremos seguir as sugestões da professora e entregar a versão final no dia 04/Dez.
