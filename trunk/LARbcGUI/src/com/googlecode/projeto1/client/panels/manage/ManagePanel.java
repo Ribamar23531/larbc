@@ -53,7 +53,7 @@ public class ManagePanel extends Panel{
 
 			CreateTab createTab = new CreateTab();
 			tabPanel.add(createTab, "Criar", false);
-			createTab.setSize("620px", "260px");
+			createTab.setSize("620px", "300px");
 
 			EditTab editTab = new EditTab();
 			tabPanel.add(editTab, "Editar", false);

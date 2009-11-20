@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.googlecode.projeto1.client.beans.AdminBean;
 import com.googlecode.projeto1.client.panels.manage.ManagePanel;
+import com.googlecode.projeto1.client.panels.query.QueryPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.widgets.MessageBox;

@@ -23,9 +23,6 @@ public class EditWindow extends Window{
 	private CaseBean myCaseBean;
 	private boolean mapOpened;
 	
-	
-//	private final PersistenceServiceAsync PERSISTENCE_SERVICE = (PersistenceServiceAsync) GWT.create(PersistenceService.class);
-	
 	public EditWindow(CaseBean caseBean){
 		super();
 		this.myCaseBean = caseBean;
@@ -43,7 +40,7 @@ public class EditWindow extends Window{
 		this.setCloseAction(Window.HIDE);  
 		this.setPlain(true);
 		this.add(windowPanel);
-		this.setSize("450px", "300px");
+		this.setSize("450px", "335px");
 		this.setResizable(false);
 	}
 
