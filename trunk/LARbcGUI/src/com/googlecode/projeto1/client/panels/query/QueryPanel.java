@@ -9,12 +9,12 @@ import com.google.gwt.maps.client.geocode.LatLngCallback;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
-import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.googlecode.projeto1.client.PanelSwitcher;
@@ -24,10 +24,8 @@ import com.googlecode.projeto1.client.panels.modality.ModalityPanel;
 import com.googlecode.projeto1.client.panels.results.ResultsPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
-import com.gwtext.client.core.NameValuePair;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.MessageBox;
-import com.gwtext.client.widgets.MessageBoxConfig;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
@@ -88,12 +86,13 @@ public class QueryPanel extends Panel{
 	private Panel buttonsVoltarPanel;
 	private FormPanel formPanel;
 	
-	private RadioButton escola;
-	private RadioButton universidade;
-	private RadioButton viaAcesso;
-	private RadioButton areaVerde;
-	private RadioButton shopping;
-	private RadioButton setorIndustrial;
+	private CheckBox escola;
+	private CheckBox universidade;
+	private CheckBox viaAcesso;
+	private CheckBox areaVerde;
+	private CheckBox shopping;
+	private CheckBox setorIndustrial;
+	private CheckBox downtown;
 	
 	public QueryPanel(){
 		formPanel = new FormPanel();
@@ -302,18 +301,20 @@ public class QueryPanel extends Panel{
 		relevanciaPontos.addItem("4");
 		relevanciaPontos.addItem("5");
 		relevanciaPontos.setItemSelected(2, true);
-		escola = new RadioButton("Escola", "Escola");
-		universidade = new RadioButton("Universidade", "Universidade");
-		viaAcesso = new RadioButton("Via principal de acesso", "Via principal de acesso");
-		areaVerde = new RadioButton("Área verde", "Área verde");
-		shopping = new RadioButton("Shopping", "Shopping");
-		setorIndustrial = new RadioButton("Setor industrial", "Setor industrial");
+		escola = new CheckBox("Escola");
+		universidade = new CheckBox("Universidade");
+		viaAcesso = new CheckBox("Via principal de acesso");
+		areaVerde = new CheckBox("Área verde");
+		shopping = new CheckBox("Shopping");
+		setorIndustrial = new CheckBox("Setor industrial");
+		downtown = new CheckBox("Centro");
 		formPanel.add(escola);
 		formPanel.add(universidade);
 		formPanel.add(viaAcesso);
 		formPanel.add(areaVerde);
 		formPanel.add(shopping);
 		formPanel.add(setorIndustrial);
+		formPanel.add(downtown);
 		//Adicionando formulário
 		queryPanel.add(formPanel, 135,430);
 
@@ -425,7 +426,8 @@ public class QueryPanel extends Panel{
 						MessageBox.alert(message + "Quartos");
 						return;
 					}
-				}				
+				}
+				
 
 				Geocoder streetQuery = new Geocoder();
 				streetQuery.getLatLng("Campina Grande, " + street, new LatLngCallback() {
@@ -441,28 +443,8 @@ public class QueryPanel extends Panel{
 					
 
 					public void onFailure() {
-						MessageBox.show(new MessageBoxConfig() {
-
-							{
-								setTitle("Rua não Encontrada");
-								setMsg("Essa rua não consta entre as existentes em Campina Grande. "
-										+ "Deseja continuar assim mesmo?");
-								setIconCls(MessageBox.QUESTION);
-								setButtons(MessageBox.YESNO);
-								setButtons(new NameValuePair[] {
-										new NameValuePair("yes", "Sim"),
-										new NameValuePair("no", "Não") });
-								setCallback(new MessageBox.PromptCallback() {
-									public void execute(String btnID, String text) {
-										if (btnID.equals("yes")) {
-											doQuery(Double.MAX_VALUE, Double.MAX_VALUE);
-										}
-
-									}
-								});
-							}
-						});
 						
+						doQuery(Double.MAX_VALUE, Double.MAX_VALUE);					
 						
 					}
 				});
@@ -499,7 +481,9 @@ public class QueryPanel extends Panel{
 		if(setorIndustrial.isChecked()){
 			kindsOfPOI.add("INDUSTRIAL");
 		}
-		kindsOfPOI.add("DOWNTOWN");
+		if(downtown.isChecked()){
+			kindsOfPOI.add("DOWNTOWN");
+		}	
 		
 		PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea,
 									garageSpace, bedroom, suite, bathroom, type, price, priceWeight,

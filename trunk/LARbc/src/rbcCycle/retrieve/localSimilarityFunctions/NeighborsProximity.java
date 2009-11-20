@@ -20,7 +20,8 @@ public class NeighborsProximity implements LocalSimilarityFunction{
 		if(!(queryObject instanceof String) || !this.comparator.isANeighbor((String)queryObject)){
 			throw new NoApplicableSimilarityFunctionException(this.getClass(), queryObject.getClass());
 		}
-		return 1./this.comparator.getDistance((String) caseObject, (String) queryObject);
+		double result = 1./this.comparator.getDistance((String) caseObject, (String) queryObject); 
+		return result;
 	}
 
 	public boolean isApplicable(Object caseObject, Object queryObject) {
