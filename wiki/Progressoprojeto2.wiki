@@ -23,3 +23,12 @@
  *  Iteração 4 (5/Out | 19/Out)
    *  [Projeto2Iteracao4 Planejamento]
    *  [ResultadosProjeto2Iteracao4 Resultados]
+ 
+ *  Iteração 5 (19/Out | 2/Nov)
+   *  [Projeto2Iteracao5 Planejamento]
+   *  [ResultadosProjeto2Iteracao5 Resultados]
+
+ *  Iteração 6 (2/Nov | 16/Nov)
+   *  [Projeto2Iteracao6 Planejamento]
+   *  [ResultadosProjeto2Iteracao6 Resultado Final]
+
