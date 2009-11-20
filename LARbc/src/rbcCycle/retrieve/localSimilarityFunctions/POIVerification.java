@@ -25,9 +25,9 @@ public class POIVerification implements LocalSimilarityFunction {
 	public double compute(Object caseObject, Object queryObject)
 			throws NoApplicableSimilarityFunctionException {
 		
-		if(this.queryCoordinate.getLatitude() == Double.MAX_VALUE && this.queryCoordinate.getLongitude() == Double.MAX_VALUE){
-			return 0;
-		}
+//		if(this.queryCoordinate.getLatitude() == Double.MAX_VALUE && this.queryCoordinate.getLongitude() == Double.MAX_VALUE){
+//			return 0;
+//		}
 		if(!(caseObject instanceof Integer)){
 			throw new NoApplicableSimilarityFunctionException(this.getClass(), caseObject.getClass());
 		}
@@ -39,18 +39,21 @@ public class POIVerification implements LocalSimilarityFunction {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		int queryPOINumber = 0;
+//		int queryPOINumber = 0;
 		int casePOINumber = 0;
 			 try {
 				 for (String kindOfPOI : this.kindsOfPOI) {
-				 queryPOINumber += this.persistenceManager.qteOfNearPOIByType(this.queryCoordinate, kindOfPOI);
+//				 queryPOINumber += this.persistenceManager.qteOfNearPOIByType(this.queryCoordinate, kindOfPOI);
 				 casePOINumber += this.persistenceManager.qteOfNearPOIByType(caseCoordinate, kindOfPOI);
 				 }
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		return 1./(Math.max(queryPOINumber, casePOINumber) - Math.min(queryPOINumber, casePOINumber));
+			if(casePOINumber == 0){
+				return 0;
+			}
+			return 1 - (1./casePOINumber);
 	}
 
 	@Override
