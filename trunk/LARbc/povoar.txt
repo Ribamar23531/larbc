@@ -5,7 +5,7 @@ PB
 Alto Branco
 Benedito Mota
 0
-NOME
+
 174
 174
 2
@@ -24,8 +24,8 @@ Campina Grande
 PB
 Bodocongó
 Anatonio Bezerra Paz
-0,
-NOME
+0
+
 0
 0
 0
@@ -85,7 +85,7 @@ PB
 Prata
 Rodrigues Alves
 0
-NOME
+
 110
 173
 0
@@ -105,7 +105,7 @@ PB
 Bairro Universitário
 Antônio Joaquim Pequeno
 428
-NOME
+
 0
 0
 2
@@ -165,7 +165,7 @@ PB
 Palmeira
 Dep. Osmar de Aquino
 0
-NOME
+
 0
 250
 0
@@ -185,7 +185,7 @@ PB
 Alto Branco
 Avenida Manoel Tavares
 0
-NOME
+
 0
 3000
 0
@@ -205,7 +205,7 @@ PB
 Centro
 Afonso Campos
 0
-NOME
+
 12
 12
 0
@@ -225,7 +225,7 @@ PB
 Centro
 Afonso Campos
 0
-NOME
+
 12
 12
 0

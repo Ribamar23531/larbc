@@ -26,7 +26,7 @@ public class Povoar {
 				caso.setEstado(scan.nextLine());
 				caso.setBairro(scan.nextLine());
 				caso.setRua(scan.nextLine());
-				caso.setRua(scan.nextLine());
+				caso.setNumero(Integer.parseInt(scan.nextLine()));
 				caso.setNome(scan.nextLine());
 				caso.setAreaConstruida(Float.parseFloat(scan.nextLine()));
 				caso.setAreaTotal(Float.parseFloat(scan.nextLine()));
