@@ -1,0 +1,241 @@
+12
+0
+Campina Grande
+PB
+Alto Branco
+Benedito Mota
+0
+NOME
+174
+174
+2
+3
+1
+2
+Casa
+189000
+Comprar
+Piscina, DCE e Area de serciço. Rua calçada, casa semi-nova tipo chalé, toda gradeada. Facilita-se e Recebe-se Carro.
+-7.202545248269045
+-35.88135838508606
+#
+0
+Campina Grande
+PB
+Bodocongó
+Anatonio Bezerra Paz
+0,
+NOME
+0
+0
+0
+3
+1
+2
+Casa
+88000
+Comprar
+Próximo à Igreja Nossa Senhora do Perpetuo Socorro. Facilita-se e recebe-se carro
+-7.22420562896495
+-35.91379165649414
+#
+0
+Campina Grande
+PB
+Prata
+Rodrigues Alves
+350
+Celina Raposo
+110
+110
+2
+3
+1
+2
+Apartamento
+235000
+Comprar
+Prédio com 2 elevadores. piscina, salão de festas, sala de jogos, sauna etc. 6º andar. Duas salas, Duas varandas. Dividido em at� 100x com entrada de 50%.
+-7.22108170192199
+-35.893186926841736
+#
+0
+Campina Grande
+PB
+Prata
+Rodrigues Alves
+350
+Celina Raposo
+0
+0
+2
+3
+1
+2
+Apartamento
+220000
+Comprar
+Prédio com 2 elevadores. piscina, salão de festas, sala de jogos, sauna etc. 6º andar. Duas salas, Duas varandas.
+-7.22108170192199
+-35.893186926841736
+#
+0
+Campina Grande
+PB
+Prata
+Rodrigues Alves
+0
+NOME
+110
+173
+0
+0
+0
+0
+Apartamento
+99000
+Comprar
+Em fase de construção. Em fino acabamento. Em até 100x com prestações à partir de R$ 618,75 e inicial a partir de R$ 3700,00. Entrega em até 2 anos.
+-7.219479816140621
+-35.8997368812561
+#
+0
+Campina Grande
+PB
+Bairro Universitário
+Antônio Joaquim Pequeno
+428
+NOME
+0
+0
+2
+3
+0
+1
+Apartamento
+120000
+Comprar
+Bom acabamento. Com copa/cozinha.
+-7.217947109483974
+-35.90911388397217
+#
+0
+Campina Grande
+PB
+Alto Branco
+Dr. Vasconcelos
+843
+San Pietro
+0
+0
+2
+3
+1
+0
+Apartamento
+140000
+Comprar
+Excelente acabamento. Com salas para 3 ambientes, copa-cozinha, quartos grandes, CDE, Area de serviço. Prédio com salão de festas, piscina, condom�nio de apenas R$ 200,00.
+-7.204769875644259
+-35.88091850280762
+#
+0
+Campina Grande
+PB
+Prata
+Rodrigues Alves
+350
+Celina Raposo
+0
+0
+2
+3
+1
+1
+Apartamento
+1000
+Alugar
+Apartamento em fino acabamento. Duas salas e duas varandas. Condom�nio de R$ 250,00
+-7.22108170192199
+-35.893186926841736
+#
+0
+Campina Grande
+PB
+Palmeira
+Dep. Osmar de Aquino
+0
+NOME
+0
+250
+0
+0
+0
+0
+Terreno
+14000
+Vender
+Mede 10x25M. Por trás do Colégio Estadual da Palmeira, com casa vizinha, com água, luz e telefone.
+-7.19893685816766
+-35.89432954788208
+#
+0
+Campina Grande
+PB
+Alto Branco
+Avenida Manoel Tavares
+0
+NOME
+0
+3000
+0
+0
+0
+0
+Terreno
+220000
+Vender
+10 lotes padrão. Próximo ao Campina Grill, com frente de 45 metros.
+-7.199479715150339
+-35.876734256744385
+#
+0
+Campina Grande
+PB
+Centro
+Afonso Campos
+0
+NOME
+12
+12
+0
+0
+0
+0
+'Sala Comercial'
+37500
+Vender
+2ºAndar. Próximo à Blunelle. Medindo 3x4 M. Com toda infra-estrutura.
+-7.219352090784255
+-35.88209867477417
+#
+0
+Campina Grande
+PB
+Centro
+Afonso Campos
+0
+NOME
+12
+12
+0
+0
+0
+0
+Sala Comercial
+37500
+Vender
+2º Andar. Próximo à Blunelle. Medindo 3x4 M. Com toda infra-estrutura.
+-7.219352090784255
+-35.88209867477417
+#
