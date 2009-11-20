@@ -36,5 +36,6 @@ A atividade "Inserir funcionalidades na interface gráfica" foi feita em conjunt
 
   * Alinhas os campos nas telas de venda e compra.
 
+Com relação as funções de similaridade, acompanhando o término da implementação das consultas especiais, foram implementadas e estão, e ainda serão, sendo validadas e alteradas caso seja necessário, até o final das atividades.
 
 A atividade de documentação é composta por: edição da página do projeto, elaboração de documentos que posteriormente serão inseridos na monografia e também documentação de código. Assim sendo, estará sempre em andamento até o término do projeto.
