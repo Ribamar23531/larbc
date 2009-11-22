@@ -58,9 +58,9 @@ public class ModalityPanel extends Panel {
 		super();
 		rootPanel = new AbsolutePanel();
 		{
-			Image image = new Image("images/larbc.png");
+			Image image = new Image("images/MeuLar.png");
 			rootPanel.add(image, 35, 25);
-			image.setPixelSize(280, 100);
+			image.setPixelSize(280, 80);
 		}
 		buttonsPanel = new Panel();		
 		buttonsComprarPanel = new Panel();
