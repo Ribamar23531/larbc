@@ -107,7 +107,7 @@ import com.gwtext.client.widgets.layout.FitLayout;
 		VerticalPanel verticalPanel = new VerticalPanel();
 		rootPanel.add(verticalPanel, 0, 0);
 		verticalPanel.setSize("440px", "59px");
-		Image image = new Image("images/larbc.png");
+		Image image = new Image("images/MeuLar.png");
 		verticalPanel.add(image);
 		image.setSize("70%", "100%");
 		
