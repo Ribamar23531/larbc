@@ -78,7 +78,7 @@ public class Help extends Panel {
 		buttonsVoltarPanel.add(voltarButtonImage);
 		
 		AbsolutePanel panel = new AbsolutePanel();
-		panel.add(buttonsVoltarPanel, 827, 40);
+		panel.add(buttonsVoltarPanel, 950, 15);
 
 		final Panel ajudaPanel = new Panel();
 		ajudaPanel.setTitle("Detalhes");
