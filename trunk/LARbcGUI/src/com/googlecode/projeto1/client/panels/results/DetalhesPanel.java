@@ -1,6 +1,9 @@
 package com.googlecode.projeto1.client.panels.results;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import beans.Foto;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -61,9 +64,11 @@ public class DetalhesPanel extends Panel{
 				fotos = lista;				
 			}
 		});
-		for(int i = 0; i< fotos.size(); i++){
-			Image foto = new Image(fotos.get(i).getPath());
-			ap.add(foto);
+		if(fotos != null){
+			for(int i = 0; i< fotos.size(); i++){
+				Image foto = new Image(fotos.get(i).getPath());
+				ap.add(foto);
+			}
 		}
 		String rua = caseBean.getStreet();
 		String bairro = caseBean.getNeighborhood();
