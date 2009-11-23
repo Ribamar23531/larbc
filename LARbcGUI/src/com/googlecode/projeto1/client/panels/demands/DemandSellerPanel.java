@@ -363,9 +363,6 @@ import com.gwtext.client.widgets.layout.FitLayout;
 				}else if(textTelefone.getText().equals("")){
 					MessageBox.alert("O campo Telefone é obrigatório");
 					return;
-				}else if(textNomeImovel.getText().equals("")){
-					MessageBox.alert("O campo Nome do Imóvel é obrigatório");
-					return;
 				}
 				nameImovel = textNomeImovel.getText();	
 				try{
