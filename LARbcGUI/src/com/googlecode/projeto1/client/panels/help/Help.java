@@ -90,7 +90,8 @@ public class Help extends Panel {
 		ajudaPanel.setFrame(true);
 		Image image = new Image("images/welcome.png");
 		ajudaPanel.add(image);
-		image.setSize("100%", "100%");
+		ajudaPanel.setPaddings(80);
+		image.setSize("80%", "80%");
 		rootPanel = new AbsolutePanel();
 		rootPanel.add(ajudaPanel);
 		rootPanel.setVisible(true);
