@@ -13,7 +13,6 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MouseListenerAdapter;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -25,8 +24,11 @@ import com.googlecode.projeto1.client.panels.results.ResultsPanel;
 import com.googlecode.projeto1.client.rpcServices.PersistenceService;
 import com.googlecode.projeto1.client.rpcServices.PersistenceServiceAsync;
 import com.gwtext.client.core.Position;
+import com.gwtext.client.data.SimpleStore;
+import com.gwtext.client.data.Store;
 import com.gwtext.client.widgets.MessageBox;
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.ColumnLayout;
@@ -62,18 +64,18 @@ public class QueryPanel extends Panel{
 	private int suite;
 	private int bedroom;
 	private TextField textStreet;
-	private ListBox textNeighborhood;
+	private ComboBox textNeighborhood;
 	private TextField textCity;
 	private TextField textName;
 	private TextField textAreaConstruida;
 	private TextField textGaragem;
 	private TextField textQuartos;
-	private ListBox comboTipo;
+	private ComboBox comboTipo;
 	private TextField textPreco;
-	private ListBox listbusinessType;
-	private ListBox listEstado;
-	private ListBox relevanciaPreco;
-	private ListBox relevanciaPontos;
+	private ComboBox listbusinessType;
+	private ComboBox listEstado;
+	private ComboBox relevanciaPreco;
+	private ComboBox relevanciaPontos;
 	private TextField textAreaTotal;
 	private TextField textSuites;
 	private TextField textBanheiros;
@@ -129,26 +131,21 @@ public class QueryPanel extends Panel{
 		rua.setSize("80px", "18px");
 		
 		//Bairro
-		textNeighborhood = new ListBox();
-		queryPanel.add(textNeighborhood, 135, 137);
-		textNeighborhood.setSize("307px", "21px");
-		PERSISTENCE_SERVICE.listBairros(new AsyncCallback<List<String>>() {
-			
-			public void onSuccess(List<String> bairros) {
-				for (String bairro : bairros) {
-					textNeighborhood.addItem(bairro);
-					textNeighborhood.setEnabled(true);
-				}
-			}
-			
-			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Os bairros não puderam ser carregados do disco");
-				
-			}
-		});
 		Label lblBairro = new Label("Bairro:");
 		queryPanel.add(lblBairro, 17, 140);
 		lblBairro.setSize("41px", "18px");
+		textNeighborhood = new ComboBox("Bairro *", "bairro", 230);
+		textNeighborhood.setHideLabel(true);
+		textNeighborhood.setSize("57px", "21px");
+		textNeighborhood.setDisplayField("abbr1");  
+		textNeighborhood.setTypeAhead(true);  
+		textNeighborhood.setMode(ComboBox.LOCAL);  
+		textNeighborhood.setTriggerAction(ComboBox.ALL);
+		textNeighborhood.setWidth(307);
+		textNeighborhood.setDisabled(false);
+		textNeighborhood.setSelectOnFocus(true);				
+		queryPanel.add(textNeighborhood, 135, 137);
+		getBairros();
 		
 		//Cidade
 		textCity = new TextField();
@@ -161,27 +158,25 @@ public class QueryPanel extends Panel{
 		lblCidade.setSize("41px", "18px");
 		
 		//Estado
-		listEstado = new ListBox();
-		queryPanel.add(listEstado, 382, 170);
-		listEstado.setSize("57px", "21px");
-		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
-			
-			public void onSuccess(List<String> states) {
-				for (String state : states) {
-					listEstado.addItem(state);
-					listEstado.setSelectedIndex(14);
-					listEstado.setEnabled(false);
-				}
-			}
-			
-			public void onFailure(Throwable arg0) {
-				MessageBox.alert("Os estados não puderam ser carregados da base de dados");
-				
-			}
-		});
 		Label lblUf = new Label("UF:");
 		queryPanel.add(lblUf, 363, 175);
 		lblUf.setSize("14px", "18px");
+		listEstado = new ComboBox("UF *", "uf", 110);
+		listEstado.setSize("57px", "21px");
+		listEstado.setHideLabel(true);
+		PERSISTENCE_SERVICE.listEstados(new AsyncCallback<List<String>>() {
+			
+			public void onSuccess(List<String> states) {
+				listEstado.setValue(states.get(14));
+				listEstado.setDisabled(true);			
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Os estados não puderam ser carregados do disco");
+				
+			}
+		});
+		queryPanel.add(listEstado, 382, 173);
 				
 		//Nome do imovel
 		textName = new TextField();
@@ -244,16 +239,25 @@ public class QueryPanel extends Panel{
 		lblBanheirosSociais.setSize("100px", "24px");
 		
 		//Tipo de imovel
-		comboTipo = new ListBox();
-		queryPanel.add(comboTipo, 135, 339);
-		comboTipo.setSize("205px", "21px");	
-		comboTipo.addItem("Casa");
-		comboTipo.addItem("Apartamento");
-		comboTipo.addItem("Terreno");
-		comboTipo.addItem("Sala Comercial");
 		Label lblTipoDeImvel = new Label("Tipo de imóvel:");
-		queryPanel.add(lblTipoDeImvel, 17, 344);
 		lblTipoDeImvel.setSize("131px", "24px");
+		queryPanel.add(lblTipoDeImvel, 17, 344);
+		comboTipo = new ComboBox("Tipo do imóvel *", "tipo do imóvel", 110);
+		comboTipo.setHideLabel(true);
+		comboTipo.setSize("205px", "21px");	
+		Store store = new SimpleStore(new String[]{"abbr", "state"}, getTipos());  
+		store.load();  
+		comboTipo.setHiddenName("tipo do imóvel");  
+		comboTipo.setStore(store);  
+		comboTipo.setDisplayField("abbr");  
+		comboTipo.setTypeAhead(true);  
+		comboTipo.setMode(ComboBox.LOCAL);  
+		comboTipo.setTriggerAction(ComboBox.ALL); 
+		comboTipo.setValue("Casa");
+		comboTipo.setDisabled(false);
+		comboTipo.setSelectOnFocus(true);  
+		comboTipo.setWidth(190); 
+		queryPanel.add(comboTipo, 135, 339);
 
 		//Preco do imovel
 		textPreco = new TextField();
@@ -265,25 +269,42 @@ public class QueryPanel extends Panel{
 		Label relevancia = new Label("Relevância:");
 		queryPanel.add(relevancia, 310, 374);
 		relevancia.setSize("115px", "24px");
-		relevanciaPreco = new ListBox();
-		queryPanel.add(relevanciaPreco, 382, 371);
+		relevanciaPreco = new ComboBox("Preço *", "preço", 110);
+		relevanciaPreco.setHideLabel(true);
 		relevanciaPreco.setSize("57px", "21px");	
-		relevanciaPreco.addItem("1");
-		relevanciaPreco.addItem("2");
-		relevanciaPreco.addItem("3");
-		relevanciaPreco.addItem("4");
-		relevanciaPreco.addItem("5");
-		relevanciaPreco.setItemSelected(2, true);
+		Store storePreco = new SimpleStore(new String[]{"abbr", "state"}, getRelevancia());  
+		store.load();  
+		relevanciaPreco.setHiddenName("preco");  
+		relevanciaPreco.setStore(storePreco);  
+		relevanciaPreco.setDisplayField("abbr");  
+		relevanciaPreco.setTypeAhead(true);  
+		relevanciaPreco.setMode(ComboBox.LOCAL);  
+		relevanciaPreco.setTriggerAction(ComboBox.ALL); 
+		relevanciaPreco.setValue("1");
+		relevanciaPreco.setDisabled(false);
+		relevanciaPreco.setSelectOnFocus(true);  
+		queryPanel.add(relevanciaPreco, 382, 371);
 
 		//Tipo de negocio
-		listbusinessType = new ListBox();
-		queryPanel.add(listbusinessType, 135, 397);
+		listbusinessType = new ComboBox("Tipo de negócio *", "tipo de negócio", 110);
+		listbusinessType.setHideLabel(true);
+		Store storeNegocio = new SimpleStore(new String[]{"abbr", "state"}, getTipoNegocio());  
+		store.load();  
+		listbusinessType.setHiddenName("tipo de negócio");  
 		listbusinessType.setSize("166px", "21px");
-		listbusinessType.addItem("Comprar");
-		listbusinessType.addItem("Alugar");
+		listbusinessType.setStore(storeNegocio);  
+		listbusinessType.setDisplayField("abbr");  
+		listbusinessType.setTypeAhead(true);  
+		listbusinessType.setMode(ComboBox.LOCAL);  
+		listbusinessType.setTriggerAction(ComboBox.ALL); 
+		listbusinessType.setValue("Comprar");
+		listbusinessType.setDisabled(false);
+		listbusinessType.setSelectOnFocus(true);  
+		listbusinessType.setWidth(190); 
 		Label lblTipoDeNegcio = new Label("Tipo de negócio:");
 		queryPanel.add(lblTipoDeNegcio, 17, 402);
 		lblTipoDeNegcio.setSize("131px", "24px");
+		queryPanel.add(listbusinessType, 135, 397);
 		
 		//Pontos de interesse
 		Label pontos = new Label("Pontos de interesse:");
@@ -292,15 +313,21 @@ public class QueryPanel extends Panel{
 		Label relevanciapontos = new Label("Relevância:");
 		queryPanel.add(relevanciapontos, 30, 448);
 		relevanciapontos.setSize("115px", "24px");
-		relevanciaPontos = new ListBox();
-		queryPanel.add(relevanciaPontos, 30, 465);
+		relevanciaPontos = new ComboBox("Pontos *", "pontos", 110);
 		relevanciaPontos.setSize("57px", "21px");	
-		relevanciaPontos.addItem("1");
-		relevanciaPontos.addItem("2");
-		relevanciaPontos.addItem("3");
-		relevanciaPontos.addItem("4");
-		relevanciaPontos.addItem("5");
-		relevanciaPontos.setItemSelected(2, true);
+		relevanciaPontos.setHideLabel(true);
+		Store storePontos = new SimpleStore(new String[]{"abbr", "state"}, getRelevancia());  
+		store.load();  
+		relevanciaPontos.setHiddenName("pontos");  
+		relevanciaPontos.setStore(storePontos);  
+		relevanciaPontos.setDisplayField("abbr");  
+		relevanciaPontos.setTypeAhead(true);  
+		relevanciaPontos.setMode(ComboBox.LOCAL);  
+		relevanciaPontos.setTriggerAction(ComboBox.ALL); 
+		relevanciaPontos.setValue("1");
+		relevanciaPontos.setDisabled(false);
+		relevanciaPontos.setSelectOnFocus(true);  
+		queryPanel.add(relevanciaPontos, 30, 465);
 		escola = new CheckBox("Escola");
 		universidade = new CheckBox("Universidade");
 		viaAcesso = new CheckBox("Via principal de acesso");
@@ -356,8 +383,7 @@ public class QueryPanel extends Panel{
 		selectedPesquisarButton.addClickListener(new ClickListener(){
 			public void onClick(Widget arg0) {			
 				street = textStreet.getText();
-				int indexBairro = textNeighborhood.getSelectedIndex();
-				neighborhood = textNeighborhood.getItemText(indexBairro);
+				neighborhood = textNeighborhood.getText();
 				city = textCity.getText();
 				name = textName.getText();
 				String message = "Digite um valor numérico válido para: ";
@@ -386,8 +412,7 @@ public class QueryPanel extends Panel{
 					}
 				}				
 				
-				int indexType = comboTipo.getSelectedIndex();
-				type = comboTipo.getItemText(indexType);
+				type = comboTipo.getText();
 				
 				try{
 					price = Float.parseFloat(textPreco.getText());
@@ -398,10 +423,9 @@ public class QueryPanel extends Panel{
 					}
 				}				
 				
-				businessType = listbusinessType.getItemText(listbusinessType.getSelectedIndex());
+				businessType = listbusinessType.getText();
 				
-				int indexState = listEstado.getSelectedIndex();
-				state = listEstado.getItemText(indexState);
+				state = listEstado.getText();
 				
 				try{
 					totalArea = Float.parseFloat(textAreaTotal.getText());
@@ -460,8 +484,8 @@ public class QueryPanel extends Panel{
 	}
 	
 	private void doQuery(double latitude, double longitude) {
-		double POIWeight = relevanciaPontos.getSelectedIndex();
-		float priceWeight = relevanciaPreco.getSelectedIndex();
+		double POIWeight = Double.parseDouble(relevanciaPontos.getText());
+		float priceWeight = Float.parseFloat(relevanciaPreco.getText());
 		List<String> kindsOfPOI = new ArrayList<String>(6);
 		if(escola.isChecked()){
 			kindsOfPOI.add("SCHOOL");
@@ -500,21 +524,6 @@ public class QueryPanel extends Panel{
 				
 			}
 		});
-		
-//		PERSISTENCE_SERVICE.doQuery(state, city, neighborhood, street, name, builtArea, totalArea,
-//									garageSpace, bedroom, suite, bathroom, type, price, businessType,
-//									latitude, longitude, POIWeight, kindsOfPOI, 
-//									new AsyncCallback<List<CaseBean>>() {
-//			public void onSuccess(List<CaseBean> arg0) {
-//				PanelSwitcher.switchPanel(new ResultsPanel(arg0));
-//				
-//			}
-//			
-//			public void onFailure(Throwable arg0) {
-//				MessageBox.alert("A consulta não pode ser realizada.");
-//				
-//			}
-//		});
 		
 	}
 	
@@ -572,6 +581,56 @@ public class QueryPanel extends Panel{
 			buttonsVoltarPanel.add(buttonImage);
 		}
 		buttonsVoltarPanel.doLayout();	
+	}
+	
+	private void getBairros() {		
+		PERSISTENCE_SERVICE.listBairros(new AsyncCallback<List<String>>() {
+			
+			public void onSuccess(List<String> bairros) {
+				String[][] lista = new String [bairros.size()][3];
+				for (int i = 0; i < bairros.size(); i++) {					
+					lista[i][0] = bairros.get(i);
+					lista[i][1] = bairros.get(i);
+					lista[i][2] = i + 1 + "";
+				}				
+				Store storeBairro = new SimpleStore(new String[]{"abbr1", "state1"}, lista);		
+				storeBairro.load();  
+				textNeighborhood.setStore(storeBairro);
+				textNeighborhood.setValue(lista[0][0]);		
+				
+			}
+			
+			public void onFailure(Throwable arg0) {
+				MessageBox.alert("Não foi possível carregar os bairros da base de dados");
+				
+			}
+		});		
+	}
+	
+	private String[][] getTipos() {  
+		return new String[][]{  
+				new String[]{"Casa", "casa", "1"},  
+				new String[]{"Apartamento", "2"},  
+				new String[]{"Terreno", "terreno", "3"},  
+				new String[]{"Sala comercial", "4"},  
+		};  
+	}
+	
+	private String[][] getRelevancia() {  
+		return new String[][]{  
+				new String[]{"1", "1", "1"},  
+				new String[]{"2", "2"},  
+				new String[]{"3", "3", "3"},  
+				new String[]{"4", "4"},  
+				new String[]{"5", "5", "5"},  
+		};  
+	}
+	
+	private String[][] getTipoNegocio() {  
+		return new String[][]{  
+				new String[]{"Comprar", "comprar", "1"},  
+				new String[]{"Alugar", "alugar"},  
+		};  
 	}
 
 }
