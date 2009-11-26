@@ -39,8 +39,9 @@ public class ModalityPanel extends Panel {
 
 	private Image managerButtonImage;
 	private Image selectedManagerButtonImage;
-	private boolean isAdministrarVenderButton;
+//	private boolean isAdministrarVenderButton;
 	private Panel wrapperPanel;
+	
 
 	private Image ajudaButtonImage;
 	private Image selectedAjudaButtonImage;
@@ -209,19 +210,11 @@ public class ModalityPanel extends Panel {
 		});
 		
 		buildButtonsPanel();
-	}
+	}	
 	
 	private void rebuildNorthPanel(Image buttonImage){
 		wrapperPanel.removeAll();
-		if(!isAdministrarVenderButton){
-			Panel rightPanel = new Panel();
-			rightPanel.add(buttonImage);
-			wrapperPanel.add(rightPanel);
-		}else{
-			Panel rightPanel = new Panel();
-			rightPanel.add(buttonImage);
-			wrapperPanel.add(rightPanel);
-		}
+		wrapperPanel.add(buttonImage);		
 		wrapperPanel.doLayout();	
 	}
 
