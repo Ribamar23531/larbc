@@ -1,6 +1,9 @@
 package com.googlecode.projeto1.client.panels.manage.demandTab;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.maps.client.geocode.Geocoder;
+import com.google.gwt.maps.client.geocode.LatLngCallback;
+import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.googlecode.projeto1.client.LoginManager;
 import com.googlecode.projeto1.client.PanelSwitcher;
@@ -72,9 +75,48 @@ public class EditWindow extends Window{
 						setCallback(new MessageBox.PromptCallback() {
 							public void execute(String btnID, String text) {
 								if (btnID.equals("yes")) {
-									saveCase();
+									save();									
 								}
 
+							}
+
+							private void save() {
+								Geocoder streetQuery = new Geocoder();
+								String query = "Campina Grande, " + demandWindowPanel.getRuaTextBox();
+								streetQuery.getLatLng(query, new LatLngCallback() {
+
+									public void onFailure() {
+										MessageBox.show(new MessageBoxConfig() {
+
+											{
+												setTitle("Rua não Encontrada");
+												setMsg("Essa rua não consta entre as existentes em Campina Grande. "
+														+ "Deseja salvar esse imóvel assim mesmo?");
+												setIconCls(MessageBox.QUESTION);
+												setButtons(MessageBox.YESNO);
+												setButtons(new NameValuePair[] {
+														new NameValuePair("yes", "Sim"),
+														new NameValuePair("no", "Não") });
+												setCallback(new MessageBox.PromptCallback() {
+													public void execute(String btnID, String text) {
+														if (btnID.equals("yes")) {
+															saveCase();
+														}
+
+													}
+												});
+											}
+										});
+										
+									}
+
+									public void onSuccess(LatLng point) {
+										saveCase();
+										
+									}
+									
+								});
+								
 							}
 
 							private void saveCase() {
