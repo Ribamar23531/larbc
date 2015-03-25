@@ -1,0 +1,15 @@
+# Plano da Iteração 1 #
+
+  * Iteração 1 (24/Ago | 7/Set)
+    * Melhoria de qualidade de imagens (Alcione)
+    * Correção de acentuação e de padrão de codificação (Alcione)
+    * Correção de defeitos na interface gráfica (Alcione)
+    * Verificação de tipos dos formulários (Alcione)
+    * Levantamento de dados para povoamento da base de dados (Diego)
+    * Implementação de mapas na interface gráfica (eventos de mouse, inserção de marcadores) (Diego)
+    * Ler o artigo-referência para apresentação para Joseana e preparar a apresentação (João Felipe)
+    * Implementar as funções de similaridade local para os atributos (João Felipe)
+    * Elaborar questionamentos sobre "como avaliar os atributos de um caso?" para análise junto ao cliente (João Felipe)
+    * Obter do cliente novas formas de avaliar os atributos de um caso, segundo a experiência real com os clientes (João Felipe)
+    * Validar com o cliente a interface gráfica e obter as modificações necessárias. (equipe)
+    * Documentação (Equipe)
